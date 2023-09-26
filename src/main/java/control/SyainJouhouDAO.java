@@ -14,7 +14,7 @@ public class SyainJouhouDAO extends DBConnection {
 
 	public List<SyainJouhouEntity> findAll(SyainJouhouDAO SyainJouhouDAO) {
 
-		List<SyainJouhouEntity> syainJouhouList = new ArrayList<SyainJouhouEntity>();
+		List<SyainJouhouEntity> syainJouhouList = new ArrayList<>();
 
 		NumberFormat nfNum = NumberFormat.getNumberInstance();
 

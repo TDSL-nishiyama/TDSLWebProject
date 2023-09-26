@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link src="./js/LoginCheck.js">
 <title>ログイン画面</title>
 </head>
 
@@ -13,8 +12,8 @@
 
 	<h1>ログインIDとパスワードを入力してください</h1>
 
-	<form name="login" action="<%=request.getContextPath()%>/IndexAction"
-		method="post" onSubmit="return checkIDandText()">
+	<form name="login" action="<%=request.getContextPath()%>/LoginAction"
+		method="post">
 
 		<p>
 			ID: <input type="text" name="id">

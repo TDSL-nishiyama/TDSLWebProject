@@ -8,7 +8,9 @@
 </head>
 <body>
 
-コンテキストパス：<%=request.getContextPath()%>
+<p>コンテキストパス：<%=request.getContextPath()%>
+
+<a href="index.jsp">戻る</a>
 
 </body>
 </html>

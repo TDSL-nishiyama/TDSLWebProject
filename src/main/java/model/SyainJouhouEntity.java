@@ -44,7 +44,7 @@ public class SyainJouhouEntity implements Serializable {
 	// アクセサメソッド
 	/**
 	 * idを取得します。
-	 * 
+	 *
 	 * @return id
 	 */
 	public int getId() {
@@ -53,7 +53,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * idを設定します。
-	 * 
+	 *
 	 * @param id
 	 *            id
 	 */
@@ -63,7 +63,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * nameを取得します。
-	 * 
+	 *
 	 * @return name
 	 */
 	public String getName() {
@@ -72,7 +72,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * nameを設定します。
-	 * 
+	 *
 	 * @param name
 	 *            name
 	 */
@@ -82,7 +82,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * yomiganaを取得します。
-	 * 
+	 *
 	 * @return yomigana
 	 */
 	public String getYomigana() {
@@ -91,7 +91,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * yomiganaを設定します。
-	 * 
+	 *
 	 * @param yomigana
 	 *            yomigana
 	 */
@@ -101,7 +101,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * seibetsuを取得します。
-	 * 
+	 *
 	 * @return seibetsu
 	 */
 	public String getSeibetsu() {
@@ -110,7 +110,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * seibetsuを設定します。
-	 * 
+	 *
 	 * @param seibetsu
 	 *            seibetsu
 	 */
@@ -120,7 +120,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * syussinnを取得します。
-	 * 
+	 *
 	 * @return syussinn
 	 */
 	public String getSyussinn() {
@@ -129,7 +129,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * syussinnを設定します。
-	 * 
+	 *
 	 * @param syussinn
 	 *            syussinn
 	 */
@@ -139,7 +139,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * juusyoを取得します。
-	 * 
+	 *
 	 * @return juusyo
 	 */
 	public String getJuusyo() {
@@ -148,7 +148,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * juusyoを設定します。
-	 * 
+	 *
 	 * @param juusyo
 	 *            juusyo
 	 */
@@ -158,7 +158,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * jutakuTeateUmuを取得します。
-	 * 
+	 *
 	 * @return jutakuTeateUmu
 	 */
 	public int getJutakuTeateUmu() {
@@ -167,7 +167,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * jutakuTeateUmuを設定します。
-	 * 
+	 *
 	 * @param jutakuTeateUmu
 	 *            jutakuTeateUmu
 	 */
@@ -177,7 +177,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * shokuiを取得します。
-	 * 
+	 *
 	 * @return shokui
 	 */
 	public String getShokui() {
@@ -186,7 +186,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * shokuiを設定します。
-	 * 
+	 *
 	 * @param shokui
 	 *            shokui
 	 */
@@ -196,7 +196,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * salaryを取得します。
-	 * 
+	 *
 	 * @return salary
 	 */
 	public String getSalary() {
@@ -205,7 +205,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * salaryを設定します。
-	 * 
+	 *
 	 * @param salary
 	 *            salary
 	 */
@@ -215,7 +215,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * nyuusyaNengetsuを取得します。
-	 * 
+	 *
 	 * @return nyuusyaNengetsu
 	 */
 	public int getNyuusyaNengetsu() {
@@ -224,7 +224,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * nyuusyaNengetsuを設定します。
-	 * 
+	 *
 	 * @param nyuusyaNengetsu
 	 *            nyuusyaNengetsu
 	 */
@@ -234,7 +234,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * kinzokuNennsuuを取得します。
-	 * 
+	 *
 	 * @return kinzokuNennsuu
 	 */
 	public int getKinzokuNennsuu() {
@@ -243,7 +243,7 @@ public class SyainJouhouEntity implements Serializable {
 
 	/**
 	 * kinzokuNennsuuを設定します。
-	 * 
+	 *
 	 * @param kinzokuNennsuu
 	 *            kinzokuNennsuu
 	 */

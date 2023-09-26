@@ -7,7 +7,7 @@ public class SessionKanriBean implements Serializable {
     private String loginId; //ログインID
     private String loginPassword; //ログインパスワード
     private String loginName; //ログイン名
-    private String kanriFlg; //管理フラグ("1"=管理者権限あり)
+    private boolean kanriFlg; //管理フラグ("TRUE"=管理者権限あり)
 
     //コンストラクタ
     public SessionKanriBean() {
@@ -26,7 +26,7 @@ public class SessionKanriBean implements Serializable {
     }
 
     //コンストラクタ（id,password,名前,管理者フラグ）
-    public SessionKanriBean(String id, String password,String loginName,String kanriFlg) {
+    public SessionKanriBean(String id, String password,String loginName,boolean kanriFlg) {
         this.loginId = id;
         this.loginPassword = password;
         this.loginName = loginName;
@@ -58,11 +58,11 @@ public class SessionKanriBean implements Serializable {
         this.loginName = loginName;
     }
 
-    public String getKanriFlg() {
+    public boolean getKanriFlg() {
         return kanriFlg;
     }
 
-    public void setKanriFlg(String kanriFlg) {
+    public void setKanriFlg(boolean kanriFlg) {
         this.kanriFlg = kanriFlg;
     }
 

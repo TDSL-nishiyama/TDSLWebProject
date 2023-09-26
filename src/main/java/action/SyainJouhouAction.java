@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import constents.Const.ERRORMSG;
+import constents.Const.Path;
+import control.IndexDAO;
+import control.SyainJouhouDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import constents.Const.ERRORMSG;
-import constents.Const.Path;
 import model.SessionKanriBean;
 import model.SyainJouhouEntity;
-import control.IndexDAO;
-import control.SyainJouhouDAO;
 
 public class SyainJouhouAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -44,7 +44,7 @@ public class SyainJouhouAction extends HttpServlet {
 		} else {
 
 		    //該当IDの管理者フラグを呼び出す
-		    List<String> resultList = new ArrayList<String>();
+		    List<String> resultList = new ArrayList<>();
 		    String kanriFlg = null;
 
 		    IndexDAO indexDAO = new IndexDAO();

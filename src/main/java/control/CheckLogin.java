@@ -30,7 +30,7 @@ public class CheckLogin extends DBConnection {
 		IndexDAO indexDAO = new IndexDAO();
 
 		// 入力したパスワードがDB内のパスワードと異なる場合エラー画面に遷移
-		List<String> loginIdPassList = new ArrayList<String>();
+		List<String> loginIdPassList = new ArrayList<>();
 		loginIdPassList.add(pLoginId);
 		loginIdPassList.add(pLoginPassword);
 

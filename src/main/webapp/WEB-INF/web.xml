@@ -7,17 +7,25 @@
   </welcome-file-list>
 
   <servlet>
-    <servlet-name>IndexAction</servlet-name>
-    <servlet-class>/action/IndexAction</servlet-class>
+    <servlet-name>LoginAction</servlet-name>
+    <servlet-class>action.LoginAction</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>IndexAction</servlet-name>
-    <url-pattern>/IndexAction</url-pattern>
+    <servlet-name>LoginAction</servlet-name>
+    <url-pattern>/LoginAction</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>LogOutAction</servlet-name>
+    <servlet-class>action.LogOutAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOutAction</servlet-name>
+    <url-pattern>/LogOutAction</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>TestAction</servlet-name>
-    <servlet-class>/action/TestAction</servlet-class>
+    <servlet-class>action.TestAction</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>TestAction</servlet-name>

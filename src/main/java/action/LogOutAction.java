@@ -1,24 +1,26 @@
 package action;
 
 import java.io.IOException;
+
+import constents.Const.Path;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import constents.Const.Path;
 
 /**
  * Servlet implementation class LoginOutAction
  */
-public class LoginOutAction extends HttpServlet {
+public class LogOutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginOutAction() {
+    public LogOutAction() {
         super();
     }
 

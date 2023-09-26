@@ -62,7 +62,7 @@ public class IndexDAO extends DBConnection {
             String pLoginPassword) {
 
         Connection conn = null;
-        List<String> indexEntityList = new ArrayList<String>();
+        List<String> indexEntityList = new ArrayList<>();
 
         try {
             // JDBCドライバ読み込み
@@ -112,11 +112,11 @@ public class IndexDAO extends DBConnection {
 
     public List<String> getSessionInfo(String pLoginId, String pLoginPassword) {
 
-        List<String> returnList = new ArrayList<String>();
+        List<String> returnList = new ArrayList<>();
         String loginId = "";
         String loginPassword = "";
         String loginName = "";
-        String kanriFlg = "";
+        boolean kanriFlg = false;
 
         Connection conn = null;
 
@@ -144,7 +144,7 @@ public class IndexDAO extends DBConnection {
                 loginId = rs.getString("loginid");
                 loginPassword = rs.getString("loginpass");
                 loginName = rs.getString("name");
-                kanriFlg = rs.getString("kanriFlg");
+                kanriFlg = rs.getBoolean("kanriFlg");
             }
 
             SessionKanriBean sessionKanriBean = new SessionKanriBean(loginId, loginPassword, loginName, kanriFlg);
@@ -157,7 +157,7 @@ public class IndexDAO extends DBConnection {
             returnList.add(sessionKanriBean.getLoginId());
             returnList.add(sessionKanriBean.getLoginPassword());
             returnList.add(sessionKanriBean.getLoginName());
-            returnList.add(sessionKanriBean.getKanriFlg());
+            returnList.add(String.valueOf(sessionKanriBean.getKanriFlg()));
 
         } catch (SQLException e) {
             e.printStackTrace();

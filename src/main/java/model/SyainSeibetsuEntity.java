@@ -3,23 +3,23 @@ package model;
 import java.io.Serializable;
 
 public class SyainSeibetsuEntity implements Serializable {
-	
+
 	private int id;				//社員ID
 	private String name;		//社員名
 	private String seibetsu;	//性別
-	
+
 	//コンストラクタ
 	public SyainSeibetsuEntity(){
-		
+
 	}
-	
+
 	//コンストラクタ（社員ID、名前、性別）
 	public SyainSeibetsuEntity(int id,String name,String seibetsu){
 		this.id = id;
 		this.name = name;
 		this.seibetsu = seibetsu;
 	}
-	
+
 	//アクセサメソッド
 	/**
 	 * idを取得します。
@@ -68,5 +68,5 @@ public class SyainSeibetsuEntity implements Serializable {
 	public void setSeibetsu(String seibetsu) {
 	    this.seibetsu = seibetsu;
 	}
-	
+
 }
