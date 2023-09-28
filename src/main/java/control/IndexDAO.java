@@ -28,7 +28,7 @@ public class IndexDAO extends DBConnection {
             // SELECT文を準備
             StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT loginid,loginpass");
+            sql.append("SELECT loginid,password");
             sql.append(" FROM login");
             sql.append(" WHERE loginid = ?;");
 
@@ -59,7 +59,7 @@ public class IndexDAO extends DBConnection {
     }
 
     public List<String> findLoginIdAndPassword(String pLoginId,
-            String pLoginPassword) {
+            String ppassword) {
 
         Connection conn = null;
         List<String> indexEntityList = new ArrayList<>();
@@ -74,32 +74,32 @@ public class IndexDAO extends DBConnection {
             // SELECT文を準備
             StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT loginid,loginpass");
+            sql.append("SELECT loginid,password");
             sql.append(" FROM login");
-            sql.append(" WHERE loginid = ? AND loginpass = ?;");
+            sql.append(" WHERE loginid = ? AND password = ?;");
 
             PreparedStatement pStmt = conn.prepareStatement(sql.toString());
             pStmt.setString(1, pLoginId);
-            pStmt.setString(2, pLoginPassword);
+            pStmt.setString(2, ppassword);
 
             // SELECTを実行し、結果表を取得
             ResultSet rs = pStmt.executeQuery();
 
             String loginId = null;
-            String loginPassword = null;
+            String password = null;
 
             while (rs.next()) {
                 loginId = rs.getString("loginid");
-                loginPassword = rs.getString("loginpass");
+                password = rs.getString("password");
             }
 
-            IndexEntity indexEntity = new IndexEntity(loginId, loginPassword);
+            IndexEntity indexEntity = new IndexEntity(loginId, password);
 
             indexEntity.setLoginId(loginId);
-            indexEntity.setLoginPassword(loginPassword);
+            indexEntity.setpassword(password);
 
             indexEntityList.add(indexEntity.getLoginId());
-            indexEntityList.add(indexEntity.getLoginPassword());
+            indexEntityList.add(indexEntity.getpassword());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,11 +110,11 @@ public class IndexDAO extends DBConnection {
         return indexEntityList;
     }
 
-    public List<String> getSessionInfo(String pLoginId, String pLoginPassword) {
+    public List<String> getSessionInfo(String pLoginId, String ppassword) {
 
         List<String> returnList = new ArrayList<>();
         String loginId = "";
-        String loginPassword = "";
+        String password = "";
         String loginName = "";
         boolean kanriFlg = false;
 
@@ -130,8 +130,8 @@ public class IndexDAO extends DBConnection {
             // SELECT文を準備
             StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT M.id,L.loginpass,M.name,L.kanriflg");
-            sql.append(" FROM meibo AS M JOIN login AS L M.id = L.id");
+            sql.append("SELECT M.id,L.loginpass,M.name,L.kanriFlg");
+            sql.append(" FROM user AS M JOIN login AS L M.id = L.id");
             sql.append(" WHERE loginid = ?;");
 
             PreparedStatement pStmt = conn.prepareStatement(sql.toString());
@@ -142,20 +142,20 @@ public class IndexDAO extends DBConnection {
 
             while (rs.next()) {
                 loginId = rs.getString("loginid");
-                loginPassword = rs.getString("loginpass");
+                password = rs.getString("password");
                 loginName = rs.getString("name");
                 kanriFlg = rs.getBoolean("kanriFlg");
             }
 
-            SessionKanriBean sessionKanriBean = new SessionKanriBean(loginId, loginPassword, loginName, kanriFlg);
+            SessionKanriBean sessionKanriBean = new SessionKanriBean(loginId, password, loginName, kanriFlg);
 
             sessionKanriBean.setLoginId(loginId);
-            sessionKanriBean.setLoginPassword(loginPassword);
+            sessionKanriBean.setpassword(password);
             sessionKanriBean.setLoginName(loginName);
             sessionKanriBean.setKanriFlg(kanriFlg);
 
             returnList.add(sessionKanriBean.getLoginId());
-            returnList.add(sessionKanriBean.getLoginPassword());
+            returnList.add(sessionKanriBean.getpassword());
             returnList.add(sessionKanriBean.getLoginName());
             returnList.add(String.valueOf(sessionKanriBean.getKanriFlg()));
 

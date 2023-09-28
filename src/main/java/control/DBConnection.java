@@ -17,17 +17,15 @@ public class DBConnection {
 		Properties properties = new Properties();
 
 		try {
-			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
-			properties.load(inStream);
+//			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
+//			properties.load(inStream);
 //			properties.load(new FileInputStream("DBAccess.properties"));
 
-			final String DRIVER_NAME = properties.getProperty("drivername");
+			final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 
 			//JDBCドライバを読み込み
 			Class.forName(DRIVER_NAME);
 
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -37,22 +35,22 @@ public class DBConnection {
 	public static Connection connectionDB(Connection conn) {
 
 		//プロパティファイルを読み込む
-		Properties properties = new Properties();
+//		Properties properties = new Properties();
 
 		try {
-			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
-			properties.load(inStream);
-//			properties.load(new FileInputStream("DBAccess.properties"));
-
-			final String JDBC_URL = properties.getProperty("jdbcurl");
-			final String DB_USER = properties.getProperty("username");
-			final String DB_PASS = properties.getProperty("userpassword");
-
+//			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
+//			properties.load(inStream);
+////			properties.load(new FileInputStream("DBAccess.properties"));
+//
+//			final String JDBC_URL = properties.getProperty("jdbcurl");
+//			final String DB_USER = properties.getProperty("username");
+//			final String DB_PASS = properties.getProperty("userpassword");
+			final String JDBC_URL = "jdbc:mysql://localhost:3306/tdsl_master?characterEncoding=UTF-8&serverTimezone=JST\"";
+			final String DB_USER = "user";
+			final String DB_PASS = "password";
 			//データベースへ接続
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-
-		} catch (IOException e) {
-			e.printStackTrace();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

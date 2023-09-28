@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class SessionKanriBean implements Serializable {
 
     private String loginId; //ログインID
-    private String loginPassword; //ログインパスワード
+    private String password; //ログインパスワード
     private String loginName; //ログイン名
     private boolean kanriFlg; //管理フラグ("TRUE"=管理者権限あり)
 
@@ -22,13 +22,13 @@ public class SessionKanriBean implements Serializable {
     //コンストラクタ（id,password）
     public SessionKanriBean(String id, String password) {
         this.loginId = id;
-        this.loginPassword = password;
+        this.password = password;
     }
 
     //コンストラクタ（id,password,名前,管理者フラグ）
     public SessionKanriBean(String id, String password,String loginName,boolean kanriFlg) {
         this.loginId = id;
-        this.loginPassword = password;
+        this.password = password;
         this.loginName = loginName;
         this.kanriFlg = kanriFlg;
     }
@@ -42,12 +42,12 @@ public class SessionKanriBean implements Serializable {
         this.loginId = id;
     }
 
-    public String getLoginPassword() {
-        return loginPassword;
+    public String getpassword() {
+        return password;
     }
 
-    public void setLoginPassword(String loginPassword) {
-        this.loginPassword = loginPassword;
+    public void setpassword(String password) {
+        this.password = password;
     }
 
     public String getLoginName() {

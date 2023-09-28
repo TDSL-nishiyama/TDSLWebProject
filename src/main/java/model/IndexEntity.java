@@ -3,7 +3,7 @@ package model;
 public class IndexEntity {
 
 	private String loginId;			//ログインID
-	private String loginPassword; 	//ログインパスワード
+	private String password; 	//ログインパスワード
 	private boolean kanriFlg;   	//管理フラグ(true=管理者権限あり　false=管理者権限なし)
 
 	//コンストラクタ
@@ -11,15 +11,15 @@ public class IndexEntity {
 
 	}
 
-	//コンストラクタ（id）
-	public IndexEntity(String id){
-		this.loginId = id;
+	//コンストラクタ（loginId）
+	public IndexEntity(String loginId){
+		this.loginId = loginId;
 	}
 
-	//コンストラクタ（id,password）
-	public IndexEntity(String id,String password){
-		this.loginId = id;
-		this.loginPassword = password;
+	//コンストラクタ（loginId,password）
+	public IndexEntity(String loginId,String password){
+		this.loginId = loginId;
+		this.password = password;
 	}
 
 	//アクセサメソッド
@@ -31,12 +31,12 @@ public class IndexEntity {
 		this.loginId = id;
 	}
 
-	public String getLoginPassword(){
-		return loginPassword;
+	public String getpassword(){
+		return password;
 	}
 
-	public void setLoginPassword(String loginPassword){
-		this.loginPassword = loginPassword;
+	public void setpassword(String password){
+		this.password = password;
 	}
 
 	public boolean isKanriFlg() {

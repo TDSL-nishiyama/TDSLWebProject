@@ -49,7 +49,7 @@ public class SyainJouhouAction extends HttpServlet {
 
 		    IndexDAO indexDAO = new IndexDAO();
 
-		    resultList = indexDAO.getSessionInfo(sessionKanriBean.getLoginId(), sessionKanriBean.getLoginPassword());
+		    resultList = indexDAO.getSessionInfo(sessionKanriBean.getLoginId(), sessionKanriBean.getpassword());
 
 		    kanriFlg = resultList.get(2);
 

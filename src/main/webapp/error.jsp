@@ -9,11 +9,9 @@
 </head>
 <body>
 
-<h1>エラー</h1>
+<p>ERROR:<%= request.getAttribute("ERRMSG") %></p>
 
-<p><%= request.getAttribute("ERRMSG") %></p>
-
-<a href = "/SyainKanriApp/login.jsp">戻る</a>
+<a href = "/TDSLWebProject/login.jsp">戻る</a>
 
 
 </body>
