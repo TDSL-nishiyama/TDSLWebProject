@@ -13,8 +13,8 @@ public class DBConnection {
 	//DB読み込み用メソッド
 	public static void loadJDBCDriver() {
 
-		//プロパティファイルを読み込む
-		Properties properties = new Properties();
+//		//プロパティファイルを読み込む
+//		Properties properties = new Properties();
 
 		try {
 //			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
@@ -45,9 +45,9 @@ public class DBConnection {
 //			final String JDBC_URL = properties.getProperty("jdbcurl");
 //			final String DB_USER = properties.getProperty("username");
 //			final String DB_PASS = properties.getProperty("userpassword");
-			final String JDBC_URL = "jdbc:mysql://localhost:3306/tdsl_master?characterEncoding=UTF-8&serverTimezone=JST\"";
-			final String DB_USER = "user";
-			final String DB_PASS = "password";
+			final String JDBC_URL = "jdbc:mysql://localhost:3306/tdsl_master";
+			final String DB_USER = "root";
+			final String DB_PASS = "tdsl1234";
 			//データベースへ接続
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 			

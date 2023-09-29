@@ -1,14 +1,15 @@
 package action;
 
 import java.io.IOException;
+import java.util.List;
 
 import constents.Const.Common;
 import constents.Const.ERRORMSG;
 import constents.Const.Path;
 import control.CheckLogin;
+import control.IndexDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,10 @@ import model.SessionKanriBean;
  */
 public class LogInAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+    public LogInAction() {
+        // TODO Auto-generated constructor stub
+    }
 	
 	/**
 	 * @see ログイン処理のサーブレット
@@ -87,17 +92,23 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			//ユーザー名と管理者権限を取得
-
+			IndexDAO indexDAO = new IndexDAO();
+			List<String> sList = indexDAO.getSessionInfo(id, password);
+			
 			// セッション情報を格納
-			SessionKanriBean sessionKanriBean = new SessionKanriBean(id, password);
+			final int  ID = 0;
+			final int  PASSWORD = 1;
+			final int  NAME = 2;
+			final int  KANRIFLG = 3;
+			SessionKanriBean sessionKanriBean = 
+					new SessionKanriBean(sList.get(ID),sList.get(PASSWORD),sList.get(NAME),Boolean.valueOf(sList.get(KANRIFLG)));
 
 			// セッション情報の文字化け対策
 			request.setCharacterEncoding(Common.ENCODE_UTF8);
-			// セッション情報の取得
+			// セッションスコープの作成
 			HttpSession httpSession = request.getSession();
 			// セッションスコープにログイン情報を保存
 			httpSession.setAttribute(Path.SESSION_SCOPE_NAME, sessionKanriBean);
-
 			// メイン画面に遷移
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.MAIN_GAMEN);

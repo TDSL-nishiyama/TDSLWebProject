@@ -17,15 +17,8 @@ import jakarta.servlet.http.HttpSession;
 public class LogOutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LogOutAction() {
-        super();
-    }
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see ログアウト処理のサーブレット
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -9,7 +9,6 @@
 <body>
 
 <p>コンテキストパス：<%=request.getContextPath()%>
-
 <a href="index.jsp">戻る</a>
 
 </body>

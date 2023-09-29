@@ -1,12 +1,9 @@
 package action;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import constents.Const.ERRORMSG;
 import constents.Const.Path;
-import control.IndexDAO;
 import control.SyainJouhouDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -42,26 +39,6 @@ public class SyainJouhouAction extends HttpServlet {
 			// ログインしていない場合リダイレクト
 			response.sendRedirect(request.getContextPath() + Path.LOGIN_GAMEN);
 		} else {
-
-		    //該当IDの管理者フラグを呼び出す
-		    List<String> resultList = new ArrayList<>();
-		    String kanriFlg = null;
-
-		    IndexDAO indexDAO = new IndexDAO();
-
-		    resultList = indexDAO.getSessionInfo(sessionKanriBean.getLoginId(), sessionKanriBean.getpassword());
-
-		    kanriFlg = resultList.get(2);
-
-		    //管理フラグがFALSEの場合、管理者権限ではないためシステムエラー画面に遷移させる
-		    if(!kanriFlg.equals("1")) {
-	            //エラーメッセージを格納
-	            request.setAttribute("ERRMSG", ERRORMSG.ERR_5);
-	            // エラー画面に遷移
-	            RequestDispatcher dispatcher = request
-	                    .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
-	            dispatcher.forward(request, response);
-		    }
 
 			// セッションスコープにインスタンスを保存
 			SyainJouhouDAO syainJouhouDAO = new SyainJouhouDAO();

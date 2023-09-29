@@ -38,7 +38,7 @@ public class CheckLogin extends DBConnection {
 				loginIdPassList)) {
 
 			result = true;
-		}
+		}	
 
 		return result;
 	}

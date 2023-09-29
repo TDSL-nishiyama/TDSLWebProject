@@ -4,8 +4,8 @@
 
 function checkIDandText(){
 
-	var id = document.form1.id.value;
-	var password = document.form1.password.value;
+	var id = document.login.id.value;
+	var password = document.login.password.value;
 
     if(id == ""){
         window.alert('ログインIDを入力してください');

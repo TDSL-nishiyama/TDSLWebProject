@@ -12,159 +12,160 @@ import model.SessionKanriBean;
 
 public class IndexDAO extends DBConnection {
 
-    public String findLoginId(String pLoginId) {
+	public String findLoginId(String pLoginId) {
 
-        Connection conn = null;
-        String loginId = null;
+		Connection conn = null;
+		String loginId = null;
 
-        try {
+		try {
 
-            // JDBCドライバを読み込み
-            super.loadJDBCDriver();
+			// JDBCドライバを読み込み
+			super.loadJDBCDriver();
 
-            // DBへ接続
-            conn = super.connectionDB(conn);
+			// DBへ接続
+			conn = super.connectionDB(conn);
 
-            // SELECT文を準備
-            StringBuilder sql = new StringBuilder();
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT loginid,password");
-            sql.append(" FROM login");
-            sql.append(" WHERE loginid = ?;");
+			sql.append("SELECT loginid,password");
+			sql.append(" FROM login");
+			sql.append(" WHERE loginid = ?;");
 
-            PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-            pStmt.setString(1, pLoginId);
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setString(1, pLoginId);
 
-            // SELECTを実行し、結果表を取得
-            ResultSet rs = pStmt.executeQuery();
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
 
-            while (rs.next()) {
-                loginId = rs.getString("loginid");
-            }
+			while (rs.next()) {
+				loginId = rs.getString("loginid");
+			}
 
-            IndexEntity indexEntity = new IndexEntity(loginId);
+			IndexEntity indexEntity = new IndexEntity(loginId);
 
-            indexEntity.setLoginId(loginId);
+			indexEntity.setLoginId(loginId);
 
-            loginId = indexEntity.getLoginId();
+			loginId = indexEntity.getLoginId();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // データベース切断
-            super.closeDB(conn);
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			super.closeDB(conn);
+		}
 
-        return loginId;
-    }
+		return loginId;
+	}
 
-    public List<String> findLoginIdAndPassword(String pLoginId,
-            String ppassword) {
+	public List<String> findLoginIdAndPassword(String pLoginId,
+			String ppassword) {
 
-        Connection conn = null;
-        List<String> indexEntityList = new ArrayList<>();
+		Connection conn = null;
+		List<String> indexEntityList = new ArrayList<>();
 
-        try {
-            // JDBCドライバ読み込み
-            super.loadJDBCDriver();
+		try {
+			// JDBCドライバ読み込み
+			super.loadJDBCDriver();
 
-            // DBへ接続
-            conn = super.connectionDB(conn);
+			// DBへ接続
+			conn = super.connectionDB(conn);
 
-            // SELECT文を準備
-            StringBuilder sql = new StringBuilder();
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT loginid,password");
-            sql.append(" FROM login");
-            sql.append(" WHERE loginid = ? AND password = ?;");
+			sql.append("SELECT loginid,password");
+			sql.append(" FROM login");
+			sql.append(" WHERE loginid = ? AND password = ?;");
 
-            PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-            pStmt.setString(1, pLoginId);
-            pStmt.setString(2, ppassword);
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setString(1, pLoginId);
+			pStmt.setString(2, ppassword);
 
-            // SELECTを実行し、結果表を取得
-            ResultSet rs = pStmt.executeQuery();
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
 
-            String loginId = null;
-            String password = null;
+			String loginId = null;
+			String password = null;
 
-            while (rs.next()) {
-                loginId = rs.getString("loginid");
-                password = rs.getString("password");
-            }
+			while (rs.next()) {
+				loginId = rs.getString("loginid");
+				password = rs.getString("password");
+			}
 
-            IndexEntity indexEntity = new IndexEntity(loginId, password);
+			IndexEntity indexEntity = new IndexEntity(loginId, password);
 
-            indexEntity.setLoginId(loginId);
-            indexEntity.setpassword(password);
+			indexEntity.setLoginId(loginId);
+			indexEntity.setpassword(password);
 
-            indexEntityList.add(indexEntity.getLoginId());
-            indexEntityList.add(indexEntity.getpassword());
+			indexEntityList.add(indexEntity.getLoginId());
+			indexEntityList.add(indexEntity.getpassword());
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            super.closeDB(conn);
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(conn);
+		}
 
-        return indexEntityList;
-    }
+		return indexEntityList;
+	}
 
-    public List<String> getSessionInfo(String pLoginId, String ppassword) {
+	public List<String> getSessionInfo(String pLoginId, String pPassword) {
 
-        List<String> returnList = new ArrayList<>();
-        String loginId = "";
-        String password = "";
-        String loginName = "";
-        boolean kanriFlg = false;
+		List<String> returnList = new ArrayList<>();
+		String loginId = "";
+		String password = "";
+		String loginName = "";
+		boolean kanriFlg = false;
 
-        Connection conn = null;
+		Connection conn = null;
 
-        try {
-            // JDBCドライバ読み込み
-            super.loadJDBCDriver();
+		try {
+			// JDBCドライバ読み込み
+			super.loadJDBCDriver();
 
-            // DBへ接続
-            conn = super.connectionDB(conn);
+			// DBへ接続
+			conn = super.connectionDB(conn);
 
-            // SELECT文を準備
-            StringBuilder sql = new StringBuilder();
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT M.id,L.loginpass,M.name,L.kanriFlg");
-            sql.append(" FROM user AS M JOIN login AS L M.id = L.id");
-            sql.append(" WHERE loginid = ?;");
+			sql.append("SELECT L.loginid,L.password,U.name,U.kanriFlg");
+			sql.append(" FROM user AS U INNER JOIN login AS L");
+			sql.append(" ON U.id = L.id");
+			sql.append(" WHERE loginid = ?;");
 
-            PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-            pStmt.setString(1, pLoginId);
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setString(1, pLoginId);
 
-            // SELECTを実行し、結果表を取得
-            ResultSet rs = pStmt.executeQuery();
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				loginId = rs.getString("loginid");
+				password = rs.getString("password");
+				loginName = rs.getString("name");
+				kanriFlg = rs.getBoolean("kanriFlg");
+			}
 
-            while (rs.next()) {
-                loginId = rs.getString("loginid");
-                password = rs.getString("password");
-                loginName = rs.getString("name");
-                kanriFlg = rs.getBoolean("kanriFlg");
-            }
+			SessionKanriBean sessionKanriBean = 
+					new SessionKanriBean(loginId, password, loginName, kanriFlg);
 
-            SessionKanriBean sessionKanriBean = new SessionKanriBean(loginId, password, loginName, kanriFlg);
+			sessionKanriBean.setLoginId(loginId);
+			sessionKanriBean.setpassword(password);
+			sessionKanriBean.setLoginName(loginName);
+			sessionKanriBean.setKanriFlg(kanriFlg);
 
-            sessionKanriBean.setLoginId(loginId);
-            sessionKanriBean.setpassword(password);
-            sessionKanriBean.setLoginName(loginName);
-            sessionKanriBean.setKanriFlg(kanriFlg);
+			returnList.add(sessionKanriBean.getLoginId());
+			returnList.add(sessionKanriBean.getpassword());
+			returnList.add(sessionKanriBean.getLoginName());
+			returnList.add(String.valueOf(sessionKanriBean.getKanriFlg()));
 
-            returnList.add(sessionKanriBean.getLoginId());
-            returnList.add(sessionKanriBean.getpassword());
-            returnList.add(sessionKanriBean.getLoginName());
-            returnList.add(String.valueOf(sessionKanriBean.getKanriFlg()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(conn);
+		}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            super.closeDB(conn);
-        }
-
-        return returnList;
-    }
+		return returnList;
+	}
 }
