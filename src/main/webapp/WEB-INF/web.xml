@@ -1,43 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
-  <display-name>TDSLWebProject</display-name>
-  <welcome-file-list>
-  	<welcome-file>index.jsp</welcome-file>
-  	<welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	id="WebApp_ID" version="6.0">
+	<display-name>TDSLWebProject</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
 
-  <servlet>
-    <servlet-name>LogInAction</servlet-name>
-    <servlet-class>action.LogInAction</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogInAction</servlet-name>
-    <url-pattern>/LogInAction</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>LogOutAction</servlet-name>
-    <servlet-class>action.LogOutAction</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogOutAction</servlet-name>
-    <url-pattern>/LogOutAction</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>TestAction</servlet-name>
-    <servlet-class>action.TestAction</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestAction</servlet-name>
-    <url-pattern>/TestAction</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>SyainJouhouAction</servlet-name>
-    <servlet-class>action.SyainJouhouAction</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SyainJouhouAction</servlet-name>
-    <url-pattern>/SyainJouhouAction</url-pattern>
-  </servlet-mapping>
+	<servlet>
+		<servlet-name>LogInAction</servlet-name>
+		<servlet-class>action.LogInAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogInAction</servlet-name>
+		<url-pattern>/LogInAction</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogOutAction</servlet-name>
+		<servlet-class>action.LogOutAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogOutAction</servlet-name>
+		<url-pattern>/LogOutAction</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>TestAction</servlet-name>
+		<servlet-class>action.TestAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestAction</servlet-name>
+		<url-pattern>/TestAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SyainJouhouAction</servlet-name>
+		<servlet-class>action.SyainJouhouAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SyainJouhouAction</servlet-name>
+		<url-pattern>/SyainJouhouAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MastaAction</servlet-name>
+		<servlet-class>action.MastaAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MastaAction</servlet-name>
+		<url-pattern>/MastaAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserAddAction</servlet-name>
+		<servlet-class>action.UserAddAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserAddAction</servlet-name>
+		<url-pattern>/UserAddAction</url-pattern>
+	</servlet-mapping>
 
 </web-app>

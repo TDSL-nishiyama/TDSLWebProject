@@ -6,7 +6,7 @@ import java.util.List;
 import constents.Const.Common;
 import constents.Const.ERRORMSG;
 import constents.Const.Path;
-import control.CheckLogin;
+import control.LoginBL;
 import control.IndexDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -22,9 +22,6 @@ import model.SessionKanriBean;
 public class LogInAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    public LogInAction() {
-        // TODO Auto-generated constructor stub
-    }
 	
 	/**
 	 * @see ログイン処理のサーブレット
@@ -42,7 +39,11 @@ public class LogInAction extends HttpServlet {
 		id = request.getParameter("id");
 		password = request.getParameter("password");
 
-		// IDが入力されていない場合、エラー画面に遷移
+		boolean errorFlg; // ログインIDパスワード存在チェック用 true = 存在 false = 存在しない
+
+		LoginBL loginBL = new LoginBL();
+		
+		// IDが入力されていない場合はエラー画面に遷移
 		if (id == null || "".equals(id)) {
 			//エラーメッセージを格納
 			request.setAttribute("ERRMSG", ERRORMSG.ERR_1);
@@ -53,7 +54,7 @@ public class LogInAction extends HttpServlet {
 			return;
 		}
 
-		// パスワードが入力されていない場合、エラー画面に遷移
+		// パスワードが入力されていない場合はエラー画面に遷移
 		if (password == null || "".equals(password)) {
 			//エラーメッセージを格納
 			request.setAttribute("ERRMSG", ERRORMSG.ERR_2);
@@ -64,11 +65,7 @@ public class LogInAction extends HttpServlet {
 			return;
 		}
 
-		boolean errorFlg; // ログインIDパスワード存在チェック用 true = 存在 false = 存在しない
-
-		CheckLogin checkLogin = new CheckLogin();
-
-		errorFlg = checkLogin.checkLoginId(id);
+		errorFlg = loginBL.checkLoginId(id);
 
 		// ログインIDが存在しない場合はエラー画面に遷移
 		if (!errorFlg) {
@@ -80,7 +77,7 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
-		errorFlg = checkLogin.checkLoginIdAndPassword(id, password);
+		errorFlg = loginBL.checkLoginIdAndPassword(id, password);
 
 		// ログインIDとパスワードが一致しない場合はエラー画面に遷移
 		if (!errorFlg) {

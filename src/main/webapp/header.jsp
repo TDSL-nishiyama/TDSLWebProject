@@ -18,8 +18,8 @@ if (loginSession == null) {
 	RequestDispatcher dispatcher = request.getRequestDispatcher(Path.LOGIN_GAMEN);
 	dispatcher.forward(request, response);
 }
-//管理フラグの設定
-boolean kanriFlg = loginSession.getKanriFlg();
+	//管理フラグの設定
+	boolean kanriFlg = loginSession.getKanriFlg();
 %>
 
 <html>

@@ -3,8 +3,8 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckLogin extends DBConnection {
-
+public class LoginBL extends DBConnection {
+	
 	// ログインID存在チェック用
 	public boolean checkLoginId(String pLoginId) {
 

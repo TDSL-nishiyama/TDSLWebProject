@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<form name="toSyainmeibo"
+	<form name="toSyainJouhou"
 		action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
 		<p>
 			<input type="submit" name="syainIpppan" value="社員名簿の閲覧">
@@ -23,7 +23,7 @@
 	
 	<% if(kanriFlg == true){%>
 	<form name="toMasta"
-		action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
+		action="<%=request.getContextPath()%>/MastaAction" method="post">
 		<p>
 			<input type="submit" name="toMasta" value="マスタ画面に遷移">
 		</p>

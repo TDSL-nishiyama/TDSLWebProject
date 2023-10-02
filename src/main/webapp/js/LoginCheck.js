@@ -2,19 +2,24 @@
  * ログイン画面チェック用
  */
 
-function checkIDandText(){
+/*ログインボタン押下*/
+function checkIDandText() {
 
 	var id = document.login.id.value;
 	var password = document.login.password.value;
+	var almsg = "";
 
-    if(id == ""){
-        window.alert('ログインIDを入力してください');
-        return false;
-    }else if(!id.match(/^[A-Za-z0-9]+$/)){
-    	window.alert('IDは半角英数のみ入力可能です')
-    	return false;
-    }else if(password == ""){
-        window.alert('パスワードを入力してください');
-        return false;
-    }
+	if (id == "") {
+		almsg ="ログインIDを入力してください";
+	} else if (!id.match(/^[A-Za-z0-9]+$/)) {
+		almsg = "IDは半角英数のみ入力可能です";
+	} else if (password == "") {
+		almsg = "パスワードを入力してください";
+	}
+	if (almsg == "") {
+		return true;
+	} else {
+		alert(almsg);
+		return false;
+	}
 }

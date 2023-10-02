@@ -20,6 +20,21 @@ public class SyainJouhouEntity implements Serializable {
 	public SyainJouhouEntity() {
 
 	}
+	
+	// コンストラクタ（名前）
+	public SyainJouhouEntity(String name) {
+
+		this.name = name;
+
+	}
+	
+	// コンストラクタ（社員ID、名前）
+	public SyainJouhouEntity(int id, String name) {
+
+		this.id = id;
+		this.name = name;
+
+	}
 
 	// コンストラクタ（社員ID、名前、読み仮名、性別、出身地、現住所、住宅手当有無、職位、年収、入社年月、勤続年数）
 	public SyainJouhouEntity(int id, String name, String yomigana,

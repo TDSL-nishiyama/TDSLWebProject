@@ -3,26 +3,11 @@
 <!-- ログイン画面  -->
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ログイン画面</title>
-<script>
-/* function checkIDandText(){
-
-	var id = document.login.id.value;
-	var password = document.login.password.value;
-
-    if(id == ""){
-        window.alert('ログインIDを入力してください');
-        return false;
-    }else if(!id.match(/^[A-Za-z0-9]+$/)){
-    	window.alert('IDは半角英数のみ入力可能です')
-    	return false;
-    }else if(password == ""){
-        window.alert('パスワードを入力してください');
-        return false;
-    } */
-}</script>
+<script type="text/javascript" src="./js/LoginCheck.js" charset="UTF-8"></script>
 </head>
 
 <body>
@@ -30,7 +15,7 @@
 	<h1>ログインIDとパスワードを入力してください</h1>
 
 	<form name="login" action="<%=request.getContextPath()%>/LogInAction"
-		method="post">
+		method="post" onsubmit="checkIDandText();retrun false;">
 
 		<p>
 			ID: <input type="text" name="id">
@@ -40,7 +25,7 @@
 		</p>
 
 		<p>
-			<input type="submit" name="login" value="ログイン" onclick="checkIDandText()">
+			<input type="submit" name="login" value="ログイン">
 		</p>
 
 	</form>
