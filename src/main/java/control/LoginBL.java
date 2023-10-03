@@ -20,10 +20,10 @@ public class LoginBL extends DBConnection {
 
 		boolean result = false;
 
-		IndexDAO indexDAO = new IndexDAO();
+		LoginDAO loginDAO = new LoginDAO();
 
 		// IDがDB内に存在しなかった場合エラー画面に遷移
-		if (!(indexDAO.findLoginId(pLoginId) == null)) {
+		if (!(loginDAO.findLoginId(pLoginId) == null)) {
 			result = true;
 		}
 
@@ -37,14 +37,14 @@ public class LoginBL extends DBConnection {
 
 		boolean result = false;
 
-		IndexDAO indexDAO = new IndexDAO();
+		LoginDAO loginDAO = new LoginDAO();
 
 		// 入力したパスワードがDB内のパスワードと異なる場合エラー画面に遷移
 		List<String> loginIdPassList = new ArrayList<>();
 		loginIdPassList.add(pLoginId);
 		loginIdPassList.add(pLoginPassword);
 
-		if (indexDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(
+		if (loginDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(
 				loginIdPassList)) {
 
 			result = true;

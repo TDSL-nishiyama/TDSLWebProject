@@ -10,7 +10,7 @@ import java.util.List;
 import model.IndexEntity;
 import model.SessionKanriBean;
 
-public class IndexDAO extends DBConnection {
+public class LoginDAO extends DBConnection {
 
 	public String findLoginId(String pLoginId) {
 

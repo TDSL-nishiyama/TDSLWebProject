@@ -7,7 +7,7 @@ import constents.Const.Common;
 import constents.Const.ERRORMSG;
 import constents.Const.Path;
 import control.LoginBL;
-import control.IndexDAO;
+import control.LoginDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -92,8 +92,8 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			//ユーザー名と管理者権限を取得
-			IndexDAO indexDAO = new IndexDAO();
-			List<String> sList = indexDAO.getSessionInfo(id, password);
+			LoginDAO loginDAO = new LoginDAO();
+			List<String> sList = loginDAO.getSessionInfo(id, password);
 			
 			// セッション情報を格納
 			final int  ID = 0;
