@@ -30,5 +30,14 @@
 
 	</form>
 
+	<form name="login" action="<%=request.getContextPath()%>/UpdatePasswordAction"
+		method="post"">
+
+		<p>
+			<input type="submit" name="updatePassword" value="パスワード再登録">
+		</p>
+
+	</form>
+
 </body>
 </html>

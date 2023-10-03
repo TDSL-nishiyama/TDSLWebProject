@@ -12,13 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginOutAction
+ * ログアウト処理のサーブレット
  */
 public class LogOutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see ログアウト処理のサーブレット
+	 * @see 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

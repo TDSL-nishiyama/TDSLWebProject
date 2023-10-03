@@ -17,14 +17,14 @@ import jakarta.servlet.http.HttpSession;
 import model.SessionKanriBean;
 
 /**
- * Servlet implementation class IndexAction
+ * ログイン処理のサーブレット
  */
 public class LogInAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
 	/**
-	 * @see ログイン処理のサーブレット
+	 * @see 
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -64,6 +64,9 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
+		
+		//TODO 初回ログイン時はパスワード登録画面に遷移
+		
 
 		errorFlg = loginBL.checkLoginId(id);
 

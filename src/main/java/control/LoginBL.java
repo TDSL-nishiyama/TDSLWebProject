@@ -5,6 +5,16 @@ import java.util.List;
 
 public class LoginBL extends DBConnection {
 	
+	// 初回ログインチェック用
+	public boolean checkLoginShokai(String pLoginId) {
+		
+		boolean result = false;
+		
+		
+		return result;
+		
+	}
+	
 	// ログインID存在チェック用
 	public boolean checkLoginId(String pLoginId) {
 

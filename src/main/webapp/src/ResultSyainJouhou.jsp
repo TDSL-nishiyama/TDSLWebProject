@@ -1,10 +1,12 @@
- pageEncoding="UTF-8"%>
-<%@ page import="model.syainJouhouEntity,java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ page import="model.SyainJouhouEntity,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<syainJouhouEntity> syainJouhouEntityList = (List<syainJouhouEntity>) 
+List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>)
 request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 %>
 
@@ -12,7 +14,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 <html>
 <head>
 <%@ include file="../header.jsp"%>
-<title>選択結果</title>
+<title>社員一覧</title>
 </head>
 <body>
 	<%if(kanriFlg == false){%>
@@ -23,7 +25,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 		</tr>
 
 		<%
-		for (syainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
+		for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
 		%>
 		<tr>
 			<td><%=syainJouhouEntity.getName()%></td>
@@ -42,11 +44,11 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 		</tr>
 
 		<%
-		for (syainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
+		for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
 		%>
 		<tr>
 			<td><%=syainJouhouEntity.getId()%></td>
-			<td><%=syainJouhouEntity.getName()%></td>
+			<td><%=syainJouhouEntity.getName()	%></td>
 		</tr>
 		<%
 		}

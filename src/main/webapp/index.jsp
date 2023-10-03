@@ -11,10 +11,14 @@
 
 	<form name="toSyainJouhou"
 		action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
+		<% //一般ユーザーの場合
+		if(kanriFlg == false){
+		%>
 		<p>
 			<input type="submit" name="syainIpppan" value="社員名簿の閲覧">
 		</p>
-		<% if(kanriFlg == true){%>
+		<% //管理者の場合
+		}else{%>
 		<p>
 			<input type="submit" name="syainKanrisya" value="社員名簿の閲覧（管理者用）">
 		</p>
