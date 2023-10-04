@@ -11,6 +11,43 @@ import model.IndexEntity;
 import model.SessionKanriBean;
 
 public class LoginDAO extends DBConnection {
+	
+	public String findUserId(String pLoginId) {
+		
+		Connection conn = null;
+		String resultCount = null;
+		
+		try {
+
+			// JDBCドライバを読み込み
+			super.loadJDBCDriver();
+
+			// DBへ接続
+			conn = super.connectionDB(conn);
+
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("select count(loginid) from login where loginid = ?;");
+
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setString(1, pLoginId);
+
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				resultCount = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			super.closeDB(conn);
+		}
+		return resultCount;
+	}
 
 	public String findLoginId(String pLoginId) {
 
@@ -168,4 +205,5 @@ public class LoginDAO extends DBConnection {
 
 		return returnList;
 	}
+	
 }

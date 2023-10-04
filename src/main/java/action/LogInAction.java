@@ -21,8 +21,7 @@ import model.SessionKanriBean;
  */
 public class LogInAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	/**
 	 * @see 
 	 */
@@ -39,10 +38,11 @@ public class LogInAction extends HttpServlet {
 		id = request.getParameter("id");
 		password = request.getParameter("password");
 
+		String loginIdCheck = ""; // ログイン初回判定用　error→エラー画面　kari→パスワード登録更新画面 true→後続処理
 		boolean errorFlg; // ログインIDパスワード存在チェック用 true = 存在 false = 存在しない
 
 		LoginBL loginBL = new LoginBL();
-		
+
 		// IDが入力されていない場合はエラー画面に遷移
 		if (id == null || "".equals(id)) {
 			//エラーメッセージを格納
@@ -64,13 +64,10 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
-		
-		//TODO 初回ログイン時はパスワード登録画面に遷移
-		
-
-		errorFlg = loginBL.checkLoginId(id);
 
 		// ログインIDが存在しない場合はエラー画面に遷移
+		errorFlg = loginBL.checkLoginId(id);
+
 		if (!errorFlg) {
 			//エラーメッセージを格納
 			request.setAttribute("ERRMSG", ERRORMSG.ERR_3);
@@ -80,9 +77,26 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
-		errorFlg = loginBL.checkLoginIdAndPassword(id, password);
+		// 初回ログイン時はパスワード登録画面に遷移
+		loginIdCheck = loginBL.checkLoginShokai(id);
+
+		if (id == null || "".equals(loginIdCheck) || loginIdCheck.equals("error")) {
+			//エラーメッセージを格納
+			request.setAttribute("ERRMSG", ERRORMSG.ERR_3);
+			// エラー画面に遷移
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+			dispatcher.forward(request, response);
+		} else if (loginIdCheck.equals("toPassword")) {
+			// パスワード登録更新画面に遷移
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher(Path.UPDATE_PASSWORD_GAMEN);
+			dispatcher.forward(request, response);
+		}
 
 		// ログインIDとパスワードが一致しない場合はエラー画面に遷移
+		errorFlg = loginBL.checkLoginIdAndPassword(id, password);
+
 		if (!errorFlg) {
 			//エラーメッセージを格納
 			request.setAttribute("ERRMSG", ERRORMSG.ERR_4);
@@ -94,14 +108,14 @@ public class LogInAction extends HttpServlet {
 			//ユーザー名と管理者権限を取得
 			LoginDAO loginDAO = new LoginDAO();
 			List<String> sList = loginDAO.getSessionInfo(id, password);
-			
+
 			// セッション情報を格納
-			final int  ID = 0;
-			final int  PASSWORD = 1;
-			final int  NAME = 2;
-			final int  KANRIFLG = 3;
-			SessionKanriBean sessionKanriBean = 
-					new SessionKanriBean(sList.get(ID),sList.get(PASSWORD),sList.get(NAME),Boolean.valueOf(sList.get(KANRIFLG)));
+			final int ID = 0;
+			final int PASSWORD = 1;
+			final int NAME = 2;
+			final int KANRIFLG = 3;
+			SessionKanriBean sessionKanriBean = new SessionKanriBean(sList.get(ID), sList.get(PASSWORD),
+					sList.get(NAME), Boolean.valueOf(sList.get(KANRIFLG)));
 
 			// セッション情報の文字化け対策
 			request.setCharacterEncoding(Common.ENCODE_UTF8);
