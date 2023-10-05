@@ -20,13 +20,13 @@
 	<form name="updatePassword"
 		action="<%=request.getContextPath()%>/ResultUpdatePasswordAction"
 		method="post" onsubmit="checkUpdatePassword();retrun false;">
-		<h1>ユーザー名（仮登録ユーザーのみ)とパスワードを入力してください</h1>
+		<h1>ログインID（仮登録ユーザーのみ)とパスワードを入力してください</h1>
 		<%
 		//遷移元がLoginAction（初回ログイン想定）の場合はユーザー名を登録させるためテキストボックスを表示
 		if (reServlet.equals(Path.UPDATE_PASSWORD_GAMEN)) {
 		%>
 		<p>
-			ユーザー名: <input type="text" name="username">
+			ログインID: <input type="text" name="loginid">
 		</p>
 		<%
 		}

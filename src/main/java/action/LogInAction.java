@@ -37,8 +37,12 @@ public class LogInAction extends HttpServlet {
 
 		id = request.getParameter("id");
 		password = request.getParameter("password");
-
-		String loginIdCheck = ""; // ログイン初回判定用　error→エラー画面　kari→パスワード登録更新画面 true→後続処理
+		
+		// ログイン初回判定用
+		//要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
+		//要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
+		String loginIdCheck[] = {"",""}; 
+		
 		boolean errorFlg; // ログインIDパスワード存在チェック用 true = 存在 false = 存在しない
 
 		LoginBL loginBL = new LoginBL();
@@ -80,14 +84,14 @@ public class LogInAction extends HttpServlet {
 		// 初回ログイン時はパスワード登録画面に遷移
 		loginIdCheck = loginBL.checkLoginShokai(id);
 
-		if (id == null || "".equals(loginIdCheck) || loginIdCheck.equals("error")) {
+		if (id == null || "".equals(loginIdCheck[0]) || loginIdCheck[0].equals("error")) {
 			//エラーメッセージを格納
 			request.setAttribute("ERRMSG", ERRORMSG.ERR_3);
 			// エラー画面に遷移
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
 			dispatcher.forward(request, response);
-		} else if (loginIdCheck.equals("toPassword")) {
+		} else if (loginIdCheck[0].equals("toPassword")) {
 			// パスワード登録更新画面に遷移
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.UPDATE_PASSWORD_GAMEN);

@@ -6,18 +6,23 @@ import java.util.List;
 public class LoginBL extends DBConnection {
 
 	// 初回ログインチェック用
-	public String checkLoginShokai(String pLoginId) {
-
-		String result = "false";
+	public String[] checkLoginShokai(String pLoginId) {
+		
+		//要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
+		//要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
+		String[] result = {"",""};
 
 		//TODO IDが5桁未満だと落ちるので仮、本当はID登録文字数制限とかしたほうがいい
 		if (pLoginId.length() >= 4) {
 			//IDが仮IDだった場合、パスワード更新登録画面に遷移
 			if (pLoginId.substring(0, 4).equals("kari")) {
-				result = "toPassword";
+				result[0] = "toPassword";
+				//loginテーブルid項目の取得
+				LoginDAO loginDAO = new LoginDAO();
+				result[1] =  loginDAO.findLoginIdtoId(pLoginId);
 				//それ以外の場合は後続処理に移行
 			} else {
-				result = "true";
+				result[0] = "true";
 			}
 		}
 

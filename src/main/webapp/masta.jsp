@@ -8,6 +8,11 @@
 <title>マスタ画面</title>
 </head>
 <body>
+	<table>
+	<th>
+	反映された変更の表示域
+	</th>
+	</table>
 	<form name="toUserAdd"
 		action="<%=request.getContextPath()%>/UserAddAction" method="post">
 		<p>

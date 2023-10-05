@@ -12,6 +12,47 @@ import model.SessionKanriBean;
 
 public class LoginDAO extends DBConnection {
 	
+	public String findLoginIdtoId(String pLoginId) {
+
+		Connection conn = null;
+		String userId = null;
+		
+
+		try {
+
+			// JDBCドライバを読み込み
+			super.loadJDBCDriver();
+
+			// DBへ接続
+			conn = super.connectionDB(conn);
+
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT id");
+			sql.append(" FROM login");
+			sql.append(" WHERE loginid = ?;");
+
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setString(1, pLoginId);
+
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				userId = rs.getString("id");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			super.closeDB(conn);
+		}
+
+		return userId;
+	}
+	
 	public String findUserId(String pLoginId) {
 		
 		Connection conn = null;

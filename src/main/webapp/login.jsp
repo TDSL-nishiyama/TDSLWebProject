@@ -11,7 +11,10 @@
 </head>
 
 <body>
-
+	<%=
+	//更新メッセージの表示
+	request.getAttribute("MSG")
+	%>
 	<h1>ログインIDとパスワードを入力してください</h1>
 
 	<form name="login" action="<%=request.getContextPath()%>/LogInAction"
