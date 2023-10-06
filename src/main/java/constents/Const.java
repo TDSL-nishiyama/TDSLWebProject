@@ -26,6 +26,7 @@ public class Const {
 		//スコープ名
 		public static final String SESSION_SCOPE_NAME = "loginSession";
 		public static final String SYAIN_JOUHOU_SCOPE = "syainJouhouEntityList";
+		public static final String BEFORE_UPDATEPASSWORD = "LoginAction";
 	}
 
 	//エラー関連

@@ -92,6 +92,9 @@ public class LogInAction extends HttpServlet {
 					.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
 			dispatcher.forward(request, response);
 		} else if (loginIdCheck[0].equals("toPassword")) {
+			// リクエストスコープにLoginActionからの遷移である情報を追加
+			request.setAttribute(Path.BEFORE_UPDATEPASSWORD, "LoginAction");
+			request.setAttribute("LOGINID_BEFORE", id);
 			// パスワード登録更新画面に遷移
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.UPDATE_PASSWORD_GAMEN);

@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * パスワード登録更新画面のサーブレット
@@ -24,10 +25,8 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//ログインIDに紐づくユーザーIDを取得
 		ResultUpdatePasswordBL resultUpdatePasswordBL = new ResultUpdatePasswordBL();
 		
-		String userId = resultUpdatePasswordBL.getUserId("loginid");
 		String loginId = request.getParameter("loginid");
 		String password = request.getParameter("pass1");
 		
@@ -37,8 +36,9 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 		LoginBL loginBL = new LoginBL();
 		
 		//ユーザーID重複チェック
-		//既存ユーザーの場合、usernameテキストボックスは表示されないため判定自体を行わない
-		if (!(loginId == "" || loginId.equals(null))) {
+		//既存ユーザーの場合
+		HttpSession session = request.getSession();
+		if (session.getAttribute("USER_ATTRIBUTE").equals("1")) {
 			errFlg = loginBL.checkDuplicationLoginId(loginId);
 			// ユーザー名が重複している場合はエラーメッセージを表示
 			if (!errFlg) {
@@ -50,17 +50,21 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			//ユーザーの登録
-			resultUpdatePasswordBL.updateUserPassword(userId, loginId, password);
+			String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
+			resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
 			resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
 		}else {
 			//パスワードの更新
-			resultUpdatePasswordBL.updatePassword(userId, password);
+			resultUpdatePasswordBL.updatePassword(loginId, password);
 			resultMSG = "パスワードの更新が完了しました";
 		}
 		
 		//ログイン画面に表示させるメッセージを格納
 		request.setAttribute("MSG",resultMSG);
-
+		//セッションを破棄
+		session.removeAttribute("USER_ATTRIBUTE");
+		session.removeAttribute("LOGINID_BEFORE");
+		session.invalidate();
 		//ログイン画面に遷移
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher(Path.LOGIN_GAMEN);

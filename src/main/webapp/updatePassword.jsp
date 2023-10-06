@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="constents.Const.Path"%>
+<%
+// セッションスコープの作成
+HttpSession httpsession = request.getSession();
+if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
+	httpsession.setAttribute("USER_ATTRIBUTE", "1");
+	httpsession.setAttribute("LOGINID_BEFORE",(String)request.getAttribute("LOGINID_BEFORE"));
+} else {
+	httpsession.setAttribute("USER_ATTRIBUTE", "0");
+}
+%>
 <!-- パスワード登録更新画面 -->
 <!DOCTYPE html>
 <html>
@@ -13,24 +23,14 @@
 </head>
 
 <body>
-	<%
-	// 遷移元Pathの取得
-	String reServlet = request.getServletPath();
-	%>
 	<form name="updatePassword"
 		action="<%=request.getContextPath()%>/ResultUpdatePasswordAction"
 		method="post" onsubmit="checkUpdatePassword();retrun false;">
-		<h1>ログインID（仮登録ユーザーのみ)とパスワードを入力してください</h1>
-		<%
-		//遷移元がLoginAction（初回ログイン想定）の場合はユーザー名を登録させるためテキストボックスを表示
-		if (reServlet.equals(Path.UPDATE_PASSWORD_GAMEN)) {
-		%>
+		<h1>ログインIDとパスワードを入力してください</h1>
+		※仮登録ユーザーの場合、ログインIDを変更してください。
 		<p>
 			ログインID: <input type="text" name="loginid">
 		</p>
-		<%
-		}
-		%>
 		<p>
 			パスワード: <input type="password" name="pass1">
 		</p>

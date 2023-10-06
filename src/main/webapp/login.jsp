@@ -11,9 +11,16 @@
 </head>
 
 <body>
+	<%
+	String msg = "";
+	msg = (String)request.getAttribute("MSG");
+	if(msg == null){
+		msg = "";
+	}
+	%>
 	<%=
 	//更新メッセージの表示
-	request.getAttribute("MSG")
+	msg
 	%>
 	<h1>ログインIDとパスワードを入力してください</h1>
 
