@@ -9,9 +9,9 @@
 <title>ユーザー登録画面</title>
 </head>
 <body>
-<!-- TODO 登録ボタンの作成  -->
+	<%@ include file="../msg.jsp"%>
 	<form name="userInsert"
-		action="<%=request.getContextPath()%>/UserAddAction" method="post">
+		action="<%=request.getContextPath()%>/ResultUserAddAction" method="post">
 		<p>
 			ユーザー名：<input type="text" name="userName"><br>
 			管理者権限<br>
@@ -20,6 +20,10 @@
 			<input type="submit" name="addUser" value="ユーザー登録"><br>
 		</p>
 	</form>
+	
+	<p>
+		<a href="/TDSLWebProject/masta.jsp">戻る</a>
+	</p>
 
 </body>
 </html>

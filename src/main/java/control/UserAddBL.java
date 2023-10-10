@@ -5,21 +5,25 @@ import model.UserAddEntity;
 public class UserAddBL {
 	
 	public void userAdd(String userName,boolean kanriFlg){
-	//TODO ユーザー重複チェック
-		
-	//TODO 連番の作成
-	int userid = 6;
-	String loginName = "kari6";
-	String loginPassword = "tdsl";
-			
+	
+	int userid = 0;
+	String loginName = "";
+	String loginPassword = "";
+	
+	//ID（）連番・仮登録用ID・仮登録パスワードの作成
+	LoginDAO loginDAO = new LoginDAO();
+	userid = Integer.parseInt(loginDAO.maxUserId()) + 1;   
+	loginName = "kari" + String.valueOf(userid);
+	loginPassword = "tdsl";
+	
 	MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate(); 
 	
+	UserAddEntity useraddentity = new UserAddEntity(userid, userName, kanriFlg,loginName,loginPassword);
+	
 	//ユーザーテーブル登録
-	UserAddEntity useraddentity1 = new UserAddEntity(userid, userName, kanriFlg);
-	useraddDAOInsUp.InsertUser(useraddentity1);
+	useraddDAOInsUp.InsertUser(useraddentity);
 	
 	//ログインテーブル仮登録
-	UserAddEntity useraddentity2 = new UserAddEntity(userid,loginName,loginPassword);
-	useraddDAOInsUp.InsertLogin(useraddentity2);
+	useraddDAOInsUp.InsertLogin(useraddentity);
 	}
 }

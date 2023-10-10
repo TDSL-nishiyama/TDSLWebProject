@@ -53,7 +53,45 @@ public class LoginDAO extends DBConnection {
 		return userId;
 	}
 	
-	public String findUserId(String pLoginId) {
+	//IDの最大値取得用
+	public String maxUserId() {
+		
+		Connection conn = null;
+		String resultCount = null;
+		
+		try {
+
+			// JDBCドライバを読み込み
+			super.loadJDBCDriver();
+
+			// DBへ接続
+			conn = super.connectionDB(conn);
+
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT MAX(ID) FROM user;");
+
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				resultCount = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			super.closeDB(conn);
+		}
+		return resultCount;
+	}
+	
+	//loginidの重複チェック用
+	public String countLoginId(String pLoginId) {
 		
 		Connection conn = null;
 		String resultCount = null;

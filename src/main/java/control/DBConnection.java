@@ -53,8 +53,8 @@ public class DBConnection {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
-
 		return conn;
 	}
 

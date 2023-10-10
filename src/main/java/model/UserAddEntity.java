@@ -1,6 +1,8 @@
 package model;
 
-public class UserAddEntity {
+import java.io.Serializable;
+
+public class UserAddEntity implements Serializable{
 
 	private int userid;
 	private String name;
@@ -8,17 +10,23 @@ public class UserAddEntity {
 	private String loginid;
 	private String loginpassword;
 	
-	public UserAddEntity(int userid,String name, boolean kanriFlg) {
+	//コンストラクタ
+	public UserAddEntity(int userid,String name, boolean kanriFlg,String loginid,String loginpassword) {
 		this.userid = userid;
 		this.name = name;
 		this.kanriFlg = kanriFlg;
-	}
-	
-	public UserAddEntity(int userId,String loginid,String loginpassword) {
 		this.loginid = loginid;
 		this.loginpassword = loginpassword;
 	}
 	
+	public UserAddEntity(int userid,String name, boolean kanriFlg,String loginid) {
+		this.userid = userid;
+		this.name = name;
+		this.kanriFlg = kanriFlg;
+		this.loginid = loginid;
+	}
+	
+	//アクセサメソッド
 	public int getUserid() {
 		return userid;
 	}

@@ -35,9 +35,9 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 		
 		LoginBL loginBL = new LoginBL();
 		
-		//ユーザーID重複チェック
-		//既存ユーザーの場合
+		
 		HttpSession session = request.getSession();
+		//新規ユーザーの場合
 		if (session.getAttribute("USER_ATTRIBUTE").equals("1")) {
 			errFlg = loginBL.checkDuplicationLoginId(loginId);
 			// ユーザー名が重複している場合はエラーメッセージを表示
@@ -53,6 +53,7 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 			String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
 			resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
 			resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
+		//既存ユーザーの場合
 		}else {
 			//パスワードの更新
 			resultUpdatePasswordBL.updatePassword(loginId, password);

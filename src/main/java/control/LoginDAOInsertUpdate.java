@@ -21,7 +21,7 @@ public class LoginDAOInsertUpdate extends DBConnection {
 			// SQL文を準備
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("INSERT INTO login COLUMN(id,loginid,password) VALUES(?,?,?);");
+			sql.append("INSERT INTO login(id,loginid,password) VALUES(?,?,?);");
 
 			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 			pStmt.setString(1, pUserId);
@@ -87,7 +87,7 @@ public class LoginDAOInsertUpdate extends DBConnection {
 			// SQL文を準備
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("UPDATE login SET password = ? WHERE id = ?;");
+			sql.append("UPDATE login SET password = ? WHERE loginid = ?;");
 
 			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 			pStmt.setString(1, pLoginPassword);

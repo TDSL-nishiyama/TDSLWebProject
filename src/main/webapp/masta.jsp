@@ -10,14 +10,37 @@
 <body>
 	<table>
 	<th>
-	反映された変更の表示域
 	</th>
 	</table>
+	<form name="toUserIchiran"
+		action="<%=request.getContextPath()%>/UserIchiranAction" method="post">
+		<p>
+			<input type="submit" name="toMasta" value="ユーザー一覧">
+		</p>
+	</form>
+
 	<form name="toUserAdd"
 		action="<%=request.getContextPath()%>/UserAddAction" method="post">
 		<p>
-			<input type="submit" name="toMasta" value="ユーザー登録画面に遷移">
+			<input type="submit" name="toMasta" value="ユーザー登録">
 		</p>
 	</form>
+	
+	<form name="toUserUpdate"
+		action="<%=request.getContextPath()%>/UserUpdateAction" method="post">
+		<p>
+			<input type="submit" name="toMasta" value="ユーザー更新">
+		</p>
+	</form>
+	
+	<form name="toUserDelete"
+		action="<%=request.getContextPath()%>/UserDelAction" method="post">
+		<p>
+			<input type="submit" name="toMasta" value="ユーザー削除">
+		</p>
+	</form>
+	
+	<a href = "/TDSLWebProject/index.jsp">戻る</a>
+	
 </body>
 </html>

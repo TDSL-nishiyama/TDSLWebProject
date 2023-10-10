@@ -1,19 +1,21 @@
 package action;
 
 import java.io.IOException;
+import java.util.List;
 
 import constents.Const.Path;
-import control.UserAddBL;
+import control.UserIchiranBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.UserAddEntity;
 
 /**
  * ユーザー登録画面のサーブレット
  */
-public class UserAddAction extends HttpServlet {
+public class UserIchiranAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,9 +24,16 @@ public class UserAddAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//マスタ画面に遷移
+		//データ格納処理
+		UserIchiranBL userIchiranBL = new UserIchiranBL();		
+
+		//リクエストスコープにインスタンスを保存
+		List<UserAddEntity> useIchiranBLlist = userIchiranBL.resultUserList(userIchiranBL);
+		request.setAttribute(Path.USER_ICHIRAN_SCOPE, useIchiranBLlist);
+		
+		//ユーザー一覧画面に遷移
 		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_ADD_GAMEN);
+				.getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);
 		dispatcher.forward(request, response);
 	}
 

@@ -75,7 +75,7 @@ public class LoginBL extends DBConnection {
 		String resultDB = null;
 
 		LoginDAO loginDAO = new LoginDAO();
-		resultDB = loginDAO.findUserId(pLoginId);
+		resultDB = loginDAO.countLoginId(pLoginId);
 
 		// IDが重複している場合、エラー画面に遷移
 		if (Integer.parseInt(resultDB) > 0) {

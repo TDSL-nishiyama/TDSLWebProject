@@ -69,7 +69,7 @@
 		<servlet-name>UpdatePasswordAction</servlet-name>
 		<url-pattern>/UpdatePasswordAction</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ResultUpdatePasswordAction</servlet-name>
 		<servlet-class>action.ResultUpdatePasswordAction</servlet-class>
@@ -77,6 +77,33 @@
 	<servlet-mapping>
 		<servlet-name>ResultUpdatePasswordAction</servlet-name>
 		<url-pattern>/ResultUpdatePasswordAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultUserAddAction</servlet-name>
+		<servlet-class>action.ResultUserAddAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultUserAddAction</servlet-name>
+		<url-pattern>/ResultUserAddAction</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>UserIchiranAction</servlet-name>
+		<servlet-class>action.UserIchiranAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserIchiranAction</servlet-name>
+		<url-pattern>/UserIchiranAction</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>ResultUserIchiranAction</servlet-name>
+		<servlet-class>action.ResultUserIchiranAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultUserIchiranAction</servlet-name>
+		<url-pattern>/ResultUserIchiranAction</url-pattern>
 	</servlet-mapping>
 
 </web-app>

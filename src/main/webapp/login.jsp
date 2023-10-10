@@ -11,17 +11,7 @@
 </head>
 
 <body>
-	<%
-	String msg = "";
-	msg = (String)request.getAttribute("MSG");
-	if(msg == null){
-		msg = "";
-	}
-	%>
-	<%=
-	//更新メッセージの表示
-	msg
-	%>
+	<%@ include file="./msg.jsp"%>
 	<h1>ログインIDとパスワードを入力してください</h1>
 
 	<form name="login" action="<%=request.getContextPath()%>/LogInAction"
