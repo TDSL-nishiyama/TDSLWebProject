@@ -1,6 +1,6 @@
 package control;
 
-import model.MastaEntity;
+import model.UserAddEntity;
 
 public class UserAddBL {
 	
@@ -16,11 +16,9 @@ public class UserAddBL {
 	loginName = "kari" + String.valueOf(userid);
 	loginPassword = "tdsl";
 	
-	//TODO LoginNameを任意に生成されないためのチェック
-	
 	MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate(); 
 	
-	MastaEntity useraddentity = new MastaEntity(userid, userName, kanriFlg,loginName,loginPassword);
+	UserAddEntity useraddentity = new UserAddEntity(userid, userName, kanriFlg,loginName,loginPassword);
 	
 	//ユーザーテーブル登録
 	useraddDAOInsUp.InsertUser(useraddentity);

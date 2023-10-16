@@ -26,7 +26,7 @@ public class SyainJouhouAction extends HttpServlet {
 				(SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE_NAME);
 		
 		boolean kanriFlg = false;
-		kanriFlg = loginSession.getKanriFlg();
+		kanriFlg = loginSession.isKanriFlg();
 		
 		//データ格納処理
 		SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);		

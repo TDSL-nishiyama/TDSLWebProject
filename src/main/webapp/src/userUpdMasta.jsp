@@ -9,15 +9,31 @@
 </head>
 <body>
 	<%@ include file="../msg.jsp"%>
+	<form name="selectUpdateUser"
+		action="<%=request.getContextPath()%>/ResultUserUpdAction"
+		method="post">
+		更新するユーザーIDを入力してください
+		<p>
+			ユーザーID：<input type="text" name="userIdUpd"><br>
+			<input type="submit" name="addUser" value="更新"><br>
+		</p>
+		<tr>
+			<th>ID</th>
+			<th>ログインID</th>
+			<th>名前</th>
+			<th>管理フラグ</th>
+			<th>更新</th>
+			<th>削除</th>
+		</tr>
+	</form>
+	
 	<form name="userUpdate"
 		action="<%=request.getContextPath()%>/ResultUserUpdAction"
 		method="post">
+		更新するユーザーIDを入力してください
 		<p>
-			ログインID<%=loginSession.getLoginId()%><br> ユーザー名：<input
-				type="text" name="userName"><br> 管理者権限<br> <input
-				type="radio" name="kanriFlg" value="1"> あり<br> <input
-				type="radio" name="kanriFlg" value="0" checked> なし<br>
-			<br> <input type="submit" name="addUser" value="登録内容変更"><br>
+			ユーザーID：<input type="text" name="userIdUpd"><br>
+			<input type="submit" name="addUser" value="更新"><br>
 		</p>
 	</form>
 

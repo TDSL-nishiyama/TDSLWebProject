@@ -93,7 +93,7 @@ public class LogInAction extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else if (loginIdCheck[0].equals("toPassword")) {
 			// リクエストスコープにLoginActionからの遷移である情報を追加
-			request.setAttribute(Path.BEFORE_UPDATEPASSWORD_GAMEN, "LoginAction");
+			request.setAttribute(Path.BEFORE_UPDATEPASSWORD, "LoginAction");
 			request.setAttribute("LOGINID_BEFORE", id);
 			// パスワード登録更新画面に遷移
 			RequestDispatcher dispatcher = request
@@ -118,11 +118,11 @@ public class LogInAction extends HttpServlet {
 
 			// セッション情報を格納
 			final int ID = 0;
-			final int LOGINID = 1;
+			final int PASSWORD = 1;
 			final int NAME = 2;
 			final int KANRIFLG = 3;
-			SessionKanriBean sessionKanriBean = new SessionKanriBean(Integer.parseInt(sList.get(ID)) ,
-					sList.get(LOGINID),sList.get(NAME), Boolean.valueOf(sList.get(KANRIFLG)));
+			SessionKanriBean sessionKanriBean = new SessionKanriBean(sList.get(ID), sList.get(PASSWORD),
+					sList.get(NAME), Boolean.valueOf(sList.get(KANRIFLG)));
 
 			// セッション情報の文字化け対策
 			request.setCharacterEncoding(Common.ENCODE_UTF8);
