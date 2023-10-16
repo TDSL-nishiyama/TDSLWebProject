@@ -2,16 +2,17 @@ package model;
 
 import java.io.Serializable;
 
-public class UserAddEntity implements Serializable{
+public class MastaEntity implements Serializable{
 
 	private int userid;
 	private String name;
 	private boolean kanriFlg;
+	private String sakujo; //(1=退職)
 	private String loginid;
 	private String loginpassword;
 	
 	//コンストラクタ
-	public UserAddEntity(int userid,String name, boolean kanriFlg,String loginid,String loginpassword) {
+	public MastaEntity(int userid,String name, boolean kanriFlg,String loginid,String loginpassword) {
 		this.userid = userid;
 		this.name = name;
 		this.kanriFlg = kanriFlg;
@@ -19,11 +20,16 @@ public class UserAddEntity implements Serializable{
 		this.loginpassword = loginpassword;
 	}
 	
-	public UserAddEntity(int userid,String name, boolean kanriFlg,String loginid) {
+	public MastaEntity(int userid,String name, boolean kanriFlg,String loginid) {
 		this.userid = userid;
 		this.name = name;
 		this.kanriFlg = kanriFlg;
 		this.loginid = loginid;
+	}
+	
+	public MastaEntity(int userid,String sakujo) {
+		this.userid = userid;
+		this.sakujo = sakujo;
 	}
 	
 	//アクセサメソッド
@@ -44,6 +50,14 @@ public class UserAddEntity implements Serializable{
 	}
 	public void setKanriFlg(boolean kanriFlg) {
 		this.kanriFlg = kanriFlg;
+	}
+
+	public String getSakujo() {
+		return sakujo;
+	}
+
+	public void setSakujo(String sakujo) {
+		this.sakujo = sakujo;
 	}
 
 	public String getLoginid() {

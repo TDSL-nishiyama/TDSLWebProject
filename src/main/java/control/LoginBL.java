@@ -13,6 +13,7 @@ public class LoginBL extends DBConnection {
 		String[] result = {"",""};
 
 		//TODO IDが5桁未満だと落ちるので仮、本当はID登録文字数制限とかしたほうがいい
+		//TODO 登録時にID文字数を5文字以上に強制する仕様としたため最初のIFは不要ロジック
 		if (pLoginId.length() >= 4) {
 			//IDが仮IDだった場合、パスワード更新登録画面に遷移
 			if (pLoginId.substring(0, 4).equals("kari")) {

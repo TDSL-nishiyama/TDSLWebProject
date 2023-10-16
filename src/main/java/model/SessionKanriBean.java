@@ -3,11 +3,12 @@ package model;
 import java.io.Serializable;
 
 public class SessionKanriBean implements Serializable {
-
+	
+	private int userId; //ユーザーID
     private String loginId; //ログインID
-    private String password; //ログインパスワード
     private String loginName; //ログイン名
     private boolean kanriFlg; //管理フラグ("TRUE"=管理者権限あり)
+    private String sakujo; //(1=退職)
 
     //コンストラクタ
     public SessionKanriBean() {
@@ -15,39 +16,33 @@ public class SessionKanriBean implements Serializable {
     }
 
     //コンストラクタ（id）
-    public SessionKanriBean(String id) {
-        this.loginId = id;
+    public SessionKanriBean(int userId) {
+        this.userId = userId;
     }
 
-    //コンストラクタ（id,password）
-    public SessionKanriBean(String id, String password) {
-        this.loginId = id;
-        this.password = password;
-    }
-
-    //コンストラクタ（id,password,名前,管理者フラグ）
-    public SessionKanriBean(String id, String password,String loginName,boolean kanriFlg) {
-        this.loginId = id;
-        this.password = password;
+    //コンストラクタ（id,loginid,名前,管理者フラグ）
+    public SessionKanriBean(int userId,String loginId,String loginName,boolean kanriFlg) {
+    	this.userId = userId;
+        this.loginId = loginId;
         this.loginName = loginName;
         this.kanriFlg = kanriFlg;
     }
 
     //アクセサメソッド
+    public int getUserId(int userId) {
+        return userId;
+    }
+
+    public void setuserId(int userId) {
+        this.userId = userId;
+    }
+    
     public String getLoginId() {
         return loginId;
     }
 
     public void setLoginId(String id) {
         this.loginId = id;
-    }
-
-    public String getpassword() {
-        return password;
-    }
-
-    public void setpassword(String password) {
-        this.password = password;
     }
 
     public String getLoginName() {
@@ -65,5 +60,13 @@ public class SessionKanriBean implements Serializable {
     public void setKanriFlg(boolean kanriFlg) {
         this.kanriFlg = kanriFlg;
     }
+
+	public String getSakujo() {
+		return sakujo;
+	}
+
+	public void setSakujo(String sakujo) {
+		this.sakujo = sakujo;
+	}
 
 }

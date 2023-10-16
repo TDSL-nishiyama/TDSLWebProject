@@ -6,8 +6,7 @@
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>)
-request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
+List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>) request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 %>
 
 <!DOCTYPE html>
@@ -17,7 +16,11 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 <title>社員一覧</title>
 </head>
 <body>
-	<%if(kanriFlg == false){%>
+	<%
+	//管理フラグの設定
+	boolean kanriFlg = loginSession.getKanriFlg();
+	if (kanriFlg == false) {
+	%>
 	<!-- 一般ユーザー -->
 	<table border="1">
 		<tr>
@@ -35,7 +38,9 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 		%>
 
 	</table>
-	<%}else{%>
+	<%
+	} else {
+	%>
 	<!-- 管理者 -->
 	<table border="1">
 		<tr>
@@ -48,16 +53,18 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 		%>
 		<tr>
 			<td><%=syainJouhouEntity.getId()%></td>
-			<td><%=syainJouhouEntity.getName()	%></td>
+			<td><%=syainJouhouEntity.getName()%></td>
 		</tr>
 		<%
 		}
 		%>
 
 	</table>
-	<%}%>
+	<%
+	}
+	%>
 	<p>
-		<a href="/TDSLWebProject/index.jsp">戻る</a>
+		<a href="/index.jsp">戻る</a>
 	</p>
 </body>
 </html>

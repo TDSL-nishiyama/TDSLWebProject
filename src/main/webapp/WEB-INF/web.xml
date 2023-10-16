@@ -87,8 +87,8 @@
 		<servlet-name>ResultUserAddAction</servlet-name>
 		<url-pattern>/ResultUserAddAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>UserIchiranAction</servlet-name>
 		<servlet-class>action.UserIchiranAction</servlet-class>
 	</servlet>
@@ -96,14 +96,32 @@
 		<servlet-name>UserIchiranAction</servlet-name>
 		<url-pattern>/UserIchiranAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>ResultUserIchiranAction</servlet-name>
 		<servlet-class>action.ResultUserIchiranAction</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResultUserIchiranAction</servlet-name>
 		<url-pattern>/ResultUserIchiranAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserUpdAction.java</servlet-name>
+		<servlet-class>action.UserUpdAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserUpdAction</servlet-name>
+		<url-pattern>/UserUpdAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserDelAction.java</servlet-name>
+		<servlet-class>action.UserDelAction.java</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserDelAction.java</servlet-name>
+		<url-pattern>/UserDelAction.java</url-pattern>
 	</servlet-mapping>
 
 </web-app>

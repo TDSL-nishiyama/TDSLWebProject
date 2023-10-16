@@ -1,21 +1,19 @@
 package action;
 
 import java.io.IOException;
-import java.util.List;
 
 import constents.Const.Path;
-import control.UserIchiranBL;
+import control.UserDelBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.MastaEntity;
 
 /**
- * ユーザー登録画面のサーブレット
+ * Servlet implementation class UserUpdateAction
  */
-public class UserIchiranAction extends HttpServlet {
+public class UserDelAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -24,16 +22,16 @@ public class UserIchiranAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//データ格納処理
-		UserIchiranBL userIchiranBL = new UserIchiranBL();		
-
-		//リクエストスコープにインスタンスを保存
-		List<MastaEntity> useIchiranBLlist = userIchiranBL.resultUserList(userIchiranBL);
-		request.setAttribute(Path.USER_ICHIRAN_SCOPE, useIchiranBLlist);
 		
-		//ユーザー一覧画面に遷移
+		//ユーザー削除処理
+		UserDelBL userDelBL = new UserDelBL();
+		
+		String beforeDel = "";
+		//ユーザー一覧からの遷移
+
+		//ユーザー削除からの遷移
 		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);
+				.getRequestDispatcher(beforeDel);
 		dispatcher.forward(request, response);
 	}
 

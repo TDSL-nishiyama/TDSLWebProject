@@ -49,6 +49,16 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 						.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
 				dispatcher.forward(request, response);
 			}
+			//ユーザー名が5文字未満の場合はエラーメッセージを表示
+			errFlg = resultUpdatePasswordBL.checkLoginIdLength(loginId);
+			if (!errFlg) {
+				//エラーメッセージを格納
+				request.setAttribute("ERRMSG", ERRORMSG.ERR_7);
+				// エラー画面に遷移
+				RequestDispatcher dispatcher = request
+						.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+				dispatcher.forward(request, response);
+			}
 			//ユーザーの登録
 			String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
 			resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);

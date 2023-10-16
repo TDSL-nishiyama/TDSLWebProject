@@ -3,13 +3,13 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.UserAddEntity;
+import model.MastaEntity;
 
 public class UserIchiranBL {
 	//実行結果をサーブレットに戻す
-	public List<UserAddEntity> resultUserList(UserIchiranBL userIchiranBL) {
+	public List<MastaEntity> resultUserList(UserIchiranBL userIchiranBL) {
 
-		List<UserAddEntity> result = new ArrayList<>();
+		List<MastaEntity> result = new ArrayList<>();
 		
 		//DAOクラスのインスタンス化
 		MastaDAOSelect mastaDAOsel = new MastaDAOSelect();

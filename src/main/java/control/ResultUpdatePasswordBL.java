@@ -12,8 +12,18 @@ public class ResultUpdatePasswordBL {
 		return result;
 	}
 	
-	public void updateUserPassword(String pUserId,String pLoginname,String pPassword){
+	public boolean checkLoginIdLength(String pLoginId) {
+		boolean result = false;
+		
+		if(pLoginId.length() > 4) {
+			result = true;
+		}
+		
+		return result;
+	}
 	
+	public void updateUserPassword(String pUserId,String pLoginname,String pPassword){
+		
 		//新規ログインIDとパスワードの登録
 		LoginDAOInsertUpdate insDAO = new LoginDAOInsertUpdate();
 		insDAO.updateUserPassword(pUserId, pLoginname, pPassword);
