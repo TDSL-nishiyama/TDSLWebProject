@@ -24,7 +24,6 @@ public class UserIchiranAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//データ格納処理
 		UserIchiranBL userIchiranBL = new UserIchiranBL();		
 
 		//リクエストスコープにインスタンスを保存

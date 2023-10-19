@@ -8,7 +8,16 @@
 </head>
 <body>
 
-<p>コンテキストパス：<%=request.getContextPath()%>
+	<form name="login" action="<%=request.getContextPath()%>/ResultUserIchiranAction"
+		method="post"">
+		<p>
+			<input type="submit" name="toResultUserIchiran"
+				value="削除されたユーザーも含めて表示">
+		</p>
+	</form>
+
+
+
 <a href="index.jsp">戻る</a>
 
 </body>

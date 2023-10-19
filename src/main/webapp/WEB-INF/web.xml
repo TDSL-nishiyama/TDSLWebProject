@@ -106,6 +106,15 @@
 		<servlet-name>UserUpdAction</servlet-name>
 		<url-pattern>/UserUpdAction</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>ResultUserUpdAction.java</servlet-name>
+		<servlet-class>action.ResultUserUpdAction.java</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultUserUpdAction.java</servlet-name>
+		<url-pattern>/ResultUserUpdAction.java</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>ResultUserAddAction</servlet-name>

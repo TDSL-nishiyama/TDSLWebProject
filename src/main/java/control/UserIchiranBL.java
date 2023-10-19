@@ -17,4 +17,16 @@ public class UserIchiranBL {
 
 		return result;
 	}
+	
+	//実行結果をサーブレットに戻す
+	public List<MastaEntity> resultUserListAll(UserIchiranBL userIchiranBL) {
+
+		List<MastaEntity> result = new ArrayList<>();
+		
+		//DAOクラスのインスタンス化
+		MastaDAOSelect mastaDAOsel = new MastaDAOSelect();
+		result = mastaDAOsel.getUserIchiranAll(mastaDAOsel);
+
+		return result;
+	}
 }

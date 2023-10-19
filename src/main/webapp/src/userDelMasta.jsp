@@ -9,13 +9,13 @@
 </head>
 <body>
 	<%@ include file="../msg.jsp"%>
-	<form name="userUpdate"
+	<form name="userDelete"
 		action="<%=request.getContextPath()%>/ResultUserDelAction"
 		method="post">
 		削除するユーザーIDを入力してください
 		<p>
 			ユーザーID：<input type="text" name="userIdDel"><br>
-			<input type="submit" name="addUser" value="削除"><br>
+			<input type="submit" name="userDel" value="削除"><br>
 		</p>
 	</form>
 
