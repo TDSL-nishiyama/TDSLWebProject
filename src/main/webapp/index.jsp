@@ -8,10 +8,7 @@
 <%@ include file="./header.jsp"%>
 </head>
 <body>
-	<% 
-	//管理フラグの設定
-	boolean kanriFlg = loginSession.getKanriFlg();
-	%>
+
 	<form name="toSyainJouhou"
 		action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
 		<% //一般ユーザーの場合
@@ -27,18 +24,18 @@
 		</p>
 		<%}%>
 	</form>
-
+	
 	<% if(kanriFlg == true){%>
-	<form name="toMasta" action="<%=request.getContextPath()%>/MastaAction"
-		method="post">
+	<form name="toMasta"
+		action="<%=request.getContextPath()%>/MastaAction" method="post">
 		<p>
 			<input type="submit" name="toMasta" value="マスタ画面に遷移">
 		</p>
 	</form>
 	<%}%>
-
-	<form name="test" action="<%=request.getContextPath()%>/TestAction"
-		method="post">
+	
+	<form name="test"
+		action="<%=request.getContextPath()%>/TestAction" method="post">
 		<p>
 			<input type="submit" name="login" value="テスト用ページに遷移">
 		</p>

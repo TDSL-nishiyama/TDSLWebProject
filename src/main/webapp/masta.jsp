@@ -27,7 +27,7 @@
 	</form>
 	
 	<form name="toUserUpdate"
-		action="<%=request.getContextPath()%>/UserUpdateAction" method="post">
+		action="<%=request.getContextPath()%>/UserUpdAction" method="post">
 		<p>
 			<input type="submit" name="toMasta" value="ユーザー更新">
 		</p>

@@ -1,6 +1,6 @@
 package control;
 
-import model.UserAddEntity;
+import model.MastaEntity;
 
 public class UserAddBL {
 	
@@ -18,12 +18,12 @@ public class UserAddBL {
 	
 	MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate(); 
 	
-	UserAddEntity useraddentity = new UserAddEntity(userid, userName, kanriFlg,loginName,loginPassword);
+	MastaEntity mastaEntity = new MastaEntity(userid, userName, kanriFlg,loginName,loginPassword);
 	
 	//ユーザーテーブル登録
-	useraddDAOInsUp.InsertUser(useraddentity);
+	useraddDAOInsUp.InsertUser(mastaEntity);
 	
 	//ログインテーブル仮登録
-	useraddDAOInsUp.InsertLogin(useraddentity);
+	useraddDAOInsUp.InsertLogin(mastaEntity);
 	}
 }

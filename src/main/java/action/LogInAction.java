@@ -117,11 +117,11 @@ public class LogInAction extends HttpServlet {
 			List<String> sList = loginDAO.getSessionInfo(id, password);
 
 			// セッション情報を格納
-			final int ID = 0;
-			final int PASSWORD = 1;
+			final int USERID = 0;
+			final int LOGINID = 1;
 			final int NAME = 2;
 			final int KANRIFLG = 3;
-			SessionKanriBean sessionKanriBean = new SessionKanriBean(sList.get(ID), sList.get(PASSWORD),
+			SessionKanriBean sessionKanriBean = new SessionKanriBean(Integer.parseInt(sList.get(USERID)), sList.get(LOGINID),
 					sList.get(NAME), Boolean.valueOf(sList.get(KANRIFLG)));
 
 			// セッション情報の文字化け対策

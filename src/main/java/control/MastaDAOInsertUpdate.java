@@ -5,11 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import model.MastaEntity;
-import model.UserAddEntity;
 
 public class MastaDAOInsertUpdate extends DBConnection{
 	
-	public void InsertUser(UserAddEntity pEntity) {
+	public void InsertUser(MastaEntity pEntity) {
 
 		Connection conn = null;
 
@@ -42,7 +41,7 @@ public class MastaDAOInsertUpdate extends DBConnection{
 		}
 	}
 	
-	public void InsertLogin(UserAddEntity pEntity) {
+	public void InsertLogin(MastaEntity pEntity) {
 
 		Connection conn = null;
 

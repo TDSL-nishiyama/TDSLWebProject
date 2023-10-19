@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="model.MastaEntitytjava.util.Listst"%>
-<%@ pageimportconstents.Const.Pathth"%>
-
+<%@ page import="model.MastaEntity,java.util.List"%>
+<%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<MastaEntity> userAddEntityList = (List<MastaEntity>)
-request.getAttribute(Path.USER_ICHIRAN_SCOPE)
-E);
+List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Path.USER_ICHIRAN_SCOPE);
 %>
 
 <!DOCTYPE html>
@@ -19,7 +16,7 @@ E);
 <title>ユーザー一覧</title>
 </head>
 <body>
-	<form name="toUserAdd" action=<%=request.getContextPathth()%>
+	<form name="toUserAdd" action=<%=request.getContextPath()%>
 		/UserAddAction" method="post">
 		<p>
 			<input type="submit" name="toMasta" value="ユーザーの追加">
@@ -38,24 +35,22 @@ E);
 			<th>削除</th>
 		</tr>
 		<%
-		for (MastaEntity userAddEntity : userAddEntityList) {
+		for (MastaEntity mastaEntity : mastaEntitylist) {
 		%>
-		<td><%=userAddEntity.getUserid()%></td>
-		<td><%=userAddEntity.getLoginid()	%></td>
-		<td><%=userAddEntity.getName()	%></td>
-		<td><%=userAddEntity.getKanriFlg()	%></td>
-		<td><form><input type="submit" name="toSakujo" value="更新"></form></td>
-		<td><form><input type="submit" name="toSakujo" value="削除"></form></td>
+		<td><%=mastaEntity.getUserid()%></td>
+		<td><%=mastaEntity.getLoginid()%></td>
+		<td><%=mastaEntity.getName()%></td>
+		<td><%=mastaEntity.getKanriFlg()%></td>
+		<td><form>
+				<input type="submit" name="toSakujo" value="更新">
+			</form></td>
+		<td><form>
+				<input type="submit" name="toSakujo" value="削除">
+			</form></td>
 		</tr>
 		<%
 		}
 		%>
-		<form name="toUserIchiranAll" action=<%=request.getContextPathth()%>
-			/UserIchiranAction" method="post">
-			<p>
-				<input type="submit" name="toIchiranAll" value="削除したユーザーも含めて再表示">
-			</p>
-		</form>
 	</table>
 	<p>
 		<a href="/TDSLWebProject/masta.jsp">戻る</a>

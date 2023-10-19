@@ -14,22 +14,21 @@ public class SessionKanriBean implements Serializable {
     public SessionKanriBean() {
 
     }
-
-    //コンストラクタ（id）
-    public SessionKanriBean(String id) {
-        this.loginId = id;
+    //コンストラクタ（loginId）
+    public SessionKanriBean(String loginId) {
+        this.loginId = loginId;
     }
 
-    //コンストラクタ（id,password）
-    public SessionKanriBean(String id, String password) {
-        this.loginId = id;
+    //コンストラクタ（loginId,password）
+    public SessionKanriBean(String loginId, String password) {
+        this.loginId = loginId;
         this.password = password;
     }
 
     //コンストラクタ（id,password,名前,管理者フラグ）
-    public SessionKanriBean(String id, String password,String loginName,boolean kanriFlg) {
-        this.loginId = id;
-        this.password = password;
+    public SessionKanriBean(int userId, String loginId,String loginName,boolean kanriFlg) {
+        this.userId = userId;
+        this.loginId = loginId;
         this.loginName = loginName;
         this.kanriFlg = kanriFlg;
     }
@@ -67,7 +66,7 @@ public class SessionKanriBean implements Serializable {
 		this.loginName = loginName;
 	}
 
-	public boolean isKanriFlg() {
+	public boolean getKanriFlg() {
 		return kanriFlg;
 	}
 

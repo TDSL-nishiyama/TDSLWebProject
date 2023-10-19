@@ -146,7 +146,7 @@ public class LoginDAO extends DBConnection {
 
 			sql.append("SELECT loginid,password");
 			sql.append(" FROM login");
-			sql.append(" WHERE loginid = ?;");
+			sql.append(" WHERE del = '' AND  loginid = ?;");
 
 			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 			pStmt.setString(1, pLoginId);
@@ -229,8 +229,8 @@ public class LoginDAO extends DBConnection {
 	public List<String> getSessionInfo(String pLoginId, String pPassword) {
 
 		List<String> returnList = new ArrayList<>();
+		int userId = 0;
 		String loginId = "";
-		String password = "";
 		String loginName = "";
 		boolean kanriFlg = false;
 
@@ -246,7 +246,7 @@ public class LoginDAO extends DBConnection {
 			// SELECT文を準備
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("SELECT L.loginid,L.password,U.name,U.kanriFlg");
+			sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg");
 			sql.append(" FROM user AS U INNER JOIN login AS L");
 			sql.append(" ON U.id = L.id");
 			sql.append(" WHERE loginid = ?;");
@@ -257,24 +257,24 @@ public class LoginDAO extends DBConnection {
 			// SELECTを実行し、結果表を取得
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
+				userId = rs.getInt("id");
 				loginId = rs.getString("loginid");
-				password = rs.getString("password");
 				loginName = rs.getString("name");
 				kanriFlg = rs.getBoolean("kanriFlg");
 			}
 
 			SessionKanriBean sessionKanriBean = 
-					new SessionKanriBean(loginId, password, loginName, kanriFlg);
+					new SessionKanriBean(userId, loginId, loginName, kanriFlg);
 
+			sessionKanriBean.setUserId(userId);
 			sessionKanriBean.setLoginId(loginId);
-			sessionKanriBean.setPassword(password);
 			sessionKanriBean.setLoginName(loginName);
 			sessionKanriBean.setKanriFlg(kanriFlg);
 
+			returnList.add(String.valueOf(sessionKanriBean.getUserId()));
 			returnList.add(sessionKanriBean.getLoginId());
-			returnList.add(sessionKanriBean.getPassword());
 			returnList.add(sessionKanriBean.getLoginName());
-			returnList.add(String.valueOf(sessionKanriBean.isKanriFlg()));
+			returnList.add(String.valueOf(sessionKanriBean.getKanriFlg()));
 
 		} catch (SQLException e) {
 			e.printStackTrace();

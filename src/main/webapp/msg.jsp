@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<!--更新メッセージ表示クラス-->
 <head>
 <meta charset="UTF-8">
 </head>

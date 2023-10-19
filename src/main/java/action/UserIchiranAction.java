@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.UserAddEntity;
+import model.MastaEntity;
 
 /**
  * ユーザー登録画面のサーブレット
@@ -28,7 +28,7 @@ public class UserIchiranAction extends HttpServlet {
 		UserIchiranBL userIchiranBL = new UserIchiranBL();		
 
 		//リクエストスコープにインスタンスを保存
-		List<UserAddEntity> useIchiranBLlist = userIchiranBL.resultUserList(userIchiranBL);
+		List<MastaEntity> useIchiranBLlist = userIchiranBL.resultUserList(userIchiranBL);
 		request.setAttribute(Path.USER_ICHIRAN_SCOPE, useIchiranBLlist);
 		
 		//ユーザー一覧画面に遷移

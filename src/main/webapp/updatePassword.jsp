@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="constents.Const.Path"%>
 <%
-p
-
 // セッションスコープの作成
 HttpSession httpsession = request.getSession();
-if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD_GAMEN) == "LoginAction") {
+if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
 	httpsession.setAttribute("USER_ATTRIBUTE", "1");
 	httpsession.setAttribute("LOGINID_BEFORE",(String)request.getAttribute("LOGINID_BEFORE"));
 } else {

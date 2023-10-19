@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UserUpdateAction
+ * Servlet implementation class UserDelAction
  */
 public class UserDelAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,16 +22,9 @@ public class UserDelAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
-		//ユーザー削除処理
-		UserDelBL userDelBL = new UserDelBL();
-		
-		String beforeDel = "";
-		//ユーザー一覧からの遷移
-
 		//ユーザー削除からの遷移
 		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(beforeDel);
+				.getRequestDispatcher(Path.USER_DEL_GAMEN);
 		dispatcher.forward(request, response);
 	}
 

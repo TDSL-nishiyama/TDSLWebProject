@@ -6,14 +6,50 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.UserAddEntity;
+import model.MastaEntity;
 
 public class MastaDAOSelect extends DBConnection {
+	
+	public String checkUserId(MastaEntity mastaEntity) {
+		
+		String result = "";
+		Connection conn = null;
 
-	public List<UserAddEntity> getUserIchiran(MastaDAOSelect MastaDAOSelect) {
+		try {
 
-		List<UserAddEntity> returnList = new ArrayList<>();
+			// JDBCドライバを読み込み
+			super.loadJDBCDriver();
+
+			// DBへ接続
+			conn = super.connectionDB(conn);
+
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT COUNT(id) FROM user WHERE id = ? AND del = '';");
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setInt(1, mastaEntity.getUserid());
+			
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				result = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			super.closeDB(conn);
+		}
+		
+		return result;
+	}
+
+	public List<MastaEntity> getUserIchiran(MastaDAOSelect MastaDAOSelect) {
+
+		List<MastaEntity> returnList = new ArrayList<>();
 		int id = 0;
 		String loginId = "";
 		String loginName = "";
@@ -47,8 +83,8 @@ public class MastaDAOSelect extends DBConnection {
 				loginName = rs.getString("name");
 				kanriFlg = rs.getBoolean("kanriFlg");
 
-				UserAddEntity userAddEntity = new UserAddEntity(id, loginName, kanriFlg, loginId);
-				returnList.add(userAddEntity);
+				MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId);
+				returnList.add(mastaEntity);
 			}
 
 		} catch (SQLException e) {

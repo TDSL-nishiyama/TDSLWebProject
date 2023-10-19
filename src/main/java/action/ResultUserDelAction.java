@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import model.SessionKanriBean;
 
 /**
- * ユーザー登録画面のサーブレット
+ * ユーザー削除画面のサーブレット
  */
 public class ResultUserDelAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,28 +31,43 @@ public class ResultUserDelAction extends HttpServlet {
 		int userId = loginSession.getUserId();
 		//画面に入力されたユーザーID
 		int userIdDel = Integer.parseInt(request.getParameter("userIdDel"));
-
-		//現在ログインしているユーザーを削除しようとした場合、エラーメッセージを表示
+		
 		boolean errflg = false;
 		UserDelBL userDelBL = new UserDelBL();
+		//入力されたIDが存在しない場合エラーメッセージを表示
+		errflg = userDelBL.userDelCheck(userIdDel);
+		if (errflg == false) {
+			//メッセージを格納
+			request.setAttribute("MSG", "入力されたユーザーIDは存在しません");
+			//ユーザー削除画面に遷移
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher(Path.USER_DEL_GAMEN);
+			dispatcher.forward(request, response);
+			return;
+		}
+		
+		//現在ログインしているユーザーを削除しようとした場合、エラーメッセージを表示		
 		errflg = userDelBL.userDelCheck(userId, userIdDel);
 		if (errflg == false) {
 			//メッセージを格納
 			request.setAttribute("MSG", "現在ログインしているユーザーの削除はできません");
-			//マスタ画面に遷移
+			//ユーザー削除画面に遷移
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher(Path.USER_DEL_GAMEN);
+			dispatcher.forward(request, response);
+			return;
+		
+		} else {
+			//ユーザー削除
+			userDelBL.userDel(userIdDel);
+
+			//登録完了メッセージ
+			request.setAttribute("MSG", "ユーザーの削除が完了しました");
+			//ユーザー削除画面に遷移
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.USER_DEL_GAMEN);
 			dispatcher.forward(request, response);
 		}
-		//ユーザー削除
-		userDelBL.userDel(userId);
-
-		//登録完了メッセージ
-		request.setAttribute("MSG", "ユーザーの削除が完了しました");
-		//マスタ画面に遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_DEL_GAMEN);
-		dispatcher.forward(request, response);
 	}
 
 }

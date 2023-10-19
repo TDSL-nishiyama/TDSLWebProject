@@ -1,6 +1,9 @@
 package action;
 
 import java.io.IOException;
+
+import constents.Const.Path;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,19 +15,20 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UserUpdAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Default constructor. 
-	 */
-	public UserUpdAction() {
-		// TODO Auto-generated constructor stub
-	}
+	public class UserDelAction extends HttpServlet {
+		private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+		/**
+		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+		 */
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
 
+			//ユーザー更新からの遷移
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher(Path.USER_UPD_GAMEN);
+			dispatcher.forward(request, response);
+		}
+
+	}
 }
