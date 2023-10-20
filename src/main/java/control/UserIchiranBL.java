@@ -29,4 +29,16 @@ public class UserIchiranBL {
 
 		return result;
 	}
+	
+	//実行結果をサーブレットに戻す
+	public List<MastaEntity> resultKaritourokuUserList(UserIchiranBL userIchiranBL) {
+
+		List<MastaEntity> result = new ArrayList<>();
+		
+		//DAOクラスのインスタンス化
+		MastaDAOSelect mastaDAOsel = new MastaDAOSelect();
+		result = mastaDAOsel.getKaritouroku(mastaDAOsel);
+
+		return result;
+	}
 }

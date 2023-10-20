@@ -142,5 +142,14 @@
 		<servlet-name>ResultUserIchiranAction</servlet-name>
 		<url-pattern>/ResultUserIchiranAction</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>KaritourokuAction</servlet-name>
+		<servlet-class>action.KaritourokuAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>KaritourokuAction</servlet-name>
+		<url-pattern>/KaritourokuAction</url-pattern>
+	</servlet-mapping>
 
 </web-app>

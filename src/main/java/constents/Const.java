@@ -25,6 +25,7 @@ public class Const {
 		public static final String USER_ICHIRAN_GAMEN = "/src/userIchiran.jsp";
 		public static final String USER_DEL_GAMEN = "/src/userDelMasta.jsp";
 		public static final String USER_UPD_GAMEN = "/src/userUpdMasta.jsp";
+		public static final String KARI_USER_GAMEN = "/src/karitouroku.jsp";
 
 		//スコープ名
 		public static final String SESSION_SCOPE_NAME = "loginSession";

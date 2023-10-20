@@ -198,4 +198,54 @@ public class MastaDAOSelect extends DBConnection {
 
 		return returnList;
 	}
+	
+	public List<MastaEntity> getKaritouroku(MastaDAOSelect MastaDAOSelect) {
+
+		List<MastaEntity> returnList = new ArrayList<>();
+		int id = 0;
+		String loginId = "";
+		String loginPassword = "";
+		String loginName = "";
+		
+		Connection conn = null;
+
+		try {
+			// JDBCドライバ読み込み
+			super.loadJDBCDriver();
+
+			// DBへ接続
+			conn = super.connectionDB(conn);
+
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT U.id,L.loginid,L.password,U.name");
+			sql.append(" FROM user AS U INNER JOIN login AS L");
+			sql.append(" ON U.id = L.id");
+			sql.append(" WHERE SUBSTRING(loginid,1,4)='kari';");
+
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
+
+			//結果表に格納されたレコードの内容をMastaEntityに設定
+			while (rs.next()) {
+				id = rs.getInt("id");
+				loginId = rs.getString("loginid");
+				loginPassword = rs.getString("password");
+				loginName = rs.getString("name");
+
+				MastaEntity mastaEntity = new MastaEntity(id, loginName, false, loginId,loginPassword, "");
+				returnList.add(mastaEntity);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(conn);
+		}
+
+		return returnList;
+	}
 }
