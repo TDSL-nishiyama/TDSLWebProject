@@ -17,6 +17,7 @@ if (loginSession == null) {
 	// ログインしていない場合ログイン画面に遷移
 	RequestDispatcher dispatcher = request.getRequestDispatcher(Path.LOGIN_GAMEN);
 	dispatcher.forward(request, response);
+	return;
 }
 	//管理フラグの設定
 	boolean kanriFlg = loginSession.getKanriFlg();

@@ -38,11 +38,6 @@ public class LogInAction extends HttpServlet {
 		id = request.getParameter("id");
 		password = request.getParameter("password");
 		
-		// ログイン初回判定用
-		//要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
-		//要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
-		String loginIdCheck[] = {"",""}; 
-		
 		boolean errorFlg; // ログインIDパスワード存在チェック用 true = 存在 false = 存在しない
 
 		LoginBL loginBL = new LoginBL();
@@ -79,8 +74,14 @@ public class LogInAction extends HttpServlet {
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
 			dispatcher.forward(request, response);
+			return;
 		}
-
+		
+		// ログイン初回判定用
+		//要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
+		//要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
+		String loginIdCheck[] = {"",""}; 
+		
 		// 初回ログイン時はパスワード登録画面に遷移
 		loginIdCheck = loginBL.checkLoginShokai(id);
 
@@ -91,6 +92,7 @@ public class LogInAction extends HttpServlet {
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
 			dispatcher.forward(request, response);
+			return;
 		} else if (loginIdCheck[0].equals("toPassword")) {
 			// リクエストスコープにLoginActionからの遷移である情報を追加
 			request.setAttribute(Path.BEFORE_UPDATEPASSWORD, "LoginAction");
@@ -99,6 +101,7 @@ public class LogInAction extends HttpServlet {
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.UPDATE_PASSWORD_GAMEN);
 			dispatcher.forward(request, response);
+			return;
 		}
 
 		// ログインIDとパスワードが一致しない場合はエラー画面に遷移
@@ -111,6 +114,7 @@ public class LogInAction extends HttpServlet {
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
 			dispatcher.forward(request, response);
+			return;
 		} else {
 			//ユーザー名と管理者権限を取得
 			LoginDAO loginDAO = new LoginDAO();

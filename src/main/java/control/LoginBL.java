@@ -7,19 +7,19 @@ public class LoginBL extends DBConnection {
 
 	// 初回ログインチェック用
 	public String[] checkLoginShokai(String pLoginId) {
-		
+
 		//要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
 		//要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
-		String[] result = {"",""};
+		String[] result = { "error", "" };
 
-		//TODO IDが5桁未満だと落ちるので仮、本当はID登録文字数制限とかしたほうがいい
-		if (pLoginId.length() >= 4) {
+		//IDは5桁以上のためエラー（画面からの登録はできないが一応）
+		if (pLoginId.length() > 4) {
 			//IDが仮IDだった場合、パスワード更新登録画面に遷移
 			if (pLoginId.substring(0, 4).equals("kari")) {
 				result[0] = "toPassword";
 				//loginテーブルid項目の取得
 				LoginDAO loginDAO = new LoginDAO();
-				result[1] =  loginDAO.findLoginIdtoId(pLoginId);
+				result[1] = loginDAO.findLoginIdtoId(pLoginId);
 				//それ以外の場合は後続処理に移行
 			} else {
 				result[0] = "true";
@@ -86,4 +86,16 @@ public class LoginBL extends DBConnection {
 
 	}
 
+	//ログインID桁数チェック
+	public boolean checkLoginIdLength(String pLoginId) {
+		
+		boolean result = true;
+		
+		// IDが5桁未満の場合、エラー画面に遷移
+		if (pLoginId.length() < 5) {
+			result = false;
+		}
+
+		return result;
+	}
 }

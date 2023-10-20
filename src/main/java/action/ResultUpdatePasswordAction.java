@@ -24,23 +24,34 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		ResultUpdatePasswordBL resultUpdatePasswordBL = new ResultUpdatePasswordBL();
-		
+
 		String loginId = request.getParameter("loginid");
 		String password = request.getParameter("pass1");
-		
+
 		boolean errFlg;
 		String resultMSG = "";
-		
+
 		LoginBL loginBL = new LoginBL();
-		
-		
+
 		HttpSession session = request.getSession();
 		//新規ユーザーの場合
 		if (session.getAttribute("USER_ATTRIBUTE").equals("1")) {
-			errFlg = loginBL.checkDuplicationLoginId(loginId);
+			
+			// ログインIDが5桁未満の場合、エラーメッセージを表示
+			errFlg = loginBL.checkLoginIdLength(loginId);
+			if (!errFlg) {
+				//エラーメッセージを格納
+				request.setAttribute("ERRMSG", "ログインIDは5桁以上にしてください");
+				// エラー画面に遷移
+				RequestDispatcher dispatcher = request
+						.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+				dispatcher.forward(request, response);
+			}
+			
 			// ユーザー名が重複している場合はエラーメッセージを表示
+			errFlg = loginBL.checkDuplicationLoginId(loginId);
 			if (!errFlg) {
 				//エラーメッセージを格納
 				request.setAttribute("ERRMSG", ERRORMSG.ERR_6);
@@ -53,15 +64,15 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 			String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
 			resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
 			resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
-		//既存ユーザーの場合
-		}else {
+			//既存ユーザーの場合
+		} else {
 			//パスワードの更新
 			resultUpdatePasswordBL.updatePassword(loginId, password);
 			resultMSG = "パスワードの更新が完了しました";
 		}
-		
+
 		//ログイン画面に表示させるメッセージを格納
-		request.setAttribute("MSG",resultMSG);
+		request.setAttribute("MSG", resultMSG);
 		//セッションを破棄
 		session.removeAttribute("USER_ATTRIBUTE");
 		session.removeAttribute("LOGINID_BEFORE");

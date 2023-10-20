@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.IndexEntity;
+import model.LoginEntity;
 import model.SessionKanriBean;
 
 public class LoginDAO extends DBConnection {
@@ -158,11 +158,11 @@ public class LoginDAO extends DBConnection {
 				loginId = rs.getString("loginid");
 			}
 
-			IndexEntity indexEntity = new IndexEntity(loginId);
+			LoginEntity loginEntity = new LoginEntity(loginId);
 
-			indexEntity.setLoginId(loginId);
+			loginEntity.setLoginId(loginId);
 
-			loginId = indexEntity.getLoginId();
+			loginId = loginEntity.getLoginId();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -209,13 +209,13 @@ public class LoginDAO extends DBConnection {
 				password = rs.getString("password");
 			}
 
-			IndexEntity indexEntity = new IndexEntity(loginId, password);
+			LoginEntity loginEntity = new LoginEntity(loginId, password);
 
-			indexEntity.setLoginId(loginId);
-			indexEntity.setpassword(password);
+			loginEntity.setLoginId(loginId);
+			loginEntity.setLoginPassword(password);
 
-			indexEntityList.add(indexEntity.getLoginId());
-			indexEntityList.add(indexEntity.getpassword());
+			indexEntityList.add(loginEntity.getLoginId());
+			indexEntityList.add(loginEntity.getLoginPassword());
 
 		} catch (SQLException e) {
 			e.printStackTrace();

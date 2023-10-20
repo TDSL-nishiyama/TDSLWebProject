@@ -135,7 +135,7 @@ public class MastaDAOSelect extends DBConnection {
 				kanriFlg = rs.getBoolean("kanriFlg");
 				sakujo = rs.getString("del");
 
-				MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId,sakujo);
+				MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId,"", sakujo);
 				returnList.add(mastaEntity);
 			}
 

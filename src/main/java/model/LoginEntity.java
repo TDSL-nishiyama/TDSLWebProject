@@ -13,6 +13,11 @@ public class LoginEntity implements Serializable {
 		this.loginId = loginId;
 	}
 	
+	public LoginEntity(String loginId,String loginPassword){
+		this.loginId = loginId;
+		this.loginPassword = loginPassword;
+	}
+	
 	//アクセサメソッド
 	public String getUserId() {
 		return userId;

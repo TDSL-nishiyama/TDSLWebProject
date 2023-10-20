@@ -18,7 +18,7 @@ public class UserAddBL {
 	
 	MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate(); 
 	
-	MastaEntity mastaEntity = new MastaEntity(userid, userName, kanriFlg,loginName,loginPassword);
+	MastaEntity mastaEntity = new MastaEntity(userid, userName, kanriFlg,loginName,loginPassword,"");
 	
 	//ユーザーテーブル登録
 	useraddDAOInsUp.InsertUser(mastaEntity);
