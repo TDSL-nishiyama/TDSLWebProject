@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +8,12 @@
 </head>
 <body>
 
-	<form name="login" action="<%=request.getContextPath()%>/ResultUserIchiranAction"
-		method="post"">
-		<p>
-			<input type="submit" name="toResultUserIchiran"
-				value="削除されたユーザーも含めて表示">
-		</p>
-	</form>
+	<p>
+	ユーザー数：<%=request.getAttribute("TEST") %>
+	</p>
 
 
-
-<a href="index.jsp">戻る</a>
+	<a href="index.jsp">戻る</a>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package action;
 
 import java.io.IOException;
 
+import control.common.DAOCommon;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -26,6 +27,9 @@ public class TestAction extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		DAOCommon daoCommom = new DAOCommon();
+		int result = daoCommom.countSQL("\\test.sql");
+		request.setAttribute("TEST", result);
         RequestDispatcher dispatcher = request
                 .getRequestDispatcher("/testpage.jsp");
         dispatcher.forward(request, response);

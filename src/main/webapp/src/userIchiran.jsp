@@ -16,13 +16,15 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 <title>ユーザー一覧</title>
 </head>
 <body>
-	<form name="toUserAdd" action=<%=request.getContextPath()%>/UserAddAction method="post">
+	<form name="toUserAdd" action=<%=request.getContextPath()%>
+		/UserAddAction method="post">
 		<p>
 			<input type="submit" name="toUserAdd" value="ユーザーの追加">
 		</p>
 	</form>
 
-	<form name="toResultUserIchiran" action=<%=request.getContextPath()%>/ResultUserIchiranAction method="post">
+	<form name="toResultUserIchiran" action=<%=request.getContextPath()%>
+		/ResultUserIchiranAction method="post">
 		<p>
 			<input type="submit" name="toResultUserIchiran"
 				value="削除されたユーザーも含めて表示">
@@ -43,7 +45,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 		<%
 		int idView = 0;
 		String kanriFlgView = "";
-		
+
 		for (MastaEntity mastaEntity : mastaEntitylist) {
 		%>
 		<td><%=mastaEntity.getUserid()%></td>
@@ -57,21 +59,20 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 			} else {
 				kanriFlgView = "×";
 			}
-			%>
-			<%=kanriFlgView%>
+			%> <%=kanriFlgView%>
 		</td>
 		<td>
-			 <form name="userUpdate"
+			<form
 				action="<%=request.getContextPath()%>/ResultUserUpdAction"
 				method="post">
 				<input type="submit" name="userUpd" value="更新"><br>
 			</form>
 		</td>
 		<td>
-			<form name="userDelete"
-				action="<%=request.getContextPath()%>/ResultUserDelAction"
-				method="post">
-				<input type="submit" name="userDel" value="削除"><br>
+			<form action="<%=request.getContextPath()%>/ResultUserDelAction" method="post">
+				<!--TODO hiddenのvalue値を可変に（JSでリスナー設定して制御）  -->
+				<input type="hidden" name="userIdDel" value="15"> <input
+					type="submit" name="userDel" value="削除"><br>
 			</form>
 		</td>
 		</tr>

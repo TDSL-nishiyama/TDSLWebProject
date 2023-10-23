@@ -9,6 +9,10 @@
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
 	<servlet>
 		<servlet-name>LogInAction</servlet-name>
 		<servlet-class>action.LogInAction</servlet-class>
@@ -106,8 +110,8 @@
 		<servlet-name>UserUpdAction</servlet-name>
 		<url-pattern>/UserUpdAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>ResultUserUpdAction.java</servlet-name>
 		<servlet-class>action.ResultUserUpdAction.java</servlet-class>
 	</servlet>
@@ -142,8 +146,8 @@
 		<servlet-name>ResultUserIchiranAction</servlet-name>
 		<url-pattern>/ResultUserIchiranAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>KaritourokuAction</servlet-name>
 		<servlet-class>action.KaritourokuAction</servlet-class>
 	</servlet>

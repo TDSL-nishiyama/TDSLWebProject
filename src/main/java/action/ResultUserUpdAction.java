@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import constents.Const.Path;
-import control.UserIchiranBL;
 import control.UserUpdBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -34,9 +33,9 @@ public class ResultUserUpdAction extends HttpServlet {
 		List<MastaEntity> userUpdList = userUpdBL.resultUserList(userUpdBL,id);
 		request.setAttribute(Path.USER_ICHIRAN_SCOPE, userUpdList);
 		
-		//ユーザー更新画面に遷移
+		//ユーザー更新実行画面に遷移
 		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_UPD_GAMEN);
+				.getRequestDispatcher(Path.RESULT_USER_UPD_GAMEN);
 		dispatcher.forward(request, response);
 	}
 

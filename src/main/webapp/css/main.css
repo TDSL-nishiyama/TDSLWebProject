@@ -1,34 +1,6 @@
 @charset "UTF-8";
 
-/* table属性 青系ボーダー
- 中身は適当にWebからコピペ。すきに作ってください */
-table {
-	width: 100%;
-	border: black
-}
-
-th {
-	position: relative;
-	text-align: left;
-	width: 15%;
-}
-
-th:after {
-	display: block;
-	content: "";
-	width: 30px;
-	height: 2px;
-	background-color: #333;
-	position: absolute;
-	top: calc(50% - 1px);
-	right: -15px;
-}
-
-td {
-	text-align: left;
-	padding: 7px 0 7px 30px;
-	width: 85%;
-}
+/* あまり興味ないので好きに作ってください */
 
 /* 段落 */
 p{

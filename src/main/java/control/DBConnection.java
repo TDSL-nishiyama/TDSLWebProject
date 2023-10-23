@@ -1,8 +1,8 @@
 package control;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,19 +10,29 @@ import java.util.Properties;
 
 public class DBConnection {
 
+	private static String DRIVER_NAME = "";
+	private static String JDBC_URL = "";
+	private static String DB_USER = "";
+	private static String DB_PASS = "";
+	private static final String PATH = "C:\\pleiades\\2023-06\\workspace\\TDSLWebProject\\src\\main\\webapp\\WEB-INF\\lib\\DBAccess.properties";
+
 	//DB読み込み用メソッド
 	public static void loadJDBCDriver() {
-
-//		//プロパティファイルを読み込む
-//		Properties properties = new Properties();
-
 		try {
-//			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
-//			properties.load(inStream);
-//			properties.load(new FileInputStream("DBAccess.properties"));
+			Properties properties = new Properties();
+			FileInputStream inStream = null;
+			try {
+				inStream = new FileInputStream(PATH);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			try {
+				properties.load(inStream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
-			final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
-
+			DRIVER_NAME = properties.getProperty("drivername");
 			//JDBCドライバを読み込み
 			Class.forName(DRIVER_NAME);
 
@@ -33,27 +43,30 @@ public class DBConnection {
 
 	//DB接続用メソッド
 	public static Connection connectionDB(Connection conn) {
-
-		//プロパティファイルを読み込む
-//		Properties properties = new Properties();
-
 		try {
-//			InputStream inStream = new FileInputStream("C:\\DBAccess.properties");
-//			properties.load(inStream);
-////			properties.load(new FileInputStream("DBAccess.properties"));
-//
-//			final String JDBC_URL = properties.getProperty("jdbcurl");
-//			final String DB_USER = properties.getProperty("username");
-//			final String DB_PASS = properties.getProperty("userpassword");
-			final String JDBC_URL = "jdbc:mysql://localhost:3306/tdsl_master";
-			final String DB_USER = "root";
-			final String DB_PASS = "tdsl1234";
+			Properties properties = new Properties();
+			FileInputStream inStream = null;
+			try {
+				inStream = new FileInputStream(PATH);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			try {
+				properties.load(inStream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			JDBC_URL = properties.getProperty("jdbcurl");
+			DB_USER = properties.getProperty("username");
+			DB_PASS = properties.getProperty("userpassword");
+			
 			//データベースへ接続
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		}
 		return conn;
 	}
