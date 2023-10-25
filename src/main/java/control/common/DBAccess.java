@@ -9,6 +9,7 @@ import java.util.Map;
 import constents.Const.Common;
 
 public interface DBAccess {
+	
 	//JDBC読み込み
 	default public void loadJDBCDriver() {
 

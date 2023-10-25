@@ -14,7 +14,7 @@ public class Const {
 		public static final String DB_USER = "username";
 		public static final String DB_PASS = "userpassword";
 		public static final String DB_PROP_PATH = "C:\\pleiades\\2023-06\\workspace\\TDSLWebProject\\src\\main\\webapp\\WEB-INF\\lib\\DBAccess.properties";
-		public static final String SQL_FILE_PATH="C:\\pleiades\\2023-06\\workspace\\TDSLWebProject\\src\\main\\webapp\\WEB-INF\\sql";
+		public static final String SQL_FILE_PATH="C:\\pleiades\\2023-06\\workspace\\TDSLWebProject\\src\\main\\webapp\\WEB-INF\\sql\\";
 	}
 
 	//遷移関連
