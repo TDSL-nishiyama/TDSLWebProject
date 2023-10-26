@@ -28,7 +28,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 		for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
 		%>
 		<tr>
-			<td><%=syainJouhouEntity.getName()%></td>
+			<td><%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%></td>
 		</tr>
 		<%
 		}
@@ -48,7 +48,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
 		%>
 		<tr>
 			<td><%=syainJouhouEntity.getId()%></td>
-			<td><%=syainJouhouEntity.getName()	%></td>
+			<td><%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%></td>
 		</tr>
 		<%
 		}

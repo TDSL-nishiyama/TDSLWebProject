@@ -13,7 +13,7 @@ import constents.Const.Common;
 
 public class LoadFile {
 	/**
-	 *@see SQL文取得用（PreparedStatement要素なし）　
+	 *{@index} SQL文取得用
 	 *@param String loadPath 発行したいSQLのファイルが格納されているパス 
 	 *@throws IOException 
 	 **/
@@ -31,7 +31,7 @@ public class LoadFile {
 	}
 
 	/**
-	 *@see プロパティファイル取得用（単要素）　
+	 *{@index} プロパティファイル取得用（単要素）　
 	 *@param String loadPath プロパティファイルが格納されているパス 
 	 *@param String pName 取得したい要素名
 	 **/
@@ -53,7 +53,7 @@ public class LoadFile {
 	}
 
 	/**
-	 *@see プロパティファイル取得用（複数要素）　
+	 *{@index} プロパティファイル取得用（複数要素）　
 	 *@param String loadPath プロパティファイルが格納されているパス 
 	 *@param String[] pName 取得したい要素名
 	 **/

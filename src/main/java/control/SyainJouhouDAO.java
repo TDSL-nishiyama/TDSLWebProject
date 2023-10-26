@@ -4,114 +4,90 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import constents.Const.Common;
+import control.common.DAOCommon;
+import control.common.DBAccess;
 import model.SyainJouhouEntity;
 
-public class SyainJouhouDAO extends DBConnection {
+public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 
-	public List<SyainJouhouEntity> findIppan(SyainJouhouDAO SyainJouhouDAO) {
+	private String sqlPath = Common.SQL_FILE_PATH;
 
-		List<SyainJouhouEntity> syainJouhouList = new ArrayList<>();
+	/**
+	 * {@index} 社員情報の情報を取得
+	 * @param fileName 実行したいSQLファイルの名前
+	 * @param column 取得したいカラム名
+	 * @param kanriFlg 管理者フラグ
+	 * @return selectの結果
+	 */
+	public List<SyainJouhouEntity> selectSQL(String fileName, List<String> column, boolean kanriFlg) {
 
+		List<SyainJouhouEntity> result = new ArrayList<SyainJouhouEntity>();
+		sqlPath += fileName;
+
+		//JDBC接続
+		DBAccess.super.loadJDBCDriver();
+
+		//DB接続
 		Connection conn = null;
+		conn = DBAccess.super.connectionDB(conn);
 
-		try {
-			//JDBCドライバを読み込み
-			super.loadJDBCDriver();
+		//SQL文の作成
+		String sql = null;
+		sql = makeSQL(sqlPath);
 
-			//DBへ接続
-			conn = super.connectionDB(conn);
+		//クエリの発行・格納
+		if (kanriFlg == false) {
+			try {
+				//発行
+				PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+				//クエリの実行
+				ResultSet rs = pStmt.executeQuery();
 
-			//SELECT文を準備
-			StringBuilder sql = new StringBuilder();
+				String sei = null;
+				String mei = null;
 
-			sql.append("SELECT name FROM user;");
-
-			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-
-			//SELECTを実行し、結果表を取得
-			ResultSet rs = pStmt.executeQuery();
-
-			//結果表に格納されたレコードの内容をSyainJouhouEntityに設定
-			while (rs.next()) {
-				String name = rs.getString("name");
-				SyainJouhouEntity syainJouhouEntity = new SyainJouhouEntity(name);
-				syainJouhouList.add(syainJouhouEntity);
+				//格納
+				while (rs.next()) {
+					sei = rs.getString(column.get(0));
+					mei = rs.getString(column.get(1));
+					SyainJouhouEntity entity = new SyainJouhouEntity(sei, mei);
+					result.add(entity);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+		} else {
+			try {
+				//発行
+				PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+				//クエリの実行
+				ResultSet rs = pStmt.executeQuery();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			//データベース切断
-			if (conn != null) {
-				super.closeDB(conn);
+				int id = 0;
+				String sei = null;
+				String mei = null;
+
+				//格納
+				while (rs.next()) {
+					id = rs.getInt(column.get(0));
+					sei = rs.getString(column.get(1));
+					mei = rs.getString(column.get(2));
+					SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, mei);
+					result.add(entity);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
-		return syainJouhouList;
 
+		//DB切断
+		DBAccess.super.closeDB(conn);
+
+		return result;
 	}
 
-	public List<SyainJouhouEntity> findAll(SyainJouhouDAO SyainJouhouDAO) {
-
-		List<SyainJouhouEntity> syainJouhouList = new ArrayList<>();
-
-		NumberFormat nfNum = NumberFormat.getNumberInstance();
-
-		Connection conn = null;
-
-		try {
-			//JDBCドライバを読み込み
-			super.loadJDBCDriver();
-
-			//DBへ接続
-			conn = super.connectionDB(conn);
-
-			//SELECT文を準備
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("SELECT id,name FROM user;");
-
-			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-
-			//SELECTを実行し、結果表を取得
-			ResultSet rs = pStmt.executeQuery();
-
-			//結果表に格納されたレコードの内容をSyainJouhouEntityに設定
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				//				String yomigana = rs.getString("yomigana");
-				//				String seibetsu = rs.getString("seibetsu");
-				//				String syussinn = rs.getString("syussin");
-				//				String juusyo = rs.getString("juusyo");
-				//				int jutakuTeateUmu = rs.getInt("teate");
-				//				String shokui = rs.getString("job");
-				//				String salary = nfNum.format(rs.getInt("salary")); //カンマ区切りで設定
-				//				int nyuusyaNengetsu = rs.getInt("nyuusya");
-				//				int kinzokuNennsuu = rs.getInt("kinzoku");
-
-				//				SyainJouhouEntity SyainJouhouEntityAdd = new SyainJouhouEntity(id, name, yomigana, seibetsu,
-				//						syussinn, juusyo, jutakuTeateUmu, shokui, salary, nyuusyaNengetsu, kinzokuNennsuu);
-				//				syainJouhouList.add(SyainJouhouEntityAdd);
-				SyainJouhouEntity syainJouhouEntity = new SyainJouhouEntity(id, name);
-				syainJouhouList.add(syainJouhouEntity);
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			//データベース切断
-			if (conn != null) {
-				super.closeDB(conn);
-			}
-		}
-		return syainJouhouList;
-
-	}
 }

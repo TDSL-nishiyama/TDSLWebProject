@@ -1,0 +1,1 @@
+select sei,mei from usershousai;

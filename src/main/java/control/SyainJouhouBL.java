@@ -18,16 +18,29 @@ public class SyainJouhouBL {
 	public List<SyainJouhouEntity> resultSyainList(SyainJouhouBL syainJouhouBL) {
 
 		List<SyainJouhouEntity> result = new ArrayList<>();
-
+		List<String> column = new ArrayList<String>();
+		
 		//DAOクラスのインスタンス化
-		SyainJouhouDAO syainJouhouDAO = new SyainJouhouDAO();
-
+		SyainJouhouDAO dao = new SyainJouhouDAO();
+		
 		//管理者ではない場合
 		if (kanriFlg == false) {
-			result = syainJouhouDAO.findIppan(syainJouhouDAO);
-			//管理者の場合
+			//取得カラム名の設定
+			column.add("sei");
+			column.add("mei");
+			
+			//ステートメントの設定
+			result = dao.selectSQL("usershousai_ippann.sql", column,kanriFlg);
+			
+		//管理者の場合
 		} else {
-			result = syainJouhouDAO.findAll(syainJouhouDAO);
+			//取得カラム名の設定
+			column.add("id");
+			column.add("sei");
+			column.add("mei");
+			
+			result = dao.selectSQL("usershousai_kanrisya.sql", column,kanriFlg);
+
 		}
 
 		return result;

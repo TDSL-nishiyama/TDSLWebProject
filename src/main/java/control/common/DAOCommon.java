@@ -159,7 +159,7 @@ public class DAOCommon implements DBAccess {
 	}
 
 	//SQL文作成
-	private String makeSQL(String sqlPath) {
+	protected String makeSQL(String sqlPath) {
 		String result = null;
 
 		LoadFile loadfile = new LoadFile();
