@@ -4,9 +4,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import constents.Const.Common;
 
-public class HashPassword {
+public class EncryptCommon {
 
-	public static String cryptoHash(String password) throws NoSuchAlgorithmException {
+	public String cryptoHash(String password) throws NoSuchAlgorithmException {
 
 		String result = "";
 

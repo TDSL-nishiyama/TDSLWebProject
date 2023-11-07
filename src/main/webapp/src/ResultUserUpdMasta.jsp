@@ -44,9 +44,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 			%> <%=kanriFlgView%>
 		</td>
 		<td>
-			<form name="userUpdate"
-				action="<%=request.getContextPath()%>/ResultUserUpdAction"
-				method="post">
+			<form action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
 				<input type="submit" name="userUpd" value="更新"><br>
 			</form>
 		</td>

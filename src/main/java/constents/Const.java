@@ -26,6 +26,7 @@ public class Const {
 		public static final String SYSTEM_ERROR_GAMEN = "/error.jsp";
 		public static final String MAIN_GAMEN_PATH = "/TDSLWebProject/index.jsp";
 		public static final String SYAIN_JOUHOU_PATH = "/src/ResultSyainJouhou.jsp";
+		public static final String SYAIN_HENSYU_PATH = "/src/syainJouhouHensyu.jsp";
 		public static final String MASTA_GAMEN = "/masta.jsp";
 		public static final String USER_ADD_GAMEN = "/src/userAddMasta.jsp";
 		public static final String UPDATE_PASSWORD_GAMEN = "/updatePassword.jsp";
@@ -38,6 +39,7 @@ public class Const {
 		//スコープ名
 		public static final String SESSION_SCOPE_NAME = "loginSession";
 		public static final String SYAIN_JOUHOU_SCOPE = "syainJouhouEntityList";
+		public static final String SYAIN_HENSYU_SCOPE = "syainHensyuList";
 		public static final String BEFORE_UPDATEPASSWORD = "LoginAction";
 		public static final String USER_ICHIRAN_SCOPE = "userIchiran";
 	}
