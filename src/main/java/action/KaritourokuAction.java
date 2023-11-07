@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.MastaEntity;
 
 /**
- * ユーザー登録画面のサーブレット
+ * 仮登録一覧画面のサーブレット
  */
 public class KaritourokuAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
