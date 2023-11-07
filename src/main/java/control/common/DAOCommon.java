@@ -57,7 +57,7 @@ public class DAOCommon implements DBAccess {
 	}
 
 	/**
-	 * {@index} SELECT実行メソッド
+	 * {@index} SELECT実行メソッド　（1レコード）
 	 * @param fileName 実行したいSQLファイルの名前
 	 * @param column 取得したいカラム名
 	 * @return selectの結果(List)
@@ -104,7 +104,7 @@ public class DAOCommon implements DBAccess {
 	}
 
 	/**
-	 * {@index} SELECT実行メソッド ?あり
+	 * {@index} SELECT実行メソッド ?あり　（1レコード）
 	 * @param fileName 実行したいSQLファイルの名前
 	 * @param column 取得したいカラム名　List<String>
 	 * @param statement PreparedStatmentの内容　List<Object>
@@ -156,6 +156,49 @@ public class DAOCommon implements DBAccess {
 		DBAccess.super.closeDB(conn);
 
 		return result;
+	}
+	
+	/**
+	 * {@index} INSERT・UPDATE・DLETE実行メソッド（1レコード）
+	 * @param fileName 実行したいSQLファイルの名前
+	 * @param column 取得したいカラム名　List<String>
+	 * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
+	 * @return selectの結果(List)
+	 */
+	public void executeDML(String fileName, List<String> column, List<Object> statement) {
+
+		sqlPath += fileName;
+
+		//JDBC接続
+		DBAccess.super.loadJDBCDriver();
+
+		//DB接続
+		Connection conn = null;
+		conn = DBAccess.super.connectionDB(conn);
+
+		//SQL文の作成
+		String sql = null;
+		sql = makeSQL(sqlPath);
+
+		//クエリの発行・格納
+		try {
+			//発行
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			if(!(statement.equals(null))) {
+				int cnt = statement.size(); //ステートメントを設定する数
+				for(int i = 0 ; i < cnt; i++) {
+					pStmt.setObject(i+1, statement.get(i));
+				}
+			}
+			//クエリの実行
+			pStmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		//DB切断
+		DBAccess.super.closeDB(conn);
+
 	}
 
 	//SQL文作成

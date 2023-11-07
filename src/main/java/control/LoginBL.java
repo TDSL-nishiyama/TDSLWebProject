@@ -17,7 +17,7 @@ public class LoginBL extends DBConnection {
 			//IDが仮IDだった場合、パスワード更新登録画面に遷移
 			if (pLoginId.substring(0, 4).equals("kari")) {
 				result[0] = "toPassword";
-				//loginテーブルid項目の取得
+				//loginテーブルid項目の取得（Sessionを保持していない画面のためDBより取得）
 				LoginDAO loginDAO = new LoginDAO();
 				result[1] = loginDAO.findLoginIdtoId(pLoginId);
 				//それ以外の場合は後続処理に移行

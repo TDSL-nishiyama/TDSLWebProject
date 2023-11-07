@@ -15,7 +15,7 @@
 	<h1>ログインIDとパスワードを入力してください</h1>
 
 	<form name="login" action="<%=request.getContextPath()%>/LogInAction"
-		method="post" onsubmit="checkIDandText();retrun false;">
+		method="post">
 
 		<p>
 			ID: <input type="text" name="id">
@@ -25,12 +25,13 @@
 		</p>
 
 		<p>
-			<input type="submit" name="login" value="ログイン">
+			<input type="submit" name="login" value="ログイン" onclick="checkIDandText();">
 		</p>
 
 	</form>
 
-	<form name="login" action="<%=request.getContextPath()%>/UpdatePasswordAction"
+	<form name="login"
+		action="<%=request.getContextPath()%>/UpdatePasswordAction"
 		method="post"">
 
 		<p>

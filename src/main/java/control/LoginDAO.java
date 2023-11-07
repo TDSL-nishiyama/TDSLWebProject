@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.common.DAOCommon;
+import control.common.DBAccess;
 import model.LoginEntity;
 import model.SessionKanriBean;
 
-public class LoginDAO extends DBConnection {
+public class LoginDAO extends DAOCommon implements DBAccess {
 	
 	public String findLoginIdtoId(String pLoginId) {
 
@@ -130,48 +132,18 @@ public class LoginDAO extends DBConnection {
 
 	public String findLoginId(String pLoginId) {
 
-		Connection conn = null;
-		String loginId = null;
+		List<String> column = new ArrayList<String>();
+		List<Object> statement = new ArrayList<>();
+		List<Object> result = new ArrayList<>();
+		
+		column.add("loginid");
+		
+		statement.add(pLoginId);
+		
+		result = selectSQL("findLoginId.sql", column, statement);
+		
+		return result.get(0).toString();
 
-		try {
-
-			// JDBCドライバを読み込み
-			super.loadJDBCDriver();
-
-			// DBへ接続
-			conn = super.connectionDB(conn);
-
-			// SELECT文を準備
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("SELECT loginid,password");
-			sql.append(" FROM login");
-			sql.append(" WHERE del = '' AND  loginid = ?;");
-
-			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-			pStmt.setString(1, pLoginId);
-
-			// SELECTを実行し、結果表を取得
-			ResultSet rs = pStmt.executeQuery();
-
-			while (rs.next()) {
-				loginId = rs.getString("loginid");
-			}
-
-			LoginEntity loginEntity = new LoginEntity(loginId);
-
-			loginEntity.setLoginId(loginId);
-
-			loginId = loginEntity.getLoginId();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// データベース切断
-			super.closeDB(conn);
-		}
-
-		return loginId;
 	}
 
 	public List<String> findLoginIdAndPassword(String pLoginId,
