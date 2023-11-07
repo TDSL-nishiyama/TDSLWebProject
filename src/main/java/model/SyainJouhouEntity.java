@@ -12,17 +12,17 @@ public class SyainJouhouEntity implements Serializable {
 	private String mei_yomi;
 	private Date nyuusyaYMD;
 	private Date taisytaYMD;
-	private String seibetsu; //0=男　1=女 3=その他
+	private String seibetsu; //0=男　1=女 2=その他
 	private Date seinenngappi;
 	private String syusshin;
 	private String juusyo;
 	
-	public SyainJouhouEntity() {
-	}
-	
-	public SyainJouhouEntity(String sei,String mei) {
+	public SyainJouhouEntity(int id,String sei,String mei,Date nyuusyaYMD,String syusshin) {
+		this.id = id;
 		this.sei = sei;
 		this.mei = mei;
+		this.nyuusyaYMD = nyuusyaYMD;
+		this.syusshin = syusshin;
 	}
 	
 	public SyainJouhouEntity(int id,String sei, String mei) {
@@ -31,6 +31,10 @@ public class SyainJouhouEntity implements Serializable {
 		this.mei = mei;
 	}
 
+
+	public SyainJouhouEntity() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
 
 	public int getId() {
 		return id;

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.SessionKanriBean;
-import model.SyainJouhouEntity;
+import model.SyainJouhouBean;
 
 public class SyainJouhouAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class SyainJouhouAction extends HttpServlet {
 		SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);		
 
 		//リクエストスコープにインスタンスを保存
-		List<SyainJouhouEntity> SyainJouhouBLlist = syainJouhouBL.resultSyainList(syainJouhouBL);
+		List<SyainJouhouBean> SyainJouhouBLlist = syainJouhouBL.resultSyainJouhou(syainJouhouBL);
 		request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
 		// 結果出力画面(ResultSyainJouhou.jsp)にフォワード
 		RequestDispatcher dispatcher = request

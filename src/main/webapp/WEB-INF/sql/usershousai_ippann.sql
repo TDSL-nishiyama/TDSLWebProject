@@ -1,1 +1,1 @@
-select sei,mei from usershousai;
+select id,sei,mei,nyuusyaYMD,syusshin from usershousai;
