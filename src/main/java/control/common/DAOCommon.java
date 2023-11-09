@@ -59,7 +59,10 @@ public class DAOCommon implements DBAccess {
 
 		//DB切断
 		DBAccess.super.closeDB(conn);
-
+		
+		//SQLファイルパスの初期化
+		sqlPath = Common.SQL_FILE_PATH;
+		
 		return result;
 	}
 
@@ -107,6 +110,8 @@ public class DAOCommon implements DBAccess {
 		//DB切断
 		DBAccess.super.closeDB(conn);
 
+		//SQLファイルパスの初期化
+		sqlPath = Common.SQL_FILE_PATH;
 		return result;
 	}
 
@@ -162,17 +167,18 @@ public class DAOCommon implements DBAccess {
 		//DB切断
 		DBAccess.super.closeDB(conn);
 
+		//SQLファイルパスの初期化
+		sqlPath = Common.SQL_FILE_PATH;
 		return result;
 	}
 	
 	/**
-	 * {@index} INSERT・UPDATE・DLETE実行メソッド（1レコード）
+	 * {@index} UPDATE・DLETE実行メソッド（1レコード）
 	 * @param fileName 実行したいSQLファイルの名前
-	 * @param column 取得したいカラム名　List<String>
 	 * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
 	 * @return selectの結果(List)
 	 */
-	public void executeDML(String fileName, List<String> column, List<Object> statement) {
+	public void executeDML(String fileName,  List<Object> statement) {
 
 		sqlPath += fileName;
 
@@ -203,6 +209,8 @@ public class DAOCommon implements DBAccess {
 			e.printStackTrace();
 		}
 
+		//SQLファイルパスの初期化
+		sqlPath = Common.SQL_FILE_PATH;
 		//DB切断
 		DBAccess.super.closeDB(conn);
 
