@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <!-- ログイン画面  -->
 <!DOCTYPE html>
 <html>
@@ -11,34 +11,34 @@
 </head>
 
 <body>
-	<%@ include file="./msg.jsp"%>
-	<h1>ログインIDとパスワードを入力してください</h1>
+  <%@ include file="./msg.jsp"%>
+  <h1>ログインIDとパスワードを入力してください</h1>
 
-	<form name="login" action="<%=request.getContextPath()%>/LogInAction"
-		method="post">
+  <form name="login" action="<%=request.getContextPath()%>/LogInAction"
+    method="post" onsubmit="return checkIDandText();">
 
-		<p>
-			ID: <input type="text" name="id">
-		</p>
-		<p>
-			PASS:<input type="password" name="password">
-		</p>
+    <p>
+      ID: <input type="text" name="id">
+    </p>
+    <p>
+      PASS:<input type="password" name="password">
+    </p>
 
-		<p>
-			<input type="submit" name="login" value="ログイン" onclick="checkIDandText();">
-		</p>
+    <p>
+      <input type="submit" name="login" value="ログイン">
+    </p>
 
-	</form>
+  </form>
 
-	<form name="login"
-		action="<%=request.getContextPath()%>/UpdatePasswordAction"
-		method="post"">
+  <form name="rePassword"
+    action="<%=request.getContextPath()%>/UpdatePasswordAction"
+    method="post"">
 
-		<p>
-			<input type="submit" name="updatePassword" value="パスワード再登録">
-		</p>
+    <p>
+      <input type="submit" name="updatePassword" value="パスワード再登録">
+    </p>
 
-	</form>
+  </form>
 
 </body>
 </html>

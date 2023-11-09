@@ -13,18 +13,18 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class UserUpdateAction
  */
 public class UserUpdAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-		//マスタ画面からの遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_UPD_GAMEN);
-		dispatcher.forward(request, response);
-	}
+    //マスタ画面からの遷移
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.USER_UPD_GAMEN);
+    dispatcher.forward(request, response);
+  }
 
 }

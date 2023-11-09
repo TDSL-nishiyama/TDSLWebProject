@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 
 <%@ page import="model.MastaEntity,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
@@ -17,44 +17,44 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 <title>ユーザー更新画面</title>
 </head>
 <body>
-	<%@ include file="../msg.jsp"%>
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>ログインID</th>
-			<th>名前</th>
-			<th>管理フラグ</th>
-			<th>更新</th>
-		</tr>
-		<%
-		String kanriFlgView = "";
-		for (MastaEntity mastaEntity : mastaEntitylist) {
-		%>
-		<td><%=mastaEntity.getUserid()%></td>
-		<td><%=mastaEntity.getLoginid()%></td>
-		<td><%=mastaEntity.getName()%></td>
-		<td>
-			<%
-			//管理フラグtrueの場合、〇　falseの場合、×　を表示
-			if (mastaEntity.getKanriFlg() == true) {
-				kanriFlgView = "〇";
-			} else {
-				kanriFlgView = "×";
-			}
-			%> <%=kanriFlgView%>
-		</td>
-		<td>
-			<form action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
-				<input type="submit" name="userUpd" value="更新"><br>
-			</form>
-		</td>
-		<%
-		}
-		%>
-	</table>
-	<p>
-		<a href="/TDSLWebProject/masta.jsp">戻る</a>
-	</p>
+  <%@ include file="../msg.jsp"%>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>ログインID</th>
+      <th>名前</th>
+      <th>管理フラグ</th>
+      <th>更新</th>
+    </tr>
+    <%
+    String kanriFlgView = "";
+    for (MastaEntity mastaEntity : mastaEntitylist) {
+    %>
+    <td><%=mastaEntity.getUserid()%></td>
+    <td><%=mastaEntity.getLoginid()%></td>
+    <td><%=mastaEntity.getName()%></td>
+    <td>
+      <%
+      //管理フラグtrueの場合、〇　falseの場合、×　を表示
+      if (mastaEntity.getKanriFlg() == true) {
+        kanriFlgView = "〇";
+      } else {
+        kanriFlgView = "×";
+      }
+      %> <%=kanriFlgView%>
+    </td>
+    <td>
+      <form action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
+        <input type="submit" name="userUpd" value="更新"><br>
+      </form>
+    </td>
+    <%
+    }
+    %>
+  </table>
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
 
 </body>
 </html>

@@ -13,17 +13,17 @@ import jakarta.servlet.http.HttpServletResponse;
  * パスワード登録更新画面のサーブレット
  */
 public class UpdatePasswordAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		//パスワード登録更新画面に遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.UPDATE_PASSWORD_GAMEN);
-		dispatcher.forward(request, response);
-	}
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    //パスワード登録更新画面に遷移
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.UPDATE_PASSWORD_GAMEN);
+    dispatcher.forward(request, response);
+  }
 
 }

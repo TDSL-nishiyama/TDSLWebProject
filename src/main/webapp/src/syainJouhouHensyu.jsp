@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 
 <%@ page import="model.SyainJouhouEntity,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
@@ -17,66 +17,66 @@ List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>) reques
 </head>
 
 <body>
-	<%
-	if (kanriFlg == false) {
-	%>
-	<!-- 一般ユーザー -->
-	<table border="1">
-		<tr>
-			<th>社員ID</th>
-			<th>名前</th>
-			<th>入社年月日</th>
-			<th>出身地</th>
-		</tr>
+  <%
+  if (kanriFlg == false) {
+  %>
+  <!-- 一般ユーザー -->
+  <table border="1">
+    <tr>
+      <th>社員ID</th>
+      <th>名前</th>
+      <th>入社年月日</th>
+      <th>出身地</th>
+    </tr>
 
-		<%
-		for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
-		%>
-		<tr>
-			<td><input type="text" value="<%=syainJouhouEntity.getId()%>"></td>
-			<td><input type="text" value="<%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%>"></td>
-			<td><input type="text" value="<%=syainJouhouEntity.getNyuusyaYMD()%>"></td>
-			<td><input type="text" value="<%=syainJouhouEntity.getSyusshin()%>"></td>
-		</tr>
-		<%
-		}
-		%>
+    <%
+    for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
+    %>
+    <tr>
+      <td><input type="text" value="<%=syainJouhouEntity.getId()%>"></td>
+      <td><input type="text" value="<%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%>"></td>
+      <td><input type="text" value="<%=syainJouhouEntity.getNyuusyaYMD()%>"></td>
+      <td><input type="text" value="<%=syainJouhouEntity.getSyusshin()%>"></td>
+    </tr>
+    <%
+    }
+    %>
 
-	</table>
-	<%
-	} else {
-	%>
-	<!-- 管理者 -->
-	<table border="1">
-		<tr>
-			<th>社員ID</th>
-			<th>名前</th>
-		</tr>
+  </table>
+  <%
+  } else {
+  %>
+  <!-- 管理者 -->
+  <table border="1">
+    <tr>
+      <th>社員ID</th>
+      <th>名前</th>
+    </tr>
 
-		<%
-		for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
-		%>
-		<tr>
-			<td><%=syainJouhouEntity.getId()%></td>
-			<td><%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%></td>
-		</tr>
-		<%
-		}
-		%>
+    <%
+    for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
+    %>
+    <tr>
+      <td><%=syainJouhouEntity.getId()%></td>
+      <td><%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%></td>
+    </tr>
+    <%
+    }
+    %>
 
-	</table>
-	<%
-	}
-	%>
-	<p>
-	
-	<form name="toSJHen-SJInfo"
-		action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
-		<p>
-			<input type="submit" name="toSJHen-SJInfo" value="戻る">
-		</p>
+  </table>
+  <%
+  }
+  %>
+  <p>
+  
+  <form name="toSJHen-SJInfo"
+    action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
+    <p>
+      <input type="submit" name="toSJHen-SJInfo" value="戻る">
+    </p>
 
-	</form>
+  </form>
 
 
 </body>

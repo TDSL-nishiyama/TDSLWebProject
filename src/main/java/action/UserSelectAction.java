@@ -13,20 +13,20 @@ import jakarta.servlet.http.HttpServletResponse;
  * ユーザー登録画面のサーブレット
  */
 public class UserSelectAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		//リクエストスコープにインスタンスを保存
-		
-		//ユーザー一覧画面に遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);
-		dispatcher.forward(request, response);
-	}
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    
+    //リクエストスコープにインスタンスを保存
+    
+    //ユーザー一覧画面に遷移
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);
+    dispatcher.forward(request, response);
+  }
 
 }

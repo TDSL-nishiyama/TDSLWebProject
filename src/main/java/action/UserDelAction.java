@@ -14,18 +14,18 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class UserDelAction
  */
 public class UserDelAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		//ユーザー削除からの遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_DEL_GAMEN);
-		dispatcher.forward(request, response);
-	}
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    
+    //ユーザー削除からの遷移
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.USER_DEL_GAMEN);
+    dispatcher.forward(request, response);
+  }
 
 }

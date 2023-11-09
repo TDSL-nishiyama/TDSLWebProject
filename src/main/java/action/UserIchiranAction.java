@@ -16,24 +16,24 @@ import model.MastaEntity;
  * ユーザー登録画面のサーブレット
  */
 public class UserIchiranAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		UserIchiranBL userIchiranBL = new UserIchiranBL();		
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    
+    UserIchiranBL userIchiranBL = new UserIchiranBL();    
 
-		//リクエストスコープにインスタンスを保存
-		List<MastaEntity> useIchiranBLlist = userIchiranBL.resultUserList(userIchiranBL);
-		request.setAttribute(Path.USER_ICHIRAN_SCOPE, useIchiranBLlist);
-		
-		//ユーザー一覧画面に遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);
-		dispatcher.forward(request, response);
-	}
+    //リクエストスコープにインスタンスを保存
+    List<MastaEntity> useIchiranBLlist = userIchiranBL.resultUserList(userIchiranBL);
+    request.setAttribute(Path.USER_ICHIRAN_SCOPE, useIchiranBLlist);
+    
+    //ユーザー一覧画面に遷移
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);
+    dispatcher.forward(request, response);
+  }
 
 }

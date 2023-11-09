@@ -5,97 +5,97 @@ import java.util.List;
 
 public class LoginBL{
 
-	// 初回ログインチェック用
-	public String[] checkLoginShokai(String pLoginId) {
+  // 初回ログインチェック用
+  public String[] checkLoginShokai(String pLoginId) {
 
-		//要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
-		//要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
-		String[] result = { "error", "" };
+    //要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
+    //要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
+    String[] result = { "error", "" };
 
-		//IDは5桁以上のためエラー（画面からの登録はできないが一応）
-		if (pLoginId.length() > 4) {
-			//IDが仮IDだった場合、パスワード更新登録画面に遷移
-			if (pLoginId.substring(0, 4).equals("kari")) {
-				result[0] = "toPassword";
-				//loginテーブルid項目の取得（Sessionを保持していない画面のためDBより取得）
-				LoginDAO loginDAO = new LoginDAO();
-				result[1] = loginDAO.findLoginIdtoId(pLoginId);
-				//それ以外の場合は後続処理に移行
-			} else {
-				result[0] = "true";
-			}
-		}
+    //IDは5桁以上のためエラー（画面からの登録はできないが一応）
+    if (pLoginId.length() > 4) {
+      //IDが仮IDだった場合、パスワード更新登録画面に遷移
+      if (pLoginId.substring(0, 4).equals("kari")) {
+        result[0] = "toPassword";
+        //loginテーブルid項目の取得（Sessionを保持していない画面のためDBより取得）
+        LoginDAO loginDAO = new LoginDAO();
+        result[1] = loginDAO.findLoginIdtoId(pLoginId);
+        //それ以外の場合は後続処理に移行
+      } else {
+        result[0] = "true";
+      }
+    }
 
-		return result;
+    return result;
 
-	}
+  }
 
-	// ログインID存在チェック用
-	public boolean checkLoginId(String pLoginId) {
+  // ログインID存在チェック用
+  public boolean checkLoginId(String pLoginId) {
 
-		boolean result = false;
+    boolean result = false;
 
-		LoginDAO loginDAO = new LoginDAO();
+    LoginDAO loginDAO = new LoginDAO();
 
-		// IDがDB内に存在しなかった場合エラー画面に遷移
-		if (!(loginDAO.findLoginId(pLoginId) == null)) {
-			result = true;
-		}
+    // IDがDB内に存在しなかった場合エラー画面に遷移
+    if (!(loginDAO.findLoginId(pLoginId) == null)) {
+      result = true;
+    }
 
-		return result;
+    return result;
 
-	}
+  }
 
-	// ログインパスワードとIDの紐づきチェック用
-	public boolean checkLoginIdAndPassword(String pLoginId,
-			String pLoginPassword) {
+  // ログインパスワードとIDの紐づきチェック用
+  public boolean checkLoginIdAndPassword(String pLoginId,
+      String pLoginPassword) {
 
-		boolean result = false;
+    boolean result = false;
 
-		LoginDAO loginDAO = new LoginDAO();
+    LoginDAO loginDAO = new LoginDAO();
 
-		// 入力したパスワードがDB内のパスワードと異なる場合エラー画面に遷移
-		List<String> loginIdPassList = new ArrayList<>();
-		loginIdPassList.add(pLoginId);
-		loginIdPassList.add(pLoginPassword);
+    // 入力したパスワードがDB内のパスワードと異なる場合エラー画面に遷移
+    List<String> loginIdPassList = new ArrayList<>();
+    loginIdPassList.add(pLoginId);
+    loginIdPassList.add(pLoginPassword);
 
-		if (loginDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(
-				loginIdPassList)) {
+    if (loginDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(
+        loginIdPassList)) {
 
-			result = true;
-		}
+      result = true;
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	// ログインID重複チェック用
-	public boolean checkDuplicationLoginId(String pLoginId) {
+  // ログインID重複チェック用
+  public boolean checkDuplicationLoginId(String pLoginId) {
 
-		boolean result = true;
-		int resultDB = 0;
+    boolean result = true;
+    int resultDB = 0;
 
-		LoginDAO loginDAO = new LoginDAO();
-		resultDB = loginDAO.countLoginId(pLoginId);
+    LoginDAO loginDAO = new LoginDAO();
+    resultDB = loginDAO.countLoginId(pLoginId);
 
-		// IDが重複している場合、エラー画面に遷移
-		if (resultDB > 0) {
-			result = false;
-		}
+    // IDが重複している場合、エラー画面に遷移
+    if (resultDB > 0) {
+      result = false;
+    }
 
-		return result;
+    return result;
 
-	}
+  }
 
-	//ログインID桁数チェック
-	public boolean checkLoginIdLength(String pLoginId) {
-		
-		boolean result = true;
-		
-		// IDが5桁未満の場合、エラー画面に遷移
-		if (pLoginId.length() < 5) {
-			result = false;
-		}
+  //ログインID桁数チェック
+  public boolean checkLoginIdLength(String pLoginId) {
+    
+    boolean result = true;
+    
+    // IDが5桁未満の場合、エラー画面に遷移
+    if (pLoginId.length() < 5) {
+      result = false;
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

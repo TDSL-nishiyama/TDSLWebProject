@@ -3,8 +3,8 @@ package model;
 import java.io.Serializable;
 
 public class SessionKanriBean implements Serializable {
-	
-	private int userId; //ユーザーID 
+  
+  private int userId; //ユーザーID 
     private String loginId; //ログインID
     private String loginName; //ログインユーザー名
     private boolean kanriFlg; //管理フラグ("TRUE"=管理者権限あり)
@@ -27,36 +27,36 @@ public class SessionKanriBean implements Serializable {
     }
     
     //アクセサメソッド
-	public int getUserId() {
-		return userId;
-	}
+  public int getUserId() {
+    return userId;
+  }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+  public void setUserId(int userId) {
+    this.userId = userId;
+  }
 
-	public String getLoginId() {
-		return loginId;
-	}
+  public String getLoginId() {
+    return loginId;
+  }
 
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
-	}
+  public void setLoginId(String loginId) {
+    this.loginId = loginId;
+  }
 
-	public String getLoginName() {
-		return loginName;
-	}
+  public String getLoginName() {
+    return loginName;
+  }
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
+  public void setLoginName(String loginName) {
+    this.loginName = loginName;
+  }
 
-	public boolean getKanriFlg() {
-		return kanriFlg;
-	}
+  public boolean getKanriFlg() {
+    return kanriFlg;
+  }
 
-	public void setKanriFlg(boolean kanriFlg) {
-		this.kanriFlg = kanriFlg;
-	}
+  public void setKanriFlg(boolean kanriFlg) {
+    this.kanriFlg = kanriFlg;
+  }
 }
 

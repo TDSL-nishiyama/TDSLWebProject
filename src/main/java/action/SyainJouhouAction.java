@@ -15,28 +15,28 @@ import model.SessionKanriBean;
 import model.SyainJouhouBean;
 
 public class SyainJouhouAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		//管理者フラグの取得
-		SessionKanriBean loginSession = 
-				(SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE_NAME);
-		
-		boolean kanriFlg = false;
-		kanriFlg = loginSession.getKanriFlg();
-		
-		//データ格納処理
-		SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);		
+  protected void doPost(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException {
+    
+    HttpSession session = request.getSession();
+    //管理者フラグの取得
+    SessionKanriBean loginSession = 
+        (SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE_NAME);
+    
+    boolean kanriFlg = false;
+    kanriFlg = loginSession.getKanriFlg();
+    
+    //データ格納処理
+    SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);    
 
-		//リクエストスコープにインスタンスを保存
-		List<SyainJouhouBean> SyainJouhouBLlist = syainJouhouBL.resultSyainJouhou(syainJouhouBL);
-		request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
-		// 結果出力画面(ResultSyainJouhou.jsp)にフォワード
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.SYAIN_JOUHOU_PATH);
-		dispatcher.forward(request, response);
-	}
+    //リクエストスコープにインスタンスを保存
+    List<SyainJouhouBean> SyainJouhouBLlist = syainJouhouBL.resultSyainJouhou(syainJouhouBL);
+    request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
+    // 結果出力画面(ResultSyainJouhou.jsp)にフォワード
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.SYAIN_JOUHOU_PATH);
+    dispatcher.forward(request, response);
+  }
 }

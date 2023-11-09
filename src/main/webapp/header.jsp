@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 
 <%@ page import="constents.Const.Path"%>
 <%@ page import="model.SessionKanriBean" %>
@@ -14,13 +14,13 @@ jakarta.servlet.RequestDispatcher"
 SessionKanriBean loginSession = (SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE_NAME);
 //ログイン確認
 if (loginSession == null) {
-	// ログインしていない場合ログイン画面に遷移
-	RequestDispatcher dispatcher = request.getRequestDispatcher(Path.LOGIN_GAMEN);
-	dispatcher.forward(request, response);
-	return;
+  // ログインしていない場合ログイン画面に遷移
+  RequestDispatcher dispatcher = request.getRequestDispatcher(Path.LOGIN_GAMEN);
+  dispatcher.forward(request, response);
+  return;
 }
-	//管理フラグの設定
-	boolean kanriFlg = loginSession.getKanriFlg();
+  //管理フラグの設定
+  boolean kanriFlg = loginSession.getKanriFlg();
 %>
 
 <html>
@@ -28,15 +28,15 @@ if (loginSession == null) {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div align="right">
-	ログインユーザー：<%=loginSession.getLoginName()%></div>
+  ログインユーザー：<%=loginSession.getLoginName()%></div>
 <br>
 
 <form name="btnLogout"
-	action="<%=request.getContextPath()%>/LogOutAction" method="post">
+  action="<%=request.getContextPath()%>/LogOutAction" method="post">
 
-	<div align="right">
-		<input type="submit" name="logout" value="ログアウト">
-	</div>
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
 </form>
 
 </html>

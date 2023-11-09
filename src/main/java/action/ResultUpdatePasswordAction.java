@@ -17,70 +17,70 @@ import jakarta.servlet.http.HttpSession;
  * パスワード登録更新画面のサーブレット
  */
 public class ResultUpdatePasswordAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-		ResultUpdatePasswordBL resultUpdatePasswordBL = new ResultUpdatePasswordBL();
+    ResultUpdatePasswordBL resultUpdatePasswordBL = new ResultUpdatePasswordBL();
 
-		String loginId = request.getParameter("loginid");
-		String password = request.getParameter("pass1");
+    String loginId = request.getParameter("loginid");
+    String password = request.getParameter("pass1");
 
-		boolean errFlg;
-		String resultMSG = "";
+    boolean errFlg;
+    String resultMSG = "";
 
-		LoginBL loginBL = new LoginBL();
+    LoginBL loginBL = new LoginBL();
 
-		HttpSession session = request.getSession();
-		//新規ユーザーの場合
-		if (session.getAttribute("USER_ATTRIBUTE").equals("1")) {
-			
-			// ログインIDが5桁未満の場合、エラーメッセージを表示
-			errFlg = loginBL.checkLoginIdLength(loginId);
-			if (!errFlg) {
-				//エラーメッセージを格納
-				request.setAttribute("ERRMSG", "ログインIDは5桁以上にしてください");
-				// エラー画面に遷移
-				RequestDispatcher dispatcher = request
-						.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
-				dispatcher.forward(request, response);
-			}
-			
-			// ユーザー名が重複している場合はエラーメッセージを表示
-			errFlg = loginBL.checkDuplicationLoginId(loginId);
-			if (!errFlg) {
-				//エラーメッセージを格納
-				request.setAttribute("ERRMSG", ERRORMSG.ERR_6);
-				// エラー画面に遷移
-				RequestDispatcher dispatcher = request
-						.getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
-				dispatcher.forward(request, response);
-			}
-			//ユーザーの登録
-			String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
-			resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
-			resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
-			//既存ユーザーの場合
-		} else {
-			//パスワードの更新
-			resultUpdatePasswordBL.updatePassword(loginId, password);
-			resultMSG = "パスワードの更新が完了しました";
-		}
+    HttpSession session = request.getSession();
+    //新規ユーザーの場合
+    if (session.getAttribute("USER_ATTRIBUTE").equals("1")) {
+      
+      // ログインIDが5桁未満の場合、エラーメッセージを表示
+      errFlg = loginBL.checkLoginIdLength(loginId);
+      if (!errFlg) {
+        //エラーメッセージを格納
+        request.setAttribute("ERRMSG", "ログインIDは5桁以上にしてください");
+        // エラー画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+        dispatcher.forward(request, response);
+      }
+      
+      // ユーザー名が重複している場合はエラーメッセージを表示
+      errFlg = loginBL.checkDuplicationLoginId(loginId);
+      if (!errFlg) {
+        //エラーメッセージを格納
+        request.setAttribute("ERRMSG", ERRORMSG.ERR_6);
+        // エラー画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+        dispatcher.forward(request, response);
+      }
+      //ユーザーの登録
+      String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
+      resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
+      resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
+      //既存ユーザーの場合
+    } else {
+      //パスワードの更新
+      resultUpdatePasswordBL.updatePassword(loginId, password);
+      resultMSG = "パスワードの更新が完了しました";
+    }
 
-		//ログイン画面に表示させるメッセージを格納
-		request.setAttribute("MSG", resultMSG);
-		//セッションを破棄
-		session.removeAttribute("USER_ATTRIBUTE");
-		session.removeAttribute("LOGINID_BEFORE");
-		session.invalidate();
-		//ログイン画面に遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher(Path.LOGIN_GAMEN);
-		dispatcher.forward(request, response);
-	}
+    //ログイン画面に表示させるメッセージを格納
+    request.setAttribute("MSG", resultMSG);
+    //セッションを破棄
+    session.removeAttribute("USER_ATTRIBUTE");
+    session.removeAttribute("LOGINID_BEFORE");
+    session.invalidate();
+    //ログイン画面に遷移
+    RequestDispatcher dispatcher = request
+        .getRequestDispatcher(Path.LOGIN_GAMEN);
+    dispatcher.forward(request, response);
+  }
 
 }
