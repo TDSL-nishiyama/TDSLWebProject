@@ -34,12 +34,13 @@
 	</form>
 	<%}%>
 	
+	<!-- 何かを実装するためのテスト用のページとしてご自由にご利用ください -->
 	<form name="test"
 		action="<%=request.getContextPath()%>/TestAction" method="post">
 		<p>
 			<input type="submit" name="login" value="テスト用ページに遷移">
 		</p>
 	</form>
-
+	
 </body>
 </html>

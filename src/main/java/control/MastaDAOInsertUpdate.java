@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import control.common.DAOCommon;
+import control.common.DBAccess;
 import model.MastaEntity;
 
-public class MastaDAOInsertUpdate extends DBConnection{
+public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess{
 	
 	public void InsertUser(MastaEntity pEntity) {
 
@@ -104,6 +106,13 @@ public class MastaDAOInsertUpdate extends DBConnection{
 			super.closeDB(conn);
 		}
 	}
+	
+	public void addUserShoisai(MastaEntity pEntity) {
+		
+		
+		
+	}
+	
 	
 	public void delLogin(MastaEntity pEntity) {
 

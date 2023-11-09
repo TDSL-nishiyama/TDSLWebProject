@@ -18,9 +18,10 @@ public class DAOCommon implements DBAccess {
 	/**
 	 * {@index} SELECT COUNT 実行メソッド
 	 * @param fileName 実行したいSQLファイルの名前
+	 * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
 	 * @return select count の結果(int)
 	 */
-	public int countSQL(String fileName) {
+	public int countSQL(String fileName,List<Object> statement) {
 
 		int result = 0;
 		sqlPath += fileName;
@@ -40,6 +41,12 @@ public class DAOCommon implements DBAccess {
 		try {
 			//発行
 			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			if(!(statement.equals(null))) {
+				int cnt = statement.size(); //ステートメントを設定する数
+				for(int i = 0 ; i < cnt; i++) {
+					pStmt.setObject(i+1, statement.get(i));
+				}
+			}	
 			ResultSet rs = pStmt.executeQuery();
 
 			//格納

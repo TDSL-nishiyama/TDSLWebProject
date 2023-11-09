@@ -3,7 +3,7 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginBL extends DBConnection {
+public class LoginBL{
 
 	// 初回ログインチェック用
 	public String[] checkLoginShokai(String pLoginId) {
@@ -72,13 +72,13 @@ public class LoginBL extends DBConnection {
 	public boolean checkDuplicationLoginId(String pLoginId) {
 
 		boolean result = true;
-		String resultDB = null;
+		int resultDB = 0;
 
 		LoginDAO loginDAO = new LoginDAO();
 		resultDB = loginDAO.countLoginId(pLoginId);
 
 		// IDが重複している場合、エラー画面に遷移
-		if (Integer.parseInt(resultDB) > 0) {
+		if (resultDB > 0) {
 			result = false;
 		}
 

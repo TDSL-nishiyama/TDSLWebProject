@@ -1,0 +1,1 @@
+SELECT COUNT(loginid) FROM login WHERE loginid = ?;

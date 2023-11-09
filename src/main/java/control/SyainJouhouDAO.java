@@ -22,10 +22,11 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 	 * @param fileName 実行したいSQLファイルの名前
 	 * @param column 取得したいカラム名
 	 * @param statement ステートメント（不要な場合、NULLを設定）
-	 * @param kanriFlg 管理者フラグ
+	 * @param kanriFlg 管理者フラグ（0=管理者、1=一般ユーザー）
 	 * @return selectの結果
 	 */
-	public List<SyainJouhouEntity> selectSQL(String fileName, List<String> column, List<Object> statement, boolean kanriFlg) {
+	public List<SyainJouhouEntity> selectSQL(String fileName, List<String> column, List<Object> statement,
+			boolean kanriFlg) {
 
 		List<SyainJouhouEntity> result = new ArrayList<SyainJouhouEntity>();
 		sqlPath += fileName;
@@ -47,10 +48,10 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 				//発行
 				PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 				//ステートメントの設定
-				if(statement != null) {
+				if (statement != null) {
 					int cnt = statement.size(); //ステートメントを設定する数
-					for(int i = 0 ; i < cnt; i++) {
-						pStmt.setObject(i+1, statement.get(i));
+					for (int i = 0; i < cnt; i++) {
+						pStmt.setObject(i + 1, statement.get(i));
 					}
 				}
 
@@ -70,7 +71,7 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 					mei = rs.getString(column.get(2));
 					nyuusyaYMD = rs.getDate(column.get(3));
 					syusshin = rs.getString(column.get(4));
-					SyainJouhouEntity entity = new SyainJouhouEntity(id,sei, mei,nyuusyaYMD,syusshin);
+					SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, mei, nyuusyaYMD, syusshin);
 					result.add(entity);
 				}
 			} catch (SQLException e) {
@@ -81,13 +82,13 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 				//発行
 				PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 				//ステートメントの設定
-				if(statement != null) {
+				if (statement != null) {
 					int cnt = statement.size(); //ステートメントを設定する数
-					for(int i = 0 ; i < cnt; i++) {
-						pStmt.setObject(i+1, statement.get(i));
+					for (int i = 0; i < cnt; i++) {
+						pStmt.setObject(i + 1, statement.get(i));
 					}
 				}
-				
+
 				//クエリの実行
 				ResultSet rs = pStmt.executeQuery();
 
@@ -96,7 +97,9 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 				String mei = null;
 				Date nyuusyaYMD = null;
 				String syusshin = null;
-				
+				String seibetsu = null;
+				Date seinenngappi = null;
+
 				//格納
 				while (rs.next()) {
 					id = rs.getInt(column.get(0));
@@ -104,7 +107,9 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 					mei = rs.getString(column.get(2));
 					nyuusyaYMD = rs.getDate(column.get(3));
 					syusshin = rs.getString(column.get(4));
-					SyainJouhouEntity entity = new SyainJouhouEntity(id,sei, mei,nyuusyaYMD,syusshin);
+					seibetsu = rs.getString(column.get(5));
+					seinenngappi = rs.getDate(column.get(6));
+					SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, mei, nyuusyaYMD, syusshin, seibetsu,seinenngappi);
 					result.add(entity);
 				}
 			} catch (SQLException e) {

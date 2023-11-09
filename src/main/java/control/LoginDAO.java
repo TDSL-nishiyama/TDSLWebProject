@@ -16,43 +16,17 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 	
 	public String findLoginIdtoId(String pLoginId) {
 
-		Connection conn = null;
-		String userId = null;
+		List<String> column = new ArrayList<String>();
+		List<Object> statement = new ArrayList<>();
+		List<Object> result = new ArrayList<>();
 		
-
-		try {
-
-			// JDBCドライバを読み込み
-			super.loadJDBCDriver();
-
-			// DBへ接続
-			conn = super.connectionDB(conn);
-
-			// SELECT文を準備
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("SELECT id");
-			sql.append(" FROM login");
-			sql.append(" WHERE loginid = ?;");
-
-			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-			pStmt.setString(1, pLoginId);
-
-			// SELECTを実行し、結果表を取得
-			ResultSet rs = pStmt.executeQuery();
-
-			while (rs.next()) {
-				userId = rs.getString("id");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// データベース切断
-			super.closeDB(conn);
-		}
-
-		return userId;
+		column.add("id");
+		
+		statement.add(pLoginId);
+		
+		result = selectSQL("findLoginId.sql", column, statement);
+		
+		return result.get(0).toString();
 	}
 	
 	//IDの最大値取得用
@@ -64,10 +38,10 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 		try {
 
 			// JDBCドライバを読み込み
-			super.loadJDBCDriver();
+			DBAccess.super.loadJDBCDriver();
 
 			// DBへ接続
-			conn = super.connectionDB(conn);
+			conn = DBAccess.super.connectionDB(conn);
 
 			// SELECT文を準備
 			StringBuilder sql = new StringBuilder();
@@ -87,47 +61,23 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 			e.printStackTrace();
 		} finally {
 			// データベース切断
-			super.closeDB(conn);
+			DBAccess.super.closeDB(conn);
 		}
 		return resultCount;
 	}
 	
 	//loginidの重複チェック用
-	public String countLoginId(String pLoginId) {
+	public int countLoginId(String pLoginId) {
 		
-		Connection conn = null;
-		String resultCount = null;
+		List<Object> statement = new ArrayList<>();
+		int result = 0;
 		
-		try {
-
-			// JDBCドライバを読み込み
-			super.loadJDBCDriver();
-
-			// DBへ接続
-			conn = super.connectionDB(conn);
-
-			// SELECT文を準備
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("select count(loginid) from login where loginid = ?;");
-
-			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-			pStmt.setString(1, pLoginId);
-
-			// SELECTを実行し、結果表を取得
-			ResultSet rs = pStmt.executeQuery();
-
-			while (rs.next()) {
-				resultCount = rs.getString(1);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// データベース切断
-			super.closeDB(conn);
-		}
-		return resultCount;
+		statement.add(pLoginId);
+		
+		result = countSQL("countLoginId.sql", statement);
+		
+		return result;
+		
 	}
 
 	public String findLoginId(String pLoginId) {
@@ -154,10 +104,10 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 
 		try {
 			// JDBCドライバ読み込み
-			super.loadJDBCDriver();
+			DBAccess.super.loadJDBCDriver();
 
 			// DBへ接続
-			conn = super.connectionDB(conn);
+			conn = DBAccess.super.connectionDB(conn);
 
 			// SELECT文を準備
 			StringBuilder sql = new StringBuilder();
@@ -192,7 +142,7 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			super.closeDB(conn);
+			DBAccess.super.closeDB(conn);
 		}
 
 		return indexEntityList;
@@ -210,10 +160,10 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 
 		try {
 			// JDBCドライバ読み込み
-			super.loadJDBCDriver();
+			DBAccess.super.loadJDBCDriver();
 
 			// DBへ接続
-			conn = super.connectionDB(conn);
+			conn = DBAccess.super.connectionDB(conn);
 
 			// SELECT文を準備
 			StringBuilder sql = new StringBuilder();
@@ -251,7 +201,7 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			super.closeDB(conn);
+			DBAccess.super.closeDB(conn);
 		}
 
 		return returnList;

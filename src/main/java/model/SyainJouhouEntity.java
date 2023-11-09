@@ -17,12 +17,24 @@ public class SyainJouhouEntity implements Serializable {
 	private String syusshin;
 	private String juusyo;
 	
+	//一般ユーザー
 	public SyainJouhouEntity(int id,String sei,String mei,Date nyuusyaYMD,String syusshin) {
 		this.id = id;
 		this.sei = sei;
 		this.mei = mei;
 		this.nyuusyaYMD = nyuusyaYMD;
 		this.syusshin = syusshin;
+	}
+	
+	//管理者ユーザー
+	public SyainJouhouEntity(int id,String sei,String mei,Date nyuusyaYMD,String syusshin,String seibetsu,Date seinenngappi) {
+		this.id = id;
+		this.sei = sei;
+		this.mei = mei;
+		this.nyuusyaYMD = nyuusyaYMD;
+		this.syusshin = syusshin;
+		this.seibetsu = seibetsu;
+		this.seinenngappi = seinenngappi;
 	}
 	
 	public SyainJouhouEntity(int id,String sei, String mei) {
