@@ -1,0 +1,1 @@
+UPDATE login SET del = '1' where id = ?;
