@@ -215,8 +215,12 @@ public class DAOCommon implements DBAccess {
     DBAccess.super.closeDB(conn);
 
   }
-
-  //SQL文作成
+  
+  /**
+   *{@index} SQL文作成　
+   *@param String loadPath プロパティファイルが格納されているパス（フルパス） 
+   *@return ファイルから読み込まれたSQL文（改行不可）
+   **/
   protected String makeSQL(String sqlPath) {
     String result = null;
 

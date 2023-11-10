@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 
-<%@ page import="model.MastaEntity,java.util.List"%>
-<%@ page import="constents.Const.Path"%>
-
-<%
-//リクエストスコープに保存されたユーザー情報を取得
-List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Path.USER_ICHIRAN_SCOPE);
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +10,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 </head>
 <body>
   <%@ include file="../msg.jsp"%>
-  <form name="ResultUserUpd" action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
+  <form action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
     更新するユーザーIDを入力してください
     <p>
       ユーザーID：<input type="text" name="userIdUpd"><br>

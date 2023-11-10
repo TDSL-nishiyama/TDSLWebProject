@@ -171,7 +171,7 @@ public class MastaDAOSelect extends DBConnection {
       sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg");
       sql.append(" FROM user AS U INNER JOIN login AS L");
       sql.append(" ON U.id = L.id");
-      sql.append(" WHERE U.del = '' AND id = ?;");
+      sql.append(" WHERE U.del = '' AND U.id = ?;");
 
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
       pStmt.setInt(1, pID);

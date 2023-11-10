@@ -42,6 +42,7 @@ public class Const {
     public static final String SYAIN_HENSYU_SCOPE = "syainHensyuList";
     public static final String BEFORE_UPDATEPASSWORD = "LoginAction";
     public static final String USER_ICHIRAN_SCOPE = "userIchiran";
+    public static final String USER_SELECT_HENSYU = "userHensyu";
   }
 
   //エラー関連

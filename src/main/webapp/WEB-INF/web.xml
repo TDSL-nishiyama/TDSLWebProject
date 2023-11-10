@@ -112,12 +112,12 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>ResultUserUpdAction.java</servlet-name>
-    <servlet-class>action.ResultUserUpdAction.java</servlet-class>
+    <servlet-name>ResultUserUpdAction</servlet-name>
+    <servlet-class>action.ResultUserUpdAction</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ResultUserUpdAction.java</servlet-name>
-    <url-pattern>/ResultUserUpdAction.java</url-pattern>
+    <servlet-name>ResultUserUpdAction</servlet-name>
+    <url-pattern>/ResultUserUpdAction</url-pattern>
   </servlet-mapping>
 
   <servlet>
