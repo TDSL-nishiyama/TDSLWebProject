@@ -3,8 +3,17 @@
 /* あまり興味ないので好きに作ってください */
 
 /* 段落 */
-p{
+.p{
   font-size: large;
 }
 
+/* 必須項目 */
+.req{
+	color:red;
+	font-size: small;
+}
 
+/* 必須項目欠テキストボックス*/
+.reqTexNG{
+	background-color: bisque;
+}

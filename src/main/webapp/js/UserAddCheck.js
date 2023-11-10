@@ -2,24 +2,41 @@
  * ユーザー登録画面チェック用
  */
 
-/*ログインボタン押下*/
+/*ユーザー登録ボタン押下*/
 function checkUserAdd() {
 
-  var id = document.login.id.value;
-  var password = document.login.password.value;
-  var almsg = "";
+	/*フォーム入力項目*/
+	var userName = document.userInsert.userName.value;
+	var kanriFlg = document.userInsert.kanriFlg.value;
+	var sei = document.userInsert.sei.value;
+	var seiyomi = document.userInsert.seiyomi.value;
+	var mei = document.userInsert.mei.value;
+	var meiyomi = document.userInsert.meiyomi.value;
+	var nyuusyaYMD = document.userInsert.nyuusyaYMD.value;
+	var seibetsu = document.userInsert.seibetsu.value;
+	var seinenngappi = document.userInsert.seinenngappi.value;
+	var syusshin = document.userInsert.syusshin.value;
+	var juusyo = document.userInsert.juusyo.value;
 
-  if (id == "") {
-    almsg ="ログインIDを入力してください";
-  } else if (!id.match(/^[A-Za-z0-9]+$/)) {
-    almsg = "IDは半角英数のみ入力可能です";
-  } else if (password == "") {
-    almsg = "パスワードを入力してください";
-  }
-  if (almsg == "") {
-    return true;
-  } else {
-    alert(almsg);
-    return false;
-  }
+	var almsg = "";
+
+	if (Trim(userName) == "") {
+		almsg = "必須項目を入力してください"
+	}
+
+	/*必須項目チェック処理*/
+	if (Trim(userName) == "" || Trim(kanriFlg) == "" || Trim(sei) == "" || Trim(seiyomi) == "" || Trim(mei) == "" || Trim(meiyomi) == ""
+		|| Trim(seibetsu) == "" || Trim(seinenngappi) == "" || Trim(juusyo) == "") {
+		almsg = "必須項目を入力してください"
+	}
+
+	/*日付形式チェック処理*/
+	
+	/*エラー判定処理*/
+	if (almsg == "") {
+		return true;
+	} else {
+		alert(almsg);
+		return false;
+	}
 }

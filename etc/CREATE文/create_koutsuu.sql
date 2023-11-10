@@ -1,0 +1,6 @@
+CREATE TABLE koutsuu
+(no INT PRIMARY KEY,sendmailaddress VARCHAR(100)
+,kukan1_start VARCHAR(100) NOT NULL,kukan1_end VARCHAR(100) NOT NULL,kingaku1 VARCHAR(100) NOT NULL
+,kukan2_start VARCHAR(100) NOT NULL,kukan2_end VARCHAR(100) NOT NULL,kingaku2 VARCHAR(100) NOT NULL
+,bikou VARCHAR(1000)
+);

@@ -1,0 +1,13 @@
+CREATE TABLE usershousai
+(id INT PRIMARY KEY
+,sei VARCHAR(100) NOT NULL
+,sei_yomi VARCHAR(100) NOT NULL
+,mei VARCHAR(100) NOT NULL
+,mei_yomi VARCHAR(100) NOT NULL
+,nyuusyaYMD DATE NOT NULL
+,taisyaYMD DATE
+,seibetsu VARCHAR(2) NOT NULL
+,seinenngappi DATE NOT NULL
+,syusshin VARCHAR(1000)
+,juusyo VARCHAR(1000) NOT NULL
+);

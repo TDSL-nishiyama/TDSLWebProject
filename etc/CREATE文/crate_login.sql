@@ -1,0 +1,1 @@
+CREATE TABLE login(id int PRIMARY KEY,loginid varchar(200) NOT NULL,password varchar(200) NOT NULL,del varchar(2) default(''));

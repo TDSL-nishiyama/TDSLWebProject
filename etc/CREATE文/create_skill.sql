@@ -1,0 +1,4 @@
+CREATE TABLE skill
+(id INT PRIMARY KEY,cstart DATE
+,sikaku1 VARCHAR(100),sikaku2 VARCHAR(100),sikaku3 VARCHAR(100)
+,carrier1 VARCHAR(100),carrier2 VARCHAR(100),carrier3 VARCHAR(100));
