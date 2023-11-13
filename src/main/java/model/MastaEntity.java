@@ -5,23 +5,23 @@ import java.io.Serializable;
 public class MastaEntity implements Serializable {
 
   private int userid;
-  private String name;
+  private String username;
   private boolean kanriFlg;
   private String sakujo; //(1=退職)
   private String loginid;
   private String loginpassword;
-
+  
   //コンストラクタ
-  public MastaEntity(int userid, String name, boolean kanriFlg, String loginid) {
+  public MastaEntity(int userid, String username, boolean kanriFlg, String loginid) {
     this.userid = userid;
-    this.name = name;
+    this.username = username;
     this.kanriFlg = kanriFlg;
     this.loginid = loginid;
   }
   
-  public MastaEntity(int userid, String name, boolean kanriFlg, String loginid,String loginpassword,String sakujo) {
+  public MastaEntity(int userid, String username, boolean kanriFlg, String loginid,String loginpassword,String sakujo) {
     this.userid = userid;
-    this.name = name;
+    this.username = username;
     this.kanriFlg = kanriFlg;
     this.loginid = loginid;
     this.loginpassword = loginpassword;
@@ -41,12 +41,12 @@ public class MastaEntity implements Serializable {
     this.userid = useridU;
   }
 
-  public String getName() {
-    return name;
+  public String getUserName() {
+    return username;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setUserName(String username) {
+    this.username = username;
   }
 
   public boolean getKanriFlg() {

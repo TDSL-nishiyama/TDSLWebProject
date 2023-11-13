@@ -43,10 +43,10 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
   </table>
   <%}else{%>
   <!-- 管理者 -->
-  <form action=<%=request.getContextPath()%>/SyainJouhouHensyuAction method="post">
+  <form action=<%=request.getContextPath()%>/SyainJouhouHensyuuAction method="post">
     <p>
       編集したいユーザーID:<input type="text" name="chgUserId">
-      <input type="submit" name="toSyainHensyu" value="編集">
+      <input type="submit" value="編集">
     </p>
   </form>
   <table border="1">

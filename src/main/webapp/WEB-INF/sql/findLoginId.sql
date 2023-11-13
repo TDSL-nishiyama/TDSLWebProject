@@ -1,1 +1,1 @@
-SELECT loginid FROM login WHERE del = '' AND loginid = ?;
+SELECT COUNT(id) FROM login WHERE del = '' AND loginid = ?;

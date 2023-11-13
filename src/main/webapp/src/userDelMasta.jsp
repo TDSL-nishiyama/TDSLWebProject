@@ -14,8 +14,8 @@
     method="post">
     削除するユーザーIDを入力してください
     <p>
-      ユーザーID：<input type="text" name="userIdDel"><br>
-      <input type="submit" name="userDel" value="削除"><br>
+      ユーザーID：<input type="text" name="userIdDel">
+      <input type="submit" name="userDel" value="削除">
     </p>
   </form>
 

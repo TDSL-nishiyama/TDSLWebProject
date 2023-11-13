@@ -80,19 +80,16 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     
   }
 
-  public String findLoginId(String pLoginId) {
+  public int findLoginId(String pLoginId) {
 
-    List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<>();
-    List<Object> result = new ArrayList<>();
-    
-    column.add("loginid");
+    int result = 0;
     
     statement.add(pLoginId);
     
-    result = selectSQL("findLoginId.sql", column, statement);
+    result = countSQL("findLoginId.sql", statement);
     
-    return result.get(0).toString();
+    return result;
 
   }
 

@@ -5,6 +5,7 @@
 <!--更新メッセージ表示クラス-->
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
 </head>
 <body>
   <%
@@ -15,9 +16,11 @@
     msg = "";
   }
   %>
+  <div class="altMsg">
   <%=
   //更新メッセージの表示
   msg
   %>
+  </div>
 </body>
 </html>

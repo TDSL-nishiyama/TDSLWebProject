@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 
-<%@ page import="model.SyainJouhouEntity,java.util.List"%>
+<%@ page import="model.SyainJouhouBean,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>) request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
+List<SyainJouhouBean> syainJouhouBeanList = (List<SyainJouhouBean>) request.getAttribute(Path.SYAIN_HENSYU_SCOPE);
 %>
 
 <!DOCTYPE html>
@@ -30,13 +30,13 @@ List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>) reques
     </tr>
 
     <%
-    for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
+    for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
     %>
     <tr>
-      <td><input type="text" value="<%=syainJouhouEntity.getId()%>"></td>
-      <td><input type="text" value="<%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%>"></td>
-      <td><input type="text" value="<%=syainJouhouEntity.getNyuusyaYMD()%>"></td>
-      <td><input type="text" value="<%=syainJouhouEntity.getSyusshin()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getId()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getName()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getNyuusyaYMD()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getSyusshin()%>"></td>
     </tr>
     <%
     }
@@ -51,14 +51,18 @@ List<SyainJouhouEntity> syainJouhouEntityList = (List<SyainJouhouEntity>) reques
     <tr>
       <th>社員ID</th>
       <th>名前</th>
+      <th>入社年月日</th>
+      <th>出身地</th>
     </tr>
 
     <%
-    for (SyainJouhouEntity syainJouhouEntity : syainJouhouEntityList) {
+    for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
     %>
     <tr>
-      <td><%=syainJouhouEntity.getId()%></td>
-      <td><%=syainJouhouEntity.getSei()%><%=syainJouhouEntity.getMei()%></td>
+      <td><input type="text" value="<%=syainJouhouBean.getId()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getName()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getNyuusyaYMD()%>"></td>
+      <td><input type="text" value="<%=syainJouhouBean.getSyusshin()%>"></td>
     </tr>
     <%
     }

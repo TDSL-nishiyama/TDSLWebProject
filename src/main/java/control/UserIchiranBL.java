@@ -13,7 +13,7 @@ public class UserIchiranBL {
     
     //DAOクラスのインスタンス化
     MastaDAOSelect mastaDAOsel = new MastaDAOSelect();
-    result = mastaDAOsel.getUserIchiran(mastaDAOsel);
+    result = mastaDAOsel.getUserIchiran(mastaDAOsel,"userIchiran.sql");
 
     return result;
   }
@@ -37,7 +37,7 @@ public class UserIchiranBL {
     
     //DAOクラスのインスタンス化
     MastaDAOSelect mastaDAOsel = new MastaDAOSelect();
-    result = mastaDAOsel.getKaritouroku(mastaDAOsel);
+    result = mastaDAOsel.getUserIchiran(mastaDAOsel,"karitouroku.sql");
 
     return result;
   }

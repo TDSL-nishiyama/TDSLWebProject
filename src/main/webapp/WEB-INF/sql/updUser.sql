@@ -1,0 +1,1 @@
+UPDATE user SET name = ?,kanriflg = ? where id = ?;

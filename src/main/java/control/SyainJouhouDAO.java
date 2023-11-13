@@ -22,7 +22,7 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
    * @param fileName 実行したいSQLファイルの名前
    * @param column 取得したいカラム名
    * @param statement ステートメント（不要な場合、NULLを設定）
-   * @param kanriFlg 管理者フラグ（0=管理者、1=一般ユーザー）
+   * @param kanriFlg 管理者フラグ（1=管理者、0=一般ユーザー）
    * @return selectの結果
    */
   public List<SyainJouhouEntity> selectSQL(String fileName, List<String> column, List<Object> statement,

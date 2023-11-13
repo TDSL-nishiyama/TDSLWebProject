@@ -16,10 +16,9 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 <title>ユーザー一覧</title>
 </head>
 <body>
-  <form name="toUserAdd" action=<%=request.getContextPath()%>
-    /UserAddAction method="post">
+  <form action=<%=request.getContextPath()%>/UserAddAction method="post">
     <p>
-      <input type="submit" name="toUserAdd" value="ユーザーの追加">
+      <input type="submit" value="ユーザーの追加">
     </p>
   </form>
 
@@ -49,7 +48,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
     %>
     <td><%=mastaEntity.getUserid()%></td>
     <td><%=mastaEntity.getLoginid()%></td>
-    <td><%=mastaEntity.getName()%></td>
+    <td><%=mastaEntity.getUserName()%></td>
     <td>
       <%
       //管理フラグtrueの場合、〇　falseの場合、×　を表示

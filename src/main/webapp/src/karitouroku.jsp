@@ -22,7 +22,6 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
     <tr>
       <th>ID</th>
       <th>ログインID</th>
-      <th>仮パスワード</th>
       <th>名前</th>
       <th>管理フラグ</th>
     </tr>
@@ -33,8 +32,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
     %>
     <td><%=mastaEntity.getUserid()%></td>
     <td><%=mastaEntity.getLoginid()%></td>
-    <td><%=mastaEntity.getLoginpassword()%></td>
-    <td><%=mastaEntity.getName()%></td>
+    <td><%=mastaEntity.getUserName()%></td>
     <td>
       <%
       //管理フラグtrueの場合、〇　falseの場合、×　を表示

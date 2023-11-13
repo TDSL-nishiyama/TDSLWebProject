@@ -30,7 +30,7 @@
       出身地：<input type="text" name="syusshin"><br>
       <span class="req">※</span>住所：<input type="text" name="juusyo"><br><br>
       
-      <input type="submit" name="addUser" value="ユーザー登録"><br>
+      <input type="submit" value="ユーザー登録"><br>
     </p>
   </form>
   

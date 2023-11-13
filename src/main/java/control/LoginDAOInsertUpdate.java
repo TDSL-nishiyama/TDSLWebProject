@@ -28,7 +28,6 @@ public class LoginDAOInsertUpdate extends DBConnection {
       pStmt.setString(2, pLoginId);
       pStmt.setString(3, pLoginPassword);
 
-      //TODO Insertを実行　
       pStmt.execute();
 
     } catch (SQLException e) {

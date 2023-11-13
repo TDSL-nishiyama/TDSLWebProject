@@ -4,49 +4,48 @@ import model.MastaEntity;
 
 public class UserDelBL {
 
-  //ID存在確認
-  public boolean userDelCheck(int userIdDel) {
-    
-    boolean result = true;
-    
-    MastaDAOSelect mastaDAOSelect = new MastaDAOSelect(); 
-    MastaEntity mastaEntity = new MastaEntity(userIdDel);
-    
-    //ユーザーID確認
-    int i = Integer.parseInt(mastaDAOSelect.checkUserId(mastaEntity));
-        
-    
-    //カウント結果が0の場合IDは存在しない
-    if(i == 0) {
-      result = false;
-    }
-    
-    return result;
-  }
+	//ID存在確認
+	public boolean userDelCheck(int userIdDel) {
 
-  //ログインID-削除ID一致確認
-  public boolean userDelCheck(int userId, int userIdDel) {
+		boolean result = true;
 
-    boolean result = true;
+		MastaDAOSelect mastaDAOSelect = new MastaDAOSelect();
+		MastaEntity mastaEntity = new MastaEntity(userIdDel);
 
-    if (userId == userIdDel) {
-      result = false;
-    }
+		//ユーザーID確認
+		int i = Integer.parseInt(mastaDAOSelect.checkUserId(mastaEntity));
 
-    return result;
-  }
+		//カウント結果が0の場合IDは存在しない
+		if (i == 0) {
+			result = false;
+		}
 
-  //ユーザー削除処理
-  public void userDel(int userId) {
+		return result;
+	}
 
-    MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();
+	//ログインID-削除ID一致確認
+	public boolean userDelCheck(int userId, int userIdDel) {
 
-    MastaEntity mastaEntity = new MastaEntity(userId);
+		boolean result = true;
 
-    //ユーザーテーブル削除（論理削除）
-    useraddDAOInsUp.delUser(mastaEntity);
+		if (userId == userIdDel) {
+			result = false;
+		}
 
-    //ログインテーブル削除（論理削除）
-    useraddDAOInsUp.delLogin(mastaEntity);
-  }
+		return result;
+	}
+
+	//ユーザー削除処理
+	public void userDel(int userId) {
+
+		MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();
+
+		MastaEntity mastaEntity = new MastaEntity(userId);
+
+		//ユーザーテーブル削除（論理削除）
+		useraddDAOInsUp.delUser(mastaEntity);
+
+		//ログインテーブル削除（論理削除）
+		useraddDAOInsUp.delLogin(mastaEntity);
+	}
 }

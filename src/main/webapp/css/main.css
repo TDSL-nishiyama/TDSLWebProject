@@ -2,11 +2,6 @@
 
 /* あまり興味ないので好きに作ってください */
 
-/* 段落 */
-.p{
-  font-size: large;
-}
-
 /* 必須項目 */
 .req{
 	color:red;
@@ -16,4 +11,10 @@
 /* 必須項目欠テキストボックス*/
 .reqTexNG{
 	background-color: bisque;
+}
+
+/* アラートメッセージ */
+.altMsg{
+	color: red;
+	font-weight:bold
 }

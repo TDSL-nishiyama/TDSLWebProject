@@ -18,8 +18,8 @@ if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>パスワード登録更新</title>
-<script type="text/javascript" src="./js/UpdatePasswordCheck.js"
-  charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<script type="text/javascript" src="./js/UpdatePasswordCheck.js" charset="UTF-8"></script>
 </head>
 
 <body>
@@ -27,7 +27,7 @@ if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
     action="<%=request.getContextPath()%>/ResultUpdatePasswordAction"
     method="post" onsubmit="checkUpdatePassword();retrun false;">
     <h1>ログインIDとパスワードを入力してください</h1>
-    ※仮登録ユーザーの場合、ログインIDを変更してください。
+    <div class="req">※仮登録ユーザーの場合、ログインIDを変更してください。
     <p>
       ログインID: <input type="text" name="loginid">
     </p>

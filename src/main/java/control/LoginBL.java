@@ -38,7 +38,7 @@ public class LoginBL{
     LoginDAO loginDAO = new LoginDAO();
 
     // IDがDB内に存在しなかった場合エラー画面に遷移
-    if (!(loginDAO.findLoginId(pLoginId) == null)) {
+    if (!(loginDAO.findLoginId(pLoginId) == 0)) {
       result = true;
     }
 
