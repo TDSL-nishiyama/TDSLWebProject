@@ -19,7 +19,7 @@ public class LoginBL{
         result[0] = "toPassword";
         //loginテーブルid項目の取得（Sessionを保持していない画面のためDBより取得）
         LoginDAO loginDAO = new LoginDAO();
-        result[1] = loginDAO.findLoginIdtoId(pLoginId);
+        result[1] = String.valueOf(loginDAO.findLoginIdtoId(pLoginId));
         //それ以外の場合は後続処理に移行
       } else {
         result[0] = "true";
@@ -96,6 +96,16 @@ public class LoginBL{
       result = false;
     }
 
+    return result;
+  }
+  
+  //セッション情報取得
+  public List<Object> getSessionInfo(String loginid){
+    
+    List<Object> result = new ArrayList<>();
+    LoginDAO loginDAO = new LoginDAO();
+    result = loginDAO.getSessionInfo(loginid);
+    
     return result;
   }
 }

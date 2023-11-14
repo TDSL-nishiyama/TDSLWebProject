@@ -41,7 +41,9 @@ public class UserDelBL {
 		MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();
 
 		MastaEntity mastaEntity = new MastaEntity(userId);
-
+		
+		//TODO トランザクション処理
+		
 		//ユーザーテーブル削除（論理削除）
 		useraddDAOInsUp.delUser(mastaEntity);
 

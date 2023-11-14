@@ -23,7 +23,7 @@ public class SyainJouhouHensyuuAction extends HttpServlet {
     HttpSession session = request.getSession();
     //管理者フラグの取得
     SessionKanriBean loginSession = 
-        (SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE_NAME);
+        (SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE);
     
     boolean kanriFlg = false;
     kanriFlg = loginSession.getKanriFlg();

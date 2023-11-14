@@ -11,7 +11,7 @@ jakarta.servlet.RequestDispatcher"
 
 <%
 //セッションスコープに保存されたユーザー情報を取得
-SessionKanriBean loginSession = (SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE_NAME);
+SessionKanriBean loginSession = (SessionKanriBean)session.getAttribute(Path.SESSION_SCOPE);
 //ログイン確認
 if (loginSession == null) {
   // ログインしていない場合ログイン画面に遷移

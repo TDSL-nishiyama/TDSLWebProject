@@ -2,18 +2,20 @@ package control;
 
 public class ResultUpdatePasswordBL {
   
-  public String getUserId(String ploginId) {
+  //IDの規約チェック
+  public boolean checkLoginIdConditions(String loginId) {
+    boolean result = true;
     
-    String result = "";
-    
-    LoginDAO loginDAO = new LoginDAO();
-    result = loginDAO.findLoginIdtoId(ploginId);
+    //先頭文字がkari~はNG（不正ID作成の防止のため）
+    if(loginId.substring(0, 4).equals("kari")) {
+      result = false;
+    }
     
     return result;
   }
   
   public void updateUserPassword(String pUserId,String pLoginname,String pPassword){
-  
+
     //新規ログインIDとパスワードの登録
     LoginDAOInsertUpdate insDAO = new LoginDAOInsertUpdate();
     insDAO.updateUserPassword(pUserId, pLoginname, pPassword);

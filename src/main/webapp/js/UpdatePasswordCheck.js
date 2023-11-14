@@ -9,7 +9,7 @@ function checkUpdatePassword() {
   var pass2 = document.updatePassword.pass2.value;
   var almsg = "";
 
-  if (pass1 || pass2 == "") {
+  if (pass1 == "" || pass2 == "") {
     almsg = "パスワードを入力してください"
   } else if (pass1 != pass2) {
     almsg = "パスワードが異なります"

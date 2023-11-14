@@ -6,7 +6,7 @@
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Path.USER_SELECT_HENSYU);
+List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Path.USER_HENSYU_SCOPE);
 %>
 
 <!DOCTYPE html>

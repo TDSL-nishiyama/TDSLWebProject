@@ -5,7 +5,7 @@ import java.util.List;
 
 import control.common.DAOCommon;
 
-public class TestBL {
+public class TestBL extends DAOCommon{
   
   public Object testBLMain() {
     
@@ -19,9 +19,7 @@ public class TestBL {
     statement.add(1);
     statement.add("");
     
-    DAOCommon dbCommon = new DAOCommon();
-    
-    result = dbCommon.selectSQL(str1, column,statement);
+    result = super.selectSQL(str1, column,statement);
     
     return result;
     

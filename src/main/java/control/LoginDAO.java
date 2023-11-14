@@ -10,11 +10,10 @@ import java.util.List;
 import control.common.DAOCommon;
 import control.common.DBAccess;
 import model.LoginEntity;
-import model.SessionKanriBean;
 
 public class LoginDAO extends DAOCommon implements DBAccess {
   
-  public String findLoginIdtoId(String pLoginId) {
+  public List<Object> findLoginIdtoId(String pLoginId) {
 
     List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<>();
@@ -24,9 +23,9 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     
     statement.add(pLoginId);
     
-    result = selectSQL("findLoginId.sql", column, statement);
+    result = selectSQL("findLoginIdtoId.sql",column, statement);
     
-    return result.get(0).toString();
+    return result;
   }
   
   //IDの最大値取得用
@@ -144,64 +143,28 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 
     return indexEntityList;
   }
+  
+  /**
+   * {@index} セッション情報の取得
+   * @param pLoginId ログインID
+   * @return 実行結果(List<Object>)
+   */
+  public List<Object> getSessionInfo(String pLoginId) {
 
-  public List<String> getSessionInfo(String pLoginId, String pPassword) {
+    List<Object> result = new ArrayList<>();
+    List<String> column = new ArrayList<String>();
+    List<Object> statement = new ArrayList<>();
+    
+    column.add("id");
+    column.add("loginid");
+    column.add("name");
+    column.add("kanriflg");
+    
+    statement.add(pLoginId);
+    
+    result = selectSQL("getSessionInfo.sql", column, statement);
 
-    List<String> returnList = new ArrayList<>();
-    int userId = 0;
-    String loginId = "";
-    String loginName = "";
-    boolean kanriFlg = false;
-
-    Connection conn = null;
-
-    try {
-      // JDBCドライバ読み込み
-      DBAccess.super.loadJDBCDriver();
-
-      // DBへ接続
-      conn = DBAccess.super.connectionDB(conn);
-
-      // SELECT文を準備
-      StringBuilder sql = new StringBuilder();
-
-      sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg");
-      sql.append(" FROM user AS U INNER JOIN login AS L");
-      sql.append(" ON U.id = L.id");
-      sql.append(" WHERE loginid = ?;");
-
-      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      pStmt.setString(1, pLoginId);
-
-      // SELECTを実行し、結果表を取得
-      ResultSet rs = pStmt.executeQuery();
-      while (rs.next()) {
-        userId = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginName = rs.getString("name");
-        kanriFlg = rs.getBoolean("kanriFlg");
-      }
-
-      SessionKanriBean sessionKanriBean = 
-          new SessionKanriBean(userId, loginId, loginName, kanriFlg);
-
-      sessionKanriBean.setUserId(userId);
-      sessionKanriBean.setLoginId(loginId);
-      sessionKanriBean.setLoginName(loginName);
-      sessionKanriBean.setKanriFlg(kanriFlg);
-
-      returnList.add(String.valueOf(sessionKanriBean.getUserId()));
-      returnList.add(sessionKanriBean.getLoginId());
-      returnList.add(sessionKanriBean.getLoginName());
-      returnList.add(String.valueOf(sessionKanriBean.getKanriFlg()));
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      DBAccess.super.closeDB(conn);
-    }
-
-    return returnList;
+    return result;
   }
   
 }

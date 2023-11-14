@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ page import="constents.Const.Path"%>
+<%@ page import="constents.Const.Path,constents.Const.Common"%>
 <%
 // セッションスコープの作成
 HttpSession httpsession = request.getSession();
-if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
-  httpsession.setAttribute("USER_ATTRIBUTE", "1");
-  httpsession.setAttribute("LOGINID_BEFORE", (String) request.getAttribute("LOGINID_BEFORE"));
+//LoginActionから遷移して来た場合、新規ユーザー
+if (request.getAttribute(Path.BEFORE_ACTION) == "LoginAction") {
+  httpsession.setAttribute(Path.USER_ATTRIBUTE, Common.SHINKI);
+  httpsession.setAttribute(Path.BEFORE_LOGIN, (String) request.getAttribute(Path.BEFORE_LOGIN));
 } else {
-  httpsession.setAttribute("USER_ATTRIBUTE", "0");
+  httpsession.setAttribute(Path.USER_ATTRIBUTE, Common.KISON);
 }
 %>
 <!-- パスワード登録更新画面 -->
@@ -25,9 +26,9 @@ if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
 <body>
   <form name="updatePassword"
     action="<%=request.getContextPath()%>/ResultUpdatePasswordAction"
-    method="post" onsubmit="checkUpdatePassword();retrun false;">
+    method="post" onsubmit="return checkUpdatePassword();">
     <h1>ログインIDとパスワードを入力してください</h1>
-    <div class="req">※仮登録ユーザーの場合、ログインIDを変更してください。
+    <div class="req">※仮登録ユーザーの場合、ログインIDを変更してください。</div>
     <p>
       ログインID: <input type="text" name="loginid">
     </p>
@@ -38,7 +39,7 @@ if (request.getAttribute(Path.BEFORE_UPDATEPASSWORD) == "LoginAction") {
       パスワード（再入力）:<input type="password" name="pass2">
     </p>
     <p>
-      <input type="submit" name="submitPass" value="登録">
+      <input type="submit" value="登録">
     </p>
   </form>
 

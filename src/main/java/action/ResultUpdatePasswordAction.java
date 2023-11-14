@@ -2,6 +2,7 @@ package action;
 
 import java.io.IOException;
 
+import constents.Const.Common;
 import constents.Const.ERRORMSG;
 import constents.Const.Path;
 import control.LoginBL;
@@ -26,9 +27,10 @@ public class ResultUpdatePasswordAction extends HttpServlet {
       throws ServletException, IOException {
 
     ResultUpdatePasswordBL resultUpdatePasswordBL = new ResultUpdatePasswordBL();
-
-    String loginId = request.getParameter("loginid");
-    String password = request.getParameter("pass1");
+    final String GAMEN_LOGINID = "loginid";
+    final String GAMEN_PASSWORD1 = "pass1";
+    String loginId = request.getParameter(GAMEN_LOGINID);
+    String password = request.getParameter(GAMEN_PASSWORD1);
 
     boolean errFlg;
     String resultMSG = "";
@@ -37,31 +39,46 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 
     HttpSession session = request.getSession();
     //新規ユーザーの場合
-    if (session.getAttribute("USER_ATTRIBUTE").equals("1")) {
-      
-      // ログインIDが5桁未満の場合、エラーメッセージを表示
+    if (session.getAttribute(Path.USER_ATTRIBUTE).equals(Common.SHINKI)) {
+
+      //ログインIDが5桁未満の場合、エラーメッセージを表示
       errFlg = loginBL.checkLoginIdLength(loginId);
       if (!errFlg) {
         //エラーメッセージを格納
-        request.setAttribute("ERRMSG", "ログインIDは5桁以上にしてください");
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, "ログインIDは5桁以上にしてください");
         // エラー画面に遷移
         RequestDispatcher dispatcher = request
             .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
         dispatcher.forward(request, response);
+        return;
       }
-      
-      // ユーザー名が重複している場合はエラーメッセージを表示
+
+      //ユーザー名が重複している場合はエラーメッセージを表示
       errFlg = loginBL.checkDuplicationLoginId(loginId);
       if (!errFlg) {
         //エラーメッセージを格納
-        request.setAttribute("ERRMSG", ERRORMSG.ERR_6);
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_6);
         // エラー画面に遷移
         RequestDispatcher dispatcher = request
             .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
         dispatcher.forward(request, response);
+        return;
       }
+
+      //ユーザー名の先頭4文字にkariをつけることは禁止（不正ID作成対策）
+      errFlg = resultUpdatePasswordBL.checkLoginIdConditions(loginId);
+      if (!errFlg) {
+        //エラーメッセージを格納
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, "ログインIDの先頭はkari以外にしてください");
+        // エラー画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+        dispatcher.forward(request, response);
+        return;
+      }
+
       //ユーザーの登録
-      String loginIdBefore = (String) session.getAttribute("LOGINID_BEFORE");
+      String loginIdBefore = (String) session.getAttribute(Path.BEFORE_LOGIN);
       resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
       resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
       //既存ユーザーの場合
@@ -74,8 +91,8 @@ public class ResultUpdatePasswordAction extends HttpServlet {
     //ログイン画面に表示させるメッセージを格納
     request.setAttribute("MSG", resultMSG);
     //セッションを破棄
-    session.removeAttribute("USER_ATTRIBUTE");
-    session.removeAttribute("LOGINID_BEFORE");
+    session.removeAttribute(Path.USER_ATTRIBUTE);
+    session.removeAttribute(Path.BEFORE_LOGIN);
     session.invalidate();
     //ログイン画面に遷移
     RequestDispatcher dispatcher = request

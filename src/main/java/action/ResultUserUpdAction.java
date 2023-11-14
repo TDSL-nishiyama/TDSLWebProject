@@ -57,7 +57,7 @@ public class ResultUserUpdAction extends HttpServlet {
 
 		//リクエストスコープにインスタンスを保存
 		List<MastaEntity> userUpdList = userUpdBL.resultUserList(userUpdBL, updKoumoku);
-		request.setAttribute(Path.USER_SELECT_HENSYU, userUpdList);
+		request.setAttribute(Path.USER_HENSYU_SCOPE, userUpdList);
 
 		//ユーザー更新実行画面に遷移
 		RequestDispatcher dispatcher = request

@@ -21,7 +21,7 @@ public class DAOCommon implements DBAccess {
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return select count の結果(int)
    */
-  public int countSQL(String fileName,List<Object> statement) {
+  protected int countSQL(String fileName,List<Object> statement) {
 
     int result = 0;
     sqlPath += fileName;
@@ -72,7 +72,7 @@ public class DAOCommon implements DBAccess {
    * @param column 取得したいカラム名
    * @return selectの結果(List)
    */
-  public List<Object> selectSQL(String fileName, List<String> column) {
+  protected List<Object> selectSQL(String fileName, List<String> column) {
 
     List<Object> result = new ArrayList<Object>();
     sqlPath += fileName;
@@ -122,7 +122,7 @@ public class DAOCommon implements DBAccess {
    * @param statement PreparedStatmentの内容　List<Object>
    * @return selectの結果(List)
    */
-  public List<Object> selectSQL(String fileName, List<String> column, List<Object> statement) {
+  protected List<Object> selectSQL(String fileName, List<String> column, List<Object> statement) {
 
     List<Object> result = new ArrayList<Object>();
     sqlPath += fileName;
@@ -178,7 +178,7 @@ public class DAOCommon implements DBAccess {
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return selectの結果(List)
    */
-  public void executeDML(String fileName,  List<Object> statement) {
+  protected void executeDML(String fileName,  List<Object> statement) {
 
     sqlPath += fileName;
 
@@ -215,6 +215,28 @@ public class DAOCommon implements DBAccess {
     DBAccess.super.closeDB(conn);
 
   }
+  
+  /**
+   *{@index} トランザクション開始処理
+   **/
+  protected void startTransaction() {
+
+  }
+  
+  /**
+   *{@index} トランザクション終了処理（正常系）
+   **/
+  protected void endTransactionTrue() {
+
+  }
+  
+  /**
+   *{@index} トランザクション終了処理（異常系）
+   **/
+  protected void endTransactionFalse() {
+
+  }
+
   
   /**
    *{@index} SQL文作成　

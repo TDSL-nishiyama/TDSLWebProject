@@ -37,7 +37,7 @@ public class UserAddBL {
   //コンスタラクタでEntityに値を設定
   MastaEntity mastaEntity = new MastaEntity(userid, input.get("username"), kanriFlg,loginId, loginPassword);
   SyainJouhouEntity syainJouhouEntity = new SyainJouhouEntity(userid,
-      input.get("sei"),input.get("mei"),input.get("seiyomi"),input.get("meiyomi")
+      input.get("sei"),input.get("seiyomi"),input.get("mei"),input.get("meiyomi")
       ,nyuusyaYMD,input.get("seibetsu"),seinenngappi,input.get("syusshin"),input.get("juusyo")
       );
   

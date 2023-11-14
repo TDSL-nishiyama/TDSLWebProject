@@ -26,7 +26,7 @@ public class ResultUserDelAction extends HttpServlet {
 
     //現在ログインしているユーザーID
     HttpSession session = request.getSession();
-    SessionKanriBean loginSession = (SessionKanriBean) session.getAttribute(Path.SESSION_SCOPE_NAME);
+    SessionKanriBean loginSession = (SessionKanriBean) session.getAttribute(Path.SESSION_SCOPE);
 
     int userId = loginSession.getUserId();
     //画面に入力されたユーザーID

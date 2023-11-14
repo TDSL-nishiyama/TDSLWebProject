@@ -23,7 +23,7 @@ public class LogOutAction extends HttpServlet {
 
     //セッションを破棄
     HttpSession session = request.getSession();
-    session.removeAttribute(Path.SESSION_SCOPE_NAME);
+    session.removeAttribute(Path.SESSION_SCOPE);
     session.invalidate();
 
     //ログイン画面に遷移
