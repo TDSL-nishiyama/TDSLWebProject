@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class LoginDAOInsertUpdate extends DBConnection {
+import control.common.DAOCommon;
+import control.common.DBAccess;
+
+public class LoginDAOInsertUpdate extends DAOCommon implements DBAccess {
 
   public void InsertLoginId(String pUserId, String pLoginId, String pLoginPassword) {
 
