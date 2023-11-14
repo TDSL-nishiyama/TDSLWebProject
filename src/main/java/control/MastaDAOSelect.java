@@ -6,246 +6,175 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import constents.Const.Common;
+import control.common.DAOCommon;
+import control.common.DBAccess;
 import model.MastaEntity;
 
-public class MastaDAOSelect extends DBConnection {
-  
-  public String checkUserId(MastaEntity mastaEntity) {
-    
-    String result = "";
-    Connection conn = null;
+public class MastaDAOSelect extends DAOCommon implements DBAccess {
 
-    try {
+	private String sqlPath = Common.SQL_FILE_PATH;
 
-      // JDBCドライバを読み込み
-      super.loadJDBCDriver();
+	public String checkUserId(MastaEntity mastaEntity) {
 
-      // DBへ接続
-      conn = super.connectionDB(conn);
+		String result = "";
+		List<Object> statement = new ArrayList<>();
+		statement.add(String.valueOf(mastaEntity.getUserid()));
+		result = String.valueOf(super.countSQL("checkUserId.sql", statement));
+		
+		return result;
+	}
 
-      // SELECT文を準備
-      StringBuilder sql = new StringBuilder();
+	public List<MastaEntity> getUserIchiran(MastaDAOSelect MastaDAOSelect,String fileName) {
 
-      sql.append("SELECT COUNT(id) FROM user WHERE id = ? AND del = '';");
-      
-      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      pStmt.setInt(1, mastaEntity.getUserid());
-      
-      // SELECTを実行し、結果表を取得
-      ResultSet rs = pStmt.executeQuery();
-      while (rs.next()) {
-        result = rs.getString(1);
-      }
+		List<MastaEntity> returnList = new ArrayList<>();
+		int id = 0;
+		String loginId = "";
+		String loginName = "";
+		boolean kanriFlg = false;
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      // データベース切断
-      super.closeDB(conn);
-    }
-    
-    return result;
-  }
+		Connection conn = null;
 
-  public List<MastaEntity> getUserIchiran(MastaDAOSelect MastaDAOSelect) {
+		try {
+			// JDBCドライバ読み込み
+			DBAccess.super.loadJDBCDriver();
 
-    List<MastaEntity> returnList = new ArrayList<>();
-    int id = 0;
-    String loginId = "";
-    String loginName = "";
-    boolean kanriFlg = false;
+			// DBへ接続
+			conn = DBAccess.super.connectionDB(conn);
 
-    Connection conn = null;
+			//SQL文の作成
+			sqlPath += fileName;
+			String sql = null;
+			sql = makeSQL(sqlPath);
 
-    try {
-      // JDBCドライバ読み込み
-      super.loadJDBCDriver();
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-      // DBへ接続
-      conn = super.connectionDB(conn);
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
 
-      // SELECT文を準備
-      StringBuilder sql = new StringBuilder();
+			//結果表に格納されたレコードの内容をMastaEntityに設定
+			while (rs.next()) {
+				id = rs.getInt("id");
+				loginId = rs.getString("loginid");
+				loginName = rs.getString("name");
+				kanriFlg = rs.getBoolean("kanriFlg");
 
-      sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg");
-      sql.append(" FROM user AS U INNER JOIN login AS L");
-      sql.append(" ON U.id = L.id");
-      sql.append(" WHERE U.del = '';");
+				MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId);
+				returnList.add(mastaEntity);
+			}
 
-      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBAccess.super.closeDB(conn);
+		}
+		
+		sqlPath = Common.SQL_FILE_PATH;
 
-      // SELECTを実行し、結果表を取得
-      ResultSet rs = pStmt.executeQuery();
+		return returnList;
+	}
 
-      //結果表に格納されたレコードの内容をMastaEntityに設定
-      while (rs.next()) {
-        id = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginName = rs.getString("name");
-        kanriFlg = rs.getBoolean("kanriFlg");
+	public List<MastaEntity> getUserIchiranAll(MastaDAOSelect MastaDAOSelect) {
 
-        MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId);
-        returnList.add(mastaEntity);
-      }
+		List<MastaEntity> returnList = new ArrayList<>();
+		int id = 0;
+		String loginId = "";
+		String loginName = "";
+		boolean kanriFlg = false;
+		String sakujo = "";
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      super.closeDB(conn);
-    }
+		Connection conn = null;
 
-    return returnList;
-  }
-  
-  public List<MastaEntity> getUserIchiranAll(MastaDAOSelect MastaDAOSelect) {
+		try {
+			// JDBCドライバ読み込み
+			DBAccess.super.loadJDBCDriver();
 
-    List<MastaEntity> returnList = new ArrayList<>();
-    int id = 0;
-    String loginId = "";
-    String loginName = "";
-    boolean kanriFlg = false;
-    String sakujo = "";
+			// DBへ接続
+			conn = DBAccess.super.connectionDB(conn);
 
-    Connection conn = null;
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
 
-    try {
-      // JDBCドライバ読み込み
-      super.loadJDBCDriver();
+			sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg,U.del");
+			sql.append(" FROM user AS U INNER JOIN login AS L");
+			sql.append(" ON U.id = L.id;");
 
-      // DBへ接続
-      conn = super.connectionDB(conn);
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 
-      // SELECT文を準備
-      StringBuilder sql = new StringBuilder();
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
 
-      sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg,U.del");
-      sql.append(" FROM user AS U INNER JOIN login AS L");
-      sql.append(" ON U.id = L.id;");
+			//結果表に格納されたレコードの内容をMastaEntityに設定
+			while (rs.next()) {
+				id = rs.getInt("id");
+				loginId = rs.getString("loginid");
+				loginName = rs.getString("name");
+				kanriFlg = rs.getBoolean("kanriFlg");
+				sakujo = rs.getString("del");
 
-      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+				MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId, "", sakujo);
+				returnList.add(mastaEntity);
+			}
 
-      // SELECTを実行し、結果表を取得
-      ResultSet rs = pStmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBAccess.super.closeDB(conn);
+		}
 
-      //結果表に格納されたレコードの内容をMastaEntityに設定
-      while (rs.next()) {
-        id = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginName = rs.getString("name");
-        kanriFlg = rs.getBoolean("kanriFlg");
-        sakujo = rs.getString("del");
+		return returnList;
+	}
 
-        MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId,"", sakujo);
-        returnList.add(mastaEntity);
-      }
+	public List<MastaEntity> getHensyuUser(MastaDAOSelect MastaDAOSelect, Map<String, String> updKoumoku) {
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      super.closeDB(conn);
-    }
+		List<MastaEntity> returnList = new ArrayList<>();
+		int id = 0;
+		String loginId = "";
+		String loginName = "";
+		boolean kanriFlg = false;
 
-    return returnList;
-  }
-  
-  public List<MastaEntity> getUserIchiran(MastaDAOSelect MastaDAOSelect,int pID) {
+		Connection conn = null;
 
-    List<MastaEntity> returnList = new ArrayList<>();
-    int id = 0;
-    String loginId = "";
-    String loginName = "";
-    boolean kanriFlg = false;
+		try {
+			// JDBCドライバ読み込み
+			DBAccess.super.loadJDBCDriver();
 
-    Connection conn = null;
+			// DBへ接続
+			conn = DBAccess.super.connectionDB(conn);
 
-    try {
-      // JDBCドライバ読み込み
-      super.loadJDBCDriver();
+			// SELECT文を準備
+			StringBuilder sql = new StringBuilder();
 
-      // DBへ接続
-      conn = super.connectionDB(conn);
+			sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg");
+			sql.append(" FROM user AS U INNER JOIN login AS L");
+			sql.append(" ON U.id = L.id");
+			sql.append(" WHERE U.del = '' AND U.id = ?;");
 
-      // SELECT文を準備
-      StringBuilder sql = new StringBuilder();
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			pStmt.setInt(1, Integer.parseInt(updKoumoku.get("userIdUpd")));
 
-      sql.append("SELECT U.id,L.loginid,U.name,U.kanriFlg");
-      sql.append(" FROM user AS U INNER JOIN login AS L");
-      sql.append(" ON U.id = L.id");
-      sql.append(" WHERE U.del = '' AND U.id = ?;");
+			// SELECTを実行し、結果表を取得
+			ResultSet rs = pStmt.executeQuery();
 
-      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      pStmt.setInt(1, pID);
-      
-      // SELECTを実行し、結果表を取得
-      ResultSet rs = pStmt.executeQuery();
+			//結果表に格納されたレコードの内容をMastaEntityに設定
+			while (rs.next()) {
+				id = rs.getInt("id");
+				loginId = rs.getString("loginid");
+				loginName = rs.getString("name");
+				kanriFlg = rs.getBoolean("kanriFlg");
 
-      //結果表に格納されたレコードの内容をMastaEntityに設定
-      while (rs.next()) {
-        id = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginName = rs.getString("name");
-        kanriFlg = rs.getBoolean("kanriFlg");
+				MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId);
+				returnList.add(mastaEntity);
+			}
 
-        MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId);
-        returnList.add(mastaEntity);
-      }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBAccess.super.closeDB(conn);
+		}
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      super.closeDB(conn);
-    }
-
-    return returnList;
-  }
-  
-  public List<MastaEntity> getKaritouroku(MastaDAOSelect MastaDAOSelect) {
-
-    List<MastaEntity> returnList = new ArrayList<>();
-    int id = 0;
-    String loginId = "";
-    String loginPassword = "";
-    String loginName = "";
-    
-    Connection conn = null;
-
-    try {
-      // JDBCドライバ読み込み
-      super.loadJDBCDriver();
-
-      // DBへ接続
-      conn = super.connectionDB(conn);
-
-      // SELECT文を準備
-      StringBuilder sql = new StringBuilder();
-
-      sql.append("SELECT U.id,L.loginid,L.password,U.name");
-      sql.append(" FROM user AS U INNER JOIN login AS L");
-      sql.append(" ON U.id = L.id");
-      sql.append(" WHERE SUBSTRING(loginid,1,4)='kari';");
-
-      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-
-      // SELECTを実行し、結果表を取得
-      ResultSet rs = pStmt.executeQuery();
-
-      //結果表に格納されたレコードの内容をMastaEntityに設定
-      while (rs.next()) {
-        id = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginPassword = rs.getString("password");
-        loginName = rs.getString("name");
-
-        MastaEntity mastaEntity = new MastaEntity(id, loginName, false, loginId,loginPassword, "");
-        returnList.add(mastaEntity);
-      }
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      super.closeDB(conn);
-    }
-
-    return returnList;
-  }
+		return returnList;
+	}
 }

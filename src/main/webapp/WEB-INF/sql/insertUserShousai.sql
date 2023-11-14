@@ -1,1 +1,1 @@
-INSERT INTO user(id,name,kanriflg) VALUES(?,?,?);
+insert into usershousai(id,sei,sei_yomi,mei,mei_yomi,nyuusyaYMD,taisyaYMD,seibetsu,seinenngappi,syusshin,juusyo) values(?,?,?,?,?,?,?,?,?,?,?);

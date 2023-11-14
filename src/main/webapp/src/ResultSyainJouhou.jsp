@@ -68,7 +68,15 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
       <td><%=syainJouhouBean.getName()%></td>
       <td><%=syainJouhouBean.getSeibetsu()%></td>
       <td><%=syainJouhouBean.getAge()%></td>
-      <td><%=syainJouhouBean.getNyuusyaYMD()%></td>
+      <%
+      //入社年月日は入力必須項目ではない日付項目のためNULLが出力されるケースがある
+      //NULLの場合はブランクに変換
+      String getNyuusyaYMDViwe = String.valueOf(syainJouhouBean.getNyuusyaYMD());
+      if(syainJouhouBean.getNyuusyaYMD() == null){
+        getNyuusyaYMDViwe = "";
+      }
+      %>
+      <td><%=getNyuusyaYMDViwe%></td>
       <td><%=syainJouhouBean.getNenji()%></td>
       <td><%=syainJouhouBean.getSyusshin()%></td>
     </tr>

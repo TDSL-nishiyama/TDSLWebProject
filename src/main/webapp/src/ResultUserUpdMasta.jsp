@@ -14,11 +14,11 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 <head>
 <meta charset="UTF-8">
 <%@ include file="../header.jsp"%>
-<title>ユーザー更新画面</title>
+<title>ユーザー更新実行画面</title>
 </head>
 <body>
 	<%@ include file="../msg.jsp"%>
-	<form action="<%=request.getContextPath()%>/ResultUserUpdAction"
+	<form name="userKoushinJikkou" action="<%=request.getContextPath()%>/ResultUserUpdAction"
 		method="post">
 		<table border="1">
 			<tr>
@@ -28,23 +28,31 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 				<th>更新</th>
 			</tr>
 			<%
-			String kanriFlgView = "";
 			for (MastaEntity mastaEntity : mastaEntitylist) {
 			%>
 			<td><%=mastaEntity.getUserid()%></td>
-			<td><input type=text" value="<%=mastaEntity.getName()%>"</td>
+			<td><input type=text" name="username" value="<%=mastaEntity.getName()%>"</td>
 			<td>
-				<%
-				//管理フラグtrueの場合、〇　falseの場合、×　を表示
-				if (mastaEntity.getKanriFlg() == true) {
-					kanriFlgView = "〇";
-				} else {
-					kanriFlgView = "×";
-				}
-				%> <%=kanriFlgView%>
+			<%
+			//mastaEntityから選択ユーザーの管理者権限を取得してcheckedを制御
+			if(mastaEntity.getKanriFlg() == false){
+			%>
+				管理者権限:
+				あり：<input type="radio" name="kanriflg" value=1>
+				なし：<input type="radio" name="kanriflg" value=0 checked>
+			<%
+			}else{
+			%>
+				管理者権限:
+				あり：<input type="radio" name="kanriflg" value=1 checked>
+				なし：<input type="radio" name="kanriflg" value=0>
+			<%
+			}
+			%>
 			</td>
 			<td><input type="submit" name="userUpd" value="更新"><br>
 			</td>
+			<input type="hidden" name="hdnUserId" value=<%=mastaEntity.getUserid()%>>
 			<%
 			}
 			%>

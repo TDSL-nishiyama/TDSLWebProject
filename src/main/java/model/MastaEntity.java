@@ -12,11 +12,12 @@ public class MastaEntity implements Serializable {
   private String loginpassword;
   
   //コンストラクタ
-  public MastaEntity(int userid, String username, boolean kanriFlg, String loginid) {
+  public MastaEntity(int userid, String username, boolean kanriFlg, String loginid,String loginpassword) {
     this.userid = userid;
     this.username = username;
     this.kanriFlg = kanriFlg;
     this.loginid = loginid;
+    this.loginpassword = loginpassword;
   }
   
   public MastaEntity(int userid, String username, boolean kanriFlg, String loginid,String loginpassword,String sakujo) {
@@ -27,10 +28,19 @@ public class MastaEntity implements Serializable {
     this.loginpassword = loginpassword;
     this.sakujo = sakujo;
   }
+  
+  //ユーザー一覧
+  public MastaEntity(int userid, String username, boolean kanriFlg, String loginid) {
+    this.userid = userid;
+    this.username = username;
+    this.kanriFlg = kanriFlg;
+    this.loginid = loginid;
+  }
 
   public MastaEntity(int userid) {
     this.userid = userid;
   }
+
 
   //アクセサメソッド
   public int getUserid() {

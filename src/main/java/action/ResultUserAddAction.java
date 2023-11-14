@@ -30,6 +30,7 @@ public class ResultUserAddAction extends HttpServlet {
     gamenInfo.put("sei", request.getParameter("sei"));
     gamenInfo.put("mei", request.getParameter("mei"));
     gamenInfo.put("seiyomi", request.getParameter("seiyomi"));
+    gamenInfo.put("meiyomi", request.getParameter("meiyomi"));
     gamenInfo.put("nyuusyaYMD", request.getParameter("nyuusyaYMD"));
     gamenInfo.put("seibetsu", request.getParameter("seibetsu"));
     gamenInfo.put("seinenngappi", request.getParameter("seinenngappi"));

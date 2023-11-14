@@ -49,7 +49,7 @@ public class SyainJouhouBL {
         result.add(bean);
       }
 
-    //管理者の場合
+      //管理者の場合
     } else {
       //取得カラム名の設定
       column.add("id");
@@ -69,15 +69,20 @@ public class SyainJouhouBL {
         StringBuilder name = new StringBuilder();
         name.append(resultDB.get(i).getSei());
         name.append(resultDB.get(i).getMei());
-
-        //入社年次の設定(DateをStringからLocalDateに変換して差分を取得)
-        Period prNyuusyaYMD = null;
-        prNyuusyaYMD = calc.diffDate(resultDB.get(i).getNyuusyaYMD());
+        
         StringBuilder nenji = new StringBuilder();
-        nenji.append(prNyuusyaYMD.getYears());
-        nenji.append("年");
-        nenji.append(prNyuusyaYMD.getMonths());
-        nenji.append("ヵ月");
+        //入社日付は必須項目ではないためNULLチェックを行う
+        if (resultDB.get(i).getNyuusyaYMD() != null) {
+          //入社年次の設定(DateをStringからLocalDateに変換して差分を取得)
+          Period prNyuusyaYMD = null;
+          prNyuusyaYMD = calc.diffDate(resultDB.get(i).getNyuusyaYMD());
+          nenji.append(prNyuusyaYMD.getYears());
+          nenji.append("年");
+          nenji.append(prNyuusyaYMD.getMonths());
+          nenji.append("ヵ月");
+        }else {
+          nenji.append("");
+        }
 
         //性別の設定
         String seibetsu = null;

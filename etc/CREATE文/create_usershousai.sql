@@ -8,6 +8,6 @@ CREATE TABLE usershousai
 ,taisyaYMD DATE
 ,seibetsu VARCHAR(2) NOT NULL
 ,seinenngappi DATE NOT NULL
-,syusshin VARCHAR(1000)
+,syusshin VARCHAR(1000) DEFAULT('')
 ,juusyo VARCHAR(1000) NOT NULL
 );

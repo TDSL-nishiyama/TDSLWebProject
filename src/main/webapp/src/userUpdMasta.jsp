@@ -13,7 +13,7 @@
   <form action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
     更新するユーザーIDを入力してください
     <p>
-      ユーザーID：<input type="text" name="userIdUpd"><br>
+      ユーザーID：<input type="text" name="userIdUpd">
        <input type="submit" value="更新"><br>
     </p>
   </form>

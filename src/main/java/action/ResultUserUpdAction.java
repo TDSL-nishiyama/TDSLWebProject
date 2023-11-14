@@ -1,7 +1,9 @@
 package action;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import constents.Const.Path;
 import control.UserUpdBL;
@@ -13,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.MastaEntity;
 
 /**
- * ユーザー登録画面のサーブレット
+ * ユーザー更新実行画面のサーブレット
  */
 public class ResultUserUpdAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,13 +26,37 @@ public class ResultUserUpdAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//選択したユーザーID
-		int id = Integer.parseInt(request.getParameter("userIdUpd"));
-
+		Map<String, String> updKoumoku = new HashMap<String, String>();
 		UserUpdBL userUpdBL = new UserUpdBL();
 
+		//選択したユーザーID
+		String id = request.getParameter("userIdUpd");
+		updKoumoku.put("userIdUpd", id);
+		
+		//更新処理(ResultUserUpdhdn項目で判定)
+		if (request.getParameter("hdnUserId") != null) {
+			id = request.getParameter("hdnUserId");
+			String name = request.getParameter("username");
+			String kanriflg = request.getParameter("kanriflg");
+			
+			updKoumoku.put("userIdUpd", id);
+			updKoumoku.put("username", name);
+			updKoumoku.put("kanriflg", kanriflg);
+
+			//ユーザー情報のアップデート
+			userUpdBL.updUserList(updKoumoku);
+			StringBuilder sb = new StringBuilder();
+			sb.append("社員ID：");
+			sb.append(id);
+			sb.append("　　");
+			sb.append(name);
+			sb.append("さんの情報を更新しました");
+			
+			request.setAttribute("MSG", sb.toString());
+		}
+
 		//リクエストスコープにインスタンスを保存
-		List<MastaEntity> userUpdList = userUpdBL.resultUserList(userUpdBL, id);
+		List<MastaEntity> userUpdList = userUpdBL.resultUserList(userUpdBL, updKoumoku);
 		request.setAttribute(Path.USER_SELECT_HENSYU, userUpdList);
 
 		//ユーザー更新実行画面に遷移
