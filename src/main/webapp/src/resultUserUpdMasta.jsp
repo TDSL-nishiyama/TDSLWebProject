@@ -31,7 +31,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 			for (MastaEntity mastaEntity : mastaEntitylist) {
 			%>
 			<td><%=mastaEntity.getUserid()%></td>
-			<td><input type=text" name="username" value="<%=mastaEntity.getName()%>"</td>
+			<td><input type=text" name="username" value="<%=mastaEntity.getUserName()%>"</td>
 			<td>
 			<%
 			//mastaEntityから選択ユーザーの管理者権限を取得してcheckedを制御

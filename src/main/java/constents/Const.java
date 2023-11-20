@@ -15,11 +15,11 @@ public class Const {
     public static final String DB_PASS = "userpassword";
     public static final String DB_PROP_PATH = "C:\\pleiades\\2023-06\\workspace\\TDSLWebProject\\src\\main\\webapp\\WEB-INF\\lib\\DBAccess.properties";
     public static final String SQL_FILE_PATH = "C:\\pleiades\\2023-06\\workspace\\TDSLWebProject\\src\\main\\webapp\\WEB-INF\\sql\\";
-  
+
     //その他
     public static final String SHINKI = "1";
     public static final String KISON = "0";
-    
+
   }
 
   //遷移関連
@@ -30,7 +30,7 @@ public class Const {
     public static final String MAIN_GAMEN = "/index.jsp";
     public static final String SYSTEM_ERROR_GAMEN = "/error.jsp";
     public static final String MAIN_GAMEN_PATH = "/TDSLWebProject/index.jsp";
-    public static final String SYAIN_JOUHOU_PATH = "/src/ResultSyainJouhou.jsp";
+    public static final String SYAIN_JOUHOU_PATH = "/src/syainJouhou.jsp";
     public static final String SYAIN_HENSYU_PATH = "/src/syainJouhouHensyu.jsp";
     public static final String MASTA_GAMEN = "/masta.jsp";
     public static final String USER_ADD_GAMEN = "/src/userAddMasta.jsp";
@@ -38,7 +38,7 @@ public class Const {
     public static final String USER_ICHIRAN_GAMEN = "/src/userIchiran.jsp";
     public static final String USER_DEL_GAMEN = "/src/userDelMasta.jsp";
     public static final String USER_UPD_GAMEN = "/src/userUpdMasta.jsp";
-    public static final String RESULT_USER_UPD_GAMEN = "/src/ResultUserUpdMasta.jsp";
+    public static final String RESULT_USER_UPD_GAMEN = "/src/resultUserUpdMasta.jsp";
     public static final String KARI_USER_GAMEN = "/src/karitouroku.jsp";
 
     //スコープ名

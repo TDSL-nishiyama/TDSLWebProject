@@ -34,7 +34,7 @@ public class SyainJouhouAction extends HttpServlet {
     //リクエストスコープにインスタンスを保存
     List<SyainJouhouBean> SyainJouhouBLlist = syainJouhouBL.resultSyainJouhou(syainJouhouBL);
     request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
-    // 結果出力画面(ResultSyainJouhou.jsp)にフォワード
+    // 結果出力画面(syainJouhou.jsp)にフォワード
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.SYAIN_JOUHOU_PATH);
     dispatcher.forward(request, response);
