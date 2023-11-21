@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../header.jsp"%>
-<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
 <script type="text/javascript" src="./js/UserAddCheck.js" charset="UTF-8"></script>
 <title>ユーザー登録画面</title>
 </head>

@@ -6,11 +6,11 @@ import java.util.Date;
 public class SyainJouhouBean implements Serializable {
 
   private int id; //ユーザーID
-  private String name; //名前 sei+mei
   private String sei;
   private String sei_yomi;
   private String mei;
   private String mei_yomi;
+  private String name; //名前 sei+mei
   private Date nyuusyaYMD;
   private Date taisytaYMD;
   private String seibetsu; //0=男　1=女 2=その他
@@ -22,16 +22,16 @@ public class SyainJouhouBean implements Serializable {
 
   //コンスタラクター
   //全部
-  public SyainJouhouBean(int id, String name, String sei, String sei_yomi, String mei, String mei_yomi,
+  public SyainJouhouBean(int id, String sei, String sei_yomi, String mei, String mei_yomi,String name,
       Date nyuusyaYMD, Date taisytaYMD, String seibetsu, Date seinenngappi, String age, String nenji,
       String syusshin, String juusyo) {
     super();
     this.id = id;
-    this.name = name;
     this.sei = sei;
     this.sei_yomi = sei_yomi;
     this.mei = mei;
     this.mei_yomi = mei_yomi;
+    this.name = name;
     this.nyuusyaYMD = nyuusyaYMD;
     this.taisytaYMD = taisytaYMD;
     this.seibetsu = seibetsu;
@@ -69,12 +69,13 @@ public class SyainJouhouBean implements Serializable {
 
   //必要分（管理者）
   public SyainJouhouBean(int id, String name, Date nyuusyaYMD, String nenji,
-      String syusshin, String seibetsu, String age) {
+      String syusshin, String juusyo,String seibetsu, String age) {
     this.id = id;
     this.name = name;
     this.nyuusyaYMD = nyuusyaYMD;
     this.nenji = nenji;
     this.syusshin = syusshin;
+    this.juusyo = juusyo;
     this.seibetsu = seibetsu;
     this.age = age;
   }

@@ -24,13 +24,10 @@ if (loginSession == null) {
 %>
 
 <html>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<div align="right">
-  ログインユーザー：<%=loginSession.getLoginName()%></div>
-<br>
-
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：<%=loginSession.getLoginName()%></div>
+<p>
 <form name="btnLogout"
   action="<%=request.getContextPath()%>/LogOutAction" method="post">
 
@@ -38,5 +35,5 @@ if (loginSession == null) {
     <input type="submit" name="logout" value="ログアウト">
   </div>
 </form>
-
+</p>
 </html>

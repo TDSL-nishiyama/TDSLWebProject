@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>メインページ</title>
 <%@ include file="./header.jsp"%>
-<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
 </head>
 <body>
 

@@ -18,3 +18,14 @@
 	color: red;
 	font-weight:bold
 }
+
+/* テーブル*/
+table.tableM {
+border-collapse: collapse;
+}
+table.tableM th,
+table.tableM td {
+white-space: nowrap;
+padding: 0;
+border: solid 1px #000;
+}

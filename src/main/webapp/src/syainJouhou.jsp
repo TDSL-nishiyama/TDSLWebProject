@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="model.SyainJouhouBean,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
 
@@ -49,7 +50,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
       <input type="submit" value="編集">
     </p>
   </form>
-  <table border="1">
+  <table class="tableM">
     <tr>
       <th>社員ID</th>
       <th>名前</th>
@@ -58,6 +59,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
       <th>入社年月日</th>
       <th>年次</th>
       <th>出身地</th>
+      <th>住所</th>
     </tr>
 
     <%
@@ -79,6 +81,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
       <td><%=getNyuusyaYMDViwe%></td>
       <td><%=syainJouhouBean.getNenji()%></td>
       <td><%=syainJouhouBean.getSyusshin()%></td>
+      <td><%=syainJouhouBean.getJuusyo()%></td>
     </tr>
     <%
     }

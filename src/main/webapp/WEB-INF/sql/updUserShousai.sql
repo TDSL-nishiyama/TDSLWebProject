@@ -1,0 +1,1 @@
+UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?,nyuusyaYMD=?,seibetsu=?,seinenngappi=?,syusshin=?,juusyo=? where id = ?;

@@ -5,7 +5,6 @@
 <!--更新メッセージ表示クラス-->
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
 </head>
 <body>
   <%

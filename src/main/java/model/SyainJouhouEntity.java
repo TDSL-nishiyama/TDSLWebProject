@@ -52,6 +52,22 @@ public class SyainJouhouEntity implements Serializable {
     this.syusshin = syusshin;
     this.juusyo = juusyo;
   }
+  
+  //DB項目
+  public SyainJouhouEntity(int id, String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD,
+      Date taisytaYMD, String seibetsu, Date seinenngappi, String syusshin, String juusyo) {
+    this.id = id;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.nyuusyaYMD = nyuusyaYMD;
+    this.taisytaYMD = taisytaYMD;
+    this.seibetsu = seibetsu;
+    this.seinenngappi = seinenngappi;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
+  }
 
   public SyainJouhouEntity(int id, String sei, String mei) {
     this.id = id;

@@ -1,0 +1,1 @@
+select id,sei,sei_yomi,mei,mei_yomi,nyuusyaYMD,taisyaYMD,seibetsu,seinenngappi,syusshin,juusyo from usershousai where id = ?;

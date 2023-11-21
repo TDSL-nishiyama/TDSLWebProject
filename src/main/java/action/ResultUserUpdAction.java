@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import constents.Const.MSG;
 import constents.Const.Path;
 import control.UserUpdBL;
 import jakarta.servlet.RequestDispatcher;
@@ -45,6 +46,8 @@ public class ResultUserUpdAction extends HttpServlet {
 
 			//ユーザー情報のアップデート
 			userUpdBL.updUserList(updKoumoku);
+			
+			//メッセージ設定
 			StringBuilder sb = new StringBuilder();
 			sb.append("社員ID：");
 			sb.append(id);
@@ -52,7 +55,7 @@ public class ResultUserUpdAction extends HttpServlet {
 			sb.append(name);
 			sb.append("さんの情報を更新しました");
 			
-			request.setAttribute("MSG", sb.toString());
+			request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
 		}
 
 		//リクエストスコープにインスタンスを保存

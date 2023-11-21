@@ -42,6 +42,18 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
     String sql = null;
     sql = makeSQL(sqlPath);
 
+    final int ID = 0;
+    final int SEI = 1;
+    final int SEI_YOMI = 2;
+    final int MEI = 3;
+    final int MEI_YOMI = 4;
+    final int NYUUSYAYMD = 5;
+    final int TAISYAYMD = 6;
+    final int SEIBETSU = 7;
+    final int SEINENNGAPPI = 8;
+    final int SYUSSHIN = 9;
+    final int JUUSYO = 10;
+    
     //クエリの発行・格納
     if (kanriFlg == false) {
       try {
@@ -66,11 +78,11 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 
         //格納
         while (rs.next()) {
-          id = rs.getInt(column.get(0));
-          sei = rs.getString(column.get(1));
-          mei = rs.getString(column.get(2));
-          nyuusyaYMD = rs.getDate(column.get(3));
-          syusshin = rs.getString(column.get(4));
+          id = rs.getInt(column.get(ID));
+          sei = rs.getString(column.get(SEI));
+          mei = rs.getString(column.get(MEI));
+          nyuusyaYMD = rs.getDate(column.get(NYUUSYAYMD));
+          syusshin = rs.getString(column.get(SYUSSHIN));
           SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, mei, nyuusyaYMD, syusshin);
           result.add(entity);
         }
@@ -94,33 +106,56 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 
         int id = 0;
         String sei = null;
+        String seiyomi = null;
         String mei = null;
+        String meiyomi = null;
         Date nyuusyaYMD = null;
-        String syusshin = null;
+        Date taisyaYMD = null;
         String seibetsu = null;
         Date seinenngappi = null;
+        String syusshin = null;
+        String juusyo = null;
 
         //格納
         while (rs.next()) {
-          id = rs.getInt(column.get(0));
-          sei = rs.getString(column.get(1));
-          mei = rs.getString(column.get(2));
-          nyuusyaYMD = rs.getDate(column.get(3));
-          syusshin = rs.getString(column.get(4));
-          seibetsu = rs.getString(column.get(5));
-          seinenngappi = rs.getDate(column.get(6));
-          SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, mei, nyuusyaYMD, syusshin, seibetsu,seinenngappi);
+          id = rs.getInt(column.get(ID));
+          sei = rs.getString(column.get(SEI));
+          seiyomi = rs.getString(column.get(SEI_YOMI));
+          mei = rs.getString(column.get(MEI));
+          meiyomi = rs.getString(column.get(MEI_YOMI));
+          nyuusyaYMD = rs.getDate(column.get(NYUUSYAYMD));
+          taisyaYMD = rs.getDate(column.get(TAISYAYMD));
+          seibetsu = rs.getString(column.get(SEIBETSU));
+          seinenngappi = rs.getDate(column.get(SEINENNGAPPI));
+          syusshin = rs.getString(column.get(SYUSSHIN));
+          juusyo = rs.getString(column.get(JUUSYO));
+          
+          SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, seiyomi,mei,meiyomi, nyuusyaYMD,taisyaYMD, seibetsu, seinenngappi,syusshin,juusyo);
           result.add(entity);
         }
-      } catch (SQLException e) {
+      }catch (SQLException e) {
         e.printStackTrace();
+      }finally {
+        //DB切断
+        DBAccess.super.closeDB(conn);
       }
     }
-
-    //DB切断
-    DBAccess.super.closeDB(conn);
+    
+    sqlPath = Common.SQL_FILE_PATH;
 
     return result;
   }
-
+  
+  /**
+   * {@index} 社員情報の更新を実施(usershousaiテーブル)
+   * @param fileName 実行したいSQLファイルの名前
+   * @param updKoumoku アップデートしたい項目
+   */
+  public void updateSyainJouhou(String fileName,List<Object> statement) {
+    
+    super.executeDML(fileName, statement);
+    sqlPath = Common.SQL_FILE_PATH;
+    
+  }
+  
 }

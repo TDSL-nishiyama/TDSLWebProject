@@ -3,6 +3,7 @@
 
 <%@ page import="model.SyainJouhouBean,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
+<%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
@@ -15,73 +16,86 @@ List<SyainJouhouBean> syainJouhouBeanList = (List<SyainJouhouBean>) request.getA
 <%@ include file="../header.jsp"%>
 <title>社員一覧</title>
 </head>
+<form name="toSJHen-SJInfo"
+	action="<%=request.getContextPath()%>/ResultSyainJouhouHensyuuAction"
+	method="post">
+	<body>
+		<%@ include file="../msg.jsp"%>
+		<p>
+		<table class="tableM">
+			<tr>
+				<th>社員ID</th>
+				<th>姓</th>
+				<th>姓(ﾖﾐ)</th>
+				<th>名</th>
+				<th>名(ﾖﾐ)</th>
+				<th>性別</th>
+				<th>生年月日</th>
+				<th>入社年月日</th>
+				<th>出身地</th>
+				<th>住所</th>
+			</tr>
 
-<body>
-  <%
-  if (kanriFlg == false) {
-  %>
-  <!-- 一般ユーザー -->
-  <table border="1">
-    <tr>
-      <th>社員ID</th>
-      <th>名前</th>
-      <th>入社年月日</th>
-      <th>出身地</th>
-    </tr>
+			<%
+			for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
+			%>
+			<tr>
+				<td><input type="hidden" name="updUserId"
+					value=<%=syainJouhouBean.getId()%>><%=syainJouhouBean.getId()%></td>
+				<td><input type="text" name="sei"
+					value=<%=syainJouhouBean.getSei()%>></td>
+				<td><input type="text" name="sei_yomi"
+					value=<%=syainJouhouBean.getSei_yomi()%>></td>
+				<td><input type="text" name="mei"
+					value=<%=syainJouhouBean.getMei()%>></td>
+				<td><input type="text" name="mei_yomi"
+					value=<%=syainJouhouBean.getMei_yomi()%>></td>
+				<td>
+				<%if(syainJouhouBean.getSeibetsu().equals("男")){%>
+					<input type="radio" name="seibetsu" value="0" checked>男
+	      	<input type="radio" name="seibetsu" value="1">女
+	      	<input type="radio" name="seibetsu" value="2">その他 
+				<%}else if(syainJouhouBean.getSeibetsu().equals("女")){%>
+				<input type="radio" name="seibetsu" value="0">男
+      	<input type="radio" name="seibetsu" value="1" checked>女
+      	<input type="radio" name="seibetsu" value="2">その他
+      	<%}else{%>
+      	<input type="radio" name="seibetsu" value="0">男
+      	<input type="radio" name="seibetsu" value="1">女
+      	<input type="radio" name="seibetsu" value="2" checked>その他
+      	<%}%>
+      	</td>
+				<td><input type="text" name="seinenngappi"
+					value=<%=syainJouhouBean.getSeinenngappi()%>></td>
+				<%
+				//入社年月日は入力必須項目ではない日付項目のためNULLが出力されるケースがある
+				//NULLの場合はブランクに変換
+				String getNyuusyaYMDViwe = String.valueOf(syainJouhouBean.getNyuusyaYMD());
+				if (syainJouhouBean.getNyuusyaYMD() == null) {
+				  getNyuusyaYMDViwe = "";
+				}
+				%>
+				<td><input type="text" name="nyuusyaYMD"
+					value=<%=getNyuusyaYMDViwe%>></td>
+				<td><input type="text" name="syusshin"
+					value=<%=syainJouhouBean.getSyusshin()%>></td>
+				<td><input type="text" name="juusyo"
+					value=<%=syainJouhouBean.getJuusyo()%>></td>
+			</tr>
+			<%
+			}
+			%>
+		</table>
+		</p>
+		
+		<p>
+			<input type="submit" name="toSJHen" value="更新実行">
+</form>
 
-    <%
-    for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
-    %>
-    <tr>
-      <td><input type="text" value="<%=syainJouhouBean.getId()%>"></td>
-      <td><input type="text" value="<%=syainJouhouBean.getName()%>"></td>
-      <td><input type="text" value="<%=syainJouhouBean.getNyuusyaYMD()%>"></td>
-      <td><input type="text" value="<%=syainJouhouBean.getSyusshin()%>"></td>
-    </tr>
-    <%
-    }
-    %>
-
-  </table>
-  <%
-  } else {
-  %>
-  <!-- 管理者 -->
-  <table border="1">
-    <tr>
-      <th>社員ID</th>
-      <th>名前</th>
-      <th>入社年月日</th>
-      <th>出身地</th>
-    </tr>
-
-    <%
-    for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
-    %>
-    <tr>
-      <td><input type="text" value="<%=syainJouhouBean.getId()%>"></td>
-      <td><input type="text" value="<%=syainJouhouBean.getName()%>"></td>
-      <td><input type="text" value="<%=syainJouhouBean.getNyuusyaYMD()%>"></td>
-      <td><input type="text" value="<%=syainJouhouBean.getSyusshin()%>"></td>
-    </tr>
-    <%
-    }
-    %>
-
-  </table>
-  <%
-  }
-  %>
-  <p>
-  
-  <form name="toSJHen-SJInfo"
-    action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
-    <p>
-      <input type="submit" name="toSJHen-SJInfo" value="戻る">
-    </p>
-
-  </form>
-
-
+<form name="toSJHen-SJInfo"
+	action="<%=request.getContextPath()%>/SyainJouhouAction" method="post">
+	<input type="submit" name="toSJHen-SJInfo" value="戻る">
+</form>
+</p>
 </body>
 </html>

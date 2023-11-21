@@ -28,11 +28,14 @@ public class SyainJouhouHensyuuAction extends HttpServlet {
     boolean kanriFlg = false;
     kanriFlg = loginSession.getKanriFlg();
     
+    //画面情報の取得
+    int updUserId = Integer.parseInt(request.getParameter("chgUserId"));
+    
     //データ格納処理
     SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);    
 
     //リクエストスコープにインスタンスを保存
-    List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhou(syainJouhouBL);
+    List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhouHensyu(syainJouhouBL,updUserId);
     request.setAttribute(Path.SYAIN_HENSYU_SCOPE, syainJouhouBLlist);
     // 社員情報編集画面(syainJouhouBLlist.jsp)にフォワード
     RequestDispatcher dispatcher = request

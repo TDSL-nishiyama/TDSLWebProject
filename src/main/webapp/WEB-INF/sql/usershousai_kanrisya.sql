@@ -1,1 +1,1 @@
-select id,sei,mei,nyuusyaYMD,syusshin,seibetsu,seinenngappi from usershousai;
+select id,sei,sei_yomi,mei,mei_yomi,nyuusyaYMD,taisyaYMD,seibetsu,seinenngappi,syusshin,juusyo from usershousai;
