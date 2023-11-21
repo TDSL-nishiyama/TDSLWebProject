@@ -44,7 +44,7 @@ public class SyainJouhouBL {
       column.add(UserShousai.COL_NYUUSYAYMD);
       column.add(UserShousai.COL_SYUSSHIN);
 
-      resultDB = dao.selectSQL("usershousai_ippann.sql", column, null, kanriFlg);
+      resultDB = dao.selectSQL("usershousai.sql", column, null, kanriFlg);
       for (int i = 0; i < resultDB.size(); i++) {
         //名前の設定
         String name = null;
@@ -71,7 +71,7 @@ public class SyainJouhouBL {
       column.add(UserShousai.COL_SYUSSHIN);
       column.add(UserShousai.COL_JYUUSYO);
       
-      resultDB = dao.selectSQL("usershousai_kanrisya.sql", column, null, kanriFlg);
+      resultDB = dao.selectSQL("usershousai.sql", column, null, kanriFlg);
 
       //DBから取得した情報をもとに必要事項を設定
       for (int i = 0; i < resultDB.size(); i++) {

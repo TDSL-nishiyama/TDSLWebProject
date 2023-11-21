@@ -1,1 +1,0 @@
-select id,sei,mei,nyuusyaYMD,syusshin from usershousai;

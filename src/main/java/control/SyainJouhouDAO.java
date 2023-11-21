@@ -41,18 +41,6 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
     //SQL文の作成
     String sql = null;
     sql = makeSQL(sqlPath);
-
-    final int ID = 0;
-    final int SEI = 1;
-    final int SEI_YOMI = 2;
-    final int MEI = 3;
-    final int MEI_YOMI = 4;
-    final int NYUUSYAYMD = 5;
-    final int TAISYAYMD = 6;
-    final int SEIBETSU = 7;
-    final int SEINENNGAPPI = 8;
-    final int SYUSSHIN = 9;
-    final int JUUSYO = 10;
     
     //クエリの発行・格納
     if (kanriFlg == false) {
@@ -75,6 +63,12 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
         String mei = null;
         Date nyuusyaYMD = null;
         String syusshin = null;
+        
+        final int ID = 0;
+        final int SEI = 1;
+        final int MEI = 2;
+        final int NYUUSYAYMD = 3;
+        final int SYUSSHIN = 4;
 
         //格納
         while (rs.next()) {
@@ -115,6 +109,18 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
         Date seinenngappi = null;
         String syusshin = null;
         String juusyo = null;
+        
+        final int ID = 0;
+        final int SEI = 1;
+        final int SEI_YOMI = 2;
+        final int MEI = 3;
+        final int MEI_YOMI = 4;
+        final int NYUUSYAYMD = 5;
+        final int TAISYAYMD = 6;
+        final int SEIBETSU = 7;
+        final int SEINENNGAPPI = 8;
+        final int SYUSSHIN = 9;
+        final int JUUSYO = 10;
 
         //格納
         while (rs.next()) {
