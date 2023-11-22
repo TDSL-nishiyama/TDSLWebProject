@@ -1,1 +1,1 @@
-select id,sei,sei_yomi,mei,mei_yomi,nyuusyaYMD,taisyaYMD,seibetsu,seinenngappi,syusshin,juusyo from usershousai;
+select S.id,S.sei,S.sei_yomi,S.mei,S.mei_yomi,S.nyuusyaYMD,S.taisyaYMD,S.seibetsu,S.seinenngappi,S.syusshin,S.juusyo from usershousai as S JOIN user as U ON S.id = U.id where U.del = '';

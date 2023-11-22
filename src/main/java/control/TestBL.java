@@ -11,7 +11,7 @@ public class TestBL extends DAOCommon{
     
     Object result = null;
     String str1 = null;
-    str1 = "userall.sql";
+    str1 = "test.sql";
     List<String> column = new ArrayList<String>();
     column.add("id");
     column.add("name");

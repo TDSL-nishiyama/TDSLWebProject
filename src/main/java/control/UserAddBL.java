@@ -23,7 +23,7 @@ public class UserAddBL {
   //ID（）連番・仮登録用ID・仮登録パスワードの作成
   kanriFlg = Boolean.valueOf(input.get("kanriflg"));
   LoginDAO loginDAO = new LoginDAO();
-  userid = Integer.parseInt(loginDAO.maxUserId()) + 1;   
+  userid = loginDAO.maxUserId() + 1;   
   loginId = "kari" + String.valueOf(userid);
   loginPassword = "tdsl";
   //String→Dateの変換

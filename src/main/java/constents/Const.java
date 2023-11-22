@@ -56,11 +56,17 @@ public class Const {
   //正常系メッセージ関連
   public static final class MSG {
     public static final String MSG_ATTRIBUTE = "MSG";
+    
+    //マスタ_削除
+    public static final String MASTA_DEL_1 = "入力されたIDは存在しません";
+    public static final String MASTA_DEL_2 = "現在ログインしているユーザーは削除できません";
+    public static final String MASTA_DEL_3 = "ユーザーの削除が完了しました";
   }
 
   //エラー関連
   public static final class ERRORMSG {
     public static final String ERRMSG_ATTRIBUTE = "ERRMSG";
+    //ログイン
     public static final String ERR_1 = "IDを入力してください";
     public static final String ERR_2 = "パスワードを入力してください";
     public static final String ERR_3 = "入力されたIDは存在しません";

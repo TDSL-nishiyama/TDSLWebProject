@@ -85,7 +85,7 @@ public class LogInAction extends HttpServlet {
     // 初回ログイン時はパスワード登録画面に遷移
     loginIdCheck = loginBL.checkLoginShokai(loginId);
 
-    if (loginId == null || "".equals(loginIdCheck[0]) || loginIdCheck[0].equals("error")) {
+    if (loginId == null || loginId.equals("") || loginIdCheck[0].equals("error")) {
       //エラーメッセージを格納
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_3);
       // エラー画面に遷移

@@ -3,6 +3,7 @@ package action;
 import java.io.IOException;
 
 import constents.Const.Path;
+import constents.Const.MSG;
 import control.UserDelBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -34,11 +35,11 @@ public class ResultUserDelAction extends HttpServlet {
     
     boolean errflg = false;
     UserDelBL userDelBL = new UserDelBL();
-    //入力されたIDが存在しない場合エラーメッセージを表示
+    //入力されたIDが存在しない場合、メッセージを表示
     errflg = userDelBL.userDelCheck(userIdDel);
     if (errflg == false) {
       //メッセージを格納
-      request.setAttribute("MSG", "入力されたユーザーIDは存在しません");
+      request.setAttribute(MSG.MSG_ATTRIBUTE,MSG.MASTA_DEL_1 );
       //ユーザー削除画面に遷移
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.USER_DEL_GAMEN);
@@ -46,11 +47,11 @@ public class ResultUserDelAction extends HttpServlet {
       return;
     }
     
-    //現在ログインしているユーザーを削除しようとした場合、エラーメッセージを表示    
+    //現在ログインしているユーザーを削除しようとした場合、メッセージを表示    
     errflg = userDelBL.userDelCheck(userId, userIdDel);
     if (errflg == false) {
       //メッセージを格納
-      request.setAttribute("MSG", "現在ログインしているユーザーの削除はできません");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_DEL_2);
       //ユーザー削除画面に遷移
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.USER_DEL_GAMEN);
@@ -58,11 +59,11 @@ public class ResultUserDelAction extends HttpServlet {
       return;
     
     } else {
-      //ユーザー削除
+      //ユーザー削除を実行
       userDelBL.userDel(userIdDel);
 
       //登録完了メッセージ
-      request.setAttribute("MSG", "ユーザーの削除が完了しました");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_DEL_3);
       //ユーザー削除画面に遷移
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.USER_DEL_GAMEN);

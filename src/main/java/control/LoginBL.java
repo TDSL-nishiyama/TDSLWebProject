@@ -55,13 +55,11 @@ public class LoginBL{
     LoginDAO loginDAO = new LoginDAO();
 
     // 入力したパスワードがDB内のパスワードと異なる場合エラー画面に遷移
-    List<String> loginIdPassList = new ArrayList<>();
+    List<Object> loginIdPassList = new ArrayList<Object>();
     loginIdPassList.add(pLoginId);
     loginIdPassList.add(pLoginPassword);
 
-    if (loginDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(
-        loginIdPassList)) {
-
+    if (loginDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(loginIdPassList)) {
       result = true;
     }
 

@@ -41,7 +41,7 @@ public class DAOCommon implements DBAccess {
     try {
       //発行
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      if (!(statement.equals(null))) {
+      if (statement!=null) {
         int cnt = statement.size(); //ステートメントを設定する数
         for (int i = 0; i < cnt; i++) {
           pStmt.setObject(i + 1, statement.get(i));

@@ -1,0 +1,1 @@
+SELECT U.id,L.loginid,U.name,U.kanriFlg,U.del FROM user AS U INNER JOIN login AS L ON U.id = L.id;

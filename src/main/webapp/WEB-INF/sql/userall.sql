@@ -1,1 +1,0 @@
-select id,name from user where id = ? and del = ?;

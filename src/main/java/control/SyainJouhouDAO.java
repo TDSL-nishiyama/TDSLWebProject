@@ -142,13 +142,11 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
       }catch (SQLException e) {
         e.printStackTrace();
       }finally {
+        sqlPath = Common.SQL_FILE_PATH;
         //DB切断
         DBAccess.super.closeDB(conn);
       }
     }
-    
-    sqlPath = Common.SQL_FILE_PATH;
-
     return result;
   }
   
@@ -157,9 +155,9 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
    * @param fileName 実行したいSQLファイルの名前
    * @param updKoumoku アップデートしたい項目
    */
-  public void updateSyainJouhou(String fileName,List<Object> statement) {
+  public void updateSyainJouhou(String fileName,List<Object> updKoumoku) {
     
-    super.executeDML(fileName, statement);
+    super.executeDML(fileName, updKoumoku);
     sqlPath = Common.SQL_FILE_PATH;
     
   }

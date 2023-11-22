@@ -15,8 +15,8 @@ public class SyainJouhouBL {
 
   private boolean kanriFlg;
 
+  //コンストラクタでメンバに管理者フラグを設定
   public SyainJouhouBL(boolean pKanriFlg) {
-    //コンストラクタでメンバに管理者フラグを設定
     kanriFlg = pKanriFlg;
   }
 
@@ -48,7 +48,7 @@ public class SyainJouhouBL {
       for (int i = 0; i < resultDB.size(); i++) {
         //名前の設定
         String name = null;
-        name = setName(resultDB.get(i).getSei(),resultDB.get(i).getMei());
+        name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
 
         SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(), name.toString(),
             resultDB.get(i).getNyuusyaYMD(), resultDB.get(i).getSyusshin());
@@ -70,15 +70,15 @@ public class SyainJouhouBL {
       column.add(UserShousai.COL_SEINENGAPPI);
       column.add(UserShousai.COL_SYUSSHIN);
       column.add(UserShousai.COL_JYUUSYO);
-      
+
       resultDB = dao.selectSQL("usershousai.sql", column, null, kanriFlg);
 
       //DBから取得した情報をもとに必要事項を設定
       for (int i = 0; i < resultDB.size(); i++) {
         //名前の設定
         String name = null;
-        name = setName(resultDB.get(i).getSei(),resultDB.get(i).getMei());
-        
+        name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
+
         //入社年次の設定
         String nenji = null;
         //入社日付は必須項目ではないためNULLチェックを行う
@@ -97,7 +97,8 @@ public class SyainJouhouBL {
         age = setAge(resultDB.get(i).getSeinenngappi());
 
         SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(), name,
-            resultDB.get(i).getNyuusyaYMD(), nenji, resultDB.get(i).getSyusshin(),resultDB.get(i).getJuusyo(), seibetsu,age);
+            resultDB.get(i).getNyuusyaYMD(), nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo(),
+            seibetsu, age);
 
         result.add(bean);
       }
@@ -105,14 +106,14 @@ public class SyainJouhouBL {
 
     return result;
   }
-  
+
   /**
    * {@index} 社員情報編集を行うユーザーの結果表（1レコード）を取得してSyainJouhouBeanに格納する
    * @param syainJouhouBL
    * @param pUpdId　編集するユーザーID
    * @return
    */
-  public List<SyainJouhouBean> resultSyainJouhouHensyu(SyainJouhouBL syainJouhouBL,int pUpdId) {
+  public List<SyainJouhouBean> resultSyainJouhouHensyu(SyainJouhouBL syainJouhouBL, int pUpdId) {
 
     List<SyainJouhouEntity> resultDB = new ArrayList<>();
     List<SyainJouhouBean> result = new ArrayList<>();
@@ -134,17 +135,17 @@ public class SyainJouhouBL {
     column.add(UserShousai.COL_SEINENGAPPI);
     column.add(UserShousai.COL_SYUSSHIN);
     column.add(UserShousai.COL_JYUUSYO);
-    
+
     statement.add(pUpdId);
-    
+
     resultDB = dao.selectSQL("usershousaihensyuu.sql", column, statement, kanriFlg);
 
     //DBから取得した情報をもとに必要事項を設定
     for (int i = 0; i < resultDB.size(); i++) {
       //名前の設定
       String name = null;
-      name = setName(resultDB.get(i).getSei(),resultDB.get(i).getMei());
-      
+      name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
+
       //入社年次の設定
       String nenji = null;
       //入社日付は必須項目ではないためNULLチェックを行う
@@ -161,34 +162,35 @@ public class SyainJouhouBL {
       //年齢の設定
       String age = null;
       age = setAge(resultDB.get(i).getSeinenngappi());
-      
+
       SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(),
-          resultDB.get(i).getSei(),resultDB.get(i).getSei_yomi(),resultDB.get(i).getMei(),resultDB.get(i).getMei_yomi(), name,
-          resultDB.get(i).getNyuusyaYMD(),null, seibetsu,resultDB.get(i).getSeinenngappi(),
-          age, nenji,resultDB.get(i).getSyusshin(),resultDB.get(i).getJuusyo());
+          resultDB.get(i).getSei(), resultDB.get(i).getSei_yomi(), resultDB.get(i).getMei(),
+          resultDB.get(i).getMei_yomi(), name,
+          resultDB.get(i).getNyuusyaYMD(), null, seibetsu, resultDB.get(i).getSeinenngappi(),
+          age, nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo());
       result.add(bean);
     }
 
     return result;
 
   }
-  
+
   /**
    * {@index} 社員情報更新を行う
    * @param updKoumoku　アップデートする項目
    * @param pUpdId　編集するユーザーID
    * @return
    */
-  public void syainJouhouUpd(Map<String, Object> updKoumoku,int pUpdId) {
+  public void syainJouhouUpd(Map<String, Object> updKoumoku, int pUpdId) {
 
     SyainJouhouDAO dao = new SyainJouhouDAO();
     List<Object> statement = new ArrayList<>();
     //TODO 将来的に一般ユーザーでも特定の項目を編集できるようにするためSQLファイル名は呼び出し側で指定
     String fileName = "updUserShousai.sql";
-    
+
     //性別の値をDB格納用に戻す（例：男→"0"）
     String seibetsu = putSeibetsu(updKoumoku.get(UserShousai.COL_SEIBETSU).toString());
-    
+
     /*実行クエリ
      * UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?,nyuusyaYMD=?,seibetsu=?
      * ,seinenngappi=?,syusshin=?,juusyo=? where id = ?;
@@ -210,18 +212,18 @@ public class SyainJouhouBL {
 
   }
 
-  private String setName(String sei,String mei) {
+  private String setName(String sei, String mei) {
     String result = null;
-    
+
     StringBuilder name = new StringBuilder();
     name.append(sei);
     name.append(mei);
-    
+
     result = name.toString();
-        
+
     return result;
   }
-  
+
   private String setNenji(Date nyuusyaYMD) {
 
     String result = null;
@@ -258,7 +260,7 @@ public class SyainJouhouBL {
 
     return result;
   }
-  
+
   private String putSeibetsu(String seibetsuView) {
 
     String result = null;

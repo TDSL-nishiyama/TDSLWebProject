@@ -13,7 +13,7 @@ public class UserDelBL {
 		MastaEntity mastaEntity = new MastaEntity(userIdDel);
 
 		//ユーザーID確認
-		int i = Integer.parseInt(mastaDAOSelect.checkUserId(mastaEntity));
+		int i = mastaDAOSelect.checkUserId(mastaEntity);
 
 		//カウント結果が0の場合IDは存在しない
 		if (i == 0) {

@@ -14,11 +14,11 @@ public class ResultUpdatePasswordBL {
     return result;
   }
   
-  public void updateUserPassword(String pUserId,String pLoginname,String pPassword){
+  public void updateUserPassword(String loginIdBefore,String pLoginId,String pPassword){
 
     //新規ログインIDとパスワードの登録
     LoginDAOInsertUpdate insDAO = new LoginDAOInsertUpdate();
-    insDAO.updateUserPassword(pUserId, pLoginname, pPassword);
+    insDAO.updateUserAndPassword(loginIdBefore,pLoginId, pPassword);
   }
   
   public void updatePassword(String pUserId,String pPassword){

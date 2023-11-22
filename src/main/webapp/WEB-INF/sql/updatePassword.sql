@@ -1,0 +1,1 @@
+UPDATE login SET password = ? WHERE loginid = ?;

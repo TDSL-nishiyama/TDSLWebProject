@@ -27,7 +27,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
       <input type="submit" value="削除されたユーザーも含めて表示">
     </p>
   </form>
-  
+
   <!--TODO 仕様迷い中、ページディレクションのJSPのみでの実装がしんどい  -->
   <!-- 11人目以降は2ページ目  -->
   <!-- 最大表示数は100人 -->
@@ -60,17 +60,19 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
       %> <%=kanriFlgView%>
     </td>
     <td>
-      <form
-        action="<%=request.getContextPath()%>/ResultUserUpdAction"
+      <form action="<%=request.getContextPath()%>/ResultUserUpdAction"
         method="post">
-        <input type="submit" name="userUpd" value="更新"><br>
+        <input type="hidden" name="userIdUpd"
+          value="<%=mastaEntity.getUserid()%>"> <input type="submit"
+          value="更新"><br>
       </form>
     </td>
     <td>
-      <form action="<%=request.getContextPath()%>/ResultUserDelAction" method="post">
-        <!--TODO hiddenのvalue値を可変に（JSでリスナー設定して制御）  -->
-        <input type="hidden" name="userIdDel" value="15"> <input
-          type="submit" name="userDel" value="削除"><br>
+      <form action="<%=request.getContextPath()%>/ResultUserDelAction"
+        method="post">
+        <input type="hidden" name="userIdDel"
+          value="<%=mastaEntity.getUserid()%>"> <input type="submit"
+          value="削除"><br>
       </form>
     </td>
     </tr>

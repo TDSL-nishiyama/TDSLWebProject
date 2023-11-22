@@ -72,7 +72,7 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
 
   }
 
-  public void updUser(Map<String, String> updKoumoku) {
+  public void updUser(Map<String, Object> updKoumoku) {
     List<Object> statement = new ArrayList<>();
 
     statement.add(updKoumoku.get("username"));

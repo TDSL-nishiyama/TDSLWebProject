@@ -1,0 +1,1 @@
+SELECT loginid,password FROM login WHERE loginid = ? AND password = ?;
