@@ -61,6 +61,7 @@ public class ResultUserDelAction extends HttpServlet {
     } else {
       //ユーザー削除を実行
       userDelBL.userDel(userIdDel);
+      //TODO ユーザー詳細TBLの退社年月日に退社日を挿入
 
       //登録完了メッセージ
       request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_DEL_3);
