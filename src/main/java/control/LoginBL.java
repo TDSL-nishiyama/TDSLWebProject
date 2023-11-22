@@ -5,7 +5,12 @@ import java.util.List;
 
 public class LoginBL{
 
-  // 初回ログインチェック用
+  /**
+   * {@index}初回ログインチェック用
+   * @param ログインID
+   * @return 要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
+   * @return 要素1 loginテーブルのログイン名に紐づくloginテーブルのIDを取得
+  **/
   public String[] checkLoginShokai(String pLoginId) {
 
     //要素0 error→エラー画面　kari→パスワード登録更新画面 true→後続処理
@@ -25,12 +30,14 @@ public class LoginBL{
         result[0] = "true";
       }
     }
-
     return result;
-
   }
 
-  // ログインID存在チェック用
+  /**
+   * {@index}ログインID存在チェック
+   * @param ログインID
+   * @return true→エラーあり　false→エラーなし
+   **/
   public boolean checkLoginId(String pLoginId) {
 
     boolean result = false;
@@ -41,12 +48,15 @@ public class LoginBL{
     if (!(loginDAO.findLoginId(pLoginId) == 0)) {
       result = true;
     }
-
     return result;
-
   }
-
-  // ログインパスワードとIDの紐づきチェック用
+  
+  /**
+   * {@index}ログインパスワードとIDの紐づきチェック
+   * @param pLoginId ログインID
+   * @param pLoginPassword ログインパスワード
+   * @return true→エラーあり　false→エラーなし
+   **/
   public boolean checkLoginIdAndPassword(String pLoginId,
       String pLoginPassword) {
 
@@ -62,11 +72,14 @@ public class LoginBL{
     if (loginDAO.findLoginIdAndPassword(pLoginId, pLoginPassword).equals(loginIdPassList)) {
       result = true;
     }
-
     return result;
   }
 
-  // ログインID重複チェック用
+  /**
+   * {@index}ログインID重複チェック
+   * @param ログインID
+   * @return true→エラーあり　false→エラーなし
+   **/
   public boolean checkDuplicationLoginId(String pLoginId) {
 
     boolean result = true;
@@ -79,11 +92,15 @@ public class LoginBL{
     if (resultDB > 0) {
       result = false;
     }
-
     return result;
-
   }
-
+  
+  /**
+   * {@index}ログインID桁数チェック
+   * @param ログインID
+   * @return true→エラーあり　false→エラーなし
+   * @see IDは5桁以上
+   **/
   //ログインID桁数チェック
   public boolean checkLoginIdLength(String pLoginId) {
     
@@ -93,11 +110,14 @@ public class LoginBL{
     if (pLoginId.length() < 5) {
       result = false;
     }
-
     return result;
   }
   
-  //セッション情報取得
+  /**
+   * {@index}セッション情報取得
+   * @param loginid ログインID
+   * @return セッション情報
+   **/
   public List<Object> getSessionInfo(String loginid){
     
     List<Object> result = new ArrayList<>();
