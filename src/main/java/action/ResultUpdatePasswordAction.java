@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import constents.Const.Common;
 import constents.Const.ERRORMSG;
+import constents.Const.MSG;
 import constents.Const.Path;
 import control.LoginBL;
 import control.ResultUpdatePasswordBL;
@@ -45,7 +46,7 @@ public class ResultUpdatePasswordAction extends HttpServlet {
       errFlg = loginBL.checkLoginIdLength(loginId);
       if (!errFlg) {
         //エラーメッセージを格納
-        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, "ログインIDは5桁以上にしてください");
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.ERR_6);
         // エラー画面に遷移
         RequestDispatcher dispatcher = request
             .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
@@ -57,7 +58,7 @@ public class ResultUpdatePasswordAction extends HttpServlet {
       errFlg = loginBL.checkDuplicationLoginId(loginId);
       if (!errFlg) {
         //エラーメッセージを格納
-        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_6);
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_7);
         // エラー画面に遷移
         RequestDispatcher dispatcher = request
             .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
@@ -69,7 +70,7 @@ public class ResultUpdatePasswordAction extends HttpServlet {
       errFlg = resultUpdatePasswordBL.checkLoginIdConditions(loginId);
       if (!errFlg) {
         //エラーメッセージを格納
-        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, "ログインIDの先頭はkari以外にしてください");
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.ERR_8);
         // エラー画面に遷移
         RequestDispatcher dispatcher = request
             .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
@@ -80,16 +81,16 @@ public class ResultUpdatePasswordAction extends HttpServlet {
       //ユーザーの登録
       String loginIdBefore = (String) session.getAttribute(Path.BEFORE_LOGIN);
       resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
-      resultMSG = "ユーザーの登録が完了しました。再度ログインをお願いします";
+      resultMSG = MSG.UPDPASS_1;
       //既存ユーザーの場合
     } else {
       //パスワードの更新
       resultUpdatePasswordBL.updatePassword(loginId, password);
-      resultMSG = "パスワードの更新が完了しました";
+      resultMSG = MSG.UPDPASS_2;
     }
 
     //ログイン画面に表示させるメッセージを格納
-    request.setAttribute("MSG", resultMSG);
+    request.setAttribute(MSG.MSG_ATTRIBUTE, resultMSG);
     //セッションを破棄
     session.removeAttribute(Path.USER_ATTRIBUTE);
     session.removeAttribute(Path.BEFORE_LOGIN);

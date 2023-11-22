@@ -57,6 +57,10 @@ public class Const {
   public static final class MSG {
     public static final String MSG_ATTRIBUTE = "MSG";
     
+    //パスワード登録更新
+    public static final String UPDPASS_1 = "ユーザーの登録が完了しました。再度ログインをお願いします";
+    public static final String UPDPASS_2 = "パスワードの更新が完了しました";
+    
     //マスタ_削除
     public static final String MASTA_DEL_1 = "入力されたIDは存在しません";
     public static final String MASTA_DEL_2 = "現在ログインしているユーザーは削除できません";
@@ -66,13 +70,16 @@ public class Const {
   //エラー関連
   public static final class ERRORMSG {
     public static final String ERRMSG_ATTRIBUTE = "ERRMSG";
-    //ログイン
+    //ログイン・パスワード登録更新
     public static final String ERR_1 = "IDを入力してください";
     public static final String ERR_2 = "パスワードを入力してください";
     public static final String ERR_3 = "入力されたIDは存在しません";
     public static final String ERR_4 = "パスワードが異なります";
     public static final String ERR_5 = "この操作には管理者権限が必要です";
-    public static final String ERR_6 = "ユーザーIDが重複しています";
+    public static final String ERR_6 = "ログインIDは5桁以上にしてください";
+    public static final String ERR_7 = "ユーザーIDが重複しています";
+    public static final String ERR_8 = "ログインIDの先頭はkari以外にしてください";
+    
   }
 
 }
