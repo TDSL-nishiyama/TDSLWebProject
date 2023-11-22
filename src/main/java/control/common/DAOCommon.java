@@ -21,7 +21,7 @@ public class DAOCommon implements DBAccess {
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return select count の結果(int)
    */
-  protected int countSQL(String fileName,List<Object> statement) {
+  protected int countSQL(String fileName, List<Object> statement) {
 
     int result = 0;
     sqlPath += fileName;
@@ -41,12 +41,12 @@ public class DAOCommon implements DBAccess {
     try {
       //発行
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      if(!(statement.equals(null))) {
+      if (!(statement.equals(null))) {
         int cnt = statement.size(); //ステートメントを設定する数
-        for(int i = 0 ; i < cnt; i++) {
-          pStmt.setObject(i+1, statement.get(i));
+        for (int i = 0; i < cnt; i++) {
+          pStmt.setObject(i + 1, statement.get(i));
         }
-      }  
+      }
       ResultSet rs = pStmt.executeQuery();
 
       //格納
@@ -55,14 +55,12 @@ public class DAOCommon implements DBAccess {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      //SQLファイルパスの初期化
+      sqlPath = Common.SQL_FILE_PATH;
+      //DB切断
+      DBAccess.super.closeDB(conn);
     }
-
-    //DB切断
-    DBAccess.super.closeDB(conn);
-    
-    //SQLファイルパスの初期化
-    sqlPath = Common.SQL_FILE_PATH;
-    
     return result;
   }
 
@@ -105,13 +103,13 @@ public class DAOCommon implements DBAccess {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      //SQLファイルパスの初期化
+      sqlPath = Common.SQL_FILE_PATH;
+      //DB切断
+      DBAccess.super.closeDB(conn);
     }
 
-    //DB切断
-    DBAccess.super.closeDB(conn);
-
-    //SQLファイルパスの初期化
-    sqlPath = Common.SQL_FILE_PATH;
     return result;
   }
 
@@ -148,9 +146,9 @@ public class DAOCommon implements DBAccess {
 
       //PreparedStatementの設定
       for (int i = 0; i < steCnt; i++) {
-        pStmt.setObject(i+1, statement.get(i));
+        pStmt.setObject(i + 1, statement.get(i));
       }
-      
+
       //クエリの実行
       ResultSet rs = pStmt.executeQuery();
 
@@ -162,23 +160,22 @@ public class DAOCommon implements DBAccess {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      //SQLファイルパスの初期化
+      sqlPath = Common.SQL_FILE_PATH;
+      //DB切断
+      DBAccess.super.closeDB(conn);
     }
-
-    //DB切断
-    DBAccess.super.closeDB(conn);
-
-    //SQLファイルパスの初期化
-    sqlPath = Common.SQL_FILE_PATH;
     return result;
   }
-  
+
   /**
    * {@index} UPDATE・DLETE実行メソッド（1レコード）
    * @param fileName 実行したいSQLファイルの名前
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return selectの結果(List)
    */
-  protected void executeDML(String fileName,  List<Object> statement) {
+  protected void executeDML(String fileName, List<Object> statement) {
 
     sqlPath += fileName;
 
@@ -197,39 +194,38 @@ public class DAOCommon implements DBAccess {
     try {
       //発行
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      if(!(statement.equals(null))) {
+      if (!(statement.equals(null))) {
         int cnt = statement.size(); //ステートメントを設定する数
-        for(int i = 0 ; i < cnt; i++) {
-          pStmt.setObject(i+1, statement.get(i));
+        for (int i = 0; i < cnt; i++) {
+          pStmt.setObject(i + 1, statement.get(i));
         }
       }
       //クエリの実行
       pStmt.execute();
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      //SQLファイルパスの初期化
+      sqlPath = Common.SQL_FILE_PATH;
+      //DB切断
+      DBAccess.super.closeDB(conn);
     }
-
-    //SQLファイルパスの初期化
-    sqlPath = Common.SQL_FILE_PATH;
-    //DB切断
-    DBAccess.super.closeDB(conn);
-
   }
-  
+
   /**
    *{@index} トランザクション開始処理
    **/
   protected void startTransaction() {
 
   }
-  
+
   /**
    *{@index} トランザクション終了処理（正常系）
    **/
   protected void endTransactionTrue() {
 
   }
-  
+
   /**
    *{@index} トランザクション終了処理（異常系）
    **/
@@ -237,7 +233,6 @@ public class DAOCommon implements DBAccess {
 
   }
 
-  
   /**
    *{@index} SQL文作成　
    *@param String loadPath プロパティファイルが格納されているパス（フルパス） 
