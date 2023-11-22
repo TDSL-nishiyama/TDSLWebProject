@@ -1,1 +1,1 @@
-SELECT U.id,L.loginid,U.name,U.kanriFlg FROM user AS U INNER JOIN login AS L ON U.id = L.id WHERE U.del = '' AND U.id = ?;
+SELECT U.id,L.loginid,U.name,U.kanriFlg,S.sei,S.sei_yomi,S.mei,S.mei_yomi,S.nyuusyaYMD,S.taisyaYMD,S.seibetsu,S.seinenngappi,S.syusshin,S.juusyo FROM user AS U INNER JOIN login AS L ON U.id = L.id INNER JOIN usershousai AS S ON U.id = S.id WHERE U.del = '' AND U.id = ?;

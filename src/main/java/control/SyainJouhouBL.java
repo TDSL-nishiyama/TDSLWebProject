@@ -188,8 +188,9 @@ public class SyainJouhouBL {
     //TODO 将来的に一般ユーザーでも特定の項目を編集できるようにするためSQLファイル名は呼び出し側で指定
     String fileName = "updUserShousai.sql";
 
-    //性別の値をDB格納用に戻す（例：男→"0"）
-    String seibetsu = putSeibetsu(updKoumoku.get(UserShousai.COL_SEIBETSU).toString());
+    //性別の値をDB格納用に戻す（例：男→"0")
+
+//      String seibetsu = putSeibetsu(updKoumoku.get(UserShousai.COL_SEIBETSU).toString());
 
     /*実行クエリ
      * UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?,nyuusyaYMD=?,seibetsu=?
@@ -201,7 +202,7 @@ public class SyainJouhouBL {
     statement.add(updKoumoku.get(UserShousai.COL_MEI));
     statement.add(updKoumoku.get(UserShousai.COL_MEI_YOMI));
     statement.add(updKoumoku.get(UserShousai.COL_NYUUSYAYMD));
-    statement.add(seibetsu);
+    statement.add(updKoumoku.get(UserShousai.COL_SEIBETSU));
     statement.add(updKoumoku.get(UserShousai.COL_SEINENGAPPI));
     statement.add(updKoumoku.get(UserShousai.COL_SYUSSHIN));
     statement.add(updKoumoku.get(UserShousai.COL_JYUUSYO));
@@ -261,25 +262,25 @@ public class SyainJouhouBL {
     return result;
   }
 
-  private String putSeibetsu(String seibetsuView) {
-
-    String result = null;
-    switch (seibetsuView) {
-    case "男":
-      result = "0";
-      break;
-    case "女":
-      result = "1";
-      break;
-    case "その他":
-      result = "2";
-      break;
-    default:
-      result = "2";
-    }
-
-    return result;
-  }
+//  private String putSeibetsu(String seibetsuView) {
+//
+//    String result = null;
+//    switch (seibetsuView) {
+//    case "男":
+//      result = "0";
+//      break;
+//    case "女":
+//      result = "1";
+//      break;
+//    case "その他":
+//      result = "2";
+//      break;
+//    default:
+//      result = "2";
+//    }
+//
+//    return result;
+//  }
 
   private String setAge(Date seinenngappi) {
 

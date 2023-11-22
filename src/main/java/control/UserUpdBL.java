@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import model.MastaEntity;
+import model.MastaBean;
 
 public class UserUpdBL {
   //実行結果をサーブレットに戻す
-  public List<MastaEntity> resultUserList(UserUpdBL userIchiranBL,Map<String,Object> updKoumoku) {
+  public List<MastaBean> selectUserList(UserUpdBL userIchiranBL,Map<String,Object> updKoumoku) {
     
-    List<MastaEntity> result = new ArrayList<>();
+    List<MastaBean> result = new ArrayList<>();
     
     //DAOクラスのインスタンス化
     MastaDAOSelect mastaDAOsel = new MastaDAOSelect();

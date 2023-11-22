@@ -3,14 +3,46 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class MastaBean extends SyainJouhouBean implements Serializable {
-
+public class MastaBean implements Serializable {
+  
   private int userid;
   private String username;
   private boolean kanriFlg;
   private String sakujo; //(1=退職)
   private String loginid;
   private String loginpassword;
+  private String sei;
+  private String sei_yomi;
+  private String mei;
+  private String mei_yomi;
+  private Date nyuusyaYMD;
+  private Date taisytaYMD;
+  private String seibetsu; //0=男　1=女 2=その他
+  private Date seinenngappi;
+  private String syusshin;
+  private String juusyo;
+  
+  //コンストラクター
+  public MastaBean(int userid, String username, boolean kanriFlg, String loginid, String loginpassword,
+      String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD, Date taisytaYMD, String seibetsu,
+      Date seinenngappi, String syusshin, String juusyo) {
+    super();
+    this.userid = userid;
+    this.username = username;
+    this.kanriFlg = kanriFlg;
+    this.loginid = loginid;
+    this.loginpassword = loginpassword;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.nyuusyaYMD = nyuusyaYMD;
+    this.taisytaYMD = taisytaYMD;
+    this.seibetsu = seibetsu;
+    this.seinenngappi = seinenngappi;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
+  }
 
   //アクセサメソッド
   public int getUserid() {
@@ -61,160 +93,85 @@ public class MastaBean extends SyainJouhouBean implements Serializable {
     this.loginpassword = loginpassword;
   }
 
-  @Override
-  public String getName() {
-
-    return super.getName();
-  }
-
-  @Override
-  public void setName(String name) {
-
-    super.setName(name);
-  }
-
-  @Override
   public String getSei() {
-
-    return super.getSei();
+    return sei;
   }
 
-  @Override
   public void setSei(String sei) {
-
-    super.setSei(sei);
+    this.sei = sei;
   }
 
-  @Override
   public String getSei_yomi() {
-
-    return super.getSei_yomi();
+    return sei_yomi;
   }
 
-  @Override
   public void setSei_yomi(String sei_yomi) {
-
-    super.setSei_yomi(sei_yomi);
+    this.sei_yomi = sei_yomi;
   }
 
-  @Override
   public String getMei() {
-
-    return super.getMei();
+    return mei;
   }
 
-  @Override
   public void setMei(String mei) {
-
-    super.setMei(mei);
+    this.mei = mei;
   }
 
-  @Override
   public String getMei_yomi() {
-
-    return super.getMei_yomi();
+    return mei_yomi;
   }
 
-  @Override
   public void setMei_yomi(String mei_yomi) {
-
-    super.setMei_yomi(mei_yomi);
+    this.mei_yomi = mei_yomi;
   }
 
-  @Override
   public Date getNyuusyaYMD() {
-
-    return super.getNyuusyaYMD();
+    return nyuusyaYMD;
   }
 
-  @Override
   public void setNyuusyaYMD(Date nyuusyaYMD) {
-
-    super.setNyuusyaYMD(nyuusyaYMD);
+    this.nyuusyaYMD = nyuusyaYMD;
   }
 
-  @Override
   public Date getTaisytaYMD() {
-
-    return super.getTaisytaYMD();
+    return taisytaYMD;
   }
 
-  @Override
   public void setTaisytaYMD(Date taisytaYMD) {
-
-    super.setTaisytaYMD(taisytaYMD);
+    this.taisytaYMD = taisytaYMD;
   }
 
-  @Override
   public String getSeibetsu() {
-
-    return super.getSeibetsu();
+    return seibetsu;
   }
 
-  @Override
   public void setSeibetsu(String seibetsu) {
-
-    super.setSeibetsu(seibetsu);
+    this.seibetsu = seibetsu;
   }
 
-  @Override
   public Date getSeinenngappi() {
-
-    return super.getSeinenngappi();
+    return seinenngappi;
   }
 
-  @Override
   public void setSeinenngappi(Date seinenngappi) {
-
-    super.setSeinenngappi(seinenngappi);
+    this.seinenngappi = seinenngappi;
   }
 
-  @Override
-  public String getAge() {
-
-    return super.getAge();
-  }
-
-  @Override
-  public void setTanjoubi(String age) {
-
-    super.setTanjoubi(age);
-  }
-
-  @Override
-  public String getNenji() {
-
-    return super.getNenji();
-  }
-
-  @Override
-  public void setNenji(String nenji) {
-
-    super.setNenji(nenji);
-  }
-
-  @Override
   public String getSyusshin() {
-
-    return super.getSyusshin();
+    return syusshin;
   }
 
-  @Override
   public void setSyusshin(String syusshin) {
-
-    super.setSyusshin(syusshin);
+    this.syusshin = syusshin;
   }
 
-  @Override
   public String getJuusyo() {
-
-    return super.getJuusyo();
+    return juusyo;
   }
 
-  @Override
   public void setJuusyo(String juusyo) {
-
-    super.setJuusyo(juusyo);
+    this.juusyo = juusyo;
   }
+
 
 }

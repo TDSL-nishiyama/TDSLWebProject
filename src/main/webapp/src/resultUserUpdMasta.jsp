@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="model.MastaEntity,java.util.List"%>
+<%@ page import="model.MastaBean,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Path.USER_HENSYU_SCOPE);
+List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER_HENSYU_SCOPE);
 %>
 
 <!DOCTYPE html>
@@ -29,15 +29,15 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 				<th>管理者権限</th>
 			</tr>
 			<%
-			for (MastaEntity mastaEntity : mastaEntitylist) {
+			for (MastaBean mastaBean : mastaBeanlist) {
 			%>
-			<td><%=mastaEntity.getUserid()%></td>
+			<td><%=mastaBean.getUserid()%></td>
 			<td><input type=text " name="username"
-				value="<%=mastaEntity.getUserName()%>"</td>
+				value="<%=mastaBean.getUserName()%>"</td>
 			<td>
 				<%
 				//mastaEntityから選択ユーザーの管理者権限を取得してcheckedを制御
-				if (mastaEntity.getKanriFlg() == false) {
+				if (mastaBean.getKanriFlg() == false) {
 				%> 管理者権限: あり：<input type="radio" name="kanriflg" value=1>
 				なし：<input type="radio" name="kanriflg" value=0 checked> <%
  				} else {
@@ -47,10 +47,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
  				%>
 			</td>
 			<input type="hidden" name="hdnUserId"
-				value=<%=mastaEntity.getUserid()%>>
-			<%
-			}
-			%>
+				value=<%=mastaBean.getUserid()%>>
 		</table>
 		</p>
 		<table class="tableM">
@@ -65,42 +62,47 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 				<th>出身地</th>
 				<th>住所</th>
 			</tr>
-
 			<tr>
-				<td><input type="text" name="sei" value=""></td>
-				<td><input type="text" name="sei_yomi" value=""></td>
-				<td><input type="text" name="mei" value=""></td>
-				<td><input type="text" name="mei_yomi" value=""></td>
+				<td><input type="text" name="sei" value=<%=mastaBean.getSei()%>></td>
+				<td><input type="text" name="sei_yomi" value=<%=mastaBean.getSei_yomi()%>></td>
+				<td><input type="text" name="mei" value=<%=mastaBean.getMei()%>></td>
+				<td><input type="text" name="mei_yomi" value=<%=mastaBean.getMei_yomi()%>></td>
 				<td>
-				<%
-				if (true) {
-				%> <input type="radio" name="seibetsu" value="0" checked>男
-				<input type="radio" name="seibetsu" value="1">女 <input
-				type="radio" name="seibetsu" value="2">その他
-				<%--<%}else if(syainJouhouBean.getSeibetsu().equals("女")){%>
+				<%if(mastaBean.getSeibetsu().equals("0")){%>
+					<input type="radio" name="seibetsu" value="0" checked>男
+	      	<input type="radio" name="seibetsu" value="1">女
+	      	<input type="radio" name="seibetsu" value="2">その他 
+				<%}else if(mastaBean.getSeibetsu().equals("1")){%>
 				<input type="radio" name="seibetsu" value="0">男
       	<input type="radio" name="seibetsu" value="1" checked>女
       	<input type="radio" name="seibetsu" value="2">その他
       	<%}else{%>
       	<input type="radio" name="seibetsu" value="0">男
       	<input type="radio" name="seibetsu" value="1">女
-      	<input type="radio" name="seibetsu" value="2" checked>その他 --%>
+      	<input type="radio" name="seibetsu" value="2" checked>その他
       	<%}%>
-				</td>
-				<td><input type="text" name="seinenngappi" value=""></td>
+      	</td>
+				<td><input type="text" name="seinenngappi"
+					value=<%=mastaBean.getSeinenngappi()%>></td>
 				<%
 				//入社年月日は入力必須項目ではない日付項目のためNULLが出力されるケースがある
 				//NULLの場合はブランクに変換
-				String getNyuusyaYMDViwe = "";
-				if (false) {
+				String getNyuusyaYMDViwe = String.valueOf(mastaBean.getNyuusyaYMD());
+				if (mastaBean.getNyuusyaYMD() == null) {
 				  getNyuusyaYMDViwe = "";
 				}
 				%>
-				<td><input type="text" name="nyuusyaYMD" value=""></td>
-				<td><input type="text" name="syusshin" value=""></td>
-				<td><input type="text" name="juusyo" value=""></td>
+				<td><input type="text" name="nyuusyaYMD"
+					value=<%=getNyuusyaYMDViwe%>></td>
+				<td><input type="text" name="syusshin"
+					value=<%=mastaBean.getSyusshin()%>></td>
+				<td><input type="text" name="juusyo"
+					value=<%=mastaBean.getJuusyo()%>></td>
 			</tr>
 		</table>
+		<%
+			}
+			%>
 		<p>
 			<input type="submit" name="userUpd" value="更新">
 		</p>

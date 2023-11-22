@@ -14,7 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.MastaEntity;
+import model.MastaBean;
 
 /**
  * ユーザー更新実行画面のサーブレット
@@ -53,8 +53,8 @@ public class ResultUserUpdAction extends HttpServlet {
       updKoumoku.put("username", request.getParameter("username"));
       updKoumoku.put("sei", request.getParameter("sei"));
       updKoumoku.put("mei", request.getParameter("mei"));
-      updKoumoku.put("seiyomi", request.getParameter("seiyomi"));
-      updKoumoku.put("meiyomi", request.getParameter("meiyomi"));
+      updKoumoku.put("sei_yomi", request.getParameter("sei_yomi"));
+      updKoumoku.put("mei_yomi", request.getParameter("mei_yomi"));
       updKoumoku.put("nyuusyaYMD", request.getParameter("nyuusyaYMD"));
       updKoumoku.put("seibetsu", request.getParameter("seibetsu"));
       updKoumoku.put("seinenngappi", request.getParameter("seinenngappi"));
@@ -77,7 +77,7 @@ public class ResultUserUpdAction extends HttpServlet {
     }
 
     //リクエストスコープにインスタンスを保存
-    List<MastaEntity> userUpdList = userUpdBL.resultUserList(userUpdBL, updKoumoku);
+    List<MastaBean> userUpdList = userUpdBL.selectUserList(userUpdBL, updKoumoku);
     request.setAttribute(Path.USER_HENSYU_SCOPE, userUpdList);
 
     //ユーザー更新実行画面に遷移
