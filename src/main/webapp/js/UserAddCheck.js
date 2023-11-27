@@ -19,18 +19,18 @@ function checkUserAdd() {
 	var juusyo = document.userInsert.juusyo.value;
 
 	var almsg = "";
-
-	if (Trim(userName) == "") {
-		almsg = "必須項目を入力してください"
-	}
-
+	var msg1="必須項目を入力してください";
+	
 	/*必須項目チェック処理*/
-	if (Trim(userName) == "" || Trim(kanriFlg) == "" || Trim(sei) == "" || Trim(seiyomi) == "" || Trim(mei) == "" || Trim(meiyomi) == ""
-		|| Trim(seibetsu) == "" || Trim(seinenngappi) == "" || Trim(juusyo) == "") {
-		almsg = "必須項目を入力してください"
+	if (Trim(userName) == "") {
+		almsg = msg1;
+		alert(almsg);
+		return false;
 	}
 
 	/*日付形式チェック処理*/
+	
+	/*日付存在チェック処理*/
 	
 	/*エラー判定処理*/
 	if (almsg == "") {

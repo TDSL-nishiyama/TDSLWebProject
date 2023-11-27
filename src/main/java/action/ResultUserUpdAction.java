@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import constents.Const.MSG;
 import constents.Const.Path;
 import control.SyainJouhouBL;
@@ -32,16 +31,29 @@ public class ResultUserUpdAction extends HttpServlet {
     UserUpdBL userUpdBL = new UserUpdBL();
 
     //選択したユーザーID
-    String id = request.getParameter("userIdUpd");
+    int id = Integer.parseInt(request.getParameter("userIdUpd"));
     updKoumoku.put("userIdUpd", id);
+    
+    boolean errflg = false;
+    //入力されたIDが存在しない場合、メッセージを表示
+    errflg = userUpdBL.userUpdCheck(id);
+    if (errflg == false) {
+      //メッセージを格納
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_UPD_1);
+      //ユーザー削除画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.USER_UPD_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    }
 
     //更新処理(ResultUserUpdhdn項目で判定)
     if (request.getParameter("hdnUserId") != null) {
-      id = request.getParameter("hdnUserId");
+      id = Integer.parseInt(request.getParameter("hdnUserId"));
       String name = request.getParameter("username");
       String kanriflg = request.getParameter("kanriflg");
 
-      //画面情報の格納
+      //画面情報の格納(userテーブル)
       updKoumoku.put("userIdUpd", id);
       updKoumoku.put("username", name);
       updKoumoku.put("kanriflg", kanriflg);
@@ -49,7 +61,7 @@ public class ResultUserUpdAction extends HttpServlet {
       //ユーザー情報のアップデート(userテーブル)実行
       userUpdBL.updUserList(updKoumoku);
 
-      //画面情報の格納
+      //画面情報の格納(usershousaiテーブル)
       updKoumoku.put("username", request.getParameter("username"));
       updKoumoku.put("sei", request.getParameter("sei"));
       updKoumoku.put("mei", request.getParameter("mei"));
@@ -63,7 +75,7 @@ public class ResultUserUpdAction extends HttpServlet {
 
       //ユーザー詳細情報のアップデート（usershousaiテーブル）実行
       SyainJouhouBL syainJouhouBL = new SyainJouhouBL(Boolean.valueOf(kanriflg));
-      syainJouhouBL.syainJouhouUpd(updKoumoku, Integer.parseInt(id));
+      syainJouhouBL.syainJouhouUpd(updKoumoku, id);
 
       //メッセージ設定
       StringBuilder sb = new StringBuilder();
@@ -77,7 +89,7 @@ public class ResultUserUpdAction extends HttpServlet {
     }
 
     //リクエストスコープにインスタンスを保存
-    List<MastaBean> userUpdList = userUpdBL.selectUserList(userUpdBL, updKoumoku);
+    List<MastaBean> userUpdList = userUpdBL.selectUserList(updKoumoku);
     request.setAttribute(Path.USER_HENSYU_SCOPE, userUpdList);
 
     //ユーザー更新実行画面に遷移

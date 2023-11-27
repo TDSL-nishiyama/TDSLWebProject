@@ -61,6 +61,14 @@ public class Const {
     public static final String UPDPASS_1 = "ユーザーの登録が完了しました。再度ログインをお願いします";
     public static final String UPDPASS_2 = "パスワードの更新が完了しました";
     
+    //マスタ_登録
+    public static final String MASTA_ADD_1_1 = "必須項目（";
+    public static final String MASTA_ADD_1_2 = "）を入力してください";
+    public static final String MASTA_ADD_2 = "ユーザーの登録が完了しました";
+    
+    //マスタ_更新
+    public static final String MASTA_UPD_1 = "入力されたIDは存在しません";
+    
     //マスタ_削除
     public static final String MASTA_DEL_1 = "入力されたIDは存在しません";
     public static final String MASTA_DEL_2 = "現在ログインしているユーザーは削除できません";

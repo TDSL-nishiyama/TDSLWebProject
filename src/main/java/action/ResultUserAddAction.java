@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import constents.Const.MSG;
 import constents.Const.Path;
 import control.UserAddBL;
 import jakarta.servlet.RequestDispatcher;
@@ -36,13 +37,33 @@ public class ResultUserAddAction extends HttpServlet {
     gamenInfo.put("seinenngappi", request.getParameter("seinenngappi"));
     gamenInfo.put("syusshin", request.getParameter("syusshin"));
     gamenInfo.put("juusyo", request.getParameter("juusyo"));
-
-    //ユーザー登録
+    
+    //インスタンス化
     UserAddBL userAddBL = new UserAddBL();
+    
+    //必須項目チェック
+    boolean errflg = false;
+    String userName = gamenInfo.get("username");
+    errflg = userAddBL.userAddCheck(userName);
+    if (errflg == false) {
+      //メッセージを格納
+      StringBuilder sb = new StringBuilder();
+      sb.append(MSG.MASTA_ADD_1_1);
+      sb.append("userName");
+      sb.append(MSG.MASTA_ADD_1_2);
+      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+      //ユーザー登録画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.USER_ADD_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    }
+    
+    //ユーザー登録
     userAddBL.userAdd(gamenInfo);
 
     //登録完了メッセージ
-    request.setAttribute("MSG", "ユーザー登録が完了しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_ADD_2);
     //マスタ画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.USER_ADD_GAMEN);

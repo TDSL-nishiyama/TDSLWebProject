@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +7,21 @@
 <title>ユーザー削除画面</title>
 </head>
 <body>
+  <form name="toUserIchiran" action="<%=request.getContextPath()%>/UserIchiranAction" method="post">
+    <p>
+      <input type="submit" name="toMasta" value="ユーザー一覧">
+    </p>
+  </form>
   <%@ include file="../msg.jsp"%>
-  <form name="userDelete"
-    action="<%=request.getContextPath()%>/ResultUserDelAction"
-    method="post">
+  <form name="userDelete" action="<%=request.getContextPath()%>/ResultUserDelAction" method="post">
     削除するユーザーIDを入力してください
     <p>
-      ユーザーID：<input type="text" name="userIdDel">
+      ユーザーID：
+      <input type="text" name="userIdDel">
       <input type="submit" name="userDel" value="削除">
     </p>
     <%//TODO ユーザー削除の際に退社年月日をユーザー詳細テーブルに挿入 %>
-    
+
   </form>
 
   <p>
