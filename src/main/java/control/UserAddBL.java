@@ -10,21 +10,25 @@ import model.SyainJouhouEntity;
 public class UserAddBL {
 
   /**
-   *{@index必須項目確認} 
+   *{@index 必須項目確認} 
    * @param chkKoumoku チェックしたい項目名（対象画面情報のvalue）
-   * @return
+   * @return エラーの可否 true = 正常　false = 異常
    */
-  public boolean userAddCheck(String chkKoumoku) {
+  public boolean checkHissu(String chkKoumoku) {
 
-    boolean result = true;
+    boolean result= true;
 
     if (chkKoumoku.trim() == "") {
       result = false;
     }
     return result;
   }
-
-  public void userAdd(Map<String, String> addKoumoku) {
+  
+  /**
+   * {@index ユーザー追加実行処理} 
+   * @param addKoumoku
+   */
+  public void addUser(Map<String, String> addKoumoku) {
 
     int userid = 0;
     boolean kanriFlg = false;

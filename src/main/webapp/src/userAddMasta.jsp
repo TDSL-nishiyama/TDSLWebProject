@@ -63,13 +63,13 @@
           <span class="req">※</span>姓(ﾖﾐ)：
         </td>
         <td>
-          <input type="text" name="seiyomi">
+          <input type="text" name="sei_yomi">
         </td>
         <td>
           <span class="req">※</span>名(ﾖﾐ)：
         </td>
         <td>
-          <input type="text" name="meiyomi">
+          <input type="text" name="mei_yomi">
         </td>
       </tr>
       <tr>

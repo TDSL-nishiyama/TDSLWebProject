@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="model.MastaEntity,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
@@ -16,13 +15,13 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 <title>ユーザー一覧</title>
 </head>
 <body>
-  <form action=<%=request.getContextPath()%>/UserAddAction method="post">
+  <form action=<%=request.getContextPath()%> /UserAddAction method="post">
     <p>
       <input type="submit" value="ユーザーの追加">
     </p>
   </form>
 
-  <form name="toResultUserIchiran" action=<%=request.getContextPath()%>/ResultUserIchiranAction method="post">
+  <form name="toResultUserIchiran" action=<%=request.getContextPath()%> /ResultUserIchiranAction method="post">
     <p>
       <input type="submit" value="削除されたユーザーも含めて表示">
     </p>
@@ -31,7 +30,7 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
   <!--TODO 仕様迷い中、ページディレクションのJSPのみでの実装がしんどい  -->
   <!-- 11人目以降は2ページ目  -->
   <!-- 最大表示数は100人 -->
-  <table border="1">
+  <table class="tableM">
     <tr>
       <th>ID</th>
       <th>ログインID</th>
@@ -57,22 +56,19 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
       } else {
         kanriFlgView = "×";
       }
-      %> <%=kanriFlgView%>
+      %>
+      <%=kanriFlgView%>
     </td>
     <td>
-      <form action="<%=request.getContextPath()%>/ResultUserUpdAction"
-        method="post">
-        <input type="hidden" name="userIdUpd"
-          value="<%=mastaEntity.getUserid()%>"> <input type="submit"
-          value="更新"><br>
+      <form action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="<%=mastaEntity.getUserid()%>">
+        <input type="submit" value="更新">
       </form>
     </td>
     <td>
-      <form action="<%=request.getContextPath()%>/ResultUserDelAction"
-        method="post">
-        <input type="hidden" name="userIdDel"
-          value="<%=mastaEntity.getUserid()%>"> <input type="submit"
-          value="削除"><br>
+      <form action="<%=request.getContextPath()%>/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="<%=mastaEntity.getUserid()%>">
+        <input type="submit" value="削除">
       </form>
     </td>
     </tr>

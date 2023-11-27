@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * ユーザー登録画面のサーブレット
+ * ユーザー登録実行画面のサーブレット
  */
 public class UserAddAction extends HttpServlet {
   private static final long serialVersionUID = 1L;
