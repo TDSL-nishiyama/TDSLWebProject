@@ -29,3 +29,12 @@ white-space: nowrap;
 padding: 0;
 border: solid 1px #000;
 }
+
+table.table-login {
+border-collapse: collapse;
+}
+table.table-login th,
+table.table-login td {
+white-space: nowrap;
+padding:5px;
+}
