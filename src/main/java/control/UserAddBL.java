@@ -1,9 +1,11 @@
 package control;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import control.common.CastCommon;
+import control.common.CheckCommon;
 import model.MastaEntity;
 import model.SyainJouhouEntity;
 
@@ -12,18 +14,37 @@ public class UserAddBL {
   /**
    *{@index 必須項目確認} 
    * @param chkKoumoku チェックしたい項目名（対象画面情報のvalue）
-   * @return エラーの可否 true = 正常　false = 異常
+   * @return key:errflg エラーの可否 true = 正常　false = 異常
+   * @return key:errMsgKoumoku hissuKoumokuの中でエラーとなった項目
    */
-  public boolean checkHissu(String chkKoumoku) {
-
-    boolean result= true;
-
-    if (chkKoumoku.trim() == "") {
-      result = false;
+  public Map<String,Object> checkHissu(Map<String,String> gamenInfo,Map<String,String> hissuKoumoku) {
+    Map<String,Object> result = new HashMap<>();
+    boolean errflg = true;
+    String errMsgKoumoku = null;
+    result.put("errflg", errflg);
+    result.put("errMsgKoumoku", errMsgKoumoku);
+    CheckCommon checkCommon = new CheckCommon();
+    
+    //画面項目のvalue値分検索、必須項目のkey値と一致した場合、
+    //必須チェックを行いエラーだった場合、必須項目のValueをメッセージとして格納
+    loop: for (String gamen : gamenInfo.keySet()) {
+      for (String hissu : hissuKoumoku.keySet())
+        if (gamen == hissu) {
+          errflg = checkCommon.checkBlankOrNULL(gamenInfo.get(gamen));
+          result.put("errflg", errflg);
+          if (errflg == false) {
+            errMsgKoumoku = hissuKoumoku.get(hissu);
+            result.put("errMsgKoumoku", errMsgKoumoku);
+            break loop;
+          } else {
+            break;
+          }
+        }
     }
+
     return result;
   }
-  
+
   /**
    * {@index ユーザー追加実行処理} 
    * @param addKoumoku
@@ -34,7 +55,6 @@ public class UserAddBL {
     boolean kanriFlg = false;
     String loginId = "";
     String loginPassword = "";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     Date nyuusyaYMD = null;
     Date seinenngappi = null;
 
@@ -45,17 +65,14 @@ public class UserAddBL {
     loginId = "kari" + String.valueOf(userid);
     loginPassword = "tdsl";
     //String→Dateの変換
-    try {
-      nyuusyaYMD = sdf.parse(addKoumoku.get("nyuusyaYMD"));
-      seinenngappi = sdf.parse(addKoumoku.get("seinenngappi"));
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
+    CastCommon castCommon = new CastCommon();
+    nyuusyaYMD = castCommon.chgStrToDate(addKoumoku.get("nyuusyaYMD"));
+    seinenngappi = castCommon.chgStrToDate(addKoumoku.get("seinenngappi"));
 
     //コンスタラクタでEntityに値を設定
     MastaEntity mastaEntity = new MastaEntity(userid, addKoumoku.get("username"), kanriFlg, loginId, loginPassword);
     SyainJouhouEntity syainJouhouEntity = new SyainJouhouEntity(userid,
-        addKoumoku.get("sei"), addKoumoku.get("seiyomi"), addKoumoku.get("mei"), addKoumoku.get("meiyomi"), nyuusyaYMD,
+        addKoumoku.get("sei"), addKoumoku.get("sei_yomi"), addKoumoku.get("mei"), addKoumoku.get("mei_yomi"), nyuusyaYMD,
         addKoumoku.get("seibetsu"), seinenngappi, addKoumoku.get("syusshin"), addKoumoku.get("juusyo"));
 
     //各種テーブルへの登録

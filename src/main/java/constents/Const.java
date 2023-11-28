@@ -49,6 +49,7 @@ public class Const {
     public static final String BEFORE_LOGIN = "loginBefore";
     public static final String USER_ATTRIBUTE = "userAttribute";
     public static final String USER_ICHIRAN_SCOPE = "userIchiran";
+    public static final String USER_ADD_SCOPE = "userAdd";
     public static final String USER_HENSYU_SCOPE = "userHensyu";
 
   }
@@ -56,6 +57,8 @@ public class Const {
   //正常系メッセージ関連
   public static final class MSG {
     public static final String MSG_ATTRIBUTE = "MSG";
+    //汎用
+    public static final String ERROR_SETLENIENT = "存在しない日付です";
     
     //パスワード登録更新
     public static final String UPDPASS_1 = "ユーザーの登録が完了しました。再度ログインをお願いします";

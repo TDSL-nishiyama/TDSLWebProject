@@ -34,7 +34,7 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
       </td>
       <td>
         <%
-        //mastaEntityから選択ユーザーの管理者権限を取得してcheckedを制御
+        //mastaBeanから選択ユーザーの管理者権限を取得してcheckedを制御
         if (mastaBean.getKanriFlg() == false) {
         %>
         管理者権限: あり：
