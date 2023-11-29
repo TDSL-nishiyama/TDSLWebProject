@@ -2,6 +2,8 @@ package control.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckCommon {
 
@@ -31,4 +33,27 @@ public class CheckCommon {
 
     return result;
   }
+  
+  public int checkUserId(int userId) {
+    
+    int result = 0;
+    List<Object> statement = new ArrayList<>();
+    statement.add(userId);
+    DAOCommon dao = new DAOCommon();
+    result = dao.countSQL("checkUserId.sql", statement);
+
+    return result;
+  }
+  
+  public int checkUserIdAll(int userId) {
+    
+    int result = 0;
+    List<Object> statement = new ArrayList<>();
+    statement.add(userId);
+    DAOCommon dao = new DAOCommon();
+    result = dao.countSQL("checkUserIdAll.sql", statement);
+
+    return result;
+  }
+
 }

@@ -13,7 +13,7 @@ public class CastCommon {
       return result;
     }
     
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     try {
       result = sdf.parse(date);
       sdf.format(result);

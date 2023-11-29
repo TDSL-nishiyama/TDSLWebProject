@@ -1,11 +1,11 @@
 package control;
 
+import java.sql.SQLException;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import constents.UserShousai;
 import model.SyainJouhouBean;
 import model.SyainJouhouEntity;
@@ -180,17 +180,14 @@ public class SyainJouhouBL {
    * @param updKoumoku　アップデートする項目
    * @param pUpdId　編集するユーザーID
    * @return
+   * @throws SQLException 
    */
-  public void syainJouhouUpd(Map<String, Object> updKoumoku, int pUpdId) {
+  public void syainJouhouUpd(Map<String, Object> updKoumoku, int pUpdId) throws SQLException {
 
     SyainJouhouDAO dao = new SyainJouhouDAO();
     List<Object> statement = new ArrayList<>();
     //TODO 将来的に一般ユーザーでも特定の項目を編集できるようにするためSQLファイル名は呼び出し側で指定
     String fileName = "updUserShousai.sql";
-
-    //性別の値をDB格納用に戻す（例：男→"0")
-
-//      String seibetsu = putSeibetsu(updKoumoku.get(UserShousai.COL_SEIBETSU).toString());
 
     /*実行クエリ
      * UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?,nyuusyaYMD=?,seibetsu=?
@@ -261,26 +258,6 @@ public class SyainJouhouBL {
 
     return result;
   }
-
-//  private String putSeibetsu(String seibetsuView) {
-//
-//    String result = null;
-//    switch (seibetsuView) {
-//    case "男":
-//      result = "0";
-//      break;
-//    case "女":
-//      result = "1";
-//      break;
-//    case "その他":
-//      result = "2";
-//      break;
-//    default:
-//      result = "2";
-//    }
-//
-//    return result;
-//  }
 
   private String setAge(Date seinenngappi) {
 

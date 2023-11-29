@@ -1,6 +1,7 @@
 package action;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import constents.Const.Common;
 import constents.Const.ERRORMSG;
@@ -80,12 +81,33 @@ public class ResultUpdatePasswordAction extends HttpServlet {
 
       //ユーザーの登録
       String loginIdBefore = (String) session.getAttribute(Path.BEFORE_LOGIN);
-      resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
+      try {
+        resultUpdatePasswordBL.updateUserPassword(loginIdBefore, loginId, password);
+      } catch (SQLException e) {
+        //エラーメッセージを格納
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.DBERROR);
+        //エラー画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+        dispatcher.forward(request, response);
+        return;
+      }
       resultMSG = MSG.UPDPASS_1;
       //既存ユーザーの場合
     } else {
       //パスワードの更新
-      resultUpdatePasswordBL.updatePassword(loginId, password);
+      
+      try {
+        resultUpdatePasswordBL.updatePassword(loginId, password);
+      } catch (SQLException e) {
+        //エラーメッセージを格納
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.DBERROR);
+        //エラー画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+        dispatcher.forward(request, response);
+        return;
+      }
       resultMSG = MSG.UPDPASS_2;
     }
 

@@ -1,10 +1,12 @@
 package action;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import constents.Const.Path;
 import constents.UserShousai;
@@ -63,9 +65,18 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
 
     //データ更新処理
     SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);
-    syainJouhouBL.syainJouhouUpd(updKoumoku, updUserId);
+    try {
+      syainJouhouBL.syainJouhouUpd(updKoumoku, updUserId);
+    } catch (SQLException e) {
+      //エラーメッセージを格納
+      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.DBERROR);
+      //エラー画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    }
 
-    
     //ユーザー情報を取得
     List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhouHensyu(syainJouhouBL, updUserId);
 
@@ -78,7 +89,7 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
     sb.append(syainJouhouBLlist.get(0).getName());
     sb.append("さんの情報を更新しました");
     request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
-    
+
     //リクエストスコープにインスタンスを保存
     request.setAttribute(Path.SYAIN_HENSYU_SCOPE, syainJouhouBLlist);
     // 社員情報編集画面に遷移

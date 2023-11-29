@@ -1,11 +1,14 @@
 package action;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import constents.Const.Path;
 import control.UserAddBL;
@@ -153,7 +156,16 @@ public class ResultUserAddAction extends HttpServlet {
     }
 
     //ユーザー登録
-    userAddBL.addUser(gamenInfo);
+    try {
+      userAddBL.addUser(gamenInfo);
+    } catch (SQLException e) {
+      //エラーメッセージを格納
+      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.DBERROR);
+      //エラー画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+      dispatcher.forward(request, response);
+    }
     
     //画面で設定した値を削除してリクエストスコープに値を設定
     MastaBean bean = new MastaBean("",false,"","","","",null,"",null,"","");

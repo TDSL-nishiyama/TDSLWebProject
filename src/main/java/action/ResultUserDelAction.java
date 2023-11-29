@@ -1,6 +1,7 @@
 package action;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import constents.Const.Path;
 import constents.Const.MSG;
@@ -60,7 +61,11 @@ public class ResultUserDelAction extends HttpServlet {
     
     } else {
       //ユーザー削除を実行
-      userDelBL.userDel(userIdDel);
+      try {
+        userDelBL.userDel(userIdDel);
+      } catch (SQLException e) {
+
+      }
       //TODO ユーザー詳細TBLの退社年月日に退社日を挿入
 
       //登録完了メッセージ

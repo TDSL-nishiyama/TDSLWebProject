@@ -5,7 +5,7 @@
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
-List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER_HENSYU_SCOPE);
+List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER_UPD_SCOPE);
 %>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
       %>
       <td><%=mastaBean.getUserid()%></td>
       <td>
-        <input type=text " name="username" value="<%=mastaBean.getUserName()%>"
+        <input type=text " name="userName" value="<%=mastaBean.getUserName()%>"
       </td>
       <td>
         <%
@@ -38,16 +38,16 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
         if (mastaBean.getKanriFlg() == false) {
         %>
         管理者権限: あり：
-        <input type="radio" name="kanriflg" value=1>
+        <input type="radio" name="kanriFlg" value=1>
         なし：
-        <input type="radio" name="kanriflg" value=0 checked>
+        <input type="radio" name="kanriFlg" value=0 checked>
         <%
         } else {
         %>
         管理者権限: あり：
-        <input type="radio" name="kanriflg" value=1 checked>
+        <input type="radio" name="kanriFlg" value=1 checked>
         なし：
-        <input type="radio" name="kanriflg" value=0>
+        <input type="radio" name="kanriFlg" value=0>
         <%
         }
         %>
@@ -111,7 +111,15 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
           <%}%>
         </td>
         <td>
-          <input type="text" name="seinenngappi" value=<%=mastaBean.getSeinenngappi()%>>
+        <%
+        //エラー時に生年月日がNULLで入力されてしまうためブランクに変換
+        //NULLの場合はブランクに変換
+        String getSeinenngappiView = String.valueOf(mastaBean.getSeinenngappi());
+        if (mastaBean.getSeinenngappi() == null) {
+          getSeinenngappiView = "";
+        }
+        %>
+          <input type="text" name="seinenngappi" value=<%=getSeinenngappiView%>>
         </td>
         <%
         //入社年月日は入力必須項目ではない日付項目のためNULLが出力されるケースがある

@@ -1,5 +1,6 @@
 package control;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import control.common.DBAccess;
 
 public class LoginDAOInsertUpdate extends DAOCommon implements DBAccess {
 
-  public void updateUserAndPassword(String loginIdBefore,String pLoginIdAfter, String pLoginPassword) {
+  public void updateUserAndPassword(String loginIdBefore,String pLoginIdAfter, String pLoginPassword) throws SQLException {
     
     List<Object> statement = new ArrayList<Object>();
     statement.add(pLoginIdAfter);
@@ -20,7 +21,7 @@ public class LoginDAOInsertUpdate extends DAOCommon implements DBAccess {
   }
   
 
-  public void updatePassword(String pLoginId, String pLoginPassword) {
+  public void updatePassword(String pLoginId, String pLoginPassword) throws SQLException {
 
     List<Object> statement = new ArrayList<Object>();
     statement.add(pLoginPassword);

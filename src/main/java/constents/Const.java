@@ -50,6 +50,7 @@ public class Const {
     public static final String USER_ATTRIBUTE = "userAttribute";
     public static final String USER_ICHIRAN_SCOPE = "userIchiran";
     public static final String USER_ADD_SCOPE = "userAdd";
+    public static final String USER_UPD_SCOPE = "userUpd";
     public static final String USER_HENSYU_SCOPE = "userHensyu";
 
   }
@@ -71,6 +72,8 @@ public class Const {
     
     //マスタ_更新
     public static final String MASTA_UPD_1 = "入力されたIDは存在しません";
+    public static final String MASTA_UPD_2_1 = "必須項目（";
+    public static final String MASTA_UPD_2_2 = "）を入力してください";
     
     //マスタ_削除
     public static final String MASTA_DEL_1 = "入力されたIDは存在しません";
@@ -81,6 +84,9 @@ public class Const {
   //エラー関連
   public static final class ERRORMSG {
     public static final String ERRMSG_ATTRIBUTE = "ERRMSG";
+    //汎用
+    public static final String DBERROR = "テーブル更新が正常に行われませんでした";
+    
     //ログイン・パスワード登録更新
     public static final String ERR_1 = "IDを入力してください";
     public static final String ERR_2 = "パスワードを入力してください";

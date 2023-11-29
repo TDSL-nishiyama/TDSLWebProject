@@ -20,16 +20,6 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
 
   private String sqlPath = Common.SQL_FILE_PATH;
 
-  public int checkUserId(MastaEntity mastaEntity) {
-
-    int result = 0;
-    List<Object> statement = new ArrayList<>();
-    statement.add(String.valueOf(mastaEntity.getUserid()));
-    result = super.countSQL("checkUserId.sql", statement);
-
-    return result;
-  }
-
   public List<MastaEntity> getUserIchiran(String fileName) {
 
     List<MastaEntity> returnList = new ArrayList<>();

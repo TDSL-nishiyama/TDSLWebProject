@@ -1,5 +1,10 @@
 package control;
 
+import java.sql.SQLException;
+
+import constents.Const.ERRORMSG;
+import control.common.DAOCommon;
+
 public class ResultUpdatePasswordBL {
   
   //IDの規約チェック
@@ -14,18 +19,36 @@ public class ResultUpdatePasswordBL {
     return result;
   }
   
-  public void updateUserPassword(String loginIdBefore,String pLoginId,String pPassword){
+  public void updateUserPassword(String loginIdBefore,String pLoginId,String pPassword) throws SQLException{
 
-    //新規ログインIDとパスワードの登録
-    LoginDAOInsertUpdate insDAO = new LoginDAOInsertUpdate();
-    insDAO.updateUserAndPassword(loginIdBefore,pLoginId, pPassword);
+    DAOCommon dao = new DAOCommon();
+    try {
+      //トランザクション開始
+      dao.startTransaction();
+      //新規ログインIDとパスワードの登録
+      LoginDAOInsertUpdate insDAO = new LoginDAOInsertUpdate();
+      insDAO.updateUserAndPassword(loginIdBefore,pLoginId, pPassword);
+    }catch(SQLException e) {
+      dao.endTransactionFalse();
+      throw new SQLException(ERRORMSG.DBERROR);
+    }
+    dao.endTransactionTrue();
   }
   
-  public void updatePassword(String pUserId,String pPassword){
+  public void updatePassword(String pUserId,String pPassword) throws SQLException{
     
-    //パスワードの更新
-    LoginDAOInsertUpdate upDAO = new LoginDAOInsertUpdate();
-    upDAO.updatePassword(pUserId,pPassword);
+    DAOCommon dao = new DAOCommon();
+    try {
+      //トランザクション開始
+      dao.startTransaction();
+      //パスワードの更新
+      LoginDAOInsertUpdate upDAO = new LoginDAOInsertUpdate();
+      upDAO.updatePassword(pUserId,pPassword);
+    }catch(SQLException e) {
+      dao.endTransactionFalse();
+      throw new SQLException();
+    }
+    dao.endTransactionTrue();
   }
   
 }

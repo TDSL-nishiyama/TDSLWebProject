@@ -1,11 +1,13 @@
 package control;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import control.common.CastCommon;
 import control.common.CheckCommon;
+import control.common.DAOCommon;
 import model.MastaEntity;
 import model.SyainJouhouEntity;
 
@@ -17,14 +19,14 @@ public class UserAddBL {
    * @return key:errflg エラーの可否 true = 正常　false = 異常
    * @return key:errMsgKoumoku hissuKoumokuの中でエラーとなった項目
    */
-  public Map<String,Object> checkHissu(Map<String,String> gamenInfo,Map<String,String> hissuKoumoku) {
-    Map<String,Object> result = new HashMap<>();
+  public Map<String, Object> checkHissu(Map<String, String> gamenInfo, Map<String, String> hissuKoumoku) {
+    Map<String, Object> result = new HashMap<>();
     boolean errflg = true;
     String errMsgKoumoku = null;
     result.put("errflg", errflg);
     result.put("errMsgKoumoku", errMsgKoumoku);
     CheckCommon checkCommon = new CheckCommon();
-    
+
     //画面項目のvalue値分検索、必須項目のkey値と一致した場合、
     //必須チェックを行いエラーだった場合、必須項目のValueをメッセージとして格納
     loop: for (String gamen : gamenInfo.keySet()) {
@@ -48,8 +50,9 @@ public class UserAddBL {
   /**
    * {@index ユーザー追加実行処理} 
    * @param addKoumoku
+   * @throws SQLException 
    */
-  public void addUser(Map<String, String> addKoumoku) {
+  public void addUser(Map<String, String> addKoumoku) throws SQLException {
 
     int userid = 0;
     boolean kanriFlg = false;
@@ -72,25 +75,31 @@ public class UserAddBL {
     //コンスタラクタでEntityに値を設定
     MastaEntity mastaEntity = new MastaEntity(userid, addKoumoku.get("username"), kanriFlg, loginId, loginPassword);
     SyainJouhouEntity syainJouhouEntity = new SyainJouhouEntity(userid,
-        addKoumoku.get("sei"), addKoumoku.get("sei_yomi"), addKoumoku.get("mei"), addKoumoku.get("mei_yomi"), nyuusyaYMD,
+        addKoumoku.get("sei"), addKoumoku.get("sei_yomi"), addKoumoku.get("mei"), addKoumoku.get("mei_yomi"),
+        nyuusyaYMD,
         addKoumoku.get("seibetsu"), seinenngappi, addKoumoku.get("syusshin"), addKoumoku.get("juusyo"));
 
     //各種テーブルへの登録
     MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();
+    DAOCommon dao = new DAOCommon();
+    try {
+      //トランザクションの開始
+      dao.startTransaction();
+      //ユーザーテーブル登録
+      useraddDAOInsUp.InsertUser(mastaEntity);
 
-    //TODO　トランザクションの開始終了処理
+      //ログインテーブル仮登録
+      useraddDAOInsUp.InsertLogin(mastaEntity);
 
-    //ユーザーテーブル登録
-    useraddDAOInsUp.InsertUser(mastaEntity);
+      //ユーザー詳細テーブル仮登録
+      useraddDAOInsUp.InsertUserShoisai(syainJouhouEntity);
 
-    //ログインテーブル仮登録
-    useraddDAOInsUp.InsertLogin(mastaEntity);
-
-    //ユーザー詳細テーブル仮登録
-    useraddDAOInsUp.InsertUserShoisai(syainJouhouEntity);
-
-    //エラー項目が一つでもある場合、システムエラー
-
-    //トランザクションの終了
+    } catch (Exception e) {
+      //ロールバック（異常終了）
+      dao.endTransactionFalse();
+      throw new SQLException();
+    }
+    //コミット（正常終了）
+    dao.endTransactionTrue();
   }
 }

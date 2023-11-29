@@ -41,7 +41,7 @@ public class DAOCommon implements DBAccess {
     try {
       //発行
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-      if (statement!=null) {
+      if (statement != null) {
         int cnt = statement.size(); //ステートメントを設定する数
         for (int i = 0; i < cnt; i++) {
           pStmt.setObject(i + 1, statement.get(i));
@@ -119,6 +119,7 @@ public class DAOCommon implements DBAccess {
    * @param column 取得したいカラム名　List<String>
    * @param statement PreparedStatmentの内容　List<Object>
    * @return selectの結果(List)
+   * @throws SQLException 
    */
   protected List<Object> selectSQL(String fileName, List<String> column, List<Object> statement) {
 
@@ -174,8 +175,9 @@ public class DAOCommon implements DBAccess {
    * @param fileName 実行したいSQLファイルの名前
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return selectの結果(List)
+   * @throws SQLException 
    */
-  protected void executeDML(String fileName, List<Object> statement) {
+  protected void executeDML(String fileName, List<Object> statement) throws SQLException {
 
     sqlPath += fileName;
 
@@ -202,8 +204,6 @@ public class DAOCommon implements DBAccess {
       }
       //クエリの実行
       pStmt.execute();
-    } catch (SQLException e) {
-      e.printStackTrace();
     } finally {
       //SQLファイルパスの初期化
       sqlPath = Common.SQL_FILE_PATH;
@@ -214,23 +214,88 @@ public class DAOCommon implements DBAccess {
 
   /**
    *{@index} トランザクション開始処理
+   * @throws SQLException 
    **/
-  protected void startTransaction() {
+  public void startTransaction() throws SQLException {
+    //JDBC接続
+    DBAccess.super.loadJDBCDriver();
 
+    //DB接続
+    Connection conn = null;
+    conn = DBAccess.super.connectionDB(conn);
+    conn.setAutoCommit(false);
+
+    //SQL文の作成
+    String sql = null;
+    sql = "START TRANSACTION";
+
+    //クエリの発行・格納
+    //発行
+    PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+    //クエリの実行
+    pStmt.execute();
   }
 
   /**
    *{@index} トランザクション終了処理（正常系）
+   * @throws SQLException 
    **/
-  protected void endTransactionTrue() {
+  public void endTransactionTrue() {
+    //JDBC接続
+    DBAccess.super.loadJDBCDriver();
 
+    //DB接続
+    Connection conn = null;
+    conn = DBAccess.super.connectionDB(conn);
+
+    //SQL文の作成
+    String sql = null;
+    sql = "COMMIT";
+
+    //クエリの発行・格納
+    //発行
+    PreparedStatement pStmt;
+    try {
+      pStmt = conn.prepareStatement(sql.toString());
+      //クエリの実行
+      pStmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      //DB切断
+      DBAccess.super.closeDB(conn);
+    }
   }
 
   /**
    *{@index} トランザクション終了処理（異常系）
+   * @throws SQLException 
    **/
-  protected void endTransactionFalse() {
+  public void endTransactionFalse() {
+    //JDBC接続
+    DBAccess.super.loadJDBCDriver();
 
+    //DB接続
+    Connection conn = null;
+    conn = DBAccess.super.connectionDB(conn);
+
+    //SQL文の作成
+    String sql = null;
+    sql = "ROLLBACK";
+
+    //クエリの発行・格納
+    //発行
+    PreparedStatement pStmt;
+    try {
+      pStmt = conn.prepareStatement(sql.toString());
+      //クエリの実行
+      pStmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      //DB切断
+      DBAccess.super.closeDB(conn);
+    }
   }
 
   /**

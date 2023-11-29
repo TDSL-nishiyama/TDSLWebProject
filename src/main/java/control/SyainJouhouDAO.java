@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import constents.Const.Common;
 import control.common.DAOCommon;
 import control.common.DBAccess;
@@ -154,12 +153,19 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
    * {@index} 社員情報の更新を実施(usershousaiテーブル)
    * @param fileName 実行したいSQLファイルの名前
    * @param updKoumoku アップデートしたい項目
+   * @throws SQLException 
    */
-  public void updateSyainJouhou(String fileName,List<Object> updKoumoku) {
+  public void updateSyainJouhou(String fileName,List<Object> updKoumoku) throws SQLException {
     
-    super.executeDML(fileName, updKoumoku);
-    sqlPath = Common.SQL_FILE_PATH;
-    
+    try {
+      super.startTransaction();
+      super.executeDML(fileName, updKoumoku);
+    } catch (SQLException e) {
+      super.endTransactionFalse();
+      throw new SQLException();
+    }finally {
+      sqlPath = Common.SQL_FILE_PATH;
+    }
+    super.endTransactionTrue();
   }
-  
 }
