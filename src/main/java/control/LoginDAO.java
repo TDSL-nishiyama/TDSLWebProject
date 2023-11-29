@@ -1,15 +1,18 @@
 package control;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import control.common.DAOCommon;
 import control.common.DBAccess;
 
 public class LoginDAO extends DAOCommon implements DBAccess {
-
-  public List<Object> findLoginIdtoId(String pLoginId)  {
+  
+  /**
+   * {@index} loginidからIDを検索する（セッションでIDを保持していない画面での利用を想定）
+   * @param pLoginId ログインID
+   * @return pLoginIdに紐づくid
+   */
+  public List<Object> findLoginIdtoId(String pLoginId) {
 
     List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<>();
@@ -23,8 +26,10 @@ public class LoginDAO extends DAOCommon implements DBAccess {
 
     return result;
   }
-
-  //IDの最大値取得用
+  /**
+   * {@index} IDの最大値取得用
+   * @return userテーブルのid項目の最大値
+   */
   public int maxUserId() {
 
     int resultCount = 0;
@@ -33,7 +38,11 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     return resultCount;
   }
 
-  //loginidの重複チェック用
+  /**
+   * {@index} loginidの重複チェック用
+   * @param pLoginId ログインID
+   * @return 1=ID重複あり
+   */
   public int countLoginId(String pLoginId) {
 
     List<Object> statement = new ArrayList<>();
@@ -46,7 +55,12 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     return result;
 
   }
-
+  
+  /**
+   * {@index} ログインID検索用
+   * @param pLoginId ログインID
+   * @return 0=IDなし
+   */
   public int findLoginId(String pLoginId) {
 
     List<Object> statement = new ArrayList<>();
@@ -65,7 +79,6 @@ public class LoginDAO extends DAOCommon implements DBAccess {
    * @param pLoginId ログインID
    * @param pPassword ログインパスワード
    * @return
-   * @throws SQLException 
    */
   public List<Object> findLoginIdAndPassword(String pLoginId, String pPassword) {
 
@@ -88,7 +101,6 @@ public class LoginDAO extends DAOCommon implements DBAccess {
    * {@index} セッション情報の取得
    * @param pLoginId ログインID
    * @return 実行結果(List<Object>)
-   * @throws SQLException 
    */
   public List<Object> getSessionInfo(String pLoginId) {
 
