@@ -6,23 +6,22 @@ import java.util.Date;
 
 public class CastCommon {
   
-  public Date chgStrToDate(String date) {
+  public Date chgStrToDate(String pDate) {
     Date result = null;
     
-    if (date == null||date.equals("")) {
+    if (pDate == null||pDate.equals("")) {
       return result;
     }
     
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     try {
-      result = sdf.parse(date);
-      sdf.format(result);
+      result = sdf.parse(pDate);
     } catch (ParseException e) {
       e.printStackTrace();
     }
     return result;
   }
-  
+    
   public String nullToBlank(String input) {
     String result = null;
     

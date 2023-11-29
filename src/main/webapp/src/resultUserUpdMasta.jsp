@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="model.MastaBean,java.util.List"%>
+<%@ page import="model.MastaBean,java.util.List,java.text.SimpleDateFormat"%>
 <%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
 List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER_UPD_SCOPE);
+//日付変換クラスの用意
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 
 <!DOCTYPE html>
@@ -117,6 +119,8 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
         String getSeinenngappiView = String.valueOf(mastaBean.getSeinenngappi());
         if (mastaBean.getSeinenngappi() == null) {
           getSeinenngappiView = "";
+        }else{
+          getSeinenngappiView = sdf.format(mastaBean.getSeinenngappi());
         }
         %>
           <input type="text" name="seinenngappi" value=<%=getSeinenngappiView%>>
@@ -127,6 +131,8 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
         String getNyuusyaYMDViwe = String.valueOf(mastaBean.getNyuusyaYMD());
         if (mastaBean.getNyuusyaYMD() == null) {
           getNyuusyaYMDViwe = "";
+        }else{
+          getNyuusyaYMDViwe = sdf.format(mastaBean.getNyuusyaYMD());
         }
         %>
         <td>
