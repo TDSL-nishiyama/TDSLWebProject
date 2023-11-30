@@ -16,7 +16,7 @@ public class DAOCommon implements DBAccess {
   private String sqlPath = Common.SQL_FILE_PATH;
 
   /**
-   * {@index} SELECT COUNT 実行メソッド
+   * {@index} SELECT COUNT 実行メソッド（MAX等他の集計関数での利用も可能）
    * @param fileName 実行したいSQLファイルの名前
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return select count の結果(int)
@@ -39,7 +39,7 @@ public class DAOCommon implements DBAccess {
 
     //クエリの発行・格納
     try {
-      //発行
+      //ステートメントの設定
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
       if (statement != null) {
         int cnt = statement.size(); //ステートメントを設定する数
@@ -47,6 +47,7 @@ public class DAOCommon implements DBAccess {
           pStmt.setObject(i + 1, statement.get(i));
         }
       }
+      //発行
       ResultSet rs = pStmt.executeQuery();
 
       //格納
@@ -171,7 +172,7 @@ public class DAOCommon implements DBAccess {
   }
 
   /**
-   * {@index} UPDATE・DLETE実行メソッド（1レコード）
+   * {@index} INSERT・UPDATE・DLETE実行メソッド
    * @param fileName 実行したいSQLファイルの名前
    * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
    * @return selectの結果(List)
@@ -187,14 +188,55 @@ public class DAOCommon implements DBAccess {
     //DB接続
     Connection conn = null;
     conn = DBAccess.super.connectionDB(conn);
-
+    //オートコミットをオフにする（COMMIT/ROLLBACK処理を行わないと実行結果が反映されない）
+    conn.setAutoCommit(false);
+    PreparedStatement pStmt = conn.prepareStatement("START TRANSACTION");
+    //クエリの実行
+    pStmt.execute();
+    
     //SQL文の作成
     String sql = null;
     sql = makeSQL(sqlPath);
 
-    //クエリの発行・格納
     try {
-      //発行
+      //ステートメントの設定
+      pStmt = conn.prepareStatement(sql.toString());
+      if (!(statement.equals(null))) {
+        int cnt = statement.size(); //ステートメントを設定する数
+        for (int i = 0; i < cnt; i++) {
+          pStmt.setObject(i + 1, statement.get(i));
+        }
+      }
+      //クエリの実行
+      pStmt.execute();
+    } catch(SQLException e){
+      conn.rollback();
+      throw e;
+    } finally {
+      //SQLファイルパスの初期化
+      sqlPath = Common.SQL_FILE_PATH;
+    }
+    conn.commit();
+  }
+  
+  /**
+   * {@index} INSERT・UPDATE・DLETE実行メソッド（複数テーブル同時更新向け）
+   * @param conn Connection（一つ上の階層で宣言）
+   * @param fileName 実行したいSQLファイルの名前
+   * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
+   * @return selectの結果(List)
+   * @throws SQLException 
+   */
+  protected void executeDMLMlt(Connection conn,String fileName, List<Object> statement) throws SQLException {
+
+    sqlPath += fileName;
+    
+    //SQL文の作成
+    String sql = null;
+    sql = makeSQL(sqlPath);
+
+    try {
+      //ステートメントの設定
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
       if (!(statement.equals(null))) {
         int cnt = statement.size(); //ステートメントを設定する数
@@ -204,11 +246,11 @@ public class DAOCommon implements DBAccess {
       }
       //クエリの実行
       pStmt.execute();
+    } catch(SQLException e){
+      throw e;
     } finally {
       //SQLファイルパスの初期化
       sqlPath = Common.SQL_FILE_PATH;
-      //DB切断
-      DBAccess.super.closeDB(conn);
     }
   }
 
@@ -223,11 +265,12 @@ public class DAOCommon implements DBAccess {
     //DB接続
     Connection conn = null;
     conn = DBAccess.super.connectionDB(conn);
+    //オートコミットをオフにする（COMMIT/ROLLBACK処理を行わないと実行結果が反映されない）
     conn.setAutoCommit(false);
 
     //SQL文の作成
     String sql = null;
-    sql = "START TRANSACTION";
+    sql = "START TRANSACTION;";
 
     //クエリの発行・格納
     //発行
@@ -235,22 +278,41 @@ public class DAOCommon implements DBAccess {
     //クエリの実行
     pStmt.execute();
   }
-
+  
+  
   /**
-   *{@index} トランザクション終了処理（正常系）
+   *{@index} トランザクション開始処理
+   * @param  conn　Connection
    * @throws SQLException 
    **/
-  public void endTransactionTrue() {
-    //JDBC接続
-    DBAccess.super.loadJDBCDriver();
+  public Connection startTransaction(Connection conn) throws SQLException {
 
-    //DB接続
-    Connection conn = null;
-    conn = DBAccess.super.connectionDB(conn);
+    //オートコミットをオフにする（COMMIT/ROLLBACK処理を行わないと実行結果が反映されない）
+    conn.setAutoCommit(false);
 
     //SQL文の作成
     String sql = null;
-    sql = "COMMIT";
+    sql = "START TRANSACTION;";
+
+    //クエリの発行・格納
+    //発行
+    PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+    //クエリの実行
+    pStmt.execute();
+    
+    return conn;
+  }
+  
+  /**
+   *{@index} トランザクション終了処理（正常系）
+   * @param conn　Connection
+   * @throws SQLException 
+   **/
+  public void endTransactionTrue(Connection conn) {
+
+    //SQL文の作成
+    String sql = null;
+    sql = "COMMIT;";
 
     //クエリの発行・格納
     //発行
@@ -269,19 +331,13 @@ public class DAOCommon implements DBAccess {
 
   /**
    *{@index} トランザクション終了処理（異常系）
+   * @param conn　Connection
    * @throws SQLException 
    **/
-  public void endTransactionFalse() {
-    //JDBC接続
-    DBAccess.super.loadJDBCDriver();
-
-    //DB接続
-    Connection conn = null;
-    conn = DBAccess.super.connectionDB(conn);
-
+  public void endTransactionFalse(Connection conn) {
     //SQL文の作成
     String sql = null;
-    sql = "ROLLBACK";
+    sql = "ROLLBACK;";
 
     //クエリの発行・格納
     //発行

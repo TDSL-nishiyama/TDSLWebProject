@@ -7,7 +7,6 @@ import java.util.Map;
 
 import control.common.CastCommon;
 import control.common.CheckCommon;
-import control.common.DAOCommon;
 import model.MastaEntity;
 import model.SyainJouhouEntity;
 
@@ -43,7 +42,6 @@ public class UserAddBL {
           }
         }
     }
-
     return result;
   }
 
@@ -81,25 +79,6 @@ public class UserAddBL {
 
     //各種テーブルへの登録
     MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();
-    DAOCommon dao = new DAOCommon();
-    try {
-      //トランザクションの開始
-      dao.startTransaction();
-      //ユーザーテーブル登録
-      useraddDAOInsUp.InsertUser(mastaEntity);
-
-      //ログインテーブル仮登録
-      useraddDAOInsUp.InsertLogin(mastaEntity);
-
-      //ユーザー詳細テーブル仮登録
-      useraddDAOInsUp.InsertUserShoisai(syainJouhouEntity);
-
-    } catch (Exception e) {
-      //ロールバック（異常終了）
-      dao.endTransactionFalse();
-      throw new SQLException();
-    }
-    //コミット（正常終了）
-    dao.endTransactionTrue();
+    useraddDAOInsUp.InsertUserAdd(mastaEntity, syainJouhouEntity);
   }
 }

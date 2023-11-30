@@ -1,1 +1,1 @@
-SELECT U.id,L.loginid,U.name,U.kanriflg FROM user AS U INNER JOIN login AS L ON U.id = L.id WHERE SUBSTRING(loginid,1,4)='kari' and U.sakujo = '';
+SELECT U.id,L.loginid,U.name,U.kanriflg FROM user AS U INNER JOIN login AS L ON U.id = L.id WHERE SUBSTRING(loginid,1,4)='kari' and U.del = '';

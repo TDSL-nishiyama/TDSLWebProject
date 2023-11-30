@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import constents.Const.Path;
+import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import control.UserDelBL;
 import jakarta.servlet.RequestDispatcher;
@@ -64,7 +65,13 @@ public class ResultUserDelAction extends HttpServlet {
       try {
         userDelBL.userDel(userIdDel);
       } catch (SQLException e) {
-
+        //エラーメッセージを格納
+        request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.DBERROR);
+        //エラー画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+        dispatcher.forward(request, response);
+        return;
       }
       //TODO ユーザー詳細TBLの退社年月日に退社日を挿入
 

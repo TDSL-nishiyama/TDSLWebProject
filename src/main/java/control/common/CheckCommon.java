@@ -14,7 +14,7 @@ public class CheckCommon {
       return result;
     }
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     try {
       sdf.setLenient(false);
       sdf.parse(pDate);

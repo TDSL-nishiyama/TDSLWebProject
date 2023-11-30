@@ -79,6 +79,51 @@ public class ResultUserAddAction extends HttpServlet {
 
     Map<String,Object> hissuCheck = userAddBL.checkHissu(gamenInfo, hissuKoumoku);
     errflg = (boolean) hissuCheck.get("errflg");
+    
+    //日付系項目の変換用
+    Date dNyuusyaYMD = null;
+    Date dSeinenngappi = null;
+    
+    //日付項目チェック
+    errflg = checkCommon.checkDate(nyuusyaYMD);
+    if(errflg == true) {
+      dNyuusyaYMD = castCommon.chgStrToDate(nyuusyaYMD);
+    }
+    errflg = checkCommon.checkDate(seinenngappi);
+    if(errflg == true) {
+      dSeinenngappi = castCommon.chgStrToDate(seinenngappi);
+    }
+    
+    //エラーがあった場合
+    if (errflg == false) {
+      //メッセージを格納
+      StringBuilder sb = new StringBuilder();
+      sb.append(MSG.ERROR_SETLENIENT);
+      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+
+      //画面入力値を保持
+      //NULL項目はブランクに変換
+      userName = castCommon.nullToBlank(userName);
+      sei = castCommon.nullToBlank(sei);
+      mei = castCommon.nullToBlank(mei);
+      seiyomi = castCommon.nullToBlank(seiyomi);
+      meiyomi = castCommon.nullToBlank(meiyomi);
+      seibetsu = castCommon.nullToBlank(seibetsu);
+      syusshin = castCommon.nullToBlank(syusshin);
+      
+      //リクエストスコープに値を設定
+      MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, dNyuusyaYMD,
+          seibetsu, dSeinenngappi, syusshin, juusyo);
+      List<MastaBean> list = new ArrayList<MastaBean>();
+      list.add(bean);
+      request.setAttribute(Path.USER_ADD_SCOPE, list);
+
+      //ユーザー登録画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.USER_ADD_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    }
 
     //エラーがあった場合
     if (errflg == false) {
@@ -88,10 +133,6 @@ public class ResultUserAddAction extends HttpServlet {
       sb.append(hissuCheck.get("errMsgKoumoku").toString());
       sb.append(MSG.MASTA_ADD_1_2);
       request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
-
-      //画面入力値を保持
-      Date dNyuusyaYMD = null;
-      Date dSeinenngappi = null;
 
       //日付系項目の変換
       dNyuusyaYMD = castCommon.chgStrToDate(nyuusyaYMD);
@@ -120,41 +161,6 @@ public class ResultUserAddAction extends HttpServlet {
       return;
     }
     
-    //日付項目チェック
-    errflg = checkCommon.checkDate(nyuusyaYMD);
-    errflg = checkCommon.checkDate(seinenngappi);
-    
-    //エラーがあった場合
-    if (errflg == false) {
-      //メッセージを格納
-      StringBuilder sb = new StringBuilder();
-      sb.append(MSG.ERROR_SETLENIENT);
-      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
-
-      //画面入力値を保持
-      //NULL項目はブランクに変換
-      userName = castCommon.nullToBlank(userName);
-      sei = castCommon.nullToBlank(sei);
-      mei = castCommon.nullToBlank(mei);
-      seiyomi = castCommon.nullToBlank(seiyomi);
-      meiyomi = castCommon.nullToBlank(meiyomi);
-      seibetsu = castCommon.nullToBlank(seibetsu);
-      syusshin = castCommon.nullToBlank(syusshin);
-      
-      //リクエストスコープに値を設定
-      MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, null,
-          seibetsu, null, syusshin, juusyo);
-      List<MastaBean> list = new ArrayList<MastaBean>();
-      list.add(bean);
-      request.setAttribute(Path.USER_ADD_SCOPE, list);
-
-      //ユーザー登録画面に遷移
-      RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.USER_ADD_GAMEN);
-      dispatcher.forward(request, response);
-      return;
-    }
-
     //ユーザー登録
     try {
       userAddBL.addUser(gamenInfo);
@@ -165,6 +171,7 @@ public class ResultUserAddAction extends HttpServlet {
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
       dispatcher.forward(request, response);
+      return;
     }
     
     //画面で設定した値を削除してリクエストスコープに値を設定

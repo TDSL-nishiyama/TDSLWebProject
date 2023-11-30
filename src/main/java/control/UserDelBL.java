@@ -3,8 +3,6 @@ package control;
 import java.sql.SQLException;
 
 import control.common.CheckCommon;
-import control.common.DAOCommon;
-import model.MastaEntity;
 
 public class UserDelBL {
 
@@ -42,21 +40,8 @@ public class UserDelBL {
 	public void userDel(int userId) throws SQLException {
 
 		MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();
+		//user・loginテーブル削除（論理削除）
+		useraddDAOInsUp.delUserAndLogin(userId);
 
-		MastaEntity mastaEntity = new MastaEntity(userId);
-		
-		DAOCommon dao = new DAOCommon();
-		try {
-		  //トランザクション開始
-		  dao.startTransaction();
-		  //ユーザーテーブル削除（論理削除）
-	    useraddDAOInsUp.delUser(mastaEntity);
-	    //ログインテーブル削除（論理削除）
-	    useraddDAOInsUp.delLogin(mastaEntity);
-		}catch(SQLException e) {
-		  dao.endTransactionFalse();
-		  throw new SQLException();
-		}
-		dao.endTransactionTrue();
 	}
 }

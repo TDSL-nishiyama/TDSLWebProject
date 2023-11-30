@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import control.common.CheckCommon;
-import control.common.DAOCommon;
 import model.MastaBean;
 
 public class UserUpdBL {
@@ -28,7 +26,7 @@ public class UserUpdBL {
 
     return result;
   }
-  
+
   /**
    *{@index 必須項目確認} 
    * @param chkKoumoku チェックしたい項目名（対象画面情報のkey/value）
@@ -77,20 +75,12 @@ public class UserUpdBL {
   }
 
   //ユーザー更新の実行
-  public void updUserList(Map<String, Object> updKoumoku,int userId) throws SQLException {
+  public void updUserList(Map<String, Object> updKoumoku, int userId) throws SQLException {
 
+    //ユーザー更新の実行
     MastaDAOInsertUpdate mastaDaoUpd = new MastaDAOInsertUpdate();
-    DAOCommon dao = new DAOCommon();
-    try {
-      //トランザクション開始
-      dao.startTransaction();
-      //更新の実行
-      mastaDaoUpd.updUser(updKoumoku,userId);
-      mastaDaoUpd.updateUserShousai(updKoumoku,userId);
-    } catch (SQLException e) {
-      dao.endTransactionFalse();
-      throw new SQLException();
-    }
-    dao.endTransactionTrue();
+    mastaDaoUpd.updUserALL(updKoumoku, userId);
+    mastaDaoUpd.updUserALL(updKoumoku, userId);
+
   }
 }

@@ -40,7 +40,7 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
     //SQL文の作成
     String sql = null;
     sql = makeSQL(sqlPath);
-    
+
     //クエリの発行・格納
     if (kanriFlg == false) {
       try {
@@ -62,7 +62,7 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
         String mei = null;
         Date nyuusyaYMD = null;
         String syusshin = null;
-        
+
         final int ID = 0;
         final int SEI = 1;
         final int MEI = 2;
@@ -108,7 +108,7 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
         Date seinenngappi = null;
         String syusshin = null;
         String juusyo = null;
-        
+
         final int ID = 0;
         final int SEI = 1;
         final int SEI_YOMI = 2;
@@ -134,13 +134,14 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
           seinenngappi = rs.getDate(column.get(SEINENNGAPPI));
           syusshin = rs.getString(column.get(SYUSSHIN));
           juusyo = rs.getString(column.get(JUUSYO));
-          
-          SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, seiyomi,mei,meiyomi, nyuusyaYMD,taisyaYMD, seibetsu, seinenngappi,syusshin,juusyo);
+
+          SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, seiyomi, mei, meiyomi, nyuusyaYMD, taisyaYMD,
+              seibetsu, seinenngappi, syusshin, juusyo);
           result.add(entity);
         }
-      }catch (SQLException e) {
+      } catch (SQLException e) {
         e.printStackTrace();
-      }finally {
+      } finally {
         sqlPath = Common.SQL_FILE_PATH;
         //DB切断
         DBAccess.super.closeDB(conn);
@@ -148,24 +149,17 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
     }
     return result;
   }
-  
+
   /**
    * {@index} 社員情報の更新を実施(usershousaiテーブル)
    * @param fileName 実行したいSQLファイルの名前
    * @param updKoumoku アップデートしたい項目
    * @throws SQLException 
    */
-  public void updateSyainJouhou(String fileName,List<Object> updKoumoku) throws SQLException {
-    
-    try {
-      super.startTransaction();
-      super.executeDML(fileName, updKoumoku);
-    } catch (SQLException e) {
-      super.endTransactionFalse();
-      throw new SQLException();
-    }finally {
-      sqlPath = Common.SQL_FILE_PATH;
-    }
-    super.endTransactionTrue();
+  public void updateSyainJouhou(String fileName, List<Object> updKoumoku) throws SQLException {
+
+    super.executeDML(fileName, updKoumoku);
+    sqlPath = Common.SQL_FILE_PATH;
+
   }
 }
