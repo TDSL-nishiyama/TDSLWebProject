@@ -21,11 +21,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
   <%@ include file="../msg.jsp"%>
   <form name="userKoushinJikkou" action="<%=request.getContextPath()%>/ResultUserUpdAction" method="post">
     <p>
+    <span class="req">※ 必須項目</span>
     <table class="tableM">
       <tr>
         <th>ID</th>
-        <th>表示名</th>
-        <th>管理者権限</th>
+        <th><span class="req">※</span>表示名</th>
+        <th><span class="req">※</span>管理者権限</th>
       </tr>
       <%
       for (MastaBean mastaBean : mastaBeanlist) {
@@ -59,15 +60,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     </p>
     <table class="tableM">
       <tr>
-        <th>姓</th>
-        <th>姓(ﾖﾐ)</th>
-        <th>名</th>
-        <th>名(ﾖﾐ)</th>
-        <th>性別</th>
-        <th>生年月日</th>
+        <th><span class="req">※</span>姓</th>
+        <th><span class="req">※</span>姓(ﾖﾐ)</th>
+        <th><span class="req">※</span>名</th>
+        <th><span class="req">※</span>名(ﾖﾐ)</th>
+        <th><span class="req">※</span>性別</th>
+        <th><span class="req">※</span>生年月日</th>
         <th>入社年月日</th>
         <th>出身地</th>
-        <th>住所</th>
+        <th><span class="req">※</span>住所</th>
       </tr>
       <tr>
         <td>

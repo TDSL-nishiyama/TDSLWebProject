@@ -37,11 +37,11 @@
   <form name="toKoutsuuYoukyuu"
     action="<%=request.getContextPath()%>/KoutsuuYoukyuuAction" method="post">
     <p>
-      <input type="submit" name="toMasta" value="交通費費精算要求画面に遷移">
+      <input type="submit" name="toMasta" value="交通費精算要求画面に遷移">
     </p>
   </form>
   
-  <form action="<%=request.getContextPath()%>/KoutusuuKakuninAction" method="post">
+  <form action="<%=request.getContextPath()%>/KoutsuuKakuninAction" method="post">
     <p>
       <input type="submit" value="交通費精算確認画面に遷移">
     </p>

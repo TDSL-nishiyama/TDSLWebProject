@@ -51,13 +51,8 @@
     <p>
       <input type="submit" value="請求">
     </p>
+    
+    <a href="/TDSLWebProject/index.jsp">トップページに戻る</a>
   </form>
-  <p>
-  <form action="<%=request.getContextPath()%>/KoutusuuKakuninAction" method="post">
-    <p>
-      <input type="submit" value="交通費精算確認画面に遷移">
-    </p>
-  </form>
-  </p>
 </body>
 </html>

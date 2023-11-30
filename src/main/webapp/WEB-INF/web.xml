@@ -183,4 +183,13 @@
 		<url-pattern>/KoutsuuYoukyuuAction</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>KoutsuuKakuninAction</servlet-name>
+		<servlet-class>action.KoutsuuKakuninAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>KoutsuuKakuninAction</servlet-name>
+		<url-pattern>/KoutsuuKakuninAction</url-pattern>
+	</servlet-mapping>
+
 </web-app>

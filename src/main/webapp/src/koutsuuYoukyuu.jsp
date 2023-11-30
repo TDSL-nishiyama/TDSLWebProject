@@ -10,13 +10,14 @@
 <body>
   <%@ include file="../msg.jsp"%>
   <form action="<%=request.getContextPath()%>/ResultKoutusuuYoukyuuAction" method="post">
+  <span class="req">※ 必須項目</span>
     <p>
     <table class="tableM">
       <tr>
         <th>請求者</th>
-        <th>区間開始１</th>
-        <th>区間終了１</th>
-        <th>金額１</th>
+        <th><span class="req">※</span>区間開始１</th>
+        <th><span class="req">※</span>区間終了１</th>
+        <th><span class="req">※</span>金額１</th>
         <th>区間開始２</th>
         <th>区間終了２</th>
         <th>金額２</th>
@@ -53,11 +54,13 @@
     </p>
   </form>
   <p>
-  <form action="<%=request.getContextPath()%>/KoutusuuKakuninAction" method="post">
+  <form action="<%=request.getContextPath()%>/KoutsuuKakuninAction" method="post">
     <p>
       <input type="submit" value="交通費精算確認画面に遷移">
     </p>
   </form>
   </p>
+  
+  <a href="/TDSLWebProject/index.jsp">トップページに戻る</a>
 </body>
 </html>

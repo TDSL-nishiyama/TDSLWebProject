@@ -16,6 +16,11 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
 <title>仮登録ユーザー一覧</title>
 </head>
 <body>
+  <form name="toUserIchiran" action="<%=request.getContextPath()%>/UserIchiranAction" method="post">
+    <p>
+      <input type="submit" name="toMasta" value="ユーザー一覧">
+    </p>
+  </form>
   <!-- 11人目以降は2ページ目  -->
   <!-- 最大表示数は100人 -->
   <table border="1">

@@ -21,12 +21,27 @@ List<MastaEntity> mastaEntitylist = (List<MastaEntity>) request.getAttribute(Pat
     </p>
   </form>
 
-  <form name="toResultUserIchiran" action=<%=request.getContextPath()%>/ResultUserIchiranAction method="post">
+  <form name="toKaritouroku" action="<%=request.getContextPath()%>/KaritourokuAction" method="post">
     <p>
-      <input type="submit" value="削除されたユーザーも含めて表示">
+      <input type="submit" name="toKari" value="仮登録ユーザー一覧">
     </p>
   </form>
-
+  <p>
+  <table>
+    <tr>
+      <td>
+        <form name="toResultUserIchiran" action=<%=request.getContextPath()%>/ResultUserIchiranAction method="post">
+          <input type="submit" value="削除されたユーザーも含めて表示">
+        </form>
+      </td>
+      <td>
+        <form name="toUserIchiran" action="<%=request.getContextPath()%>/UserIchiranAction" method="post">
+          <input type="submit" name="toMasta" value="削除されたユーザーを含まず表示">
+        </form>
+      </td>
+    </tr>
+  </table>
+  </p>
   <!--TODO 仕様迷い中、ページディレクションのJSPのみでの実装がしんどい  -->
   <!-- 11人目以降は2ページ目  -->
   <!-- 最大表示数は100人 -->
