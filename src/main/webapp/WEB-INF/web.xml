@@ -174,4 +174,13 @@
 		<url-pattern>/ResultSyainJouhouHensyuuAction</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>KoutsuuYoukyuuAction</servlet-name>
+		<servlet-class>action.KoutsuuYoukyuuAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>KoutsuuYoukyuuAction</servlet-name>
+		<url-pattern>/KoutsuuYoukyuuAction</url-pattern>
+	</servlet-mapping>
+
 </web-app>

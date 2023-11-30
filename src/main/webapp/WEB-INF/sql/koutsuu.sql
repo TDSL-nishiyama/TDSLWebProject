@@ -1,0 +1,1 @@
+SELECT K.no,K.id,U.name,K.sendmailaddress,K.kukan1_start,K.kukan1_end,K.kingaku1,K.kukan2_start,K.kukan2_end,K.kingaku2,K.bikou FROM koutsuu AS K INNER JOIN user AS U ON K.id = U.id;

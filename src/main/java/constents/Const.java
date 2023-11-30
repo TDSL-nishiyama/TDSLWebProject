@@ -40,6 +40,8 @@ public class Const {
     public static final String USER_UPD_GAMEN = "/src/userUpdMasta.jsp";
     public static final String RESULT_USER_UPD_GAMEN = "/src/resultUserUpdMasta.jsp";
     public static final String KARI_USER_GAMEN = "/src/karitouroku.jsp";
+    public static final String KOUTUSUU_YOUKYUU_GAMEN = "/src/koutsuuYoukyuu.jsp";
+    public static final String KOUTUSUU_KAKUNIN_GAMEN = "/src/koutsuuKakunin.jsp";
 
     //スコープ名
     public static final String SESSION_SCOPE = "loginSession";
