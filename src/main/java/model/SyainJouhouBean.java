@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SyainJouhouBean implements Serializable {
-
+  
   private int id; //ユーザーID
   private String sei;
   private String sei_yomi;
@@ -78,6 +78,20 @@ public class SyainJouhouBean implements Serializable {
     this.juusyo = juusyo;
     this.seibetsu = seibetsu;
     this.age = age;
+  }
+  
+  //必須チェック
+  public SyainJouhouBean(String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD, String seibetsu,
+      Date seinenngappi, String syusshin, String juusyo) {
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.nyuusyaYMD = nyuusyaYMD;
+    this.seibetsu = seibetsu;
+    this.seinenngappi = seinenngappi;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
   }
 
   public SyainJouhouBean() {

@@ -2,20 +2,27 @@ package action;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import constents.Const.Path;
 import constents.UserShousai;
 import control.SyainJouhouBL;
+import control.common.CalcCommon;
+import control.common.CastCommon;
+import control.common.CheckCommon;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.MastaBean;
 import model.SessionKanriBean;
 import model.SyainJouhouBean;
 
@@ -36,7 +43,12 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
 
     boolean kanriFlg = false;
     kanriFlg = loginSession.getKanriFlg();
-
+    
+    //共通クラスのインスタンス化
+    CheckCommon checkCommon = new CheckCommon();
+    CastCommon castCommon = new CastCommon();
+    CalcCommon calcCommon = new CalcCommon();
+    
     //画面情報の取得
     int updUserId = Integer.parseInt(request.getParameter("updUserId"));
     String sei = request.getParameter(UserShousai.GAMEN_SEI);
@@ -48,7 +60,30 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
     String nyuusyaYMD = request.getParameter(UserShousai.GAMEN_NYUUSYAYMD);
     String syusshin = request.getParameter(UserShousai.GAMEN_SYUSSSHIN);
     String juusyo = request.getParameter(UserShousai.GAMEN_JUUSYO);
-
+    
+    /* エラーチェック　START */
+    boolean errflg = false;
+    //日付項目チェック・代入
+    Date dNyuusyaYMD = null;
+    Date dSeinenngappi = null;
+    
+    //日付項目チェック
+    checkCommon.checkDate(nyuusyaYMD);
+    checkCommon.checkDate(seinenngappi);
+    if (errflg == true) {
+      //エラーがあった場合
+      saveCatchParseException(request);
+      //メッセージを格納
+      StringBuilder sb = new StringBuilder();
+      sb.append(ERRORMSG.ERROR_SETLENIENT);
+      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+      //社員情報編集画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+      dispatcher.forward(request, response);
+      return;
+    }
+    
     //更新情報の格納
     Map<String, Object> updKoumoku = new HashMap<String, Object>();
     updKoumoku.put(UserShousai.GAMEN_SEI, sei);
@@ -61,8 +96,68 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
     updKoumoku.put(UserShousai.GAMEN_SYUSSSHIN, syusshin);
     updKoumoku.put(UserShousai.GAMEN_JUUSYO, juusyo);
 
-    //TODO 差分確認処理
+    //必須項目確認処理
+    //必須項目名をkey値、論理名をvalueとしてMAPに格納
+    LinkedHashMap<String, String> hissuKoumoku = new LinkedHashMap<String, String>();
+    UserShousai.hissuKoumokuPut(hissuKoumoku);
+    
+    Map<String, Object> hissuCheck = checkCommon.checkHissu(updKoumoku, hissuKoumoku);
+    errflg = (boolean) hissuCheck.get("errflg");
+    
+    //エラーがあった場合
+    if (errflg == false) {
+      //メッセージを格納
+      StringBuilder sb = new StringBuilder();
+      sb.append(MSG.MASTA_UPD_2_1);
+      sb.append(hissuCheck.get("errMsgKoumoku").toString());
+      sb.append(MSG.MASTA_UPD_2_2);
+      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
 
+      //画面入力値を保持
+      //NULL項目はブランクに変換
+      sei = castCommon.nullToBlank(sei);
+      mei = castCommon.nullToBlank(mei);
+      seiyomi = castCommon.nullToBlank(seiyomi);
+      meiyomi = castCommon.nullToBlank(meiyomi);
+      seibetsu = castCommon.nullToBlank(seibetsu);
+      syusshin = castCommon.nullToBlank(syusshin);
+      juusyo = castCommon.nullToBlank(juusyo);
+
+      //リクエストスコープに値を設定
+      SyainJouhouBean bean = new SyainJouhouBean(sei, seiyomi, mei, meiyomi, dNyuusyaYMD,seibetsu, dSeinenngappi, syusshin, juusyo);
+      List<SyainJouhouBean> list = new ArrayList<SyainJouhouBean>();
+      list.add(bean);
+      request.setAttribute(Path.SYAIN_HENSYU_SCOPE, list);
+
+      //社員情報編集画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+      dispatcher.forward(request, response);
+      return;
+    }
+    
+    if (nyuusyaYMD != null) {
+      //日付整合性チェック1（生年月日より入社日付のほうが大きい場合エラー）
+      if (checkCommon.diffDate1Date2(seinenngappi, nyuusyaYMD) == false) {
+        //日付整合性チェック2（生年月日-入社日付が16未満の場合エラー（15歳以下の就業は不可能なため））
+        Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
+        if (pr.getYears() < 16) {
+          //画面入力値を保持
+          saveCatchParseException(request);
+          //メッセージを格納
+          StringBuilder sb = new StringBuilder();
+          sb.append(MSG.MSG_DATE_INTEGRITY_ERR);
+          request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+          //社員情報編集画面に遷移
+          RequestDispatcher dispatcher = request
+              .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+          dispatcher.forward(request, response);
+          return;
+        }
+      }
+    }
+    /* エラーチェック　END */
+    
     //データ更新処理
     SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);
     try {
@@ -78,7 +173,7 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
     }
 
     //ユーザー情報を取得
-    List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhouHensyu(syainJouhouBL, updUserId);
+    List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhouHensyu(updUserId);
 
     //更新完了メッセージを設定
     //メッセージ設定
@@ -98,5 +193,47 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
     dispatcher.forward(request, response);
 
   }
+  
+  /**
+   * 日付項目が変換できなかった際の画面項目値の保持用
+   * @param request
+   * @throws ServletException
+   * @throws IOException
+   */
+  private void saveCatchParseException(HttpServletRequest request)
+      throws ServletException, IOException {
+    //画面から情報を取得、Mapに値を設定
+    String userName = request.getParameter("userName");
+    String kanriFlg = request.getParameter("kanriFlg");
+    String sei = request.getParameter("sei");
+    String mei = request.getParameter("mei");
+    String seiyomi = request.getParameter("sei_yomi");
+    String meiyomi = request.getParameter("mei_yomi");
+    String nyuusyaYMD = request.getParameter("nyuusyaYMD");
+    String seibetsu = request.getParameter("seibetsu");
+    String seinenngappi = request.getParameter("seinenngappi");
+    String syusshin = request.getParameter("syusshin");
+    String juusyo = request.getParameter("juusyo");
 
+    //画面入力値を保持
+    //NULL項目はブランクに変換
+    CastCommon castCommon = new CastCommon();
+    userName = castCommon.nullToBlank(userName);
+    sei = castCommon.nullToBlank(sei);
+    mei = castCommon.nullToBlank(mei);
+    seiyomi = castCommon.nullToBlank(seiyomi);
+    meiyomi = castCommon.nullToBlank(meiyomi);
+    nyuusyaYMD = castCommon.nullToBlank(nyuusyaYMD);
+    seibetsu = castCommon.nullToBlank(seibetsu);
+    seinenngappi = castCommon.nullToBlank(seinenngappi);
+    syusshin = castCommon.nullToBlank(syusshin);
+    juusyo = castCommon.nullToBlank(juusyo);
+
+    //リクエストスコープに値を設定
+    MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+        seibetsu, seinenngappi, syusshin, juusyo);
+    List<MastaBean> list = new ArrayList<MastaBean>();
+    list.add(bean);
+    request.setAttribute(Path.SYAIN_HENSYU_SCOPE, list);
+  }
 }

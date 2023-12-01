@@ -11,6 +11,7 @@ import java.util.Map;
 
 import constents.Const.Common;
 import constents.UserShousai;
+import control.common.CastCommon;
 import control.common.DAOCommon;
 import control.common.DBAccess;
 import model.MastaBean;
@@ -88,6 +89,7 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
     String jyuusyo = null;
 
     Connection conn = null;
+    CastCommon castCommon = new CastCommon();
 
     try {
       // JDBCドライバ読み込み
@@ -125,10 +127,10 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
         seinenngappi = rs.getDate(UserShousai.COL_SEINENGAPPI);
         syusshin = rs.getString(UserShousai.COL_SYUSSHIN);
         jyuusyo = rs.getString(UserShousai.COL_JYUUSYO);
-
+        
         MastaBean bean = new MastaBean(id, loginName, kanriFlg, loginId, loginName, 
-            sei,seiyomi, mei, meiyomi, nyuusyaYMD, taisyaYMD, seibetsu,
-            seinenngappi, syusshin, jyuusyo);
+            sei,seiyomi, mei, meiyomi, castCommon.chgDateToStr(nyuusyaYMD), castCommon.chgDateToStr(taisyaYMD), seibetsu,
+            castCommon.chgDateToStr(seinenngappi), syusshin, jyuusyo);
         returnList.add(bean);
       }
 

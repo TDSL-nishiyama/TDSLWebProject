@@ -192,7 +192,7 @@ public class DAOCommon implements DBAccess {
     conn.setAutoCommit(false);
     PreparedStatement pStmt = conn.prepareStatement("START TRANSACTION");
     //クエリの実行
-    pStmt.execute();
+    pStmt.executeUpdate();
     
     //SQL文の作成
     String sql = null;
@@ -245,7 +245,7 @@ public class DAOCommon implements DBAccess {
         }
       }
       //クエリの実行
-      pStmt.execute();
+      pStmt.executeUpdate();
     } catch(SQLException e){
       throw e;
     } finally {
@@ -253,32 +253,6 @@ public class DAOCommon implements DBAccess {
       sqlPath = Common.SQL_FILE_PATH;
     }
   }
-
-  /**
-   *{@index} トランザクション開始処理
-   * @throws SQLException 
-   **/
-  public void startTransaction() throws SQLException {
-    //JDBC接続
-    DBAccess.super.loadJDBCDriver();
-
-    //DB接続
-    Connection conn = null;
-    conn = DBAccess.super.connectionDB(conn);
-    //オートコミットをオフにする（COMMIT/ROLLBACK処理を行わないと実行結果が反映されない）
-    conn.setAutoCommit(false);
-
-    //SQL文の作成
-    String sql = null;
-    sql = "START TRANSACTION;";
-
-    //クエリの発行・格納
-    //発行
-    PreparedStatement pStmt = conn.prepareStatement(sql.toString());
-    //クエリの実行
-    pStmt.execute();
-  }
-  
   
   /**
    *{@index} トランザクション開始処理

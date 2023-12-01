@@ -59,9 +59,11 @@ public class Const {
 
   //正常系メッセージ関連
   public static final class MSG {
+    //スコープ名
     public static final String MSG_ATTRIBUTE = "MSG";
+    
     //汎用
-    public static final String ERROR_SETLENIENT = "存在しない日付です";
+    public static final String MSG_DATE_INTEGRITY_ERR = "日付の整合性が誤っています。日付を再度確認してください";
     
     //パスワード登録更新
     public static final String UPDPASS_1 = "ユーザーの登録が完了しました。再度ログインをお願いします";
@@ -88,6 +90,7 @@ public class Const {
     public static final String ERRMSG_ATTRIBUTE = "ERRMSG";
     //汎用
     public static final String DBERROR = "テーブル更新が正常に行われませんでした";
+    public static final String ERROR_SETLENIENT = "存在しない日付です";
     
     //ログイン・パスワード登録更新
     public static final String ERR_1 = "IDを入力してください";

@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class MastaBean implements Serializable {
   
@@ -15,18 +14,18 @@ public class MastaBean implements Serializable {
   private String sei_yomi;
   private String mei;
   private String mei_yomi;
-  private Date nyuusyaYMD;
-  private Date taisytaYMD;
+  private String nyuusyaYMD;
+  private String taisytaYMD;
   private String seibetsu; //0=男　1=女 2=その他
-  private Date seinenngappi;
+  private String seinenngappi;
   private String syusshin;
   private String juusyo;
   
   //コンストラクター
   //ResultUserUpdActionの画面項目保持用
   public MastaBean(int userid, String username, boolean kanriFlg, String loginid, String loginpassword,
-      String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD, Date taisytaYMD, String seibetsu,
-      Date seinenngappi, String syusshin, String juusyo) {
+      String sei, String sei_yomi, String mei, String mei_yomi, String nyuusyaYMD, String taisytaYMD, String seibetsu,
+      String seinenngappi, String syusshin, String juusyo) {
     this.userid = userid;
     this.username = username;
     this.kanriFlg = kanriFlg;
@@ -46,7 +45,7 @@ public class MastaBean implements Serializable {
   
   //ResultUserAddActionの画面項目保持用
   public MastaBean(String username, boolean kanriFlg, String sei, String sei_yomi, String mei, String mei_yomi,
-      Date nyuusyaYMD, String seibetsu, Date seinenngappi, String syusshin, String juusyo) {
+      String nyuusyaYMD, String seibetsu, String seinenngappi, String syusshin, String juusyo) {
     this.username = username;
     this.kanriFlg = kanriFlg;
     this.sei = sei;
@@ -141,19 +140,19 @@ public class MastaBean implements Serializable {
     this.mei_yomi = mei_yomi;
   }
 
-  public Date getNyuusyaYMD() {
+  public String getNyuusyaYMD() {
     return nyuusyaYMD;
   }
 
-  public void setNyuusyaYMD(Date nyuusyaYMD) {
+  public void setNyuusyaYMD(String nyuusyaYMD) {
     this.nyuusyaYMD = nyuusyaYMD;
   }
 
-  public Date getTaisytaYMD() {
+  public String getTaisytaYMD() {
     return taisytaYMD;
   }
 
-  public void setTaisytaYMD(Date taisytaYMD) {
+  public void setTaisytaYMD(String taisytaYMD) {
     this.taisytaYMD = taisytaYMD;
   }
 
@@ -165,11 +164,11 @@ public class MastaBean implements Serializable {
     this.seibetsu = seibetsu;
   }
 
-  public Date getSeinenngappi() {
+  public String getSeinenngappi() {
     return seinenngappi;
   }
 
-  public void setSeinenngappi(Date seinenngappi) {
+  public void setSeinenngappi(String seinenngappi) {
     this.seinenngappi = seinenngappi;
   }
 

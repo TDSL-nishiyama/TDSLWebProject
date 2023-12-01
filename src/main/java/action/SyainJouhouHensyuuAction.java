@@ -35,7 +35,7 @@ public class SyainJouhouHensyuuAction extends HttpServlet {
     SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);    
 
     //リクエストスコープにインスタンスを保存
-    List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhouHensyu(syainJouhouBL,updUserId);
+    List<SyainJouhouBean> syainJouhouBLlist = syainJouhouBL.resultSyainJouhouHensyu(updUserId);
     request.setAttribute(Path.SYAIN_HENSYU_SCOPE, syainJouhouBLlist);
     // 社員情報編集画面(syainJouhouBLlist.jsp)にフォワード
     RequestDispatcher dispatcher = request

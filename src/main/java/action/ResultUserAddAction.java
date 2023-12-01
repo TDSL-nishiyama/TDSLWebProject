@@ -2,8 +2,9 @@ package action;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import constents.Const.Path;
 import control.UserAddBL;
+import control.common.CalcCommon;
 import control.common.CastCommon;
 import control.common.CheckCommon;
 import jakarta.servlet.RequestDispatcher;
@@ -32,14 +34,15 @@ public class ResultUserAddAction extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    
+
     //インスタンス化
     UserAddBL userAddBL = new UserAddBL();
     CastCommon castCommon = new CastCommon();
     CheckCommon checkCommon = new CheckCommon();
+    CalcCommon calcCommon = new CalcCommon();
 
     //画面から情報を取得、Mapに値を設定
-    Map<String, String> gamenInfo = new LinkedHashMap<>();
+    Map<String, Object> gamenInfo = new LinkedHashMap<>();
     String userName = request.getParameter("userName");
     gamenInfo.put("username", userName);
     String kanriFlg = request.getParameter("kanriFlg");
@@ -62,9 +65,27 @@ public class ResultUserAddAction extends HttpServlet {
     gamenInfo.put("syusshin", syusshin);
     String juusyo = request.getParameter("juusyo");
     gamenInfo.put("juusyo", juusyo);
-    
-    //必須項目チェック
+
+    /* エラーチェック　START */
     boolean errflg = false;
+    //日付項目チェック
+    checkCommon.checkDate(nyuusyaYMD);
+    checkCommon.checkDate(seinenngappi);
+    if (errflg == true) {
+      //画面入力値を保持
+      saveCatchParseException(request);
+      //メッセージを格納
+      StringBuilder sb = new StringBuilder();
+      sb.append(ERRORMSG.ERROR_SETLENIENT);
+      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+      //ユーザー登録画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.USER_ADD_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    }
+
+    //必須項目チェック
     //必須項目名をkey値、論理名をvalueとしてMAPに格納
     Map<String, String> hissuKoumoku = new LinkedHashMap<>();
     hissuKoumoku.put("username", "ユーザー名");
@@ -76,54 +97,8 @@ public class ResultUserAddAction extends HttpServlet {
     hissuKoumoku.put("seibetsu", "性別");
     hissuKoumoku.put("seinenngappi", "生年月日");
     hissuKoumoku.put("juusyo", "住所");
-
-    Map<String,Object> hissuCheck = userAddBL.checkHissu(gamenInfo, hissuKoumoku);
+    Map<String, Object> hissuCheck = checkCommon.checkHissu(gamenInfo, hissuKoumoku);
     errflg = (boolean) hissuCheck.get("errflg");
-    
-    //日付系項目の変換用
-    Date dNyuusyaYMD = null;
-    Date dSeinenngappi = null;
-    
-    //日付項目チェック
-    errflg = checkCommon.checkDate(nyuusyaYMD);
-    if(errflg == true) {
-      dNyuusyaYMD = castCommon.chgStrToDate(nyuusyaYMD);
-    }
-    errflg = checkCommon.checkDate(seinenngappi);
-    if(errflg == true) {
-      dSeinenngappi = castCommon.chgStrToDate(seinenngappi);
-    }
-    
-    //エラーがあった場合
-    if (errflg == false) {
-      //メッセージを格納
-      StringBuilder sb = new StringBuilder();
-      sb.append(MSG.ERROR_SETLENIENT);
-      request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
-
-      //画面入力値を保持
-      //NULL項目はブランクに変換
-      userName = castCommon.nullToBlank(userName);
-      sei = castCommon.nullToBlank(sei);
-      mei = castCommon.nullToBlank(mei);
-      seiyomi = castCommon.nullToBlank(seiyomi);
-      meiyomi = castCommon.nullToBlank(meiyomi);
-      seibetsu = castCommon.nullToBlank(seibetsu);
-      syusshin = castCommon.nullToBlank(syusshin);
-      
-      //リクエストスコープに値を設定
-      MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, dNyuusyaYMD,
-          seibetsu, dSeinenngappi, syusshin, juusyo);
-      List<MastaBean> list = new ArrayList<MastaBean>();
-      list.add(bean);
-      request.setAttribute(Path.USER_ADD_SCOPE, list);
-
-      //ユーザー登録画面に遷移
-      RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.USER_ADD_GAMEN);
-      dispatcher.forward(request, response);
-      return;
-    }
 
     //エラーがあった場合
     if (errflg == false) {
@@ -134,9 +109,6 @@ public class ResultUserAddAction extends HttpServlet {
       sb.append(MSG.MASTA_ADD_1_2);
       request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
 
-      //日付系項目の変換
-      dNyuusyaYMD = castCommon.chgStrToDate(nyuusyaYMD);
-      dSeinenngappi = castCommon.chgStrToDate(seinenngappi);
       //NULL項目はブランクに変換
       userName = castCommon.nullToBlank(userName);
       sei = castCommon.nullToBlank(sei);
@@ -148,8 +120,8 @@ public class ResultUserAddAction extends HttpServlet {
       juusyo = castCommon.nullToBlank(juusyo);
 
       //リクエストスコープに値を設定
-      MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, dNyuusyaYMD,
-          seibetsu, dSeinenngappi, syusshin, juusyo);
+      MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+          seibetsu, seinenngappi, syusshin, juusyo);
       List<MastaBean> list = new ArrayList<MastaBean>();
       list.add(bean);
       request.setAttribute(Path.USER_ADD_SCOPE, list);
@@ -161,21 +133,51 @@ public class ResultUserAddAction extends HttpServlet {
       return;
     }
     
+    if (nyuusyaYMD != null) {
+      //日付整合性チェック1（生年月日より入社日付のほうが大きい場合エラー）
+      if (calcCommon.diffDate(seinenngappi, nyuusyaYMD) < 0) {
+        //日付整合性チェック2（生年月日-入社日付が16未満の場合エラー（15歳以下の就業は不可能なため））
+        Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
+        if (pr.getYears() < 16) {
+          //画面入力値を保持
+          saveCatchParseException(request);
+          //メッセージを格納
+          StringBuilder sb = new StringBuilder();
+          sb.append(MSG.MSG_DATE_INTEGRITY_ERR);
+          request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+          //社員情報編集画面に遷移
+          RequestDispatcher dispatcher = request
+              .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+          dispatcher.forward(request, response);
+          return;
+        }
+      }
+    }
+    /* エラーチェック　END */
+
     //ユーザー登録
     try {
       userAddBL.addUser(gamenInfo);
     } catch (SQLException e) {
       //エラーメッセージを格納
-      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE,  ERRORMSG.DBERROR);
+      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR);
+      //エラー画面に遷移
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    } catch (ParseException e) {
+      //エラーメッセージを格納
+      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERROR_SETLENIENT);
       //エラー画面に遷移
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
-    
+
     //画面で設定した値を削除してリクエストスコープに値を設定
-    MastaBean bean = new MastaBean("",false,"","","","",null,"",null,"","");
+    MastaBean bean = new MastaBean("", false, "", "", "", "", null, "", null, "", "");
     List<MastaBean> list = new ArrayList<MastaBean>();
     list.add(bean);
     request.setAttribute(Path.USER_ADD_SCOPE, list);
@@ -186,6 +188,49 @@ public class ResultUserAddAction extends HttpServlet {
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.USER_ADD_GAMEN);
     dispatcher.forward(request, response);
+  }
+
+  /**
+   * 日付項目が変換できなかった際の画面項目値の保持用
+   * @param request
+   * @throws ServletException
+   * @throws IOException
+   */
+  private void saveCatchParseException(HttpServletRequest request)
+      throws ServletException, IOException {
+    //画面から情報を取得、Mapに値を設定
+    String userName = request.getParameter("userName");
+    String kanriFlg = request.getParameter("kanriFlg");
+    String sei = request.getParameter("sei");
+    String mei = request.getParameter("mei");
+    String seiyomi = request.getParameter("sei_yomi");
+    String meiyomi = request.getParameter("mei_yomi");
+    String nyuusyaYMD = request.getParameter("nyuusyaYMD");
+    String seibetsu = request.getParameter("seibetsu");
+    String seinenngappi = request.getParameter("seinenngappi");
+    String syusshin = request.getParameter("syusshin");
+    String juusyo = request.getParameter("juusyo");
+
+    //画面入力値を保持
+    //NULL項目はブランクに変換
+    CastCommon castCommon = new CastCommon();
+    userName = castCommon.nullToBlank(userName);
+    sei = castCommon.nullToBlank(sei);
+    mei = castCommon.nullToBlank(mei);
+    seiyomi = castCommon.nullToBlank(seiyomi);
+    meiyomi = castCommon.nullToBlank(meiyomi);
+    nyuusyaYMD = castCommon.nullToBlank(nyuusyaYMD);
+    seibetsu = castCommon.nullToBlank(seibetsu);
+    seinenngappi = castCommon.nullToBlank(seinenngappi);
+    syusshin = castCommon.nullToBlank(syusshin);
+    juusyo = castCommon.nullToBlank(juusyo);
+
+    //リクエストスコープに値を設定
+    MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+        seibetsu, seinenngappi, syusshin, juusyo);
+    List<MastaBean> list = new ArrayList<MastaBean>();
+    list.add(bean);
+    request.setAttribute(Path.USER_ADD_SCOPE, list);
   }
 
 }

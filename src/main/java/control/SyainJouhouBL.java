@@ -109,11 +109,10 @@ public class SyainJouhouBL {
 
   /**
    * {@index} 社員情報編集を行うユーザーの結果表（1レコード）を取得してSyainJouhouBeanに格納する
-   * @param syainJouhouBL
    * @param pUpdId　編集するユーザーID
    * @return
    */
-  public List<SyainJouhouBean> resultSyainJouhouHensyu(SyainJouhouBL syainJouhouBL, int pUpdId) {
+  public List<SyainJouhouBean> resultSyainJouhouHensyu(int pUpdId) {
 
     List<SyainJouhouEntity> resultDB = new ArrayList<>();
     List<SyainJouhouBean> result = new ArrayList<>();
