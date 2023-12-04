@@ -43,7 +43,7 @@ public class MastaBean implements Serializable {
     this.juusyo = juusyo;
   }
   
-  //ResultUserAddActionの画面項目保持用
+  //ResultUserAddActionのエラー時の画面項目保持用
   public MastaBean(String username, boolean kanriFlg, String sei, String sei_yomi, String mei, String mei_yomi,
       String nyuusyaYMD, String seibetsu, String seinenngappi, String syusshin, String juusyo) {
     this.username = username;
@@ -58,6 +58,24 @@ public class MastaBean implements Serializable {
     this.syusshin = syusshin;
     this.juusyo = juusyo;
   }
+  
+  //ResultUserUpdActionのエラー時の画面項目保持用
+  public MastaBean(int userid,String username, boolean kanriFlg, String sei, String sei_yomi, String mei, String mei_yomi,
+      String nyuusyaYMD, String seibetsu, String seinenngappi, String syusshin, String juusyo) {
+    this.userid = userid;
+    this.username = username;
+    this.kanriFlg = kanriFlg;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.nyuusyaYMD = nyuusyaYMD;
+    this.seibetsu = seibetsu;
+    this.seinenngappi = seinenngappi;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
+  }
+
 
   //アクセサメソッド
   public int getUserid() {

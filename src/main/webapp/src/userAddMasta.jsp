@@ -89,7 +89,7 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
         <td>
           <%
           //NULLの場合はブランクに変換
-          String getNyuusyaYMDViwe = String.valueOf(mastaBean.getNyuusyaYMD());
+          String getNyuusyaYMDViwe = mastaBean.getNyuusyaYMD();
           if (mastaBean.getNyuusyaYMD() == null) {
             getNyuusyaYMDViwe = "";
           }
@@ -127,7 +127,7 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
         <td>
           <%
           //NULLの場合はブランクに変換
-          String getSeinenngappiViwe = String.valueOf(mastaBean.getSeinenngappi());
+          String getSeinenngappiViwe = mastaBean.getSeinenngappi();
           if (mastaBean.getSeinenngappi() == null) {
             getSeinenngappiViwe = "";
           }

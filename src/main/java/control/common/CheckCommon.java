@@ -8,19 +8,23 @@ import java.util.List;
 import java.util.Map;
 
 public class CheckCommon {
-
-  public boolean checkDate(String pDate) {
+  /**
+   * {@index 日付整合性チェック}
+   * @param pDate　String Dateとして想定された値
+   * @return
+   */
+  public boolean checkDate(String pDate){
     boolean result = true;
-
+    
     if (pDate == null || pDate.equals("")) {
       return result;
     }
-
+    
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     try {
-      sdf.setLenient(false);
       sdf.parse(pDate);
-    } catch (ParseException e) {
+      //日付変換エラー・パラメータ想定外エラーの場合エラーとする。
+    } catch (ParseException|IllegalArgumentException e) {
       result = false;
     }
     return result;

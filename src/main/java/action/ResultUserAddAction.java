@@ -12,6 +12,7 @@ import java.util.Map;
 import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import constents.Const.Path;
+import constents.UserShousai;
 import control.UserAddBL;
 import control.common.CalcCommon;
 import control.common.CastCommon;
@@ -69,9 +70,9 @@ public class ResultUserAddAction extends HttpServlet {
     /* エラーチェック　START */
     boolean errflg = false;
     //日付項目チェック
-    checkCommon.checkDate(nyuusyaYMD);
-    checkCommon.checkDate(seinenngappi);
-    if (errflg == true) {
+    errflg = checkCommon.checkDate(nyuusyaYMD);
+    errflg = checkCommon.checkDate(seinenngappi);
+    if (errflg == false) {
       //画面入力値を保持
       saveCatchParseException(request);
       //メッセージを格納
@@ -87,16 +88,10 @@ public class ResultUserAddAction extends HttpServlet {
 
     //必須項目チェック
     //必須項目名をkey値、論理名をvalueとしてMAPに格納
-    Map<String, String> hissuKoumoku = new LinkedHashMap<>();
+    Map<String, String> hissuKoumoku = new LinkedHashMap<String, String>();
     hissuKoumoku.put("username", "ユーザー名");
     hissuKoumoku.put("kanriFlg", "管理者権限");
-    hissuKoumoku.put("sei", "姓");
-    hissuKoumoku.put("mei", "名");
-    hissuKoumoku.put("sei_yomi", "姓(ﾖﾐ)");
-    hissuKoumoku.put("mei_yomi", "名(ﾖﾐ)");
-    hissuKoumoku.put("seibetsu", "性別");
-    hissuKoumoku.put("seinenngappi", "生年月日");
-    hissuKoumoku.put("juusyo", "住所");
+    UserShousai.hissuKoumokuPut(hissuKoumoku);
     Map<String, Object> hissuCheck = checkCommon.checkHissu(gamenInfo, hissuKoumoku);
     errflg = (boolean) hissuCheck.get("errflg");
 
@@ -132,31 +127,44 @@ public class ResultUserAddAction extends HttpServlet {
       dispatcher.forward(request, response);
       return;
     }
-    
-    if (nyuusyaYMD != null) {
+    //入社年月日の項目が空白ではない場合
+    if (!(nyuusyaYMD.equals(""))) {
+      Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
+      StringBuilder sb = new StringBuilder();
       //日付整合性チェック1（生年月日より入社日付のほうが大きい場合エラー）
-      if (calcCommon.diffDate(seinenngappi, nyuusyaYMD) < 0) {
-        //日付整合性チェック2（生年月日-入社日付が16未満の場合エラー（15歳以下の就業は不可能なため））
-        Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
-        if (pr.getYears() < 16) {
-          //画面入力値を保持
-          saveCatchParseException(request);
-          //メッセージを格納
-          StringBuilder sb = new StringBuilder();
-          sb.append(MSG.MSG_DATE_INTEGRITY_ERR);
-          request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
-          //社員情報編集画面に遷移
-          RequestDispatcher dispatcher = request
-              .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
-          dispatcher.forward(request, response);
-          return;
-        }
+      if (pr.getDays() < 0) {
+        //画面入力値を保持
+        saveCatchParseException(request);
+        //メッセージを格納
+        sb.append(MSG.MSG_DATE_INTEGRITY_ERR_1);
+        request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+        //社員情報編集画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.USER_ADD_GAMEN);
+        dispatcher.forward(request, response);
+        return;
+      }
+      //日付整合性チェック2（生年月日-入社日付が16未満の場合エラー（15歳以下の就業は不可能なため））
+      if (pr.getYears() < 16) {
+        //画面入力値を保持
+        saveCatchParseException(request);
+        //メッセージを格納
+        sb.append(MSG.MSG_DATE_INTEGRITY_ERR_2);
+        request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+        //社員情報編集画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.USER_ADD_GAMEN);
+        dispatcher.forward(request, response);
+        return;
       }
     }
     /* エラーチェック　END */
 
     //ユーザー登録
     try {
+      //管理フラグをBoolean型に変更
+      gamenInfo.put("kanriFlg", Boolean.valueOf(kanriFlg));
+      //登録メソッドの呼び出し
       userAddBL.addUser(gamenInfo);
     } catch (SQLException e) {
       //エラーメッセージを格納

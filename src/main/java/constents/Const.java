@@ -63,7 +63,8 @@ public class Const {
     public static final String MSG_ATTRIBUTE = "MSG";
     
     //汎用
-    public static final String MSG_DATE_INTEGRITY_ERR = "日付の整合性が誤っています。日付を再度確認してください";
+    public static final String MSG_DATE_INTEGRITY_ERR_1 = "入社日付もしくは生年月日が誤っています。日付を再度確認してください";
+    public static final String MSG_DATE_INTEGRITY_ERR_2 = "１６才未満の就労は不可能です。生年月日を確認してください。";
     
     //パスワード登録更新
     public static final String UPDPASS_1 = "ユーザーの登録が完了しました。再度ログインをお願いします";

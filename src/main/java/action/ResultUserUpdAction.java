@@ -87,12 +87,12 @@ public class ResultUserUpdAction extends HttpServlet {
       gamenInfo.put("syusshin", syusshin);
       String juusyo = request.getParameter("juusyo");
       gamenInfo.put("juusyo", juusyo);
-      
+
       /* エラーチェック　START */
       //日付項目チェック
-      checkCommon.checkDate(nyuusyaYMD);
-      checkCommon.checkDate(seinenngappi);
-      if (errflg == true) {
+      errflg = checkCommon.checkDate(nyuusyaYMD);
+      errflg = checkCommon.checkDate(seinenngappi);
+      if (errflg == false) {
         //エラーがあった場合
         saveCatchParseException(request);
         //メッセージを格納
@@ -105,7 +105,7 @@ public class ResultUserUpdAction extends HttpServlet {
         dispatcher.forward(request, response);
         return;
       }
-      
+
       //必須項目チェック
       //必須項目名をkey値、論理名をvalueとしてMAPに格納
       Map<String, String> hissuKoumoku = new LinkedHashMap<>();
@@ -140,7 +140,8 @@ public class ResultUserUpdAction extends HttpServlet {
         juusyo = castCommon.nullToBlank(juusyo);
 
         //リクエストスコープに値を設定
-        MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+        MastaBean bean = new MastaBean(Integer.parseInt(request.getParameter("hdnUserId")), userName,
+            Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
             seibetsu, seinenngappi, syusshin, juusyo);
         List<MastaBean> list = new ArrayList<MastaBean>();
         list.add(bean);
@@ -152,27 +153,38 @@ public class ResultUserUpdAction extends HttpServlet {
         dispatcher.forward(request, response);
         return;
       }
-      
-      if (nyuusyaYMD != null) {
+      //入社年月日の項目が空白ではない場合
+      if (!(nyuusyaYMD.equals("")) || nyuusyaYMD != null) {
+        Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
+        StringBuilder sb = new StringBuilder();
         //日付整合性チェック1（生年月日より入社日付のほうが大きい場合エラー）
-        if (checkCommon.diffDate1Date2(seinenngappi, nyuusyaYMD) == false) {
-          //日付整合性チェック2（生年月日-入社日付が16未満の場合エラー（15歳以下の就業は不可能なため））
-          Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
-          if (pr.getYears() < 16) {
-            //画面入力値を保持
-            saveCatchParseException(request);
-            //メッセージを格納
-            StringBuilder sb = new StringBuilder();
-            sb.append(MSG.MSG_DATE_INTEGRITY_ERR);
-            request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
-            //ユーザー更新実行画面に遷移
-            RequestDispatcher dispatcher = request
-                .getRequestDispatcher(Path.RESULT_USER_UPD_GAMEN);
-            dispatcher.forward(request, response);
-            return;
-          }
+        if (pr.getDays() < 0) {
+          //画面入力値を保持
+          saveCatchParseException(request);
+          //メッセージを格納
+          sb.append(MSG.MSG_DATE_INTEGRITY_ERR_1);
+          request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+          //ユーザー更新実行画面に遷移
+          RequestDispatcher dispatcher = request
+              .getRequestDispatcher(Path.RESULT_USER_UPD_GAMEN);
+          dispatcher.forward(request, response);
+          return;
+        }
+        //日付整合性チェック2（生年月日-入社日付が16未満の場合エラー（15歳以下の就業は不可能なため））
+        if (pr.getYears() < 16) {
+          //画面入力値を保持
+          saveCatchParseException(request);
+          //メッセージを格納
+          sb.append(MSG.MSG_DATE_INTEGRITY_ERR_2);
+          request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+          //ユーザー更新実行画面に遷移
+          RequestDispatcher dispatcher2 = request
+              .getRequestDispatcher(Path.RESULT_USER_UPD_GAMEN);
+          dispatcher2.forward(request, response);
+          return;
         }
       }
+
       /* エラーチェック　END */
 
       //更新の実行
@@ -205,7 +217,8 @@ public class ResultUserUpdAction extends HttpServlet {
     }
 
     //リクエストスコープにインスタンスを保存
-    List<MastaBean> userUpdList = userUpdBL.selectUserList(gamenInfo);
+    List<MastaBean> userUpdList = userUpdBL
+        .selectUserList(gamenInfo);
     request.setAttribute(Path.USER_UPD_SCOPE, userUpdList);
 
     //ユーザー更新実行画面に遷移
@@ -223,6 +236,7 @@ public class ResultUserUpdAction extends HttpServlet {
   private void saveCatchParseException(HttpServletRequest request)
       throws ServletException, IOException {
     //画面から情報を取得、Mapに値を設定
+    int id = Integer.parseInt(request.getParameter("hdnUserId"));
     String userName = request.getParameter("userName");
     String kanriFlg = request.getParameter("kanriFlg");
     String sei = request.getParameter("sei");
@@ -250,7 +264,7 @@ public class ResultUserUpdAction extends HttpServlet {
     juusyo = castCommon.nullToBlank(juusyo);
 
     //リクエストスコープに値を設定
-    MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+    MastaBean bean = new MastaBean(id, userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
         seibetsu, seinenngappi, syusshin, juusyo);
     List<MastaBean> list = new ArrayList<MastaBean>();
     list.add(bean);

@@ -73,7 +73,7 @@ request.getAttribute(Path.SYAIN_JOUHOU_SCOPE);
       <%
       //入社年月日は入力必須項目ではない日付項目のためNULLが出力されるケースがある
       //NULLの場合はブランクに変換
-      String getNyuusyaYMDViwe = String.valueOf(syainJouhouBean.getNyuusyaYMD());
+      String getNyuusyaYMDViwe = syainJouhouBean.getNyuusyaYMD();
       if(syainJouhouBean.getNyuusyaYMD() == null){
         getNyuusyaYMDViwe = "";
       }

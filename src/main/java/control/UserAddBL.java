@@ -13,10 +13,9 @@ public class UserAddBL {
   /**
    * {@index ユーザー追加実行処理} 
    * @param addKoumoku
-   * @throws SQLException 
-   * @throws ParseException 
+   * @throws SQLException
    */
-  public void addUser(Map<String, Object> addKoumoku) throws SQLException, ParseException {
+  public void addUser(Map<String, Object> addKoumoku) throws SQLException,ParseException{
 
     int userid = 0;
     boolean kanriFlg = false;
@@ -26,15 +25,15 @@ public class UserAddBL {
     Date seinenngappi = null;
 
     //ID（）連番・仮登録用ID・仮登録パスワードの作成
-    kanriFlg = (boolean) addKoumoku.get("kanriflg");
+    kanriFlg = (boolean) addKoumoku.get("kanriFlg");
     LoginDAO loginDAO = new LoginDAO();
     userid = loginDAO.maxUserId() + 1;
     loginId = "kari" + String.valueOf(userid);
     loginPassword = "tdsl";
     //String→Dateの変換(この時点での日付はチェックを通っているためParseExceptionは発生しない想定)
     CastCommon castCommon = new CastCommon();
-    nyuusyaYMD = castCommon.chgStrToDate(castCommon.chgGamenDateToStr(addKoumoku.get("nyuusyaYMD").toString()));
-    seinenngappi = castCommon.chgStrToDate(castCommon.chgGamenDateToStr(addKoumoku.get("seinenngappi").toString()));
+    nyuusyaYMD = castCommon.chgStrToDate(castCommon.chgDateToStr(addKoumoku.get("nyuusyaYMD").toString()));
+    seinenngappi = castCommon.chgStrToDate(castCommon.chgDateToStr(addKoumoku.get("seinenngappi").toString()));
 
     //コンスタラクタでEntityに値を設定
     MastaEntity mastaEntity = new MastaEntity(userid, addKoumoku.get("username").toString(), kanriFlg, loginId, loginPassword);

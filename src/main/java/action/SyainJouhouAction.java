@@ -32,7 +32,7 @@ public class SyainJouhouAction extends HttpServlet {
     SyainJouhouBL syainJouhouBL = new SyainJouhouBL(kanriFlg);    
 
     //リクエストスコープにインスタンスを保存
-    List<SyainJouhouBean> SyainJouhouBLlist = syainJouhouBL.resultSyainJouhou(syainJouhouBL);
+    List<SyainJouhouBean> SyainJouhouBLlist = syainJouhouBL.resultSyainJouhou();
     request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
     // 結果出力画面(syainJouhou.jsp)にフォワード
     RequestDispatcher dispatcher = request

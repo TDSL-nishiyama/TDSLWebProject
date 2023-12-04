@@ -104,11 +104,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         <%
         //エラー時に生年月日がNULLで入力されてしまうためブランクに変換
         //NULLの場合はブランクに変換
-        String getSeinenngappiView = String.valueOf(syainJouhouBean.getSeinenngappi());
+        String getSeinenngappiView = syainJouhouBean.getSeinenngappi();
         if (syainJouhouBean.getSeinenngappi() == null) {
           getSeinenngappiView = "";
         }else{
-          getSeinenngappiView = sdf.format(syainJouhouBean.getSeinenngappi());
+          getSeinenngappiView = syainJouhouBean.getSeinenngappi();
         }
         %>
           <input type="text" name="seinenngappi" value=<%=getSeinenngappiView%>>

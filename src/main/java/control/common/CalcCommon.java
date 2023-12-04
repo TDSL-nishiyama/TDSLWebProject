@@ -1,5 +1,6 @@
 package control.common;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,7 +16,6 @@ public class CalcCommon {
 	public Period diffDate(Date date) {
 
 		Period result = null;
-
 		String strDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
 		String[] splYMD = strDate.split("-");
 		LocalDate ldate = LocalDate.of(Integer.parseInt(splYMD[0]), Integer.parseInt(splYMD[1]),
@@ -30,12 +30,21 @@ public class CalcCommon {
    *{@index} 日付計算（年月日）
    *@param String date1 日付1
    *@param String date2 日付2
-   *@return Period date1-date2
+   *@return Period pDate1-pDate2
    **/
-  public Period diffDate(String date1,String date2) {
-
+  public Period diffDate(String pDate1,String pDate2) {
+    
+    //入力値をdate型に変換
+    Date date1 = null;
+    Date date2 = null;
+    try {
+      date1 = new SimpleDateFormat("yyyy-MM-dd").parse(pDate1);
+      date2 = new SimpleDateFormat("yyyy-MM-dd").parse(pDate2);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    
     Period result = null;
-
     String strDate1 = new SimpleDateFormat("yyyy-MM-dd").format(date1);
     String strDate2 = new SimpleDateFormat("yyyy-MM-dd").format(date2);
     String[] splYMD1 = strDate1.split("-");

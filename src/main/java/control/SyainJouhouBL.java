@@ -10,6 +10,7 @@ import constents.UserShousai;
 import model.SyainJouhouBean;
 import model.SyainJouhouEntity;
 import control.common.CalcCommon;
+import control.common.CastCommon;
 
 public class SyainJouhouBL {
 
@@ -22,11 +23,10 @@ public class SyainJouhouBL {
 
   /**
    * {@index} 社員情報閲覧画面に表示する情報の結果表(一覧)を取得してSyainJouhouBeanに格納するクラス
-   * @param syainJouhouBL
-   * @return
+   * @return List<SyainJouhouBean>
    */
   //実行結果をサーブレットに戻す
-  public List<SyainJouhouBean> resultSyainJouhou(SyainJouhouBL syainJouhouBL) {
+  public List<SyainJouhouBean> resultSyainJouhou() {
 
     List<SyainJouhouEntity> resultDB = new ArrayList<>();
     List<SyainJouhouBean> result = new ArrayList<>();
@@ -48,10 +48,12 @@ public class SyainJouhouBL {
       for (int i = 0; i < resultDB.size(); i++) {
         //名前の設定
         String name = null;
+        CastCommon castCommmon = new CastCommon();
         name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
-
+        
+        
         SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(), name.toString(),
-            resultDB.get(i).getNyuusyaYMD(), resultDB.get(i).getSyusshin());
+            castCommmon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), resultDB.get(i).getSyusshin());
 
         result.add(bean);
       }
@@ -95,9 +97,10 @@ public class SyainJouhouBL {
         //年齢の設定
         String age = null;
         age = setAge(resultDB.get(i).getSeinenngappi());
-
+        
+        CastCommon castCommmon = new CastCommon();
         SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(), name,
-            resultDB.get(i).getNyuusyaYMD(), nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo(),
+            castCommmon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo(),
             seibetsu, age);
 
         result.add(bean);
@@ -161,11 +164,12 @@ public class SyainJouhouBL {
       //年齢の設定
       String age = null;
       age = setAge(resultDB.get(i).getSeinenngappi());
-
+      
+      CastCommon castCommon =new CastCommon();
       SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(),
           resultDB.get(i).getSei(), resultDB.get(i).getSei_yomi(), resultDB.get(i).getMei(),
           resultDB.get(i).getMei_yomi(), name,
-          resultDB.get(i).getNyuusyaYMD(), null, seibetsu, resultDB.get(i).getSeinenngappi(),
+          castCommon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), null, seibetsu, castCommon.chgDateToStr(resultDB.get(i).getSeinenngappi()),
           age, nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo());
       result.add(bean);
     }

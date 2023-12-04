@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="model.MastaBean,java.util.List,java.text.SimpleDateFormat"%>
+<%@ page import="model.MastaBean,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
 
 <%
 //リクエストスコープに保存されたユーザー情報を取得
 List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER_UPD_SCOPE);
-//日付変換クラスの用意
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 
 <!DOCTYPE html>
@@ -117,11 +115,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         <%
         //エラー時に生年月日がNULLで入力されてしまうためブランクに変換
         //NULLの場合はブランクに変換
-        String getSeinenngappiView = String.valueOf(mastaBean.getSeinenngappi());
+        String getSeinenngappiView = mastaBean.getSeinenngappi();
         if (mastaBean.getSeinenngappi() == null) {
           getSeinenngappiView = "";
         }else{
-          getSeinenngappiView = sdf.format(mastaBean.getSeinenngappi());
+          getSeinenngappiView = mastaBean.getSeinenngappi();
         }
         %>
           <input type="text" name="seinenngappi" value=<%=getSeinenngappiView%>>
@@ -129,11 +127,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         <%
         //入社年月日は入力必須項目ではない日付項目のためNULLが出力されるケースがある
         //NULLの場合はブランクに変換
-        String getNyuusyaYMDViwe = String.valueOf(mastaBean.getNyuusyaYMD());
+        String getNyuusyaYMDViwe = mastaBean.getNyuusyaYMD();
         if (mastaBean.getNyuusyaYMD() == null) {
           getNyuusyaYMDViwe = "";
         }else{
-          getNyuusyaYMDViwe = sdf.format(mastaBean.getNyuusyaYMD());
+          getNyuusyaYMDViwe = mastaBean.getNyuusyaYMD();
         }
         %>
         <td>

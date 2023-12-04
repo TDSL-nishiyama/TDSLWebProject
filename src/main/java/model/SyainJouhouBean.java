@@ -1,20 +1,19 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class SyainJouhouBean implements Serializable {
-  
+
   private int id; //ユーザーID
   private String sei;
   private String sei_yomi;
   private String mei;
   private String mei_yomi;
   private String name; //名前 sei+mei
-  private Date nyuusyaYMD;
-  private Date taisytaYMD;
+  private String nyuusyaYMD;
+  private String taisytaYMD;
   private String seibetsu; //0=男　1=女 2=その他
-  private Date seinenngappi;
+  private String seinenngappi;
   private String age; //年齢　現在日付-生年月日 -> Yを抽出
   private String nenji; //年次 現在日付-入社年月日 -> YMMを抽出
   private String syusshin;
@@ -23,7 +22,7 @@ public class SyainJouhouBean implements Serializable {
   //コンスタラクター
   //全部
   public SyainJouhouBean(int id, String sei, String sei_yomi, String mei, String mei_yomi,String name,
-      Date nyuusyaYMD, Date taisytaYMD, String seibetsu, Date seinenngappi, String age, String nenji,
+      String nyuusyaYMD, String taisytaYMD, String seibetsu, String seinenngappi, String age, String nenji,
       String syusshin, String juusyo) {
     super();
     this.id = id;
@@ -42,24 +41,8 @@ public class SyainJouhouBean implements Serializable {
     this.juusyo = juusyo;
   }
 
-  //DB項目
-  public SyainJouhouBean(int id, String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD,
-      Date taisytaYMD, String seibetsu, Date seinenngappi, String syusshin, String juusyo) {
-    this.id = id;
-    this.sei = sei;
-    this.sei_yomi = sei_yomi;
-    this.mei = mei;
-    this.mei_yomi = mei_yomi;
-    this.nyuusyaYMD = nyuusyaYMD;
-    this.taisytaYMD = taisytaYMD;
-    this.seibetsu = seibetsu;
-    this.seinenngappi = seinenngappi;
-    this.syusshin = syusshin;
-    this.juusyo = juusyo;
-  }
-
   //必要分（一般）
-  public SyainJouhouBean(int id, String name, Date nyuusyaYMD,
+  public SyainJouhouBean(int id, String name, String nyuusyaYMD,
       String syusshin) {
     this.id = id;
     this.name = name;
@@ -68,7 +51,7 @@ public class SyainJouhouBean implements Serializable {
   }
 
   //必要分（管理者）
-  public SyainJouhouBean(int id, String name, Date nyuusyaYMD, String nenji,
+  public SyainJouhouBean(int id, String name, String nyuusyaYMD, String nenji,
       String syusshin, String juusyo,String seibetsu, String age) {
     this.id = id;
     this.name = name;
@@ -81,8 +64,9 @@ public class SyainJouhouBean implements Serializable {
   }
   
   //必須チェック
-  public SyainJouhouBean(String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD, String seibetsu,
-      Date seinenngappi, String syusshin, String juusyo) {
+  public SyainJouhouBean(int id,String sei, String sei_yomi, String mei, String mei_yomi, String nyuusyaYMD, String seibetsu,
+      String seinenngappi, String syusshin, String juusyo) {
+    this.id = id;
     this.sei = sei;
     this.sei_yomi = sei_yomi;
     this.mei = mei;
@@ -93,9 +77,21 @@ public class SyainJouhouBean implements Serializable {
     this.syusshin = syusshin;
     this.juusyo = juusyo;
   }
-
-  public SyainJouhouBean() {
-
+  
+  //
+  public SyainJouhouBean(int id,String name,String sei,String sei_yomi, String mei, String mei_yomi,  String nyuusyaYMD,
+      String seibetsu, String seinenngappi, String syusshin, String juusyo) {
+    this.id = id;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.name = name;
+    this.nyuusyaYMD = nyuusyaYMD;
+    this.seibetsu = seibetsu;
+    this.seinenngappi = seinenngappi;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
   }
 
   public int getId() {
@@ -146,19 +142,19 @@ public class SyainJouhouBean implements Serializable {
     this.mei_yomi = mei_yomi;
   }
 
-  public Date getNyuusyaYMD() {
+  public String getNyuusyaYMD() {
     return nyuusyaYMD;
   }
 
-  public void setNyuusyaYMD(Date nyuusyaYMD) {
+  public void setNyuusyaYMD(String nyuusyaYMD) {
     this.nyuusyaYMD = nyuusyaYMD;
   }
 
-  public Date getTaisytaYMD() {
+  public String getTaisytaYMD() {
     return taisytaYMD;
   }
 
-  public void setTaisytaYMD(Date taisytaYMD) {
+  public void setTaisytaYMD(String taisytaYMD) {
     this.taisytaYMD = taisytaYMD;
   }
 
@@ -170,11 +166,11 @@ public class SyainJouhouBean implements Serializable {
     this.seibetsu = seibetsu;
   }
 
-  public Date getSeinenngappi() {
+  public String getSeinenngappi() {
     return seinenngappi;
   }
 
-  public void setSeinenngappi(Date seinenngappi) {
+  public void setSeinenngappi(String seinenngappi) {
     this.seinenngappi = seinenngappi;
   }
 
