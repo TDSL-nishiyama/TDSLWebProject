@@ -6,16 +6,11 @@ import java.util.Date;
 
 public class CastCommon {
 
-  final String MOJIRETSU = "[^0-9]";
-
-  public String removeAllNonAlphaNumeric(String str) {
-    if (str == null) {
-      return null;
-    }
-    //数値以外を消去
-    return str.replaceAll(MOJIRETSU, "");
-  }
-
+  /**
+   * {@index StringをDateに変換する}
+   * @param pDate
+   * @return ParseExceptionが発生した場合NULLを設定
+   */
   public Date chgStrToDate(String pDate) {
     Date result = null;
 
@@ -87,6 +82,11 @@ public class CastCommon {
     return result;
   }
 
+  /**
+   * {@index NULLをブランクに変換する}
+   * @param input　String
+   * @return
+   */
   public String nullToBlank(String input) {
     String result = null;
 
