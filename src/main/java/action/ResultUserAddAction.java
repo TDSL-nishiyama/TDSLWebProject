@@ -208,7 +208,7 @@ public class ResultUserAddAction extends HttpServlet {
       throws ServletException, IOException {
     //画面から情報を取得、Mapに値を設定
     String userName = request.getParameter("userName");
-    String kanriFlg = request.getParameter("kanriFlg");
+    boolean kanriFlg = Boolean.valueOf(request.getParameter("kanriFlg"));
     String sei = request.getParameter("sei");
     String mei = request.getParameter("mei");
     String seiyomi = request.getParameter("sei_yomi");
@@ -234,7 +234,7 @@ public class ResultUserAddAction extends HttpServlet {
     juusyo = castCommon.nullToBlank(juusyo);
 
     //リクエストスコープに値を設定
-    MastaBean bean = new MastaBean(userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+    MastaBean bean = new MastaBean(userName, kanriFlg, sei, seiyomi, mei, meiyomi, nyuusyaYMD,
         seibetsu, seinenngappi, syusshin, juusyo);
     List<MastaBean> list = new ArrayList<MastaBean>();
     list.add(bean);

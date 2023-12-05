@@ -81,6 +81,21 @@ public class CheckCommon {
 
     return result;
   }
+  
+  /**
+   * {@index ログイン中のユーザーと変更したいユーザーIDの一致確認}
+   * @param loginUserId　ログインしているID
+   * @param checkuserId　確認したいID
+   * @return true(一致)false(不一致)
+   */
+  public boolean checkLoginIdEqualsId(int loginUserId,int checkuserId) {
+      boolean result = false;
+      if (loginUserId == checkuserId) {
+        result = true;
+      }
+
+      return result;
+    }
 
   /**
    *{@index 必須項目確認} 

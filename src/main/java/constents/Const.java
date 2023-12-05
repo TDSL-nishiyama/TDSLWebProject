@@ -79,6 +79,7 @@ public class Const {
     public static final String MASTA_UPD_1 = "入力されたIDは存在しません";
     public static final String MASTA_UPD_2_1 = "必須項目（";
     public static final String MASTA_UPD_2_2 = "）を入力してください";
+    public static final String MASTA_UPD_3 = "現在ログインしているユーザーの管理者権限は変更できません";
     
     //マスタ_削除
     public static final String MASTA_DEL_1 = "入力されたIDは存在しません";

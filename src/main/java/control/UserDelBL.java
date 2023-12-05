@@ -2,41 +2,13 @@ package control;
 
 import java.sql.SQLException;
 
-import control.common.CheckCommon;
-
 public class UserDelBL {
 
-	//ID存在確認
-	public boolean userDelCheck(int userIdDel) {
-
-		boolean result = true;
-
-		CheckCommon checkCommon = new CheckCommon();
-
-		//ユーザーID確認
-		int i = checkCommon.checkUserId(userIdDel);
-
-		//カウント結果が0の場合IDは存在しない
-		if (i == 0) {
-			result = false;
-		}
-
-		return result;
-	}
-
-	//ログインID-削除ID一致確認
-	public boolean userDelCheck(int userId, int userIdDel) {
-
-		boolean result = true;
-
-		if (userId == userIdDel) {
-			result = false;
-		}
-
-		return result;
-	}
-
-	//ユーザー削除処理
+	/**
+	 * {@index ユーザー削除処理}
+	 * @param userId　削除するユーザーID
+	 * @throws SQLException
+	 */
 	public void userDel(int userId) throws SQLException {
 
 		MastaDAOInsertUpdate useraddDAOInsUp = new MastaDAOInsertUpdate();

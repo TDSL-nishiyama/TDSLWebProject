@@ -44,13 +44,13 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
       </tr>
       <tr>
         <td>
-          <input type="radio" name="kanriFlg" value="1">
+          <input type="radio" name="kanriFlg" value="true">
           あり
         </td>
       </tr>
       <tr>
         <td>
-          <input type="radio" name="kanriFlg" value="0" checked>
+          <input type="radio" name="kanriFlg" value="false" checked>
           なし
         </td>
       </tr>

@@ -2,11 +2,11 @@ package action;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import constents.Const.Path;
 import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import control.UserDelBL;
+import control.common.CheckCommon;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -35,11 +35,14 @@ public class ResultUserDelAction extends HttpServlet {
     //画面に入力されたユーザーID
     int userIdDel = Integer.parseInt(request.getParameter("userIdDel"));
     
+    //共通クラスのインスタンス化
+    CheckCommon checkCommon = new CheckCommon();
+    
     boolean errflg = false;
     UserDelBL userDelBL = new UserDelBL();
+    
     //入力されたIDが存在しない場合、メッセージを表示
-    errflg = userDelBL.userDelCheck(userIdDel);
-    if (errflg == false) {
+    if (checkCommon.checkUserId(userIdDel) == 0) {
       //メッセージを格納
       request.setAttribute(MSG.MSG_ATTRIBUTE,MSG.MASTA_DEL_1 );
       //ユーザー削除画面に遷移
@@ -50,7 +53,7 @@ public class ResultUserDelAction extends HttpServlet {
     }
     
     //現在ログインしているユーザーを削除しようとした場合、メッセージを表示    
-    errflg = userDelBL.userDelCheck(userId, userIdDel);
+    errflg = checkCommon.checkLoginIdEqualsId(userId, userIdDel);
     if (errflg == false) {
       //メッセージを格納
       request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_DEL_2);

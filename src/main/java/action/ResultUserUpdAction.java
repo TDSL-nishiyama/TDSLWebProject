@@ -20,7 +20,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.MastaBean;
+import model.SessionKanriBean;
 
 /**
  * ユーザー更新実行画面のサーブレット
@@ -48,8 +50,7 @@ public class ResultUserUpdAction extends HttpServlet {
       gamenInfo.put("userIdUpd", String.valueOf(id));
 
       //入力されたIDが存在しない場合、メッセージを表示
-      errflg = userUpdBL.userUpdCheck(id);
-      if (errflg == false) {
+      if (checkCommon.checkUserId(id)==0) {
         //メッセージを格納
         request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_UPD_1);
         //ユーザー更新画面に遷移
@@ -153,6 +154,31 @@ public class ResultUserUpdAction extends HttpServlet {
         dispatcher.forward(request, response);
         return;
       }
+      
+      //管理者権限変更チェック
+      //セッションから現在ログインしているユーザーのIDと管理者フラグを取得
+      HttpSession session = request.getSession();
+      SessionKanriBean loginSession = (SessionKanriBean) session.getAttribute(Path.SESSION_SCOPE);
+      int nowUserId = loginSession.getUserId();
+      boolean[] arrKanriFlg = {false,false};
+      arrKanriFlg[0] = loginSession.getKanriFlg();//変更前
+      arrKanriFlg[1] = Boolean.valueOf(kanriFlg);//変更後
+      errflg = userUpdBL.checkKanriFlg(nowUserId, id,arrKanriFlg );
+      
+      if(errflg == true) {
+        //エラーがあった場合
+        saveCatchParseException(request);
+        //メッセージを格納
+        StringBuilder sb = new StringBuilder();
+        sb.append(MSG.MASTA_UPD_3);
+        request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
+        //ユーザー更新実行画面に遷移
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher(Path.RESULT_USER_UPD_GAMEN);
+        dispatcher.forward(request, response);
+        return;
+      }
+      
       //入社年月日の項目が空白ではない場合
       if (!(nyuusyaYMD.equals("")) || nyuusyaYMD != null) {
         Period pr = calcCommon.diffDate(seinenngappi, nyuusyaYMD);
@@ -184,11 +210,12 @@ public class ResultUserUpdAction extends HttpServlet {
           return;
         }
       }
-
       /* エラーチェック　END */
 
       //更新の実行
       try {
+        //管理フラグをBoolean型に変更）
+        gamenInfo.put("kanriFlg",Boolean.valueOf(kanriFlg));
         userUpdBL.updUserList(gamenInfo, id);
       } catch (SQLException e) {
         //エラーメッセージを格納
@@ -238,7 +265,7 @@ public class ResultUserUpdAction extends HttpServlet {
     //画面から情報を取得、Mapに値を設定
     int id = Integer.parseInt(request.getParameter("hdnUserId"));
     String userName = request.getParameter("userName");
-    String kanriFlg = request.getParameter("kanriFlg");
+    boolean kanriFlg = Boolean.valueOf(request.getParameter("kanriFlg"));
     String sei = request.getParameter("sei");
     String mei = request.getParameter("mei");
     String seiyomi = request.getParameter("sei_yomi");
@@ -264,7 +291,7 @@ public class ResultUserUpdAction extends HttpServlet {
     juusyo = castCommon.nullToBlank(juusyo);
 
     //リクエストスコープに値を設定
-    MastaBean bean = new MastaBean(id, userName, Boolean.valueOf(kanriFlg), sei, seiyomi, mei, meiyomi, nyuusyaYMD,
+    MastaBean bean = new MastaBean(id, userName, kanriFlg, sei, seiyomi, mei, meiyomi, nyuusyaYMD,
         seibetsu, seinenngappi, syusshin, juusyo);
     List<MastaBean> list = new ArrayList<MastaBean>();
     list.add(bean);

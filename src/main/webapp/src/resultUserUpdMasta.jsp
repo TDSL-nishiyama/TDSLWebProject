@@ -36,19 +36,21 @@ List<MastaBean> mastaBeanlist = (List<MastaBean>) request.getAttribute(Path.USER
       <td>
         <%
         //mastaBeanから選択ユーザーの管理者権限を取得してcheckedを制御
+        //一般ユーザーの場合
         if (mastaBean.getKanriFlg() == false) {
         %>
         管理者権限: あり：
-        <input type="radio" name="kanriFlg" value=1>
+        <input type="radio" name="kanriFlg" value="true">
         なし：
-        <input type="radio" name="kanriFlg" value=0 checked>
+        <input type="radio" name="kanriFlg" value="false" checked>
         <%
+        //管理者ユーザーの場合
         } else {
         %>
         管理者権限: あり：
-        <input type="radio" name="kanriFlg" value=1 checked>
+        <input type="radio" name="kanriFlg" value="true" checked>
         なし：
-        <input type="radio" name="kanriFlg" value=0>
+        <input type="radio" name="kanriFlg" value="false">
         <%
         }
         %>
