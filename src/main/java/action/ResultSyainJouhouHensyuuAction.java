@@ -54,11 +54,13 @@ public class ResultSyainJouhouHensyuuAction extends jakarta.servlet.http.HttpSer
     String seiyomi = request.getParameter(UserShousai.GAMEN_SEIYOMI);
     String meiyomi = request.getParameter(UserShousai.GAMEN_MEIYOMI);
     String seibetsu = request.getParameter(UserShousai.GAMEN_SEIBETSU);
-    String seinenngappi = request.getParameter(UserShousai.GAMEN_SEINENNGAPPI);
-    String nyuusyaYMD = request.getParameter(UserShousai.GAMEN_NYUUSYAYMD);
     String syusshin = request.getParameter(UserShousai.GAMEN_SYUSSSHIN);
     String juusyo = request.getParameter(UserShousai.GAMEN_JUUSYO);
 
+    //日付形式の変換
+    String seinenngappi = castCommon.chgDStrToStr(request.getParameter(UserShousai.GAMEN_SEINENNGAPPI));
+    String nyuusyaYMD = castCommon.chgDStrToStr(request.getParameter(UserShousai.GAMEN_NYUUSYAYMD));
+    
     /* エラーチェック　START */
     boolean errflg = false;
 

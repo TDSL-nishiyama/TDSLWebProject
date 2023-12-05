@@ -32,8 +32,8 @@ public class UserAddBL {
     loginPassword = "tdsl";
     //String→Dateの変換(この時点での日付はチェックを通っているためParseExceptionは発生しない想定)
     CastCommon castCommon = new CastCommon();
-    nyuusyaYMD = castCommon.chgStrToDate(castCommon.chgDateToStr(addKoumoku.get("nyuusyaYMD").toString()));
-    seinenngappi = castCommon.chgStrToDate(castCommon.chgDateToStr(addKoumoku.get("seinenngappi").toString()));
+    nyuusyaYMD = castCommon.chgStrToDate(castCommon.chgDStrToStr(addKoumoku.get("nyuusyaYMD").toString()));
+    seinenngappi = castCommon.chgStrToDate(castCommon.chgDStrToStr(addKoumoku.get("seinenngappi").toString()));
 
     //コンスタラクタでEntityに値を設定
     MastaEntity mastaEntity = new MastaEntity(userid, addKoumoku.get("username").toString(), kanriFlg, loginId, loginPassword);

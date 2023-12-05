@@ -3,6 +3,7 @@ package control.common;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,23 +14,32 @@ public class CheckCommon {
    * @param pDate　String Dateとして想定された値
    * @return
    */
-  public boolean checkDate(String pDate){
+  public boolean checkDate(String pDate) {
     boolean result = true;
-    
+
+    //項目が存在しない場合チェックを行わない
     if (pDate == null || pDate.equals("")) {
       return result;
     }
-    
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     try {
-      sdf.parse(pDate);
-      //日付変換エラー・パラメータ想定外エラーの場合エラーとする。
-    } catch (ParseException|IllegalArgumentException e) {
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      sdf.setLenient(false);
+      @SuppressWarnings("unused")
+      Date date = sdf.parse(pDate);
+      //日付変換エラー・パラメータ想定外エラーの場合エラーとする
+    } catch (ParseException | IllegalArgumentException e) {
       result = false;
     }
     return result;
+
   }
 
+  /**
+   * {@index ブランクまたはNULLチェック}
+   * @param str 文字列
+   * @return true=エラーなし　false=エラーあり
+   */
   public boolean checkBlankOrNULL(String str) {
     boolean result = true;
 
@@ -40,6 +50,11 @@ public class CheckCommon {
     return result;
   }
 
+  /**
+   * {@index ユーザーID存在確認（del項目に値があるユーザーを含まない）}
+   * @param userId
+   * @return
+   */
   public int checkUserId(int userId) {
 
     int result = 0;
@@ -51,6 +66,11 @@ public class CheckCommon {
     return result;
   }
 
+  /**
+   * {@index ユーザーID存在確認（del項目に値があるユーザーを含む）}
+   * @param userId
+   * @return
+   */
   public int checkUserIdAll(int userId) {
 
     int result = 0;

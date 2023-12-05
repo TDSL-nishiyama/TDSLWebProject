@@ -5,58 +5,70 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CastCommon {
-  
+
   final String MOJIRETSU = "[^0-9]";
-  
+
   public String removeAllNonAlphaNumeric(String str) {
     if (str == null) {
-        return null;
+      return null;
     }
     //数値以外を消去
     return str.replaceAll(MOJIRETSU, "");
-}
-  
-  public Date chgStrToDate(String pDate){
+  }
+
+  public Date chgStrToDate(String pDate) {
     Date result = null;
-    
-    if (pDate == null||pDate.equals("")) {
+
+    if (pDate == null || pDate.equals("")) {
       return null;
     }
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     try {
       result = sdf.parse(pDate);
     } catch (ParseException e) {
       result = null;
     }
-    
+
     return result;
   }
-  
+
   /**
    * {@index 画面に入力された日付形式項目を内部用持ち回り形式yyyy-MM-ddに変換する}
    * @param pDate　String
    * @return
    */
-  public String chgDateToStr(String pDate) {
+  public String chgDStrToStr(String pDate) {
     String result = null;
-    
+
     if (pDate == null) {
       return result;
     }
-    
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    final String[] formatStrings = { "yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd" };
+
     Date date = null;
-    try {
-      date = sdf.parse(pDate);
-    } catch (ParseException e) {
-      return null;
+
+    for (String formatString : formatStrings) {
+      try {
+        SimpleDateFormat sdf = new SimpleDateFormat(formatString);
+        sdf.setLenient(false);
+        date = sdf.parse(pDate);
+        //dateが変換できた場合ループから抜ける
+        if (date != null) {
+          //日付項目を内部持ち回り形式に変換
+          result = new SimpleDateFormat("yyyy-MM-dd").format(date);
+          break;
+        }
+        //日付変換エラー・パラメータ想定外エラーの場合は何もせず値を返却
+      } catch (ParseException | IllegalArgumentException e) {
+        result = pDate;
+      }
     }
-    result = sdf.format(date);
-    
+
     return result;
   }
-  
+
   /**
    * {@index Date型をStringに変換する（yyyy-MM-dd形式）}
    * @param pDate　String
@@ -64,27 +76,27 @@ public class CastCommon {
    */
   public String chgDateToStr(Date pDate) {
     String result = null;
-    
+
     if (pDate == null) {
       return result;
     }
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     result = sdf.format(pDate);
-    
+
     return result;
   }
-    
+
   public String nullToBlank(String input) {
     String result = null;
-    
-    if(input == null) {
+
+    if (input == null) {
       result = "";
-    }else {
+    } else {
       result = input;
     }
-    
+
     return result;
-    
+
   }
 }

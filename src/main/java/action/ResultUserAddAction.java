@@ -56,11 +56,11 @@ public class ResultUserAddAction extends HttpServlet {
     gamenInfo.put("sei_yomi", seiyomi);
     String meiyomi = request.getParameter("mei_yomi");
     gamenInfo.put("mei_yomi", meiyomi);
-    String nyuusyaYMD = request.getParameter("nyuusyaYMD");
+    String nyuusyaYMD = castCommon.chgDStrToStr(request.getParameter("nyuusyaYMD"));
     gamenInfo.put("nyuusyaYMD", nyuusyaYMD);
     String seibetsu = request.getParameter("seibetsu");
     gamenInfo.put("seibetsu", seibetsu);
-    String seinenngappi = request.getParameter("seinenngappi");
+    String seinenngappi = castCommon.chgDStrToStr(request.getParameter("seinenngappi"));
     gamenInfo.put("seinenngappi", seinenngappi);
     String syusshin = request.getParameter("syusshin");
     gamenInfo.put("syusshin", syusshin);

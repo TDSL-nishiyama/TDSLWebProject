@@ -77,11 +77,11 @@ public class ResultUserUpdAction extends HttpServlet {
       gamenInfo.put("sei_yomi", seiyomi);
       String meiyomi = request.getParameter("mei_yomi");
       gamenInfo.put("mei_yomi", meiyomi);
-      String nyuusyaYMD = request.getParameter("nyuusyaYMD");
+      String nyuusyaYMD = castCommon.chgDStrToStr(request.getParameter("nyuusyaYMD"));
       gamenInfo.put("nyuusyaYMD", nyuusyaYMD);
       String seibetsu = request.getParameter("seibetsu");
       gamenInfo.put("seibetsu", seibetsu);
-      String seinenngappi = request.getParameter("seinenngappi");
+      String seinenngappi = castCommon.chgDStrToStr(request.getParameter("seinenngappi"));
       gamenInfo.put("seinenngappi", seinenngappi);
       String syusshin = request.getParameter("syusshin");
       gamenInfo.put("syusshin", syusshin);
@@ -101,7 +101,7 @@ public class ResultUserUpdAction extends HttpServlet {
         request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
         //ユーザー更新実行画面に遷移
         RequestDispatcher dispatcher = request
-            .getRequestDispatcher(Path.USER_UPD_GAMEN);
+            .getRequestDispatcher(Path.RESULT_USER_UPD_GAMEN);
         dispatcher.forward(request, response);
         return;
       }
