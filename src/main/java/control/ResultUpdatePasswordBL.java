@@ -19,6 +19,7 @@ public class ResultUpdatePasswordBL {
   public void updateUserPassword(String loginIdBefore, String pLoginId, String pPassword) throws SQLException {
 
     //新規ログインIDとパスワードの登録
+    //TODO 
     LoginDAOInsertUpdate insDAO = new LoginDAOInsertUpdate();
     insDAO.updateUserAndPassword(loginIdBefore, pLoginId, pPassword);
     
@@ -27,6 +28,7 @@ public class ResultUpdatePasswordBL {
   public void updatePassword(String pUserId, String pPassword) throws SQLException {
 
       //パスワードの更新
+      //TODO パスワードのハッシュ化
       LoginDAOInsertUpdate upDAO = new LoginDAOInsertUpdate();
       upDAO.updatePassword(pUserId, pPassword);
   

@@ -18,24 +18,15 @@ public class SyainJouhouEntity implements Serializable {
   private String juusyo;
 
   //一般ユーザー
-  public SyainJouhouEntity(int id, String sei, String mei, Date nyuusyaYMD, String syusshin) {
+  public SyainJouhouEntity(int id, String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD, String syusshin,String juusyo) {
     this.id = id;
     this.sei = sei;
+    this.sei_yomi = sei_yomi;
     this.mei = mei;
+    this.mei_yomi = mei_yomi;
     this.nyuusyaYMD = nyuusyaYMD;
     this.syusshin = syusshin;
-  }
-
-  //管理者ユーザー
-  public SyainJouhouEntity(int id, String sei, String mei, Date nyuusyaYMD, String syusshin, String seibetsu,
-      Date seinenngappi) {
-    this.id = id;
-    this.sei = sei;
-    this.mei = mei;
-    this.nyuusyaYMD = nyuusyaYMD;
-    this.syusshin = syusshin;
-    this.seibetsu = seibetsu;
-    this.seinenngappi = seinenngappi;
+    this.juusyo = juusyo;
   }
 
   //初回登録
@@ -53,7 +44,7 @@ public class SyainJouhouEntity implements Serializable {
     this.juusyo = juusyo;
   }
   
-  //DB項目
+  //DB項目すべて
   public SyainJouhouEntity(int id, String sei, String sei_yomi, String mei, String mei_yomi, Date nyuusyaYMD,
       Date taisytaYMD, String seibetsu, Date seinenngappi, String syusshin, String juusyo) {
     this.id = id;

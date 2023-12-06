@@ -35,5 +35,14 @@ public class UserShousai {
     hissuKoumoku.put(COL_SEINENGAPPI, "生年月日");
     hissuKoumoku.put(COL_JYUUSYO, "住所");
   }
+  
+  //一般ユーザーの社員情報更新用
+  public static void hissuKoumokuPutIppan(Map<String, String> hissuKoumoku) {
+    hissuKoumoku.put(COL_SEI, "姓");
+    hissuKoumoku.put(COL_MEI, "名");
+    hissuKoumoku.put(COL_SEI_YOMI, "姓(ﾖﾐ)");
+    hissuKoumoku.put(COL_MEI_YOMI, "名(ﾖﾐ)");
+    hissuKoumoku.put(COL_JYUUSYO, "住所");
+  }
 
 }

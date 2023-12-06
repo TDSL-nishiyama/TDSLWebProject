@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class SyainJouhouBean implements Serializable {
+public class SyainJouhouHensyuuBean implements Serializable {
 
   private int id; //ユーザーID
   private String sei;
@@ -20,10 +20,14 @@ public class SyainJouhouBean implements Serializable {
   private String juusyo;
 
   //コンスタラクター
-  //一覧呼び出し（一般）
-  public SyainJouhouBean(int id, String name, String nyuusyaYMD, String nenji,
-      String syusshin, String juusyo) {
+  //呼び出し（一般）
+  public SyainJouhouHensyuuBean(int id, String sei, String sei_yomi, String mei, String mei_yomi, String name,
+      String nyuusyaYMD, String nenji, String syusshin, String juusyo) {
     this.id = id;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
     this.name = name;
     this.nyuusyaYMD = nyuusyaYMD;
     this.nenji = nenji;
@@ -31,27 +35,49 @@ public class SyainJouhouBean implements Serializable {
     this.juusyo = juusyo;
   }
 
-  //一覧呼び出し（管理者）
-  public SyainJouhouBean(int id, String name, String nyuusyaYMD, String nenji,
-      String syusshin, String juusyo,String seibetsu, String age) {
-    this.id = id;
-    this.name = name;
-    this.nyuusyaYMD = nyuusyaYMD;
-    this.nenji = nenji;
-    this.syusshin = syusshin;
-    this.juusyo = juusyo;
-    this.seibetsu = seibetsu;
-    this.age = age;
-  }
-  
-  //必須チェック
-  public SyainJouhouBean(int id,String sei, String sei_yomi, String mei, String mei_yomi, String nyuusyaYMD, String seibetsu,
-      String seinenngappi, String syusshin, String juusyo) {
+  //呼び出し（管理者・全項目）
+  public SyainJouhouHensyuuBean(int id, String sei, String sei_yomi, String mei, String mei_yomi, String name,
+      String nyuusyaYMD, String taisytaYMD, String seibetsu, String seinenngappi, String age, String nenji,
+      String syusshin, String juusyo) {
+    super();
     this.id = id;
     this.sei = sei;
     this.sei_yomi = sei_yomi;
     this.mei = mei;
     this.mei_yomi = mei_yomi;
+    this.name = name;
+    this.nyuusyaYMD = nyuusyaYMD;
+    this.taisytaYMD = taisytaYMD;
+    this.seibetsu = seibetsu;
+    this.seinenngappi = seinenngappi;
+    this.age = age;
+    this.nenji = nenji;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
+  }
+
+  //更新（一般）
+  public SyainJouhouHensyuuBean(int id, String sei, String sei_yomi, String mei, String mei_yomi, String nyuusyaYMD,
+      String syusshin, String juusyo) {
+    this.id = id;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.syusshin = syusshin;
+    this.juusyo = juusyo;
+  }
+
+  //更新（管理者）
+  public SyainJouhouHensyuuBean(int id, String name, String sei, String sei_yomi, String mei, String mei_yomi,
+      String nyuusyaYMD,
+      String seibetsu, String seinenngappi, String syusshin, String juusyo) {
+    this.id = id;
+    this.sei = sei;
+    this.sei_yomi = sei_yomi;
+    this.mei = mei;
+    this.mei_yomi = mei_yomi;
+    this.name = name;
     this.nyuusyaYMD = nyuusyaYMD;
     this.seibetsu = seibetsu;
     this.seinenngappi = seinenngappi;

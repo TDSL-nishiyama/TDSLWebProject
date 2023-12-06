@@ -59,24 +59,33 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
 
         int id = 0;
         String sei = null;
+        String seiyomi = null;
         String mei = null;
+        String meiyomi = null;
         Date nyuusyaYMD = null;
         String syusshin = null;
+        String juusyo = null;
 
         final int ID = 0;
         final int SEI = 1;
-        final int MEI = 2;
-        final int NYUUSYAYMD = 3;
-        final int SYUSSHIN = 4;
+        final int SEI_YOMI = 2;
+        final int MEI = 3;
+        final int MEI_YOMI = 4;
+        final int NYUUSYAYMD = 5;
+        final int SYUSSHIN = 6;
+        final int JUUSYO = 7;
 
         //格納
         while (rs.next()) {
           id = rs.getInt(column.get(ID));
           sei = rs.getString(column.get(SEI));
+          seiyomi = rs.getString(column.get(SEI_YOMI));
           mei = rs.getString(column.get(MEI));
+          meiyomi = rs.getString(column.get(MEI_YOMI));
           nyuusyaYMD = rs.getDate(column.get(NYUUSYAYMD));
           syusshin = rs.getString(column.get(SYUSSHIN));
-          SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, mei, nyuusyaYMD, syusshin);
+          juusyo = rs.getString(column.get(JUUSYO));
+          SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, seiyomi,mei,meiyomi, nyuusyaYMD, syusshin,juusyo);
           result.add(entity);
         }
       } catch (SQLException e) {

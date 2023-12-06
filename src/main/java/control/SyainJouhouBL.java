@@ -9,6 +9,7 @@ import java.util.Map;
 import constents.UserShousai;
 import model.SyainJouhouBean;
 import model.SyainJouhouEntity;
+import model.SyainJouhouHensyuuBean;
 import control.common.CalcCommon;
 import control.common.CastCommon;
 
@@ -40,9 +41,12 @@ public class SyainJouhouBL {
       //取得カラム名の設定
       column.add(UserShousai.COL_ID);
       column.add(UserShousai.COL_SEI);
+      column.add(UserShousai.COL_SEI_YOMI);
       column.add(UserShousai.COL_MEI);
+      column.add(UserShousai.COL_MEI_YOMI);
       column.add(UserShousai.COL_NYUUSYAYMD);
       column.add(UserShousai.COL_SYUSSHIN);
+      column.add(UserShousai.COL_JYUUSYO);
 
       resultDB = dao.selectSQL("usershousai.sql", column, null, kanriFlg);
       for (int i = 0; i < resultDB.size(); i++) {
@@ -50,10 +54,19 @@ public class SyainJouhouBL {
         String name = null;
         CastCommon castCommmon = new CastCommon();
         name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
-        
-        
+
+        //入社年次の設定
+        String nenji = null;
+        //入社日付は必須項目ではないためNULLチェックを行う
+        if (resultDB.get(i).getNyuusyaYMD() != null) {
+          nenji = setNenji(resultDB.get(i).getNyuusyaYMD());
+        } else {
+          nenji = "";
+        }
+
         SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(), name.toString(),
-            castCommmon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), resultDB.get(i).getSyusshin());
+            castCommmon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), nenji, resultDB.get(i).getSyusshin(),
+            resultDB.get(i).getJuusyo());
 
         result.add(bean);
       }
@@ -97,10 +110,11 @@ public class SyainJouhouBL {
         //年齢の設定
         String age = null;
         age = setAge(resultDB.get(i).getSeinenngappi());
-        
+
         CastCommon castCommmon = new CastCommon();
         SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(), name,
-            castCommmon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo(),
+            castCommmon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), nenji, resultDB.get(i).getSyusshin(),
+            resultDB.get(i).getJuusyo(),
             seibetsu, age);
 
         result.add(bean);
@@ -111,69 +125,112 @@ public class SyainJouhouBL {
   }
 
   /**
-   * {@index} 社員情報編集を行うユーザーの結果表（1レコード）を取得してSyainJouhouBeanに格納する
+   * {@index} 社員情報編集を行うユーザーの結果表（1レコード）を取得してSyainJouhouHensyuuBeanに格納する
    * @param pUpdId　編集するユーザーID
    * @return
    */
-  public List<SyainJouhouBean> resultSyainJouhouHensyu(int pUpdId) {
+  public List<SyainJouhouHensyuuBean> resultSyainJouhouHensyu(int pUpdId) {
 
     List<SyainJouhouEntity> resultDB = new ArrayList<>();
-    List<SyainJouhouBean> result = new ArrayList<>();
+    List<SyainJouhouHensyuuBean> result = new ArrayList<>();
     List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<Object>();
 
     //DAOクラスのインスタンス化
     SyainJouhouDAO dao = new SyainJouhouDAO();
+    
+    //一般ユーザーの場合
+    if (kanriFlg == false) {
+      //取得カラム名の設定
+      column.add(UserShousai.COL_ID);
+      column.add(UserShousai.COL_SEI);
+      column.add(UserShousai.COL_SEI_YOMI);
+      column.add(UserShousai.COL_MEI);
+      column.add(UserShousai.COL_MEI_YOMI);
+      column.add(UserShousai.COL_NYUUSYAYMD);
+      column.add(UserShousai.COL_SYUSSHIN);
+      column.add(UserShousai.COL_JYUUSYO);
 
-    //取得カラム名の設定
-    column.add(UserShousai.COL_ID);
-    column.add(UserShousai.COL_SEI);
-    column.add(UserShousai.COL_SEI_YOMI);
-    column.add(UserShousai.COL_MEI);
-    column.add(UserShousai.COL_MEI_YOMI);
-    column.add(UserShousai.COL_NYUUSYAYMD);
-    column.add(UserShousai.COL_TAISYAYMD);
-    column.add(UserShousai.COL_SEIBETSU);
-    column.add(UserShousai.COL_SEINENGAPPI);
-    column.add(UserShousai.COL_SYUSSHIN);
-    column.add(UserShousai.COL_JYUUSYO);
+      statement.add(pUpdId);
 
-    statement.add(pUpdId);
+      resultDB = dao.selectSQL("usershousaihensyuu.sql", column, statement, kanriFlg);
 
-    resultDB = dao.selectSQL("usershousaihensyuu.sql", column, statement, kanriFlg);
+      //DBから取得した情報をもとに必要事項を設定
+      for (int i = 0; i < resultDB.size(); i++) {
+        //名前の設定
+        String name = null;
+        name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
 
-    //DBから取得した情報をもとに必要事項を設定
-    for (int i = 0; i < resultDB.size(); i++) {
-      //名前の設定
-      String name = null;
-      name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
+        //入社年次の設定
+        String nenji = null;
+        //入社日付は必須項目ではないためNULLチェックを行う
+        if (resultDB.get(i).getNyuusyaYMD() != null) {
+          nenji = setNenji(resultDB.get(i).getNyuusyaYMD());
+        } else {
+          nenji = "";
+        }
 
-      //入社年次の設定
-      String nenji = null;
-      //入社日付は必須項目ではないためNULLチェックを行う
-      if (resultDB.get(i).getNyuusyaYMD() != null) {
-        nenji = setNenji(resultDB.get(i).getNyuusyaYMD());
-      } else {
-        nenji = "";
+        CastCommon castCommon = new CastCommon();
+        SyainJouhouHensyuuBean bean = new SyainJouhouHensyuuBean(resultDB.get(i).getId(),
+            resultDB.get(i).getSei(), resultDB.get(i).getSei_yomi(), resultDB.get(i).getMei(),
+            resultDB.get(i).getMei_yomi(), name,
+            castCommon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()),
+            nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo());
+        result.add(bean);
       }
-
-      //性別の設定
-      String seibetsu = null;
-      seibetsu = setSeibetsu(resultDB.get(i).getSeibetsu());
-
-      //年齢の設定
-      String age = null;
-      age = setAge(resultDB.get(i).getSeinenngappi());
       
-      CastCommon castCommon =new CastCommon();
-      SyainJouhouBean bean = new SyainJouhouBean(resultDB.get(i).getId(),
-          resultDB.get(i).getSei(), resultDB.get(i).getSei_yomi(), resultDB.get(i).getMei(),
-          resultDB.get(i).getMei_yomi(), name,
-          castCommon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), null, seibetsu, castCommon.chgDateToStr(resultDB.get(i).getSeinenngappi()),
-          age, nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo());
-      result.add(bean);
-    }
+    //管理者の場合
+    } else {
+      //取得カラム名の設定
+      column.add(UserShousai.COL_ID);
+      column.add(UserShousai.COL_SEI);
+      column.add(UserShousai.COL_SEI_YOMI);
+      column.add(UserShousai.COL_MEI);
+      column.add(UserShousai.COL_MEI_YOMI);
+      column.add(UserShousai.COL_NYUUSYAYMD);
+      column.add(UserShousai.COL_TAISYAYMD);
+      column.add(UserShousai.COL_SEIBETSU);
+      column.add(UserShousai.COL_SEINENGAPPI);
+      column.add(UserShousai.COL_SYUSSHIN);
+      column.add(UserShousai.COL_JYUUSYO);
 
+      statement.add(pUpdId);
+
+      resultDB = dao.selectSQL("usershousaihensyuu.sql", column, statement, kanriFlg);
+
+      //DBから取得した情報をもとに必要事項を設定
+      for (int i = 0; i < resultDB.size(); i++) {
+        //名前の設定
+        String name = null;
+        name = setName(resultDB.get(i).getSei(), resultDB.get(i).getMei());
+
+        //入社年次の設定
+        String nenji = null;
+        //入社日付は必須項目ではないためNULLチェックを行う
+        if (resultDB.get(i).getNyuusyaYMD() != null) {
+          nenji = setNenji(resultDB.get(i).getNyuusyaYMD());
+        } else {
+          nenji = "";
+        }
+
+        //性別の設定
+        String seibetsu = null;
+        seibetsu = setSeibetsu(resultDB.get(i).getSeibetsu());
+
+        //年齢の設定
+        String age = null;
+        age = setAge(resultDB.get(i).getSeinenngappi());
+
+        CastCommon castCommon = new CastCommon();
+        SyainJouhouHensyuuBean bean = new SyainJouhouHensyuuBean(resultDB.get(i).getId(),
+            resultDB.get(i).getSei(), resultDB.get(i).getSei_yomi(), resultDB.get(i).getMei(),
+            resultDB.get(i).getMei_yomi(), name,
+            castCommon.chgDateToStr(resultDB.get(i).getNyuusyaYMD()), null, seibetsu,
+            castCommon.chgDateToStr(resultDB.get(i).getSeinenngappi()),
+            age, nenji, resultDB.get(i).getSyusshin(), resultDB.get(i).getJuusyo());
+        result.add(bean);
+      }
+    }
     return result;
 
   }
@@ -187,28 +244,50 @@ public class SyainJouhouBL {
    */
   public void syainJouhouUpd(Map<String, Object> updKoumoku, int pUpdId) throws SQLException {
 
-    SyainJouhouDAO dao = new SyainJouhouDAO();
     List<Object> statement = new ArrayList<>();
-    //TODO 将来的に一般ユーザーでも特定の項目を編集できるようにするためSQLファイル名は呼び出し側で指定
-    String fileName = "updUserShousai.sql";
+    String fileName = null; //SQLファイル名
 
-    /*実行クエリ
-     * UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?,nyuusyaYMD=?,seibetsu=?
-     * ,seinenngappi=?,syusshin=?,juusyo=? where id = ?;
-    */
-    //SET句
-    statement.add(updKoumoku.get(UserShousai.COL_SEI));
-    statement.add(updKoumoku.get(UserShousai.COL_SEI_YOMI));
-    statement.add(updKoumoku.get(UserShousai.COL_MEI));
-    statement.add(updKoumoku.get(UserShousai.COL_MEI_YOMI));
-    statement.add(updKoumoku.get(UserShousai.COL_NYUUSYAYMD));
-    statement.add(updKoumoku.get(UserShousai.COL_SEIBETSU));
-    statement.add(updKoumoku.get(UserShousai.COL_SEINENGAPPI));
-    statement.add(updKoumoku.get(UserShousai.COL_SYUSSHIN));
-    statement.add(updKoumoku.get(UserShousai.COL_JYUUSYO));
-    //WHERE句
-    statement.add(pUpdId);
+    //一般ユーザーの場合
+    if (kanriFlg == false) {
+      fileName = "updUserShousaiIppan.sql";
+      /*
+       * 実行クエリ updUserShousai.sql
+       * UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?
+       * ,syusshin=?,juusyo=? where id = ?;
+       */
+      //SET句
+      statement.add(updKoumoku.get(UserShousai.COL_SEI));
+      statement.add(updKoumoku.get(UserShousai.COL_SEI_YOMI));
+      statement.add(updKoumoku.get(UserShousai.COL_MEI));
+      statement.add(updKoumoku.get(UserShousai.COL_MEI_YOMI));
+      statement.add(updKoumoku.get(UserShousai.COL_SYUSSHIN));
+      statement.add(updKoumoku.get(UserShousai.COL_JYUUSYO));
+      //WHERE句
+      statement.add(pUpdId);
+      //管理者ユーザーの場合
+    } else {
+      fileName = "updUserShousai.sql";
+      /*
+       * 実行クエリ updUserShousai.sql
+       * UPDATE usershousai SET sei=?,sei_yomi=?,mei=?,mei_yomi=?,nyuusyaYMD=?,seibetsu=?
+       * ,seinenngappi=?,syusshin=?,juusyo=? where id = ?;
+       */
+      //SET句
+      statement.add(updKoumoku.get(UserShousai.COL_SEI));
+      statement.add(updKoumoku.get(UserShousai.COL_SEI_YOMI));
+      statement.add(updKoumoku.get(UserShousai.COL_MEI));
+      statement.add(updKoumoku.get(UserShousai.COL_MEI_YOMI));
+      statement.add(updKoumoku.get(UserShousai.COL_NYUUSYAYMD));
+      statement.add(updKoumoku.get(UserShousai.COL_SEIBETSU));
+      statement.add(updKoumoku.get(UserShousai.COL_SEINENGAPPI));
+      statement.add(updKoumoku.get(UserShousai.COL_SYUSSHIN));
+      statement.add(updKoumoku.get(UserShousai.COL_JYUUSYO));
+      //WHERE句
+      statement.add(pUpdId);
+    }
 
+    //アップート実行クラスの呼び出し
+    SyainJouhouDAO dao = new SyainJouhouDAO();
     dao.updateSyainJouhou(fileName, statement);
 
   }

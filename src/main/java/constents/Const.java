@@ -70,6 +70,9 @@ public class Const {
     public static final String UPDPASS_1 = "ユーザーの登録が完了しました。再度ログインをお願いします";
     public static final String UPDPASS_2 = "パスワードの更新が完了しました";
     
+    //社員情報
+    public static final String SYAIN1 = "一般ユーザーは自分のID以外は更新することができません";
+    
     //マスタ_登録
     public static final String MASTA_ADD_1_1 = "必須項目（";
     public static final String MASTA_ADD_1_2 = "）を入力してください";
