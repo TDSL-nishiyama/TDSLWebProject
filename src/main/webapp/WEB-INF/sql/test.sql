@@ -1,1 +1,1 @@
-select count(id) from user;
+select count(id) from user where del = '';

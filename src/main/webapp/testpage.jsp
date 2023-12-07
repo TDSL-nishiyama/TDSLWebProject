@@ -8,9 +8,9 @@
 <title>テスト用JSP</title>
 </head>
 <body>
-
+  <%@ include file="./msg.jsp"%>
   <p>
-  ユーザー数：<%=request.getAttribute("TEST") %>
+  <%=request.getAttribute("KOUMOKU")%>：<%=request.getAttribute("TEST") %>
   </p>
 
 

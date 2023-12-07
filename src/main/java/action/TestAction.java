@@ -30,6 +30,7 @@ public class TestAction extends HttpServlet {
 
     TestBL testBL = new TestBL();
     var result = testBL.testBLMain();
+    request.setAttribute("KOUMOKU", "平均年齢");
     request.setAttribute("TEST", result);
     RequestDispatcher dispatcher = request
         .getRequestDispatcher("/testpage.jsp");
