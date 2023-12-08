@@ -45,6 +45,7 @@ public class Const {
 
     //スコープ名
     public static final String SESSION_SCOPE = "loginSession";
+    
     public static final String SYAIN_JOUHOU_SCOPE = "syainJouhou";
     public static final String SYAIN_HENSYU_SCOPE = "syainHensyu";
     public static final String BEFORE_ACTION = "LoginAction";
@@ -54,6 +55,7 @@ public class Const {
     public static final String USER_ADD_SCOPE = "userAdd";
     public static final String USER_UPD_SCOPE = "userUpd";
     public static final String USER_HENSYU_SCOPE = "userHensyu";
+    public static final String KOUTSUU_KAKUNIN_SCOPE = "koutsuuKakunin";
 
   }
 

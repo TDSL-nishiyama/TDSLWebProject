@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page import="model.KoutsuuBean,java.util.List"%>
+<%@ page import="constents.Const.Path"%>
+
+<%
+//リクエストスコープに保存されたユーザー情報を取得
+List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Path.KOUTSUU_KAKUNIN_SCOPE);
+%>
+
 <!DOCTYPE html>
 <!-- 交通費精算確認画面  -->
 <html>
@@ -15,42 +24,46 @@
       <th>請求No</th>
       <th>請求者</th>
       <th>ステータス</th>
-      <th>利用日付</th>
+      <th>申請日付</th>
       <th>区間開始</th>
       <th>区間終了</th>
       <th>金額</th>
       <th>備考</th>
     </tr>
+    <%
+    for (KoutsuuBean bean : koutsuuBeanList) {
+    %>
     <tr>
       <td>
-        <%=1%>
+        <%=bean.getNo()%>
       </td>
       <td>
-        <%="1:西山龍一"%>
+        <%=bean.getUserName()%>
       </td>
       <td>
-        <%="確認中"%>
+        <%=bean.getSeisannStatus()%>
       </td>
       <td>
         <%="利用日付１"%>
       </td>
       <td>
-        <%="区間開始１"%>
+        <%=bean.getKukan_start()%>
       </td>
       <td>
-        <%="区間終了１"%>
+        <%=bean.getKukan_end()%>
       </td>
       <td>
-        <%="金額１"%>
+        <%=bean.getKingaku()%>
       </td>
       <td>
-        <%="備考１"%>
+        <%=bean.getBikou()%>
       </td>
     </tr>
+    <%}%>
   </table>
   </p>
 
-  <form name="toKoutsuuYoukyuu" action="<%=request.getContextPath()%>/KoutsuuYoukyuuAction" method="post">
+  <form action="<%=request.getContextPath()%>/KoutsuuYoukyuuAction" method="post">
     <p>
       <input type="submit" name="toMasta" value="交通費精算要求画面に遷移">
     </p>

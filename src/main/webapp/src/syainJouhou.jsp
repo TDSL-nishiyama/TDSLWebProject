@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="model.SyainJouhouBean,java.util.List"%>
 <%@ page import="constents.Const.Path"%>
 

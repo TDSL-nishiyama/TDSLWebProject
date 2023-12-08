@@ -8,44 +8,49 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import control.common.CalcCommon;
 import control.common.DAOCommon;
 import control.common.DBAccess;
 
-public class TestBL extends DAOCommon implements DBAccess{
-  
-  
+public class TestBL extends DAOCommon implements DBAccess {
+
   public Object testBLMain() {
-    
+
     Object result = null;
-    
+
     result = calcationAveAge();
-    
+
     return result;
-    
+
   }
-  
-  public int calcationAveAge() {
-    int result = 0;
-    
+
+  public double calcationAveAge() {
+    double result = 0.0;
+
     String userSeinenngappiGetSQL = "select S.seinenngappi from usershousai as S JOIN user as U ON S.id = U.id where U.del = '';";
-    
-    int userCnt = super.countSQL("test.sql", null);
-    
+
+    double userCnt = super.countSQL("test.sql", null);
+
     List<TestBean> resultDB = new ArrayList<>();
     List<String> column = new ArrayList<>();
     column.add("seinenngappi");
-    
+
     resultDB = selectSQLTest(userSeinenngappiGetSQL, column);
-    for(int i = 0;i < userCnt; i++) {
-      result += setYear(resultDB.get(i).getSeinenngappi());
+    //    for(int i = 0;i < userCnt; i++) {
+    //      result += setYear(resultDB.get(i).getSeinenngappi());
+    //    }
+    List<Double> list = new ArrayList<>();
+    for (TestBean l : resultDB) {
+      list.add((double) setYear(l.getSeinenngappi()));
     }
-    
-    result = result/userCnt;
+    Stream<Double> s = list.stream();
+    var a = resultDB.iterator();
     
     return result;
   }
-  
+
   private int setYear(Date seinenngappi) {
 
     int result = 0;
@@ -56,7 +61,7 @@ public class TestBL extends DAOCommon implements DBAccess{
 
     return result;
   }
-  
+
   protected List<TestBean> selectSQLTest(String pSQL, List<String> column) {
 
     List<TestBean> result = new ArrayList<>();
@@ -80,12 +85,12 @@ public class TestBL extends DAOCommon implements DBAccess{
       ResultSet rs = pStmt.executeQuery();
 
       Date seinenngappi = null;
-      
+
       //格納
       while (rs.next()) {
-         seinenngappi = rs.getDate(column.get(0));
-         TestBean bean = new TestBean(seinenngappi);
-         result.add(bean);
+        seinenngappi = rs.getDate(column.get(0));
+        TestBean bean = new TestBean(seinenngappi);
+        result.add(bean);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -95,5 +100,5 @@ public class TestBL extends DAOCommon implements DBAccess{
 
     return result;
   }
-  
+
 }

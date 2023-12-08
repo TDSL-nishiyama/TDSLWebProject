@@ -25,7 +25,8 @@ public class UserShousai {
   public final static String COL_SEINENGAPPI = "seinenngappi";
   public final static String COL_SYUSSHIN = "syusshin";
   public final static String COL_JYUUSYO = "juusyo";
-
+  
+  //管理者ユーザーの必須項目チェック用
   public static void hissuKoumokuPut(Map<String, String> hissuKoumoku) {
     hissuKoumoku.put(COL_SEI, "姓");
     hissuKoumoku.put(COL_MEI, "名");
@@ -36,7 +37,7 @@ public class UserShousai {
     hissuKoumoku.put(COL_JYUUSYO, "住所");
   }
   
-  //一般ユーザーの社員情報更新用
+  //一般ユーザーの必須項目チェック用
   public static void hissuKoumokuPutIppan(Map<String, String> hissuKoumoku) {
     hissuKoumoku.put(COL_SEI, "姓");
     hissuKoumoku.put(COL_MEI, "名");

@@ -2,6 +2,5 @@ CREATE TABLE koutsuu
 (no INT PRIMARY KEY
 ,id INT NOT NULL
 ,sendmailaddress VARCHAR(100) NOT NULL
-,kukan1_start VARCHAR(100) NOT NULL,kukan1_end VARCHAR(100) NOT NULL,kingaku1 VARCHAR(100) NOT NULL,bikou1 VARCHAR(1000)
-,kukan2_start VARCHAR(100) ,kukan2_end VARCHAR(100),kingaku2 VARCHAR(100),bikou2 VARCHAR(1000)
+,kukan_start VARCHAR(100) NOT NULL,kukan_end VARCHAR(100) NOT NULL,kingaku VARCHAR(100) NOT NULL,bikou VARCHAR(1000)
 );
