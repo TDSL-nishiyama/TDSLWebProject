@@ -8,9 +8,15 @@ import java.util.Map;
 
 import constents.Const.Common;
 
+/**
+ * {@index データベースアクセス用インターフェース}
+ * @see 設定内容はプロパティファイル。格納場所はconstents.Constクラスで指定
+ */
 public interface DBAccess {
-  
-  //JDBC読み込み
+
+  /**
+   * {@index JDBCの読み込みを行う}
+   */
   default public void loadJDBCDriver() {
 
     LoadFile loadFile = new LoadFile();
@@ -24,7 +30,11 @@ public interface DBAccess {
     }
   }
 
-  //DB接続
+  /**
+   * {@index データベースへの接続を行う}
+   * @param conn Connection newでも生きてるやつでも
+   * @return 引数で指定したConnection
+   */
   default public Connection connectionDB(Connection conn) {
     try {
       LoadFile loadFile = new LoadFile();
@@ -39,12 +49,14 @@ public interface DBAccess {
 
     } catch (SQLException e) {
       e.printStackTrace();
-
     }
     return conn;
   }
 
-  //DB切断
+  /**
+   * {@index データベースの切断を行う}
+   * @param conn Connection 切断したいConnection
+   */
   default public void closeDB(Connection conn) {
     //データベース切断
     if (conn != null) {
@@ -52,7 +64,6 @@ public interface DBAccess {
         conn.close();
       } catch (SQLException e) {
         e.printStackTrace();
-
       }
     }
   }

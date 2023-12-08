@@ -16,7 +16,7 @@
       <tr>
         <th>請求者</th>
         <th>
-          <span calss="req">※</span>利用日付１
+          <span class="req">※</span>利用日付１
         </th>
         <th>
           <span class="req">※</span>区間開始１
@@ -35,12 +35,12 @@
         <th>備考２</th>
       </tr>
       <tr>
-        <td><%="1:西山龍一" %></td>
+        <td><%="ログインユーザー名" %></td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="riyou1" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="kukan1" maxlength="100">
         </td>
         <td>
           <input type="text" value="" maxlength="100">

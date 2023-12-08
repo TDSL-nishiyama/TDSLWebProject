@@ -9,6 +9,7 @@ public class KoutsuuEntity {
   private int id;
   private String userName;
   private String sendmailaddress;
+  private LocalDateTime riyouhiduke;
   private String kukan_start;
   private String kukan_end;
   private String kingaku;
@@ -20,8 +21,7 @@ public class KoutsuuEntity {
   private Timestamp timestamp;
 
   public KoutsuuEntity(int no, int id, String userName, String sendmailaddress, String kukan_start, String kukan_end,
-      String kingaku, String bikou, String seisannStatus) {
-    super();
+      String kingaku, String bikou, String seisannStatus,LocalDateTime youkyuuJikoku) {
     this.no = no;
     this.id = id;
     this.userName = userName;
@@ -31,6 +31,7 @@ public class KoutsuuEntity {
     this.kingaku = kingaku;
     this.bikou = bikou;
     this.seisannStatus = seisannStatus;
+    this.youkyuuJikoku = youkyuuJikoku;
   }
   
   public int getNo() {
@@ -110,6 +111,14 @@ public class KoutsuuEntity {
   }
   public void setTimestamp(Timestamp timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public LocalDateTime getRiyouhiduke() {
+    return riyouhiduke;
+  }
+
+  public void setRiyouhiduke(LocalDateTime riyouhiduke) {
+    this.riyouhiduke = riyouhiduke;
   }
   
 }

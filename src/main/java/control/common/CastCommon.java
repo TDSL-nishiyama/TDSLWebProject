@@ -2,6 +2,8 @@ package control.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class CastCommon {
@@ -80,6 +82,21 @@ public class CastCommon {
     result = sdf.format(pDate);
 
     return result;
+  }
+  
+  /**
+   * {@index LocalDateTimeをStringに変換する（yyyy-MM-dd形式）}
+   * @param ldt
+   * @return
+   */
+  public String chgLDTtoStr(LocalDateTime ldt) {
+    if (ldt == null) {
+      return null;
+    }
+    
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    
+    return ldt.format(dateTimeFormatter);
   }
 
   /**

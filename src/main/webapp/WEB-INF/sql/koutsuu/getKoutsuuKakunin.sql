@@ -1,1 +1,1 @@
-SELECT K.no,K.id,U.name,K.sendmailaddress,K.kukan_start,K.kukan_end,K.kingaku,K.bikou,KT.status FROM koutsuu AS K JOIN user AS U ON K.id = U.id JOIN ktimestamp AS KT ON K.no = KT.no where K.id = ?;
+SELECT K.no,K.id,U.name,K.sendmailaddress,K.kukan_start,K.kukan_end,K.kingaku,K.bikou,KT.status,KT.youkyuu FROM koutsuu AS K JOIN user AS U ON K.id = U.id JOIN ktimestamp AS KT ON K.no = KT.no where K.id = ?;

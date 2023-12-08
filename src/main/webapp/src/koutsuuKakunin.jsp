@@ -25,6 +25,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       <th>請求者</th>
       <th>ステータス</th>
       <th>申請日付</th>
+      <th>利用日付</th>
       <th>区間開始</th>
       <th>区間終了</th>
       <th>金額</th>
@@ -44,7 +45,10 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
         <%=bean.getSeisannStatus()%>
       </td>
       <td>
-        <%="利用日付１"%>
+        <%=bean.getYoukyuuView()%>
+      </td>
+      <td>
+        <%=bean.getRiyouhiduke()%>
       </td>
       <td>
         <%=bean.getKukan_start()%>
@@ -68,5 +72,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       <input type="submit" name="toMasta" value="交通費精算要求画面に遷移">
     </p>
   </form>
+  
+  <p><a href="/TDSLWebProject/index.jsp">トップページに戻る</a></p>
 </body>
 </html>

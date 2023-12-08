@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import constents.Const.Common;
+import constents.UserShousai;
 import control.common.DAOCommon;
 import control.common.DBAccess;
 import model.SyainJouhouEntity;
@@ -26,9 +27,22 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
    */
   public List<SyainJouhouEntity> selectSQL(String fileName, List<String> column, List<Object> statement,
       boolean kanriFlg) {
-
-    List<SyainJouhouEntity> result = new ArrayList<SyainJouhouEntity>();
+    
     sqlPath += fileName;
+    
+    //格納用変数の宣言
+    List<SyainJouhouEntity> result = new ArrayList<SyainJouhouEntity>();
+    int id = 0;
+    String sei = null;
+    String seiyomi = null;
+    String mei = null;
+    String meiyomi = null;
+    Date nyuusyaYMD = null;
+    Date taisyaYMD = null;
+    String seibetsu = null;
+    Date seinenngappi = null;
+    String syusshin = null;
+    String juusyo = null;
 
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
@@ -57,34 +71,16 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
         //クエリの実行
         ResultSet rs = pStmt.executeQuery();
 
-        int id = 0;
-        String sei = null;
-        String seiyomi = null;
-        String mei = null;
-        String meiyomi = null;
-        Date nyuusyaYMD = null;
-        String syusshin = null;
-        String juusyo = null;
-
-        final int ID = 0;
-        final int SEI = 1;
-        final int SEI_YOMI = 2;
-        final int MEI = 3;
-        final int MEI_YOMI = 4;
-        final int NYUUSYAYMD = 5;
-        final int SYUSSHIN = 6;
-        final int JUUSYO = 7;
-
         //格納
         while (rs.next()) {
-          id = rs.getInt(column.get(ID));
-          sei = rs.getString(column.get(SEI));
-          seiyomi = rs.getString(column.get(SEI_YOMI));
-          mei = rs.getString(column.get(MEI));
-          meiyomi = rs.getString(column.get(MEI_YOMI));
-          nyuusyaYMD = rs.getDate(column.get(NYUUSYAYMD));
-          syusshin = rs.getString(column.get(SYUSSHIN));
-          juusyo = rs.getString(column.get(JUUSYO));
+          id = rs.getInt(UserShousai.COL_ID);
+          sei = rs.getString(UserShousai.COL_SEI);
+          seiyomi = rs.getString(UserShousai.COL_SEI_YOMI);
+          mei = rs.getString(UserShousai.COL_MEI);
+          meiyomi = rs.getString(UserShousai.COL_MEI_YOMI);
+          nyuusyaYMD = rs.getDate(UserShousai.COL_NYUUSYAYMD);
+          syusshin = rs.getString(UserShousai.COL_SYUSSHIN);
+          juusyo = rs.getString(UserShousai.COL_JYUUSYO);
           SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, seiyomi,mei,meiyomi, nyuusyaYMD, syusshin,juusyo);
           result.add(entity);
         }
@@ -106,43 +102,19 @@ public class SyainJouhouDAO extends DAOCommon implements DBAccess {
         //クエリの実行
         ResultSet rs = pStmt.executeQuery();
 
-        int id = 0;
-        String sei = null;
-        String seiyomi = null;
-        String mei = null;
-        String meiyomi = null;
-        Date nyuusyaYMD = null;
-        Date taisyaYMD = null;
-        String seibetsu = null;
-        Date seinenngappi = null;
-        String syusshin = null;
-        String juusyo = null;
-
-        final int ID = 0;
-        final int SEI = 1;
-        final int SEI_YOMI = 2;
-        final int MEI = 3;
-        final int MEI_YOMI = 4;
-        final int NYUUSYAYMD = 5;
-        final int TAISYAYMD = 6;
-        final int SEIBETSU = 7;
-        final int SEINENNGAPPI = 8;
-        final int SYUSSHIN = 9;
-        final int JUUSYO = 10;
-
         //格納
         while (rs.next()) {
-          id = rs.getInt(column.get(ID));
-          sei = rs.getString(column.get(SEI));
-          seiyomi = rs.getString(column.get(SEI_YOMI));
-          mei = rs.getString(column.get(MEI));
-          meiyomi = rs.getString(column.get(MEI_YOMI));
-          nyuusyaYMD = rs.getDate(column.get(NYUUSYAYMD));
-          taisyaYMD = rs.getDate(column.get(TAISYAYMD));
-          seibetsu = rs.getString(column.get(SEIBETSU));
-          seinenngappi = rs.getDate(column.get(SEINENNGAPPI));
-          syusshin = rs.getString(column.get(SYUSSHIN));
-          juusyo = rs.getString(column.get(JUUSYO));
+          id = rs.getInt(UserShousai.COL_ID);
+          sei = rs.getString(UserShousai.COL_SEI);
+          seiyomi = rs.getString(UserShousai.COL_SEI_YOMI);
+          mei = rs.getString(UserShousai.COL_MEI);
+          meiyomi = rs.getString(UserShousai.COL_MEI_YOMI);
+          nyuusyaYMD = rs.getDate(UserShousai.COL_NYUUSYAYMD);
+          taisyaYMD = rs.getDate(UserShousai.COL_TAISYAYMD);
+          seibetsu = rs.getString(UserShousai.COL_SEIBETSU);
+          seinenngappi = rs.getDate(UserShousai.COL_SEINENGAPPI);
+          syusshin = rs.getString(UserShousai.COL_SYUSSHIN);
+          juusyo = rs.getString(UserShousai.COL_JYUUSYO);
 
           SyainJouhouEntity entity = new SyainJouhouEntity(id, sei, seiyomi, mei, meiyomi, nyuusyaYMD, taisyaYMD,
               seibetsu, seinenngappi, syusshin, juusyo);

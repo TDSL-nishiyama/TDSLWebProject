@@ -14,7 +14,10 @@ public class KoutsuuConst {
   
   public static final class KtimeStamp{
     public final static String COL_UNINO = "no";
+    public final static String COL_YOUKYUU = "youkyuu";
+    public final static String COL_SASHIMODOSHI = "sashimodoshi";
+    public final static String COL_SYONIN = "syounin";
     public final static String COL_STATUS = "status";
+    public final static String COL_TIMESTAMP = "timestamp";
   }
-  
 }

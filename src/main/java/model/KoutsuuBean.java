@@ -10,11 +10,14 @@ public class KoutsuuBean implements Serializable {
   private int id;
   private String userName;//koutsuuテーブルのID項目に基づくuserテーブルのname項目
   private String sendmailaddress;
+  private LocalDateTime riyouhiduke;
+  private String riyouView;//利用日付の表示用項目
   private String kukan_start;
   private String kukan_end;
   private String kingaku;
   private String bikou;
   private LocalDateTime youkyuuJikoku;
+  private String youkyuuView;//申請日付（要求時刻）の表示用項目
   private LocalDateTime sashimodoshiJikoku;
   private LocalDateTime syouninJikoku;
   private String seisannStatus;
@@ -22,7 +25,7 @@ public class KoutsuuBean implements Serializable {
   
   //交通費精算確認
   public KoutsuuBean(int no, int id, String userName,String sendmailaddress, String kukan_start, String kukan_end, String kingaku,
-      String bikou,String seisannStatus) {
+      String bikou,String seisannStatus,String youkyuuView) {
     this.no = no;
     this.id = id;
     this.userName = userName;
@@ -32,6 +35,7 @@ public class KoutsuuBean implements Serializable {
     this.kingaku = kingaku;
     this.bikou = bikou;
     this.seisannStatus = seisannStatus;
+    this.youkyuuView = youkyuuView;
   }
   
   public String getUserName() {
@@ -136,6 +140,30 @@ public class KoutsuuBean implements Serializable {
 
   public void setTimestamp(Timestamp timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public String getYoukyuuView() {
+    return youkyuuView;
+  }
+
+  public void setYoukyuuView(String youkyuuView) {
+    this.youkyuuView = youkyuuView;
+  }
+
+  public LocalDateTime getRiyouhiduke() {
+    return riyouhiduke;
+  }
+
+  public void setRiyouhiduke(LocalDateTime riyouhiduke) {
+    this.riyouhiduke = riyouhiduke;
+  }
+
+  public String getRiyouView() {
+    return riyouView;
+  }
+
+  public void setRiyouView(String riyouView) {
+    this.riyouView = riyouView;
   }
   
 }

@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import constents.Const.Common;
@@ -27,6 +32,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
    */
   public void sendKoutsuu(KoutsuuBean bean) throws SQLException {
     List<Object> statement1 = new ArrayList<>();
+    List<Object> statement2 = new ArrayList<>();
     //ステートメントの設定
 
     //JDBC接続
@@ -35,18 +41,20 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     //DB接続
     Connection conn = null;
     conn = DBAccess.super.connectionDB(conn);
-    
+
     try {
       //トランザクション開始
       super.startTransaction(conn);
       //koutsuuテーブルの更新
-      super.executeDMLMlt(conn, "", statement1);
+      super.executeDMLMlt(conn, "insertKoutsuu", statement1);
       //ktimestampテーブルの更新
-      super.executeDMLMlt(conn, "", statement1);
+      super.executeDMLMlt(conn, "insertKtimestamp", statement2);
     } catch (SQLException e) {
       //ロールバック
       super.endTransactionFalse(conn);
       throw e;
+    }finally {
+      sqlPath = Common.SQL_FILE_PATH;
     }
     //コミット
     super.endTransactionTrue(conn);
@@ -71,6 +79,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     column.add(Koutsuu.COL_KUKAN_E);
     column.add(Koutsuu.COL_KINGAKU);
     column.add(Koutsuu.COL_BIKOU);
+    column.add(KtimeStamp.COL_STATUS);
     column.add(KtimeStamp.COL_STATUS);
     //ステートメントの追加
     statement.add(selId);
@@ -112,6 +121,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       String kingaku = null;
       String bikou = null;
       String status = null;
+      LocalDateTime shinseiYMD = null;
 
       while (rs.next()) {
         no = rs.getInt(Koutsuu.COL_UNINO);
@@ -123,8 +133,15 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
         kingaku = rs.getString(Koutsuu.COL_KINGAKU);
         bikou = rs.getString(Koutsuu.COL_BIKOU);
         status = rs.getString(KtimeStamp.COL_STATUS);
+        //日付項目(MySQL:DateTime)はDateからLocalDateTimeに変換して格納
+        //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
+        Date d = new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()); 
+        LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
+        LocalTime lt = LocalTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+        shinseiYMD = LocalDateTime.of(ld, lt);
+
         KoutsuuEntity entity = new KoutsuuEntity(
-            no, id, userName, sendMailAdress, kukanStart, kukanEnd, kingaku, bikou, status);
+            no, id, userName, sendMailAdress, kukanStart, kukanEnd, kingaku, bikou, status, shinseiYMD);
         result.add(entity);
       }
 
@@ -135,13 +152,6 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       //DB切断
       DBAccess.super.closeDB(conn);
     }
-
-    return result;
-
-  }
-
-  public List<Object> selectSQL(String fileName, List<String> column, List<Object> statement) {
-    List<Object> result = new ArrayList<Object>();
 
     return result;
 
