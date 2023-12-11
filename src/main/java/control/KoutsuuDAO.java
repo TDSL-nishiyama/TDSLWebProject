@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import constents.Const.Common;
 import constents.Table.User;
@@ -16,23 +17,40 @@ import constents.KoutsuuConst.KtimeStamp;
 import control.common.CastCommon;
 import control.common.DAOCommon;
 import control.common.DBAccess;
-import model.KoutsuuBean;
 import model.KoutsuuEntity;
 
 public class KoutsuuDAO extends DAOCommon implements DBAccess {
 
   private String sqlPath = Common.SQL_FILE_PATH;
+  
+  public int getMaxNo() {
+    int result = super.countSQL("\\koutsuu\\maxNo.sql",null);
+    return result;
+  }
 
   /**
    * {@ 交通費精算要求画面で請求ボタンを押下した際の処理}
    * @param bean
    * @throws SQLException
    */
-  public void sendKoutsuu(KoutsuuBean bean) throws SQLException {
-    List<Object> statement1 = new ArrayList<>();
-    List<Object> statement2 = new ArrayList<>();
+  public void InsertKoutsuuAndKtimestamp(List<Map<String,Object>> pStatement) throws SQLException {
     //ステートメントの設定
-
+    List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_UNINO));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_USERID));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_SMAIL));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_RIYOUHIDUKE));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_KUKAN_S));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_KUKAN_E));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_KINGAKU));
+    statement1.add(pStatement.get(0).get(Koutsuu.COL_BIKOU));
+    
+    List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
+    statement2.add(pStatement.get(0).get(Koutsuu.COL_UNINO));
+    statement2.add(pStatement.get(0).get(KtimeStamp.COL_YOUKYUU));
+    statement2.add(pStatement.get(0).get(KtimeStamp.COL_STATUS));
+    statement2.add(pStatement.get(0).get(KtimeStamp.COL_TIMESTAMP));
+    
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -44,9 +62,9 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       //トランザクション開始
       super.startTransaction(conn);
       //koutsuuテーブルの更新
-      super.executeDMLMlt(conn, "insertKoutsuu", statement1);
+      super.executeDMLMlt(conn, "koutsuu\\insertKoutsuu.sql", statement1);
       //ktimestampテーブルの更新
-      super.executeDMLMlt(conn, "insertKtimestamp", statement2);
+      super.executeDMLMlt(conn, "koutsuu\\insertKtimestamp.sql", statement2);
     } catch (SQLException e) {
       //ロールバック
       super.endTransactionFalse(conn);

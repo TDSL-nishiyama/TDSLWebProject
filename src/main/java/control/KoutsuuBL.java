@@ -1,14 +1,55 @@
 package control;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import constents.KoutsuuConst.Koutsuu;
+import constents.KoutsuuConst.KtimeStamp;
+import constents.Table.User;
 import control.common.CastCommon;
 import model.KoutsuuBean;
 import model.KoutsuuEntity;
 
 public class KoutsuuBL {
+
+  public void addKoutsuuYoukyu(List<KoutsuuBean> list) throws SQLException {
+    KoutsuuDAO dao = new KoutsuuDAO();
+
+    //Noの取得（Koutsuuテーブルの最大値+1）
+    int maxNo = dao.getMaxNo() + 1;
+    
+    //送信先メールアドレスの取得
+    String sendMailAddress = "mail";
+    
+    //リストに設定されている分だけ更新を実行
+    List<Map<String,Object>> statement = new ArrayList<Map<String,Object>>();
+    Map<String,Object> m = new LinkedHashMap<String,Object>();
+    for (int i = 0; i < list.size(); i++) {
+      //ステートメントの設定
+      //koutsuu
+      m.put(Koutsuu.COL_UNINO,maxNo);
+      m.put(User.COL_USERID,list.get(i).getId());
+      m.put(Koutsuu.COL_SMAIL,sendMailAddress);
+      m.put(Koutsuu.COL_RIYOUHIDUKE,list.get(i).getRiyouhiduke());
+      m.put(Koutsuu.COL_KUKAN_S,list.get(i).getKukan_start());
+      m.put(Koutsuu.COL_KUKAN_E,list.get(i).getKukan_end());
+      m.put(Koutsuu.COL_KINGAKU,list.get(i).getKingaku());
+      m.put(Koutsuu.COL_BIKOU,list.get(i).getBikou());
+      m.put(KtimeStamp.COL_YOUKYUU,LocalDateTime.now());
+      m.put(KtimeStamp.COL_STATUS,"0");
+      m.put(KtimeStamp.COL_TIMESTAMP,LocalDateTime.now());
+      statement.add(m);
+      
+      //更新
+      dao.InsertKoutsuuAndKtimestamp(statement);
+      //no項目のカウントを進める
+      maxNo++;
+    }
+  }
 
   /**
    * {@index 交通費精算確認画面に表示される情報の取得を行う}

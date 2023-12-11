@@ -1,1 +1,1 @@
-INSERT INTO koutsuu() values();
+INSERT INTO koutsuu(no,id,sendmailaddress,riyouhiduke,kukan_start,kukan_end,kingaku,bikou) VALUES(?,?,?,?,?,?,?,?);

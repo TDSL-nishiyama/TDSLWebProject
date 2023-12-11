@@ -55,6 +55,7 @@ public class Const {
     public static final String USER_ADD_SCOPE = "userAdd";
     public static final String USER_UPD_SCOPE = "userUpd";
     public static final String USER_HENSYU_SCOPE = "userHensyu";
+    public static final String KOUTSUU_YOUKYU_SCOPE = "koutsuuYoukyu";
     public static final String KOUTSUU_KAKUNIN_SCOPE = "koutsuuKakunin";
 
   }
@@ -90,6 +91,9 @@ public class Const {
     public static final String MASTA_DEL_1 = "入力されたIDは存在しません";
     public static final String MASTA_DEL_2 = "現在ログインしているユーザーは削除できません";
     public static final String MASTA_DEL_3 = "ユーザーの削除が完了しました";
+    
+    //交通費精算要求
+    public static final String K_YOUKYU_1 = "交通費の申請が完了しました。\n申請状況は交通費精算確認画面で確認してください";
   }
 
   //エラー関連

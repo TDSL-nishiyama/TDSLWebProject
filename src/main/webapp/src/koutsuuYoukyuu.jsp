@@ -9,7 +9,7 @@
 </head>
 <body>
   <%@ include file="../msg.jsp"%>
-  <form action="<%=request.getContextPath()%>/ResultKoutusuuYoukyuuAction" method="post">
+  <form action="<%=request.getContextPath()%>/ResultKoutsuuYoukyuuAction" method="post">
     <span class="req">※ 必須項目</span>
     <p>
     <table class="tableM">
@@ -35,36 +35,36 @@
         <th>備考２</th>
       </tr>
       <tr>
-        <td><%="ログインユーザー名" %></td>
+        <td><%=loginSession.getLoginName()%></td>
         <td>
           <input type="text" name="riyou1" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kukan1" maxlength="100">
+          <input type="text" name="kukans1" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="kukane1" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="kingaku1" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="bikou1" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="riyou2" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="kukans2" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="kukane2" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="kingaku2" maxlength="100">
         </td>
         <td>
-          <input type="text" value="" maxlength="100">
+          <input type="text" name="bikou2" maxlength="100">
         </td>
       </tr>
     </table>

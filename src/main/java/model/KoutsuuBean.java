@@ -23,6 +23,17 @@ public class KoutsuuBean implements Serializable {
   private String seisannStatus;
   private Timestamp timestamp;
   
+  //交通費精算要求
+  public KoutsuuBean(int id,LocalDateTime riyouhiduke, String kukan_start, String kukan_end, String kingaku,
+      String bikou) {
+    this.id = id;
+    this.riyouhiduke = riyouhiduke;
+    this.kukan_start = kukan_start;
+    this.kukan_end = kukan_end;
+    this.kingaku = kingaku;
+    this.bikou = bikou;
+  }
+  
   //交通費精算確認
   public KoutsuuBean(int no, int id, String userName,String sendmailaddress,String riyouView, String kukan_start, String kukan_end, String kingaku,
       String bikou,String seisannStatus,String youkyuuView) {
@@ -39,6 +50,10 @@ public class KoutsuuBean implements Serializable {
     this.youkyuuView = youkyuuView;
   }
   
+  public KoutsuuBean() {
+    // TODO 自動生成されたコンストラクター・スタブ
+  }
+
   public String getUserName() {
     return userName;
   }

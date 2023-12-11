@@ -68,6 +68,18 @@ public class CastCommon {
 
     return result;
   }
+  
+  public LocalDateTime chgStrtoLDT(String pStr) {
+    LocalDateTime result = null;
+    
+    if (pStr == null||pStr.equals("")) {
+      return result;
+    }
+    
+    result = chgDtoLD(chgStrToDate(pStr));
+    
+    return result;
+  }
 
   /**
    * {@index Date型をStringに変換する（yyyy-MM-dd形式）}
@@ -103,7 +115,7 @@ public class CastCommon {
   }
   
   /**
-   * {@index DateTimeをLocalDateTimeに変換する}
+   * {@index DateをLocalDateTimeに変換する}
    * @param d DB厳選の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
    * UnsupportedOperationExceptionが発生するためNEWして渡すこと
    * @return 

@@ -173,7 +173,7 @@
 		<servlet-name>ResultSyainJouhouHensyuuAction</servlet-name>
 		<url-pattern>/ResultSyainJouhouHensyuuAction</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ResultSyainJouhouHensyuuIppanAction</servlet-name>
 		<servlet-class>action.ResultSyainJouhouHensyuuIppanAction</servlet-class>
@@ -190,6 +190,15 @@
 	<servlet-mapping>
 		<servlet-name>KoutsuuYoukyuuAction</servlet-name>
 		<url-pattern>/KoutsuuYoukyuuAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultKoutsuuYoukyuuAction</servlet-name>
+		<servlet-class>action.ResultKoutsuuYoukyuuAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultKoutsuuYoukyuuAction</servlet-name>
+		<url-pattern>/ResultKoutsuuYoukyuuAction</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

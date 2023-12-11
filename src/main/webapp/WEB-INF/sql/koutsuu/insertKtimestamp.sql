@@ -1,1 +1,1 @@
-INSERT INTO ktimestamp() values();
+INSERT INTO ktimestamp(no,youkyuu,sashimodoshi,syounin,status,timestamp) VALUES(?,?,null,null,?,?);

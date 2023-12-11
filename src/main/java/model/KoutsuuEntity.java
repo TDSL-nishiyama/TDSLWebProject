@@ -35,6 +35,10 @@ public class KoutsuuEntity {
     this.youkyuuJikoku = youkyuuJikoku;
   }
   
+  public KoutsuuEntity() {
+    // TODO 自動生成されたコンストラクター・スタブ
+  }
+
   public int getNo() {
     return no;
   }

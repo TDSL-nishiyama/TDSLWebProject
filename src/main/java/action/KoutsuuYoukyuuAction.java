@@ -1,7 +1,6 @@
 package action;
 
 import java.io.IOException;
-
 import constents.Const.Path;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,6 +18,7 @@ public class KoutsuuYoukyuuAction extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	  
     //交通費精算要求画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.KOUTUSUU_YOUKYUU_GAMEN);
