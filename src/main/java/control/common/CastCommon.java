@@ -2,7 +2,10 @@ package control.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -86,7 +89,7 @@ public class CastCommon {
   
   /**
    * {@index LocalDateTimeをStringに変換する（yyyy-MM-dd形式）}
-   * @param ldt
+   * @param ldt LocalDateTime型の値
    * @return
    */
   public String chgLDTtoStr(LocalDateTime ldt) {
@@ -97,6 +100,21 @@ public class CastCommon {
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     
     return ldt.format(dateTimeFormatter);
+  }
+  
+  /**
+   * {@index DateTimeをLocalDateTimeに変換する}
+   * @param d DB厳選の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
+   * UnsupportedOperationExceptionが発生するためNEWして渡すこと
+   * @return 
+   */
+  public LocalDateTime chgDtoLD(Date d) {
+    
+    LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
+    LocalTime lt = LocalTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+    
+    return LocalDateTime.of(ld, lt);
+    
   }
 
   /**

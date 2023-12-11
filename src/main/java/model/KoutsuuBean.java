@@ -24,11 +24,12 @@ public class KoutsuuBean implements Serializable {
   private Timestamp timestamp;
   
   //交通費精算確認
-  public KoutsuuBean(int no, int id, String userName,String sendmailaddress, String kukan_start, String kukan_end, String kingaku,
+  public KoutsuuBean(int no, int id, String userName,String sendmailaddress,String riyouView, String kukan_start, String kukan_end, String kingaku,
       String bikou,String seisannStatus,String youkyuuView) {
     this.no = no;
     this.id = id;
     this.userName = userName;
+    this.riyouView = riyouView;
     this.sendmailaddress = sendmailaddress;
     this.kukan_start = kukan_start;
     this.kukan_end = kukan_end;

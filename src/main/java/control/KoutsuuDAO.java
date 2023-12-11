@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +13,7 @@ import constents.Const.Common;
 import constents.Table.User;
 import constents.KoutsuuConst.Koutsuu;
 import constents.KoutsuuConst.KtimeStamp;
+import control.common.CastCommon;
 import control.common.DAOCommon;
 import control.common.DBAccess;
 import model.KoutsuuBean;
@@ -53,7 +51,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       //ロールバック
       super.endTransactionFalse(conn);
       throw e;
-    }finally {
+    } finally {
       sqlPath = Common.SQL_FILE_PATH;
     }
     //コミット
@@ -69,11 +67,15 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<Object>();
     List<KoutsuuEntity> result = new ArrayList<KoutsuuEntity>();
+    
+    //共通クラスのインスタンス化
+    CastCommon castCommon = new CastCommon();
 
     //取得カラム名の追加
     column.add(Koutsuu.COL_UNINO);
     column.add(Koutsuu.COL_USERID);
     column.add(User.COL_USERNAME);
+    column.add(Koutsuu.COL_RIYOUHIDUKE);
     column.add(Koutsuu.COL_SMAIL);
     column.add(Koutsuu.COL_KUKAN_S);
     column.add(Koutsuu.COL_KUKAN_E);
@@ -115,6 +117,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       int no = 0;
       int id = 0;
       String userName = null;
+      LocalDateTime riyouYMD = null;
       String sendMailAdress = null;
       String kukanStart = null;
       String kukanEnd = null;
@@ -123,25 +126,23 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       String status = null;
       LocalDateTime shinseiYMD = null;
 
+      //日付項目(MySQL:DateTime)はDateからLocalDateTimeに変換して格納
+      //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
       while (rs.next()) {
         no = rs.getInt(Koutsuu.COL_UNINO);
         id = rs.getInt(Koutsuu.COL_USERID);
         userName = rs.getString(User.COL_USERNAME);
         sendMailAdress = rs.getString(Koutsuu.COL_SMAIL);
+        riyouYMD = castCommon.chgDtoLD(new Date(rs.getDate(Koutsuu.COL_RIYOUHIDUKE).getTime()));
         kukanStart = rs.getString(Koutsuu.COL_KUKAN_S);
         kukanEnd = rs.getString(Koutsuu.COL_KUKAN_E);
         kingaku = rs.getString(Koutsuu.COL_KINGAKU);
         bikou = rs.getString(Koutsuu.COL_BIKOU);
         status = rs.getString(KtimeStamp.COL_STATUS);
-        //日付項目(MySQL:DateTime)はDateからLocalDateTimeに変換して格納
-        //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
-        Date d = new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()); 
-        LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
-        LocalTime lt = LocalTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
-        shinseiYMD = LocalDateTime.of(ld, lt);
+        shinseiYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()));
 
         KoutsuuEntity entity = new KoutsuuEntity(
-            no, id, userName, sendMailAdress, kukanStart, kukanEnd, kingaku, bikou, status, shinseiYMD);
+            no, id, userName,sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, status, shinseiYMD);
         result.add(entity);
       }
 

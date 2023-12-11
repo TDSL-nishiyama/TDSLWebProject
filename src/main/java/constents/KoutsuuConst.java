@@ -6,6 +6,7 @@ public class KoutsuuConst {
     public final static String COL_USERID = "id";
     public final static String COL_NAME = "name";
     public final static String COL_SMAIL = "sendmailaddress";
+    public final static String COL_RIYOUHIDUKE = "riyouhiduke";
     public final static String COL_KUKAN_S = "kukan_start";
     public final static String COL_KUKAN_E = "kukan_end";
     public final static String COL_KINGAKU = "kingaku";

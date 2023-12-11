@@ -9,7 +9,7 @@ import model.KoutsuuBean;
 import model.KoutsuuEntity;
 
 public class KoutsuuBL {
-  
+
   /**
    * {@index 交通費精算確認画面に表示される情報の取得を行う}
    * @param selId　対象者の社員ID（ログインしているユーザー）
@@ -22,20 +22,22 @@ public class KoutsuuBL {
 
     KoutsuuDAO dao = new KoutsuuDAO();
     resultDB = dao.selectKoutsuuKakunin(selId);
-    
+
     CastCommon castCommon = new CastCommon();
 
     for (int i = 0; i < resultDB.size(); i++) {
-      KoutsuuBean bean = new KoutsuuBean(resultDB.get(i).getNo(), resultDB.get(i).getId(), resultDB.get(i).getUserName(),
-          resultDB.get(i).getSendmailaddress(), resultDB.get(i).getKukan_start(),
-          resultDB.get(i).getKukan_end(), resultDB.get(i).getKingaku(), resultDB.get(i).getBikou(),
-          chgStatus(resultDB.get(i).getSeisannStatus()),castCommon.chgLDTtoStr(resultDB.get(i).getYoukyuuJikoku()));
+      KoutsuuBean bean = new KoutsuuBean(resultDB.get(i).getNo(), resultDB.get(i).getId(),
+          resultDB.get(i).getUserName(),
+          resultDB.get(i).getSendmailaddress(), castCommon.chgLDTtoStr(resultDB.get(i).getRiyouhiduke()),
+          resultDB.get(i).getKukan_start(), resultDB.get(i).getKukan_end(), resultDB.get(i).getKingaku(),
+          resultDB.get(i).getBikou(),
+          chgStatus(resultDB.get(i).getSeisannStatus()), castCommon.chgLDTtoStr(resultDB.get(i).getYoukyuuJikoku()));
       result.add(bean);
     }
 
     return result;
   }
-  
+
   /**
    * ステータスコード変換用
    * @param status 0→申請中 1→差戻中 2→承認済 3→振込完了
@@ -43,8 +45,8 @@ public class KoutsuuBL {
    */
   private String chgStatus(String status) {
     String result = null;
-    
-    switch(status){
+
+    switch (status) {
     case "0":
       result = "申請中";
       break;
@@ -58,7 +60,7 @@ public class KoutsuuBL {
       result = "振込完了";
       break;
     }
-    
+
     return result;
   }
 }

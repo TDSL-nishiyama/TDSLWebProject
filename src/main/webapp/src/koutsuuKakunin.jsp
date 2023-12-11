@@ -48,7 +48,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
         <%=bean.getYoukyuuView()%>
       </td>
       <td>
-        <%=bean.getRiyouhiduke()%>
+        <%=bean.getRiyouView()%>
       </td>
       <td>
         <%=bean.getKukan_start()%>
@@ -72,7 +72,9 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       <input type="submit" name="toMasta" value="交通費精算要求画面に遷移">
     </p>
   </form>
-  
-  <p><a href="/TDSLWebProject/index.jsp">トップページに戻る</a></p>
+
+  <p>
+    <a href="/TDSLWebProject/index.jsp">トップページに戻る</a>
+  </p>
 </body>
 </html>

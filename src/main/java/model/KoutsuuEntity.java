@@ -20,12 +20,13 @@ public class KoutsuuEntity {
   private String seisannStatus;
   private Timestamp timestamp;
 
-  public KoutsuuEntity(int no, int id, String userName, String sendmailaddress, String kukan_start, String kukan_end,
+  public KoutsuuEntity(int no, int id, String userName,String sendmailaddress, LocalDateTime riyouhiduke, String kukan_start, String kukan_end,
       String kingaku, String bikou, String seisannStatus,LocalDateTime youkyuuJikoku) {
     this.no = no;
     this.id = id;
     this.userName = userName;
     this.sendmailaddress = sendmailaddress;
+    this.riyouhiduke = riyouhiduke;
     this.kukan_start = kukan_start;
     this.kukan_end = kukan_end;
     this.kingaku = kingaku;
