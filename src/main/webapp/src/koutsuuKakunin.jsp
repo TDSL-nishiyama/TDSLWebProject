@@ -30,6 +30,8 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       <th>区間終了</th>
       <th>金額</th>
       <th>備考</th>
+      <th>差戻理由</th>
+      <th>修正</th>
     </tr>
     <%
     for (KoutsuuBean bean : koutsuuBeanList) {
@@ -62,6 +64,14 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       <td>
         <%=bean.getBikou()%>
       </td>
+      <td>
+        <%="差戻理由"%>
+      </td>
+      <td>
+        <form action="<%=request.getContextPath()%>/KoutsuuSashimodoshiAction" method="post">
+          <input type="submit" value="修正">
+        </form>
+      </td>
     </tr>
     <%}%>
   </table>
@@ -69,7 +79,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
 
   <form action="<%=request.getContextPath()%>/KoutsuuYoukyuuAction" method="post">
     <p>
-      <input type="submit" name="toMasta" value="交通費精算要求画面に遷移">
+      <input type="submit" value="交通費精算要求画面に遷移">
     </p>
   </form>
 

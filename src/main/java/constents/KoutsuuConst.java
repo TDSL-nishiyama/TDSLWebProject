@@ -1,6 +1,22 @@
 package constents;
 
 public class KoutsuuConst {
+  public static class KCommon{
+   public final static String QUERY_TYPE_0_SELID = "0"; 
+   public final static String QUERY_TYPE_1_ALL = "1"; 
+   public final static String QUERY_TYPE_2_SELSTA = "2";
+   public final static String QUERY_TYPE_3_JOGAI = "3";
+   
+   public final static int NONSELID = 0;
+   public final static String NONSELSTA = null;
+   
+   public final static String SHINSEI = "0";
+   public final static String SASHIMODOSHI = "1";
+   public final static String SYOUNIN = "2";
+   public final static String FURIKOMIZUMI = "3";
+   
+  }
+  
   public static final class Koutsuu {
     public final static String COL_UNINO = "no";
     public final static String COL_USERID = "id";

@@ -19,7 +19,10 @@ public class KoutsuuBean implements Serializable {
   private LocalDateTime youkyuuJikoku;
   private String youkyuuView;//申請日付（要求時刻）の表示用項目
   private LocalDateTime sashimodoshiJikoku;
+  private String sashimodoshiView;//差戻日付（差戻時刻）の表示用項目
+  private String sashimodoshiRiyuu;
   private LocalDateTime syouninJikoku;
+  private String syouninView;//承認日付（承認時刻）の表示用項目
   private String seisannStatus;
   private Timestamp timestamp;
   
@@ -34,9 +37,9 @@ public class KoutsuuBean implements Serializable {
     this.bikou = bikou;
   }
   
-  //交通費精算確認
+  //交通費精算確認・承認
   public KoutsuuBean(int no, int id, String userName,String sendmailaddress,String riyouView, String kukan_start, String kukan_end, String kingaku,
-      String bikou,String seisannStatus,String youkyuuView) {
+      String bikou,String seisannStatus,String youkyuuView,String sashimodoshiView,String syouninView) {
     this.no = no;
     this.id = id;
     this.userName = userName;
@@ -48,6 +51,8 @@ public class KoutsuuBean implements Serializable {
     this.bikou = bikou;
     this.seisannStatus = seisannStatus;
     this.youkyuuView = youkyuuView;
+    this.sashimodoshiView = sashimodoshiView;
+    this.syouninView = syouninView;
   }
   
   public KoutsuuBean() {
@@ -180,6 +185,30 @@ public class KoutsuuBean implements Serializable {
 
   public void setRiyouView(String riyouView) {
     this.riyouView = riyouView;
+  }
+
+  public String getSashimodoshiRiyuu() {
+    return sashimodoshiRiyuu;
+  }
+
+  public void setSashimodoshiRiyuu(String sashimodoshiRiyuu) {
+    this.sashimodoshiRiyuu = sashimodoshiRiyuu;
+  }
+
+  public String getSashimodoshiView() {
+    return sashimodoshiView;
+  }
+
+  public void setSashimodoshiView(String sashimodoshiView) {
+    this.sashimodoshiView = sashimodoshiView;
+  }
+
+  public String getSyouninView() {
+    return syouninView;
+  }
+
+  public void setSyouninView(String syouninView) {
+    this.syouninView = syouninView;
   }
   
 }

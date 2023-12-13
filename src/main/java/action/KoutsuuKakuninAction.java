@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import constents.Const.ERRORMSG;
 import constents.Const.Path;
+import constents.KoutsuuConst.KCommon;
 import control.KoutsuuBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -36,9 +38,14 @@ public class KoutsuuKakuninAction extends HttpServlet {
 	  KoutsuuBL koutsuuBL = new KoutsuuBL();
     List<KoutsuuBean> koutsuuBeanList = null;
     try {
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(selId);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(selId,KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
     } catch (SQLException e) {
       //エラー画面に遷移
+      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR);
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+      dispatcher.forward(request, response);
+      return;
     }
     request.setAttribute(Path.KOUTSUU_KAKUNIN_SCOPE, koutsuuBeanList);
 	  

@@ -19,9 +19,10 @@ public class KoutsuuEntity {
   private LocalDateTime syouninJikoku;
   private String seisannStatus;
   private Timestamp timestamp;
-
+  
+  //交通費精算(確認/承認)画面を開いた際の処理
   public KoutsuuEntity(int no, int id, String userName,String sendmailaddress, LocalDateTime riyouhiduke, String kukan_start, String kukan_end,
-      String kingaku, String bikou, String seisannStatus,LocalDateTime youkyuuJikoku) {
+      String kingaku, String bikou, String seisannStatus,LocalDateTime youkyuuJikoku,LocalDateTime sashimodoshiJikoku,LocalDateTime syouninJikoku) {
     this.no = no;
     this.id = id;
     this.userName = userName;
@@ -31,12 +32,13 @@ public class KoutsuuEntity {
     this.kukan_end = kukan_end;
     this.kingaku = kingaku;
     this.bikou = bikou;
-    this.seisannStatus = seisannStatus;
     this.youkyuuJikoku = youkyuuJikoku;
+    this.sashimodoshiJikoku = sashimodoshiJikoku;
+    this.syouninJikoku = syouninJikoku;
+    this.seisannStatus = seisannStatus;
   }
   
   public KoutsuuEntity() {
-    // TODO 自動生成されたコンストラクター・スタブ
   }
 
   public int getNo() {

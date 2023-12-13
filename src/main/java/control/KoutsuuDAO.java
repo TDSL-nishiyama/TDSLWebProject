@@ -12,6 +12,7 @@ import java.util.Map;
 
 import constents.Const.Common;
 import constents.Table.User;
+import constents.KoutsuuConst.KCommon;
 import constents.KoutsuuConst.Koutsuu;
 import constents.KoutsuuConst.KtimeStamp;
 import control.common.CastCommon;
@@ -22,18 +23,22 @@ import model.KoutsuuEntity;
 public class KoutsuuDAO extends DAOCommon implements DBAccess {
 
   private String sqlPath = Common.SQL_FILE_PATH;
-  
+
+  /**
+   * {@index koutsuuテーブルのNoの最大値を取得}
+   * @return
+   */
   public int getMaxNo() {
-    int result = super.countSQL("\\koutsuu\\maxNo.sql",null);
+    int result = super.countSQL("\\koutsuu\\maxNo.sql", null);
     return result;
   }
 
   /**
    * {@ 交通費精算要求画面で請求ボタンを押下した際の処理}
-   * @param bean
+   * @param pStatement　ステートメントとして設定したい値List<Map<String,Object>>　←わかりづらい？もっといいのない？
    * @throws SQLException
    */
-  public void InsertKoutsuuAndKtimestamp(List<Map<String,Object>> pStatement) throws SQLException {
+  public void InsertKoutsuuAndKtimestamp(List<Map<String, Object>> pStatement) throws SQLException {
     //ステートメントの設定
     List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
     statement1.add(pStatement.get(0).get(Koutsuu.COL_UNINO));
@@ -44,13 +49,13 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     statement1.add(pStatement.get(0).get(Koutsuu.COL_KUKAN_E));
     statement1.add(pStatement.get(0).get(Koutsuu.COL_KINGAKU));
     statement1.add(pStatement.get(0).get(Koutsuu.COL_BIKOU));
-    
+
     List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
     statement2.add(pStatement.get(0).get(Koutsuu.COL_UNINO));
     statement2.add(pStatement.get(0).get(KtimeStamp.COL_YOUKYUU));
     statement2.add(pStatement.get(0).get(KtimeStamp.COL_STATUS));
     statement2.add(pStatement.get(0).get(KtimeStamp.COL_TIMESTAMP));
-    
+
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -77,37 +82,39 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
   }
 
   /**
-   * {@ 交通費精算確認画面を開いた際の処理（一般ユーザー向け請求している/していた交通費の確認）}
-   * @param selId 選択するid
+   * {@ 交通費精算(確認/承認)画面を開いた際の処理（請求している/していた交通費の確認）}
+   * @param selId 選択するid （全IDを表示したい場合0を指定）
+   * @param selStatus 選択するステータス（0=申請中 1=差戻中 2=承認済 3=振込済）
+   * @param selQuery 選択するクエリ 0=選択したIDのみ 1=すべてのID 2=ステータスが指定のもののみ
    * @throws SQLException
    */
-  public List<KoutsuuEntity> selectKoutsuuKakunin(int selId) throws SQLException {
-    List<String> column = new ArrayList<String>();
+  public List<KoutsuuEntity> selectKoutsuuKakunin(int selId, String selStatus, String selQuery) throws SQLException {
     List<Object> statement = new ArrayList<Object>();
     List<KoutsuuEntity> result = new ArrayList<KoutsuuEntity>();
-    
+
     //共通クラスのインスタンス化
     CastCommon castCommon = new CastCommon();
 
-    //取得カラム名の追加
-    column.add(Koutsuu.COL_UNINO);
-    column.add(Koutsuu.COL_USERID);
-    column.add(User.COL_USERNAME);
-    column.add(Koutsuu.COL_RIYOUHIDUKE);
-    column.add(Koutsuu.COL_SMAIL);
-    column.add(Koutsuu.COL_KUKAN_S);
-    column.add(Koutsuu.COL_KUKAN_E);
-    column.add(Koutsuu.COL_KINGAKU);
-    column.add(Koutsuu.COL_BIKOU);
-    column.add(KtimeStamp.COL_STATUS);
-    column.add(KtimeStamp.COL_STATUS);
-    //ステートメントの追加
-    statement.add(selId);
-
-    //super.selectSQL("\\koutsuu\\getKoutsuuKakunin.sql", column, statement);
-
-    sqlPath += "\\koutsuu\\getKoutsuuKakunin.sql";
-
+    //SQL文の選択とステートメントの追加
+    switch (selQuery) {
+    case KCommon.QUERY_TYPE_0_SELID:
+      sqlPath += "koutsuu\\getKoutsuuKakunin.sql";
+      statement.add(selId);
+      break;
+    case KCommon.QUERY_TYPE_1_ALL:
+      sqlPath += "koutsuu\\getKoutsuuKakuninAll.sql";
+      break;
+    case KCommon.QUERY_TYPE_2_SELSTA:
+      sqlPath += "koutsuu\\getKoutsuuKakuninWhereStatus.sql";
+      statement.add(selStatus);
+      break;
+    case KCommon.QUERY_TYPE_3_JOGAI:
+      sqlPath += "koutsuu\\getKoutsuuKakuninJogai.sql";
+      statement.add(selStatus);
+      break;
+    default:
+      sqlPath += "koutsuu\\getKoutsuuKakuninAll.sql";
+    }
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -143,6 +150,8 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       String bikou = null;
       String status = null;
       LocalDateTime shinseiYMD = null;
+      LocalDateTime sashimodoshiYMD = null;
+      LocalDateTime syouninYMD = null;
 
       //日付項目(MySQL:DateTime)はDateからLocalDateTimeに変換して格納
       //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
@@ -158,9 +167,15 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
         bikou = rs.getString(Koutsuu.COL_BIKOU);
         status = rs.getString(KtimeStamp.COL_STATUS);
         shinseiYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()));
-
+        if (rs.getDate(KtimeStamp.COL_SASHIMODOSHI) != null) {
+          sashimodoshiYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_SASHIMODOSHI).getTime()));
+        }
+        if (rs.getDate(KtimeStamp.COL_SYONIN) != null) {
+          syouninYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_SYONIN).getTime()));
+        }
         KoutsuuEntity entity = new KoutsuuEntity(
-            no, id, userName,sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, status, shinseiYMD);
+            no, id, userName, sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, status, shinseiYMD,
+            sashimodoshiYMD, syouninYMD);
         result.add(entity);
       }
 

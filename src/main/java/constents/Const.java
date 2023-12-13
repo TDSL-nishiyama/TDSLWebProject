@@ -42,7 +42,9 @@ public class Const {
     public static final String KARI_USER_GAMEN = "/src/karitouroku.jsp";
     public static final String KOUTUSUU_YOUKYUU_GAMEN = "/src/koutsuuYoukyuu.jsp";
     public static final String KOUTUSUU_KAKUNIN_GAMEN = "/src/koutsuuKakunin.jsp";
-
+    public static final String KOUTUSUU_SHOUNIN_GAMEN = "/src/koutsuuShounin.jsp";
+    public static final String KOUTUSUU_SASHIMODOSHI_GAMEN = "/src/koutsuuSashimodoshi.jsp";
+    
     //スコープ名
     public static final String SESSION_SCOPE = "loginSession";
     
@@ -57,7 +59,7 @@ public class Const {
     public static final String USER_HENSYU_SCOPE = "userHensyu";
     public static final String KOUTSUU_YOUKYU_SCOPE = "koutsuuYoukyu";
     public static final String KOUTSUU_KAKUNIN_SCOPE = "koutsuuKakunin";
-
+    public static final String KOUTSUU_SHOUNIN_SCOPE = "koutsuuShounin";
   }
 
   //正常系メッセージ関連
@@ -101,6 +103,7 @@ public class Const {
     public static final String ERRMSG_ATTRIBUTE = "ERRMSG";
     //汎用
     public static final String DBERROR = "テーブル更新が正常に行われませんでした";
+    public static final String DBERROR_SEL = "テーブル取得が正常に行われませんでした";
     public static final String ERROR_SETLENIENT = "存在しない日付です";
     
     //ログイン・パスワード登録更新
