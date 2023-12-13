@@ -209,8 +209,8 @@
 		<servlet-name>KoutsuuKakuninAction</servlet-name>
 		<url-pattern>/KoutsuuKakuninAction</url-pattern>
 	</servlet-mapping>
-	
-			<servlet>
+
+	<servlet>
 		<servlet-name>KoutsuuShouninAction</servlet-name>
 		<servlet-class>action.KoutsuuShouninAction</servlet-class>
 	</servlet>
@@ -218,14 +218,23 @@
 		<servlet-name>KoutsuuShouninAction</servlet-name>
 		<url-pattern>/KoutsuuShouninAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>KoutsuuSashimodoshiAction</servlet-name>
 		<servlet-class>action.KoutsuuSashimodoshiAction</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>KoutsuuSashimodoshiAction</servlet-name>
 		<url-pattern>/KoutsuuSashimodoshiAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultKoutsuuShouninAction</servlet-name>
+		<servlet-class>action.ResultKoutsuuShouninAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultKoutsuuShouninAction</servlet-name>
+		<url-pattern>/ResultKoutsuuShouninAction</url-pattern>
 	</servlet-mapping>
 
 

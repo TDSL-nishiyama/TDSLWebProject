@@ -19,21 +19,21 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
 <body>
   <%@ include file="../msg.jsp"%>
   <form action="<%=request.getContextPath()%>/KoutsuuShouninAction" method="post">
-  <input type="hidden" name="type" value="3">
+    <input type="hidden" name="type" value="3">
     <p>
       <input type="submit" value="振込済を表示しない">
     </p>
   </form>
 
   <form action="<%=request.getContextPath()%>/KoutsuuShouninAction" method="post">
-  <input type="hidden" name="type" value="1">
+    <input type="hidden" name="type" value="1">
     <p>
       <input type="submit" value="全て表示">
     </p>
   </form>
 
   <form action="<%=request.getContextPath()%>/KoutsuuShouninAction" method="post">
-  <input type="hidden" name="type" value="2">
+    <input type="hidden" name="type" value="2">
     <p>
       <input type="submit" value="特定のステータスのみ表示">
       <br>
@@ -49,7 +49,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
   </form>
 
   <form action="<%=request.getContextPath()%>/KoutsuuShouninAction" method="post">
-  <input type="hidden" name="type" value="0">
+    <input type="hidden" name="type" value="0">
     <p>
       <input type="submit" value="特定のIDのみ表示">
       <br> ID:
@@ -103,7 +103,16 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
         <%=bean.getBikou()%>
       </td>
       <td>
-        <%="差戻\rn承認済\rn振込済"%>
+        <form action="<%=request.getContextPath()%>/ResultKoutsuuShouninAction" method="post">
+        差戻
+        <input type="radio" name="status" value="1">
+        承認
+        <input type="radio" name="status" value="2">
+        振込
+        <input type="radio" name="status" value="3">
+        <input type="hidden" name="selNo" value="<%=bean.getNo()%>">
+        <input type="submit" value = "実行">
+        </form>
       </td>
     </tr>
     <%}%>

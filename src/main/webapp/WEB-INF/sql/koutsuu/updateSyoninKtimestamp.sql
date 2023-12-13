@@ -1,0 +1,1 @@
+UPDATE ktimestamp SET status=?,syounin=?,timestamp=? where no = ?;

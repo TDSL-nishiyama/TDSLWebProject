@@ -40,10 +40,10 @@ public class KoutsuuShouninAction extends HttpServlet {
     if (request.getParameter("selId") != null) {
       id = Integer.parseInt(request.getParameter("selId"));
     }
-    
+
     //エラーチェックSTART
     //ID入力チェック
-    if(request.getParameter("selId") != null && request.getParameter("selId").equals("")){
+    if (request.getParameter("selId") != null && request.getParameter("selId").equals("")) {
       //エラーメッセージの設定
       request.setAttribute(MSG.MSG_ATTRIBUTE, "IDを選択してください");
       //交通費精算承認画面に遷移
@@ -63,10 +63,11 @@ public class KoutsuuShouninAction extends HttpServlet {
         koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
         break;
       case "2":
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, request.getParameter("status"), KCommon.QUERY_TYPE_2_SELSTA);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, request.getParameter("status"),
+            KCommon.QUERY_TYPE_2_SELSTA);
         break;
       case "3":
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.SHINSEI, KCommon.QUERY_TYPE_3_JOGAI);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.FURIKOMIZUMI, KCommon.QUERY_TYPE_3_JOGAI);
         break;
       default:
         koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
@@ -74,8 +75,9 @@ public class KoutsuuShouninAction extends HttpServlet {
     } catch (SQLException e) {
       //エラーメッセージを表示
       request.setAttribute(MSG.MSG_ATTRIBUTE, ERRORMSG.DBERROR_SEL);
+      //交通費精算承認画面に遷移
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.SYSTEM_ERROR_GAMEN);
+          .getRequestDispatcher(Path.KOUTUSUU_SHOUNIN_GAMEN);
       dispatcher.forward(request, response);
       return;
     }

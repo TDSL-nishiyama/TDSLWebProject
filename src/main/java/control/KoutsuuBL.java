@@ -3,6 +3,7 @@ package control;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,25 @@ public class KoutsuuBL {
     }
 
     return result;
+  }
+  
+  public void updKoutsuuShounin(int selNo,String selStatus) throws SQLException {
+    Map<String,Object> statement = new HashMap<>();
+    //ステートメントの設定
+    statement.put(KtimeStamp.COL_UNINO,selNo);
+    if(selStatus.equals(KCommon.SASHIMODOSHI)) {
+    statement.put(KtimeStamp.COL_SASHIMODOSHI,LocalDateTime.now());
+    }
+    if(selStatus.equals(KCommon.SYOUNIN)) {
+    statement.put(KtimeStamp.COL_SYONIN,LocalDateTime.now());
+    }
+    statement.put(KtimeStamp.COL_STATUS,selStatus);
+    statement.put(KtimeStamp.COL_TIMESTAMP,LocalDateTime.now());
+    
+    //更新処理
+    KoutsuuDAO dao = new KoutsuuDAO();
+    dao.updateKoutsuuAndKtimestamp(statement);
+    
   }
 
   /**

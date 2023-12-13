@@ -190,5 +190,37 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     return result;
 
   }
+  
+  public void updateKoutsuuAndKtimestamp(Map<String, Object> pStatement) throws SQLException {
+    //ステートメントの設定
+    List<Object> statement = new ArrayList<>();//ktimestampテーブル
+    //set句
+    String status = pStatement.get(KtimeStamp.COL_STATUS).toString();
+    statement.add(status);
+    if(status.equals(KCommon.SASHIMODOSHI)) {
+      statement.add(pStatement.get(KtimeStamp.COL_SASHIMODOSHI));
+    }
+    if(status.equals(KCommon.SYOUNIN)) {
+      statement.add(pStatement.get(KtimeStamp.COL_SYONIN));
+    }
+    statement.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
+    //where句
+    statement.add(pStatement.get(KtimeStamp.COL_UNINO));
+    
+    try {
+      //ktimestampテーブルの更新
+      if(status.equals(KCommon.SASHIMODOSHI)) {
+        super.executeDML("koutsuu\\updateSashimodoshiKtimestamp.sql", statement);
+      }else if(status.equals(KCommon.SYOUNIN)) {
+        super.executeDML("koutsuu\\updateSyoninKtimestamp.sql", statement);
+      }else {
+        super.executeDML("koutsuu\\updateFurikomiKtimestamp.sql", statement);  
+      }
+    } catch (SQLException e) {
+      throw e;
+    } finally {
+      sqlPath = Common.SQL_FILE_PATH;
+    }
+  }
 
 }
