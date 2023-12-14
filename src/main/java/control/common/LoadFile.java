@@ -34,6 +34,7 @@ public class LoadFile {
    *{@index} プロパティファイル取得用（単要素）　
    *@param String loadPath プロパティファイルが格納されているパス 
    *@param String pName 取得したい要素名
+   *@return String プロパティファイルの項目
    **/
   public String getProItem(String loadPath, String pName) {
 
@@ -56,6 +57,7 @@ public class LoadFile {
    *{@index} プロパティファイル取得用（複数要素）　
    *@param String loadPath プロパティファイルが格納されているパス 
    *@param String[] pName 取得したい要素名
+   *@return Map プロパティファイルの項目
    **/
   public Map<String, String> getProItem(String loadPath, String[] pName) {
 

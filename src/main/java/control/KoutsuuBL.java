@@ -19,7 +19,7 @@ import model.KoutsuuEntity;
 public class KoutsuuBL {
   
   /**
-   * {交通費精算確認画面他koutsuuテーブルの内容を取得する}
+   * {交通費精算要求画面で入力した画面を新規でテーブルに挿入する}
    * @param gamenInfo
    * @throws SQLException
    */
