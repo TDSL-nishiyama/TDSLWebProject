@@ -26,12 +26,12 @@ public class Const {
   public static final class Path {
 
     //画面名
+    public static final String MAIN_GAMEN_PATH = "/TDSLWebProject/index.jsp";
     public static final String LOGIN_GAMEN = "/login.jsp";
     public static final String MAIN_GAMEN = "/index.jsp";
     public static final String SYSTEM_ERROR_GAMEN = "/error.jsp";
-    public static final String MAIN_GAMEN_PATH = "/TDSLWebProject/index.jsp";
-    public static final String SYAIN_JOUHOU_PATH = "/src/syainJouhou.jsp";
-    public static final String SYAIN_HENSYU_PATH = "/src/syainJouhouHensyu.jsp";
+    public static final String SYAIN_JOUHOU_GAMEN = "/src/syainJouhou.jsp";
+    public static final String SYAIN_HENSYU_GAMEN = "/src/syainJouhouHensyu.jsp";
     public static final String MASTA_GAMEN = "/masta.jsp";
     public static final String USER_ADD_GAMEN = "/src/userAddMasta.jsp";
     public static final String UPDATE_PASSWORD_GAMEN = "/updatePassword.jsp";
@@ -40,10 +40,10 @@ public class Const {
     public static final String USER_UPD_GAMEN = "/src/userUpdMasta.jsp";
     public static final String RESULT_USER_UPD_GAMEN = "/src/resultUserUpdMasta.jsp";
     public static final String KARI_USER_GAMEN = "/src/karitouroku.jsp";
-    public static final String KOUTUSUU_YOUKYUU_GAMEN = "/src/koutsuuYoukyuu.jsp";
-    public static final String KOUTUSUU_KAKUNIN_GAMEN = "/src/koutsuuKakunin.jsp";
-    public static final String KOUTUSUU_SHOUNIN_GAMEN = "/src/koutsuuShounin.jsp";
-    public static final String KOUTUSUU_SASHIMODOSHI_GAMEN = "/src/koutsuuSashimodoshi.jsp";
+    public static final String KOUTSUU_YOUKYUU_GAMEN = "/src/koutsuuYoukyuu.jsp";
+    public static final String KOUTSUU_KAKUNIN_GAMEN = "/src/koutsuuKakunin.jsp";
+    public static final String KOUTSUU_SHOUNIN_GAMEN = "/src/koutsuuShounin.jsp";
+    public static final String KOUTSUU_SASHIMODOSHI_GAMEN = "/src/koutsuuSashimodoshi.jsp";
     public static final String KOUTSUU_SYUUSEI_GAMEN = "/src/koutsuuSyuusei.jsp";
     
     //スコープ名
@@ -96,7 +96,19 @@ public class Const {
     public static final String MASTA_DEL_3 = "ユーザーの削除が完了しました";
     
     //交通費精算要求
-    public static final String K_YOUKYU_1 = "交通費の申請が完了しました。\n申請状況は交通費精算確認画面で確認してください";
+    public static final String K_YOUKYU_1 = "交通費の申請が完了しました。申請状況は交通費精算確認画面で確認してください";
+    
+    //交通費承認
+    public static final String K_SHONIN_1 = "IDを入力してください";
+    public static final String K_SHONIN_2 = "入力されたIDは存在しません";
+    public static final String K_SHONIN_3 = "更新が完了しました";
+    
+    //交通費差戻
+    public static final String K_SASHIMODOSHI_1 = "差戻理由を記載してください";
+    public static final String K_SASHIMODOSHI_2 = "差戻処理が完了しました";
+    
+    //交通費修正
+    public static final String K_SYUUSEI_1 = "修正処理が完了しました";
   }
 
   //エラー関連

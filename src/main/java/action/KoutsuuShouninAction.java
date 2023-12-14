@@ -37,9 +37,9 @@ public class KoutsuuShouninAction extends HttpServlet {
     String errMSG = null;
     //ID入力チェック
     if (request.getParameter("selId") != null && request.getParameter("selId").equals("")) {
-      errMSG = "IDを入力してください";
+      errMSG = MSG.K_SHONIN_1;
       if (checkCommon.checkUserId(Integer.parseInt(request.getParameter("selId"))) == 0) {
-        errMSG = "選択したユーザーは存在しません";
+        errMSG = MSG.K_SHONIN_2;
       }
       //リクエストスコープに値を保存
       try {
@@ -59,7 +59,7 @@ public class KoutsuuShouninAction extends HttpServlet {
       request.setAttribute(MSG.MSG_ATTRIBUTE, errMSG);
       //交通費精算承認画面に遷移
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.KOUTUSUU_SHOUNIN_GAMEN);
+          .getRequestDispatcher(Path.KOUTSUU_SHOUNIN_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
@@ -111,7 +111,7 @@ public class KoutsuuShouninAction extends HttpServlet {
 
     //交通費精算承認画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTUSUU_SHOUNIN_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_SHOUNIN_GAMEN);
     dispatcher.forward(request, response);
   }
 

@@ -36,7 +36,7 @@ public class SyainJouhouAction extends HttpServlet {
     request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
     // 結果出力画面(syainJouhou.jsp)にフォワード
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.SYAIN_JOUHOU_PATH);
+        .getRequestDispatcher(Path.SYAIN_JOUHOU_GAMEN);
     dispatcher.forward(request, response);
   }
 }

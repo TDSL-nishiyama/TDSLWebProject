@@ -49,7 +49,7 @@ public class SyainJouhouHensyuuAction extends HttpServlet {
         request.setAttribute(Path.SYAIN_JOUHOU_SCOPE, SyainJouhouBLlist);
         // 結果出力画面(syainJouhou.jsp)にフォワード
         RequestDispatcher dispatcher = request
-            .getRequestDispatcher(Path.SYAIN_JOUHOU_PATH);
+            .getRequestDispatcher(Path.SYAIN_JOUHOU_GAMEN);
         dispatcher.forward(request, response);
         return;
       }
@@ -63,7 +63,7 @@ public class SyainJouhouHensyuuAction extends HttpServlet {
     request.setAttribute(Path.SYAIN_HENSYU_SCOPE, syainJouhouBLlist);
     // 社員情報編集画面(syainJouhouBLlist.jsp)にフォワード
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+        .getRequestDispatcher(Path.SYAIN_HENSYU_GAMEN);
     dispatcher.forward(request, response);
   }
 }

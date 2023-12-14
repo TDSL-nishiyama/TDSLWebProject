@@ -30,8 +30,11 @@ public class ResultKoutsuuShouninAction extends HttpServlet {
     //共通クラスのインスタンス化
     KoutsuuBL koutsuuBL = new KoutsuuBL();
     
-    //エラーチェックSTART
+    //画面情報の取得
     int no = Integer.parseInt(request.getParameter("selNo"));
+    
+    //エラーチェックSTART
+    
     
     //エラーチェックEND
     
@@ -39,7 +42,7 @@ public class ResultKoutsuuShouninAction extends HttpServlet {
     String status = request.getParameter("status");
     if(status.equals(KCommon.SASHIMODOSHI)) {
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.KOUTUSUU_SASHIMODOSHI_GAMEN);
+          .getRequestDispatcher(Path.KOUTSUU_SASHIMODOSHI_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
@@ -66,16 +69,16 @@ public class ResultKoutsuuShouninAction extends HttpServlet {
       request.setAttribute(MSG.MSG_ATTRIBUTE, ERRORMSG.DBERROR_SEL);
       //交通費精算承認画面に遷移
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.KOUTUSUU_SHOUNIN_GAMEN);
+          .getRequestDispatcher(Path.KOUTSUU_SHOUNIN_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
     request.setAttribute(Path.KOUTSUU_SHOUNIN_SCOPE, koutsuuBeanList);
     //メッセージを表示
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "更新が完了しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.K_SHONIN_3);
     //交通費精算承認画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTUSUU_SHOUNIN_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_SHOUNIN_GAMEN);
     dispatcher.forward(request, response);
   }
 

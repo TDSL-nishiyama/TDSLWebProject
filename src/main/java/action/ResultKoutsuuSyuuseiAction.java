@@ -73,7 +73,7 @@ public class ResultKoutsuuSyuuseiAction extends HttpServlet {
     }
     
     //メッセージ格納
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "修正処理が完了しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.K_SYUUSEI_1);
     //交通費修正画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.KOUTSUU_SYUUSEI_GAMEN);

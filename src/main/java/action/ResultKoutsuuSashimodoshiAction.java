@@ -51,10 +51,10 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
         return;
       }
       //メッセージ格納
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "差戻理由を記載してください");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.K_SASHIMODOSHI_1);
       //交通費差戻要求画面に遷移
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.KOUTUSUU_SASHIMODOSHI_GAMEN);
+          .getRequestDispatcher(Path.KOUTSUU_SASHIMODOSHI_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
@@ -76,10 +76,10 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
     }
     
     //メッセージ格納
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "差戻処理が完了しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.K_SASHIMODOSHI_2);
     //交通費精算要求画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTUSUU_SASHIMODOSHI_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_SASHIMODOSHI_GAMEN);
     dispatcher.forward(request, response);
 	}
 

@@ -51,7 +51,7 @@ public class KoutsuuKakuninAction extends HttpServlet {
 	  
     //交通費精算確認画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTUSUU_KAKUNIN_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_KAKUNIN_GAMEN);
     dispatcher.forward(request, response);
 	}
 

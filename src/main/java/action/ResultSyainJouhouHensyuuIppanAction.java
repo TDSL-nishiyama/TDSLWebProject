@@ -69,7 +69,7 @@ public class ResultSyainJouhouHensyuuIppanAction extends jakarta.servlet.http.Ht
       request.setAttribute(MSG.MSG_ATTRIBUTE, sb.toString());
       //社員情報編集画面に遷移
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+          .getRequestDispatcher(Path.SYAIN_HENSYU_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
@@ -118,7 +118,7 @@ public class ResultSyainJouhouHensyuuIppanAction extends jakarta.servlet.http.Ht
 
       //社員情報編集画面に遷移
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+          .getRequestDispatcher(Path.SYAIN_HENSYU_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
@@ -155,7 +155,7 @@ public class ResultSyainJouhouHensyuuIppanAction extends jakarta.servlet.http.Ht
     request.setAttribute(Path.SYAIN_HENSYU_SCOPE, syainJouhouBLlist);
     // 社員情報編集画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.SYAIN_HENSYU_PATH);
+        .getRequestDispatcher(Path.SYAIN_HENSYU_GAMEN);
     dispatcher.forward(request, response);
 
   }

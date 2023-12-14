@@ -47,7 +47,7 @@ public class KoutsuuSashimodoshiAction extends HttpServlet {
 
     //交通費差戻要求画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTUSUU_SASHIMODOSHI_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_SASHIMODOSHI_GAMEN);
     dispatcher.forward(request, response);
 	}
 

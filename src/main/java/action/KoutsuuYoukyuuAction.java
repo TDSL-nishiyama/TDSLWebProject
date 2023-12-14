@@ -21,7 +21,7 @@ public class KoutsuuYoukyuuAction extends HttpServlet {
 	  
     //交通費精算要求画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTUSUU_YOUKYUU_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_YOUKYUU_GAMEN);
     dispatcher.forward(request, response);
 	}
 
