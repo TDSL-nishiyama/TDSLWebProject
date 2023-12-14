@@ -31,15 +31,22 @@ public class ResultKoutsuuShouninAction extends HttpServlet {
     KoutsuuBL koutsuuBL = new KoutsuuBL();
     
     //エラーチェックSTART
+    int no = Integer.parseInt(request.getParameter("selNo"));
     
     //エラーチェックEND
     
-    //差戻の場合差戻画面に遷移
-    
+    //差戻の場合交通費差戻画面に遷移
+    String status = request.getParameter("status");
+    if(status.equals(KCommon.SASHIMODOSHI)) {
+      RequestDispatcher dispatcher = request
+          .getRequestDispatcher(Path.KOUTUSUU_SASHIMODOSHI_GAMEN);
+      dispatcher.forward(request, response);
+      return;
+    }
     
     //更新処理
     try {
-      koutsuuBL.updKoutsuuShounin(Integer.parseInt(request.getParameter("selNo")),request.getParameter("status"));
+      koutsuuBL.updKoutsuuShounin(no,status);
     } catch (SQLException e) {
      //エラーメッセージを表示
      request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR);

@@ -1,0 +1,1 @@
+UPDATE koutsuu SET riyouhiduke=?,kukan_start=?,kukan_end=?,kingaku=?,bikou=?,modoshiriyuu=? where no = ?;

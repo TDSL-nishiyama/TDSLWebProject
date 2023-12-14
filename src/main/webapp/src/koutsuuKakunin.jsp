@@ -65,12 +65,24 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
         <%=bean.getBikou()%>
       </td>
       <td>
-        <%="差戻理由"%>
+        <%=bean.getModoshiriyuu()%>
       </td>
       <td>
-        <form action="<%=request.getContextPath()%>/KoutsuuSashimodoshiAction" method="post">
+        <%
+        if (bean.getSeisannStatus() == "差戻中") {
+        %>
+        <form action="<%=request.getContextPath()%>/KoutsuuSyuuseiAction" method="post">
+          <input type="hidden" name="selId" value="<%=bean.getId()%>">
           <input type="submit" value="修正">
         </form>
+        <%
+        } else {
+        %>
+        <input type="submit" value="修正" disabled>
+        <%
+        }
+        %>
+
       </td>
     </tr>
     <%}%>

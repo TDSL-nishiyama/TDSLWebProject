@@ -10,6 +10,7 @@ public class MastaEntity implements Serializable {
   private String sakujo; //(1=退職)
   private String loginid;
   private String loginpassword;
+  private String sendMailAddress;
   
   //コンストラクタ
   public MastaEntity(int userid, String username, boolean kanriFlg, String loginid,String loginpassword) {
@@ -89,5 +90,13 @@ public class MastaEntity implements Serializable {
 
   public void setLoginpassword(String loginpassword) {
     this.loginpassword = loginpassword;
+  }
+
+  public String getSendMailAddress() {
+    return sendMailAddress;
+  }
+
+  public void setSendMailAddress(String sendMailAddress) {
+    this.sendMailAddress = sendMailAddress;
   }
 }

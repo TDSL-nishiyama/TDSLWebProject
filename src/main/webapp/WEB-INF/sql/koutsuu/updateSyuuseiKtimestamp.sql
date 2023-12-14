@@ -1,0 +1,1 @@
+UPDATE ktimestamp SET status=?,timestamp=? where no = ?;

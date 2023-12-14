@@ -14,6 +14,7 @@ public class KoutsuuEntity {
   private String kukan_end;
   private String kingaku;
   private String bikou;
+  private String modoshiriyuu;
   private LocalDateTime youkyuuJikoku;
   private LocalDateTime sashimodoshiJikoku;
   private LocalDateTime syouninJikoku;
@@ -22,7 +23,7 @@ public class KoutsuuEntity {
   
   //交通費精算(確認/承認)画面を開いた際の処理
   public KoutsuuEntity(int no, int id, String userName,String sendmailaddress, LocalDateTime riyouhiduke, String kukan_start, String kukan_end,
-      String kingaku, String bikou, String seisannStatus,LocalDateTime youkyuuJikoku,LocalDateTime sashimodoshiJikoku,LocalDateTime syouninJikoku) {
+      String kingaku, String bikou, String modoshiriyuu, String  seisannStatus,LocalDateTime youkyuuJikoku,LocalDateTime sashimodoshiJikoku,LocalDateTime syouninJikoku) {
     this.no = no;
     this.id = id;
     this.userName = userName;
@@ -32,6 +33,7 @@ public class KoutsuuEntity {
     this.kukan_end = kukan_end;
     this.kingaku = kingaku;
     this.bikou = bikou;
+    this.modoshiriyuu = modoshiriyuu;
     this.youkyuuJikoku = youkyuuJikoku;
     this.sashimodoshiJikoku = sashimodoshiJikoku;
     this.syouninJikoku = syouninJikoku;
@@ -126,6 +128,14 @@ public class KoutsuuEntity {
 
   public void setRiyouhiduke(LocalDateTime riyouhiduke) {
     this.riyouhiduke = riyouhiduke;
+  }
+
+  public String getModoshiriyuu() {
+    return modoshiriyuu;
+  }
+
+  public void setModoshiriyuu(String modoshiriyuu) {
+    this.modoshiriyuu = modoshiriyuu;
   }
   
 }

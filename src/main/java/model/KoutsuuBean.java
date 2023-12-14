@@ -16,6 +16,7 @@ public class KoutsuuBean implements Serializable {
   private String kukan_end;
   private String kingaku;
   private String bikou;
+  private String modoshiriyuu;//差戻理由
   private LocalDateTime youkyuuJikoku;
   private String youkyuuView;//申請日付（要求時刻）の表示用項目
   private LocalDateTime sashimodoshiJikoku;
@@ -39,7 +40,7 @@ public class KoutsuuBean implements Serializable {
   
   //交通費精算確認・承認
   public KoutsuuBean(int no, int id, String userName,String sendmailaddress,String riyouView, String kukan_start, String kukan_end, String kingaku,
-      String bikou,String seisannStatus,String youkyuuView,String sashimodoshiView,String syouninView) {
+      String bikou,String modoshiriyuu,String seisannStatus,String youkyuuView,String sashimodoshiView,String syouninView) {
     this.no = no;
     this.id = id;
     this.userName = userName;
@@ -49,16 +50,19 @@ public class KoutsuuBean implements Serializable {
     this.kukan_end = kukan_end;
     this.kingaku = kingaku;
     this.bikou = bikou;
+    this.modoshiriyuu = modoshiriyuu;
     this.seisannStatus = seisannStatus;
     this.youkyuuView = youkyuuView;
     this.sashimodoshiView = sashimodoshiView;
     this.syouninView = syouninView;
   }
   
-  public KoutsuuBean() {
-    // TODO 自動生成されたコンストラクター・スタブ
+  //交通費差戻
+  public KoutsuuBean(int no,String modoshiriyuu) {
+    this.no = no;
+    this.modoshiriyuu = modoshiriyuu;
   }
-
+  
   public String getUserName() {
     return userName;
   }
@@ -209,6 +213,14 @@ public class KoutsuuBean implements Serializable {
 
   public void setSyouninView(String syouninView) {
     this.syouninView = syouninView;
+  }
+
+  public String getModoshiriyuu() {
+    return modoshiriyuu;
+  }
+
+  public void setModoshiriyuu(String modoshiriyuu) {
+    this.modoshiriyuu = modoshiriyuu;
   }
   
 }

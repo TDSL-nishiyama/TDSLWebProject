@@ -27,6 +27,7 @@ public class KoutsuuConst {
     public final static String COL_KUKAN_E = "kukan_end";
     public final static String COL_KINGAKU = "kingaku";
     public final static String COL_BIKOU = "bikou";
+    public final static String COL_MODOSHIRIYUU = "modoshiriyuu";
   }
   
   public static final class KtimeStamp{

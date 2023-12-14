@@ -44,6 +44,7 @@ public class Const {
     public static final String KOUTUSUU_KAKUNIN_GAMEN = "/src/koutsuuKakunin.jsp";
     public static final String KOUTUSUU_SHOUNIN_GAMEN = "/src/koutsuuShounin.jsp";
     public static final String KOUTUSUU_SASHIMODOSHI_GAMEN = "/src/koutsuuSashimodoshi.jsp";
+    public static final String KOUTSUU_SYUUSEI_GAMEN = "/src/koutsuuSyuusei.jsp";
     
     //スコープ名
     public static final String SESSION_SCOPE = "loginSession";

@@ -103,16 +103,23 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
         <%=bean.getBikou()%>
       </td>
       <td>
-        <form action="<%=request.getContextPath()%>/ResultKoutsuuShouninAction" method="post">
-        差戻
-        <input type="radio" name="status" value="1">
-        承認
-        <input type="radio" name="status" value="2">
-        振込
-        <input type="radio" name="status" value="3">
-        <input type="hidden" name="selNo" value="<%=bean.getNo()%>">
-        <input type="submit" value = "実行">
+        <form action="<%=request.getContextPath()%>/KoutsuuSashimodoshiAction" method="post">
+          <input type="hidden" name="status" value="1">
+          <input type="hidden" name="selNo" value="<%=bean.getNo()%>">
+          <input type="hidden" name="selId" value="<%=bean.getId()%>">
+          <input type="submit" value="差戻">
         </form>
+        <form action="<%=request.getContextPath()%>/ResultKoutsuuShouninAction" method="post">
+          <input type="hidden" name="status" value="2">
+          <input type="hidden" name="selNo" value="<%=bean.getNo()%>">
+          <input type="hidden" name="selId" value="<%=bean.getId()%>">
+          <input type="submit" value="承認">
+        </form>
+        <form action="<%=request.getContextPath()%>/ResultKoutsuuShouninAction" method="post">
+          <input type="hidden" name="status" value="3">
+          <input type="hidden" name="selNo" value="<%=bean.getNo()%>">
+          <input type="hidden" name="selId" value="<%=bean.getId()%>">
+          <input type="submit" value="振込">
       </td>
     </tr>
     <%}%>

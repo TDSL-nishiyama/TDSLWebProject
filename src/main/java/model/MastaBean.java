@@ -20,6 +20,7 @@ public class MastaBean implements Serializable {
   private String seinenngappi;
   private String syusshin;
   private String juusyo;
+  private String sendMailAddress;
   
   //コンストラクター
   //ResultUserUpdActionの画面項目保持用
@@ -204,6 +205,14 @@ public class MastaBean implements Serializable {
 
   public void setJuusyo(String juusyo) {
     this.juusyo = juusyo;
+  }
+
+  public String getSendMailAddress() {
+    return sendMailAddress;
+  }
+
+  public void setSendMailAddress(String sendMailAddress) {
+    this.sendMailAddress = sendMailAddress;
   }
 
 

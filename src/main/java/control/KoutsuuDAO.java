@@ -148,6 +148,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       String kukanEnd = null;
       String kingaku = null;
       String bikou = null;
+      String modoshiriyuu = null;
       String status = null;
       LocalDateTime shinseiYMD = null;
       LocalDateTime sashimodoshiYMD = null;
@@ -165,6 +166,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
         kukanEnd = rs.getString(Koutsuu.COL_KUKAN_E);
         kingaku = rs.getString(Koutsuu.COL_KINGAKU);
         bikou = rs.getString(Koutsuu.COL_BIKOU);
+        modoshiriyuu = rs.getString(Koutsuu.COL_MODOSHIRIYUU);
         status = rs.getString(KtimeStamp.COL_STATUS);
         shinseiYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()));
         if (rs.getDate(KtimeStamp.COL_SASHIMODOSHI) != null) {
@@ -174,8 +176,8 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
           syouninYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_SYONIN).getTime()));
         }
         KoutsuuEntity entity = new KoutsuuEntity(
-            no, id, userName, sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, status, shinseiYMD,
-            sashimodoshiYMD, syouninYMD);
+            no, id, userName, sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, modoshiriyuu,
+            status, shinseiYMD,sashimodoshiYMD, syouninYMD);
         result.add(entity);
       }
 
@@ -190,37 +192,110 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     return result;
 
   }
-  
+
+  /**
+   * {@index 交通費精算承認画面でのテーブル更新処理}
+   * @param pStatement　Map<String,Object> 設定するステートメント
+   * @throws SQLException
+   */
   public void updateKoutsuuAndKtimestamp(Map<String, Object> pStatement) throws SQLException {
     //ステートメントの設定
     List<Object> statement = new ArrayList<>();//ktimestampテーブル
     //set句
     String status = pStatement.get(KtimeStamp.COL_STATUS).toString();
     statement.add(status);
-    if(status.equals(KCommon.SASHIMODOSHI)) {
-      statement.add(pStatement.get(KtimeStamp.COL_SASHIMODOSHI));
-    }
-    if(status.equals(KCommon.SYOUNIN)) {
+    if (status.equals(KCommon.SYOUNIN)) {
       statement.add(pStatement.get(KtimeStamp.COL_SYONIN));
     }
     statement.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
     //where句
     statement.add(pStatement.get(KtimeStamp.COL_UNINO));
+
+    //ktimestampテーブルの更新
+    if (status.equals(KCommon.SYOUNIN)) {
+      super.executeDML("koutsuu\\updateSyoninKtimestamp.sql", statement);
+    } else {
+      super.executeDML("koutsuu\\updateFurikomiKtimestamp.sql", statement);
+    }
+    sqlPath = Common.SQL_FILE_PATH;
+  }
+
+  /**
+   * 
+   * @param pStatement
+   * @throws SQLException
+   */
+  public void updateKoutsuuSashimodoshi(Map<String, Object> pStatement) throws SQLException {
+    //ステートメントの設定
+    List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
+    List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
     
+    //set句
+    statement1.add(pStatement.get(Koutsuu.COL_MODOSHIRIYUU));
+    statement2.add(pStatement.get(KtimeStamp.COL_STATUS));
+    statement2.add(pStatement.get(KtimeStamp.COL_SASHIMODOSHI));
+    statement2.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
+    //where句
+    statement1.add(pStatement.get(KtimeStamp.COL_UNINO));
+    statement2.add(pStatement.get(KtimeStamp.COL_UNINO));
+    
+    //JDBC接続
+    DBAccess.super.loadJDBCDriver();
+
+    //DB接続
+    Connection conn = null;
+    conn = DBAccess.super.connectionDB(conn);
     try {
-      //ktimestampテーブルの更新
-      if(status.equals(KCommon.SASHIMODOSHI)) {
-        super.executeDML("koutsuu\\updateSashimodoshiKtimestamp.sql", statement);
-      }else if(status.equals(KCommon.SYOUNIN)) {
-        super.executeDML("koutsuu\\updateSyoninKtimestamp.sql", statement);
-      }else {
-        super.executeDML("koutsuu\\updateFurikomiKtimestamp.sql", statement);  
-      }
-    } catch (SQLException e) {
+      super.startTransaction(conn);
+      super.executeDMLMlt(conn,"koutsuu\\updateSashimodoshiKoutsuu.sql", statement1);
+      super.executeDMLMlt(conn,"koutsuu\\updateSashimodoshiKtimestamp.sql", statement2);
+    }catch(SQLException e) {
+      super.endTransactionFalse(conn);
       throw e;
-    } finally {
+    }finally{
       sqlPath = Common.SQL_FILE_PATH;
     }
+    super.endTransactionTrue(conn);
+  }
+  
+  public void updateKoutsuuSyuusei(Map<String, Object> pStatement) throws SQLException {
+    //ステートメントの設定
+    List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
+    List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
+    
+    //set句
+    statement1.add(pStatement.get("riyouhiduke"));
+    statement1.add(pStatement.get("kukans"));
+    statement1.add(pStatement.get("kukane"));
+    statement1.add(pStatement.get("kingaku"));
+    statement1.add(pStatement.get("bikou"));
+    statement1.add(pStatement.get("modoshiriyuu"));
+    
+    statement2.add(KCommon.SHINSEI);
+    statement2.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
+    
+    //where句
+    statement1.add(pStatement.get("selNo"));
+    
+    statement2.add(pStatement.get("selNo"));
+    
+    //JDBC接続
+    DBAccess.super.loadJDBCDriver();
+
+    //DB接続
+    Connection conn = null;
+    conn = DBAccess.super.connectionDB(conn);
+    try {
+      super.startTransaction(conn);
+      super.executeDMLMlt(conn,"koutsuu\\updateSyuuseiKoutsuu.sql", statement1);
+      super.executeDMLMlt(conn,"koutsuu\\updateSyuuseiKtimestamp.sql", statement2);
+    }catch(SQLException e) {
+      super.endTransactionFalse(conn);
+      throw e;
+    }finally{
+      sqlPath = Common.SQL_FILE_PATH;
+    }
+    super.endTransactionTrue(conn);
   }
 
 }
