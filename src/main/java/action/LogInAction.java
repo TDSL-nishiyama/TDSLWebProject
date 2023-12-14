@@ -20,9 +20,6 @@ import model.SessionKanriBean;
 public class LogInAction extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  /**
-   * @see 
-   */
   protected void doPost(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException {
 

@@ -18,7 +18,7 @@ public class DAOCommon implements DBAccess {
   /**
    * {@index} SELECT COUNT 実行メソッド（MAX等他の集計関数での利用も可能）
    * @param fileName 実行したいSQLファイルの名前
-   * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
+   * @param statement PreparedStatmentの内容　ない場合はNULLを指定してください
    * @return select count の結果(int)
    */
   protected int countSQL(String fileName, List<Object> statement) {
@@ -117,8 +117,8 @@ public class DAOCommon implements DBAccess {
   /**
    * {@index} SELECT実行メソッド ?あり　（1レコード）
    * @param fileName 実行したいSQLファイルの名前
-   * @param column 取得したいカラム名　List<String>
-   * @param statement PreparedStatmentの内容　List<Object>
+   * @param column 取得したいカラム名　List
+   * @param statement PreparedStatmentの内容　List
    * @return selectの結果(List)
    * @throws SQLException 
    */
@@ -174,9 +174,9 @@ public class DAOCommon implements DBAccess {
   /**
    * {@index} INSERT・UPDATE・DLETE実行メソッド
    * @param fileName 実行したいSQLファイルの名前
-   * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
+   * @param statement PreparedStatmentの内容　List　ない場合はNULLを指定してください
    * @return selectの結果(List)
-   * @throws SQLException 
+   * @throws SQLException
    */
   protected void executeDML(String fileName, List<Object> statement) throws SQLException {
 
@@ -193,7 +193,7 @@ public class DAOCommon implements DBAccess {
     PreparedStatement pStmt = conn.prepareStatement("START TRANSACTION");
     //クエリの実行
     pStmt.executeUpdate();
-    
+
     //SQL文の作成
     String sql = null;
     sql = makeSQL(sqlPath);
@@ -209,7 +209,7 @@ public class DAOCommon implements DBAccess {
       }
       //クエリの実行
       pStmt.execute();
-    } catch(SQLException e){
+    } catch (SQLException e) {
       conn.rollback();
       throw e;
     } finally {
@@ -218,19 +218,19 @@ public class DAOCommon implements DBAccess {
     }
     conn.commit();
   }
-  
+
   /**
    * {@index} INSERT・UPDATE・DLETE実行メソッド（複数テーブル同時更新向け）
    * @param conn Connection（一つ上の階層で宣言）
    * @param fileName 実行したいSQLファイルの名前
-   * @param statement PreparedStatmentの内容　List<Object>　ない場合はNULLを指定してください
+   * @param statement PreparedStatmentの内容　List　ない場合はNULLを指定してください
    * @return selectの結果(List)
    * @throws SQLException 
    */
-  protected void executeDMLMlt(Connection conn,String fileName, List<Object> statement) throws SQLException {
+  protected void executeDMLMlt(Connection conn, String fileName, List<Object> statement) throws SQLException {
 
     sqlPath += fileName;
-    
+
     //SQL文の作成
     String sql = null;
     sql = makeSQL(sqlPath);
@@ -246,18 +246,19 @@ public class DAOCommon implements DBAccess {
       }
       //クエリの実行
       pStmt.executeUpdate();
-    } catch(SQLException e){
+    } catch (SQLException e) {
       throw e;
     } finally {
       //SQLファイルパスの初期化
       sqlPath = Common.SQL_FILE_PATH;
     }
   }
-  
+
   /**
    *{@index} トランザクション開始処理
    * @param  conn　Connection
    * @throws SQLException 
+   * @return Conneciton
    **/
   public Connection startTransaction(Connection conn) throws SQLException {
 
@@ -273,16 +274,16 @@ public class DAOCommon implements DBAccess {
     PreparedStatement pStmt = conn.prepareStatement(sql.toString());
     //クエリの実行
     pStmt.execute();
-    
+
     return conn;
   }
-  
+
   /**
    *{@index} トランザクション終了処理（正常系）
    * @param conn　Connection
    * @throws SQLException 
    **/
-  public void endTransactionTrue(Connection conn) {
+  public void endTransactionTrue(Connection conn) throws SQLException {
 
     //SQL文の作成
     String sql = null;
@@ -308,7 +309,7 @@ public class DAOCommon implements DBAccess {
    * @param conn　Connection
    * @throws SQLException 
    **/
-  public void endTransactionFalse(Connection conn) {
+  public void endTransactionFalse(Connection conn) throws SQLException {
     //SQL文の作成
     String sql = null;
     sql = "ROLLBACK;";
@@ -330,7 +331,7 @@ public class DAOCommon implements DBAccess {
 
   /**
    *{@index} SQL文作成　
-   *@param String loadPath プロパティファイルが格納されているパス（フルパス） 
+   *@param sqlPath プロパティファイルが格納されているパス（フルパス） 
    *@return ファイルから読み込まれたSQL文（改行不可）
    **/
   protected String makeSQL(String sqlPath) {

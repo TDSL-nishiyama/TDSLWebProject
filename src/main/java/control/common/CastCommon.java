@@ -69,6 +69,11 @@ public class CastCommon {
     return result;
   }
   
+  /**
+   * {@index　日付型文字列をLocalDateTimeに変換する}
+   * @param pStr
+   * @return
+   */
   public LocalDateTime chgStrtoLDT(String pStr) {
     LocalDateTime result = null;
     

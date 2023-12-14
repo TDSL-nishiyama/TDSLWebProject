@@ -114,8 +114,8 @@ public class KoutsuuBL {
   
   /**
    * {@index 差戻ボタン押下時の更新処理}
-   * @param selNo
-   * @param modoshiryuu
+   * @param selNo　選択したID
+   * @param modoshiryuu　差戻理由
    * @throws SQLException
    */
   public void updKoutsuuSashimodoshi(int selNo, String modoshiryuu) throws SQLException {
@@ -132,8 +132,8 @@ public class KoutsuuBL {
   }
   
   /**
-   * 
-   * @param gamenInfo
+   * {@index 修正ボタン押下時の更新処理}
+   * @param gamenInfo　画面情報
    * @throws SQLException
    */
   public void updKoutsuuSyuusei(Map<String,Object> gamenInfo) throws SQLException {
@@ -148,7 +148,7 @@ public class KoutsuuBL {
   /**
    * {@index ステータスコード変換用}
    * @param status 0→申請中 1→差戻中 2→承認済 3→振込済
-   * @return 変換結果
+   * @return 変換結果　0→申請中 1→差戻中 2→承認済 3→振込済
    */
   private String chgStatus(String status) {
     String result = null;
