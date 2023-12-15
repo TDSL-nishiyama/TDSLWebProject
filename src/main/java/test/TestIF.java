@@ -1,4 +1,4 @@
-package control.common;
+package test;
 
 public interface TestIF {
 }
