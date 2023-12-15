@@ -205,9 +205,9 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
   
   public void insertMail(Map<String, Object> insKoumoku) throws SQLException {
     List<Object> statement = new ArrayList<Object>();
-    statement.add(insKoumoku.get("id"));
+    statement.add(insKoumoku.get("selId"));
     statement.add(insKoumoku.get("mailAddress"));
-    statement.add(insKoumoku.get("timestamp"));
+    statement.add(LocalDateTime.now());
     
     String SQLPath = MASTA_MAIL + "InsMail.sql";
     

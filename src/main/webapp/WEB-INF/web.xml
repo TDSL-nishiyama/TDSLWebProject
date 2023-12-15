@@ -300,4 +300,13 @@
 		<url-pattern>/ResultMailUpdAction</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>MailDelAction</servlet-name>
+		<servlet-class>action.MailDelAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MailDelAction</servlet-name>
+		<url-pattern>/MailDelAction</url-pattern>
+	</servlet-mapping>
+
 </web-app>
