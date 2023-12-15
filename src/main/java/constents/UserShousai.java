@@ -2,8 +2,11 @@ package constents;
 
 import java.util.Map;
 
+/**
+ * @see ユーザー詳細テーブル関連の定数
+ */
 public class UserShousai {
-
+  //ユーザー詳細テーブルに紐づく画面項目
   public final static String GAMEN_SEI = "sei";
   public final static String GAMEN_MEI = "mei";
   public final static String GAMEN_SEIYOMI = "sei_yomi";
@@ -13,7 +16,7 @@ public class UserShousai {
   public final static String GAMEN_SEINENNGAPPI = "seinenngappi";
   public final static String GAMEN_SYUSSSHIN = "syusshin";
   public final static String GAMEN_JUUSYO = "juusyo";
-
+  //ユーザー詳細テーブルの項目
   public final static String COL_ID = "id";
   public final static String COL_SEI = "sei";
   public final static String COL_SEI_YOMI = "sei_yomi";

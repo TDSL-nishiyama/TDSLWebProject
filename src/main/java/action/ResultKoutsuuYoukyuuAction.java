@@ -57,10 +57,8 @@ public class ResultKoutsuuYoukyuuAction extends HttpServlet {
     KoutsuuBean bean2 = new KoutsuuBean(selId,castC.chgStrtoLDT(riyouhiduke2),kukans2,kukane2,kingaku2,bikou2);
     
     //エラーチェックSTART
-    
-    
+    //TODO
     //エラーチェックEND
-    
     
     //更新処理
     List<KoutsuuBean> list = new ArrayList<KoutsuuBean>();

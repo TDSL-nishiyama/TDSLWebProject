@@ -1,6 +1,9 @@
 package constents;
 
 public class KoutsuuConst {
+  /**
+   * @see 交通系画面共通定数
+   */
   public static class KCommon{
    public final static String QUERY_TYPE_0_SELID = "0"; 
    public final static String QUERY_TYPE_1_ALL = "1"; 
@@ -16,7 +19,9 @@ public class KoutsuuConst {
    public final static String FURIKOMIZUMI = "3";
    
   }
-  
+  /**
+   * @see 交通テーブルの項目
+   */
   public static final class Koutsuu {
     public final static String COL_UNINO = "no";
     public final static String COL_USERID = "id";
@@ -29,7 +34,9 @@ public class KoutsuuConst {
     public final static String COL_BIKOU = "bikou";
     public final static String COL_MODOSHIRIYUU = "modoshiriyuu";
   }
-  
+  /**
+   * @see 交通時刻テーブルの項目
+   */
   public static final class KtimeStamp{
     public final static String COL_UNINO = "no";
     public final static String COL_YOUKYUU = "youkyuu";
@@ -38,7 +45,9 @@ public class KoutsuuConst {
     public final static String COL_STATUS = "status";
     public final static String COL_TIMESTAMP = "timestamp";
   }
-  
+  /**
+   * @see 交通費精算要求画面の項目
+   */
   public static final class YoukyuuG{
     public final static String GAMEN_RIYOUHIDUKE_1 = "riyou1";
     public final static String GAMEN_KUKAN_START_1 = "kukans1";
@@ -50,5 +59,21 @@ public class KoutsuuConst {
     public final static String GAMEN_KUKAN_END_2 = "kukane2";
     public final static String GAMEN_KINGAKU_2 = "kingaku2";
     public final static String GAMEN_BIKOU_2 = "bikou2";
+  }
+  /**
+   * @see 交通費精算承認画面の項目
+   */
+  public static final class ShouninG{
+    public final static String GAMEN_RIYOUHIDUKE = "riyou";
+    public final static String GAMEN_KUKAN_START = "kukans";
+    public final static String GAMEN_KUKAN_END = "kukane";
+    public final static String GAMEN_KINGAKU = "kingaku";
+    public final static String GAMEN_BIKOU = "bikou";
+  }
+  /**
+   * @see 交通費差戻画面の項目
+   */
+  public static final class SashimodoshiG{
+    public final static String GAMEN_MODOSHIRIYUU = "modoshiriyuu";
   }
 }

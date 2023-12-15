@@ -99,6 +99,14 @@ public class Const {
     public static final String MASTA_DEL_2 = "現在ログインしているユーザーは削除できません";
     public static final String MASTA_DEL_3 = "ユーザーの削除が完了しました";
     
+    //マスタ_メールアドレス
+    public static final String MASTA_MAIL_1 = "入力されたIDは存在しません";
+    public static final String MASTA_MAIL_2 = "必須項目を入力してください";
+    public static final String MASTA_MAIL_3 ="メールアドレスは既に登録済みです。IDとメールアドレスを再度確認してください";
+    public static final String MASTA_MAIL_4 ="メールアドレスを追加しました";
+    public static final String MASTA_MAIL_5 ="メールアドレスを更新しました";
+    public static final String MASTA_MAIL_6 ="該当のメールアドレスを削除しました";
+    
     //交通費精算要求
     public static final String K_YOUKYU_1 = "交通費の申請が完了しました。申請状況は交通費精算確認画面で確認してください";
     

@@ -21,6 +21,12 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
 
   private String sqlPath = Common.SQL_FILE_PATH;
   
+  /**
+   * {@index 多重登録チェック用}
+   * @param id
+   * @param mailAddress
+   * @return　既存のPKの組み合わせと一致する場合は1を返却、そうではない場合は0を返却
+   */
   public int checkTajuuTouroku(int id,String mailAddress) {
     List<Object> statement = new ArrayList<>();
     statement.add(id);
@@ -166,7 +172,7 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
   /**
    * {@index メールアドレスマスタの情報取得用}
    * @param fileName　実行したいSQLファイルのパス（\SQL\以下を渡す）
-   * @param statement
+   * @param statement　ない場合はNULLを指定
    * @return
    * @throws SQLException
    */

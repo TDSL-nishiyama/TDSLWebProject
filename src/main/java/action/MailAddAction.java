@@ -41,7 +41,7 @@ public class MailAddAction extends HttpServlet {
       //画面の値を保持
       saveParameter(request);
       //メッセージを設定してメールアドレスマスタ画面に戻る
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "必須項目に入力を行って下さい");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_2);
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
       dispatcher.forward(request, response);
@@ -61,7 +61,7 @@ public class MailAddAction extends HttpServlet {
       //画面の値を保持
       saveParameter(request);
       //メッセージを設定してメールアドレスマスタ画面に戻る
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "ユーザーIDが存在しません");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_1);
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
       dispatcher.forward(request, response);
@@ -73,7 +73,7 @@ public class MailAddAction extends HttpServlet {
       //画面の値を保持
       saveParameter(request);
       //メッセージを設定してメールアドレスマスタ画面に戻る
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスは既に登録済みです。IDとメールアドレスを再度確認してください");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_3);
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
       dispatcher.forward(request, response);
@@ -107,7 +107,7 @@ public class MailAddAction extends HttpServlet {
     //リクエストスコープに値を保存
     request.setAttribute(Path.MAIL_SCOPE, mastaBeanList);
     //メッセージを設定
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスを追加しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_4);
     //メールアドレスマスタ画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);

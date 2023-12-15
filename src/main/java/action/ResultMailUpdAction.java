@@ -49,7 +49,7 @@ public class ResultMailUpdAction extends HttpServlet {
       //画面の値を保持
       saveParameter(request,gamenInfo);
       //メッセージを設定してメールアドレス更新画面に戻る
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "ユーザーIDが存在しません");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_1);
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
       dispatcher.forward(request, response);
@@ -61,7 +61,7 @@ public class ResultMailUpdAction extends HttpServlet {
       //画面の値を保持
       saveParameter(request,gamenInfo);
       //メッセージを設定してメールアドレス更新画面に戻る
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスは既に登録済みです。IDとメールアドレスを再度確認してください");
+      request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_3);
       RequestDispatcher dispatcher = request
           .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
       dispatcher.forward(request, response);
@@ -95,14 +95,14 @@ public class ResultMailUpdAction extends HttpServlet {
     //リクエストスコープに値を保存
     request.setAttribute(Path.MAIL_SCOPE, mastaBeanList);
     //メッセージを設定
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスを更新しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_5);
     //メールアドレス更新画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
     dispatcher.forward(request, response);
   }
   
-  public void saveParameter(HttpServletRequest request,Map<String,Object> gamenInfo) {
+  private void saveParameter(HttpServletRequest request,Map<String,Object> gamenInfo) {
     List<MastaBean> mastaBeanList = new ArrayList<MastaBean>();
     MailBL mailBL = new MailBL();
     try {

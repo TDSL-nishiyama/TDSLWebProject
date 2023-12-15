@@ -121,7 +121,7 @@ public class CastCommon {
   
   /**
    * {@index DateをLocalDateTimeに変換する}
-   * @param d DB厳選の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
+   * @param d DB源泉の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
    * UnsupportedOperationExceptionが発生するためNEWして渡すこと
    * @return 
    */

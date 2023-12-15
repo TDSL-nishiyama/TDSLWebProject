@@ -46,7 +46,7 @@ public class MailDelAction extends HttpServlet {
       return;
     }
     //メッセージを格納
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "該当のメールアドレスを削除しました");
+    request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_6);
     //リクエストスコープに値を保存
     request.setAttribute(Path.MAIL_SCOPE, mastaBeanList);
     //メールアドレスマスタ画面に遷移
