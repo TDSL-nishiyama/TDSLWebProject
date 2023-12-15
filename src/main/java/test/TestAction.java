@@ -1,8 +1,8 @@
-package action;
+package test;
 
 import java.io.IOException;
 
-import control.TestBL;
+import test.TestBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

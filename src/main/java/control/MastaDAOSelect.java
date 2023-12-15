@@ -20,7 +20,19 @@ import model.MastaEntity;
 public class MastaDAOSelect extends DAOCommon implements DBAccess {
 
   private String sqlPath = Common.SQL_FILE_PATH;
-
+  
+  public int checkTajuuTouroku(int id,String mailAddress) {
+    List<Object> statement = new ArrayList<>();
+    statement.add(id);
+    statement.add(mailAddress);
+    return super.countSQL("masta\\mail\\checkTajuuTouroku.sql", statement);
+  }
+  
+  /**
+   * {@index ユーザーの一覧を取得}
+   * @param fileName
+   * @return
+   */
   public List<MastaEntity> getUserIchiran(String fileName) {
 
     List<MastaEntity> returnList = new ArrayList<>();
@@ -69,7 +81,13 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
 
     return returnList;
   }
-
+  
+  /**
+   * {@index 編集するユーザーの情報を取得}
+   * @param fileName
+   * @param statement
+   * @return　選択したユーザーのレコード
+   */
   public List<MastaBean> getHensyuUser(String fileName, Map<String, Object> statement) {
 
     List<MastaBean> returnList = new ArrayList<>();
@@ -143,5 +161,58 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
     sqlPath = Common.SQL_FILE_PATH;
 
     return returnList;
+  }
+  
+  /**
+   * {@index メールアドレスマスタの情報取得用}
+   * @param fileName　実行したいSQLファイルのパス（\SQL\以下を渡す）
+   * @return
+   * @throws SQLException
+   */
+  public List<MastaBean> getMailTBL(String fileName) throws SQLException {
+
+    List<MastaBean> result = new ArrayList<>();
+    int id = 0;
+    String userName = null;
+    String mailAddress = null;
+
+    Connection conn = null;
+
+    try {
+      // JDBCドライバ読み込み
+      DBAccess.super.loadJDBCDriver();
+
+      // DBへ接続
+      conn = DBAccess.super.connectionDB(conn);
+
+      //SQL文の作成
+      sqlPath += fileName;
+      String sql = null;
+      sql = makeSQL(sqlPath);
+       
+      //ステートメントの設定
+      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+
+      //クエリの実行
+      ResultSet rs = pStmt.executeQuery();
+
+      //結果表に格納されたレコードの内容をMastaBeanに設定
+      while (rs.next()) {
+        //mail
+        id = rs.getInt("id");
+        userName = rs.getString("name");
+        mailAddress = rs.getString("mailaddress");
+        MastaBean bean = new MastaBean(id, userName,mailAddress);
+        result.add(bean);
+      }
+    } catch (SQLException e) {
+      throw e;
+    } finally {
+      DBAccess.super.closeDB(conn);
+    }
+
+    sqlPath = Common.SQL_FILE_PATH;
+
+    return result;
   }
 }

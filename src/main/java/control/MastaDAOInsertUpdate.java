@@ -13,49 +13,15 @@ import model.MastaEntity;
 import model.SyainJouhouEntity;
 
 public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
-
-  public void InsertUser(MastaEntity pEntity) throws SQLException {
-
-    List<Object> statement = new ArrayList<>();
-
-    statement.add(pEntity.getUserid());
-    statement.add(pEntity.getUserName());
-    statement.add(pEntity.getKanriFlg());
-
-    super.executeDML("insertUser.sql", statement);
-
-  }
-
-  public void InsertLogin(MastaEntity pEntity) throws SQLException {
-
-    List<Object> statement = new ArrayList<>();
-
-    statement.add(pEntity.getUserid());
-    statement.add(pEntity.getLoginid());
-    statement.add(pEntity.getLoginpassword());
-
-    super.executeDML("insertLogin.sql", statement);
-
-  }
-
-  public void InsertUserShoisai(SyainJouhouEntity pEntity) throws SQLException {
-    List<Object> statement = new ArrayList<>();
-    
-    statement.add(pEntity.getId());
-    statement.add(pEntity.getSei());
-    statement.add(pEntity.getSei_yomi());
-    statement.add(pEntity.getMei());
-    statement.add(pEntity.getMei_yomi());
-    statement.add(pEntity.getNyuusyaYMD());
-    statement.add(pEntity.getTaisytaYMD());
-    statement.add(pEntity.getSeibetsu());
-    statement.add(pEntity.getSeinenngappi());
-    statement.add(pEntity.getSyusshin());
-    statement.add(pEntity.getJuusyo());
-    
-    super.executeDML("insertUserShousai.sql", statement);
-  }
   
+  final String MASTA_MAIL = "masta\\mail\\";
+  
+  /**
+   * {@index ユーザー新規挿入}
+   * @param pMastaEntity
+   * @param pSyainJouhouEntity
+   * @throws SQLException
+   */
   public void InsertUserAdd(MastaEntity pMastaEntity,SyainJouhouEntity pSyainJouhouEntity) throws SQLException{
     List<Object> statement1 = new ArrayList<>();
     statement1.add(pMastaEntity.getUserid());
@@ -104,26 +70,12 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
     //コミット
     super.endTransactionTrue(conn);
   }
-
-  public void delUser(MastaEntity pEntity) throws SQLException {
-
-    List<Object> statement = new ArrayList<>();
-
-    statement.add(pEntity.getUserid());
-
-    super.executeDML("delUser.sql", statement);
-  }
-
-  public void delLogin(MastaEntity pEntity) throws SQLException {
-
-    List<Object> statement = new ArrayList<>();
-
-    statement.add(pEntity.getUserid());
-
-    super.executeDML("delLogin.sql", statement);
-
-  }
   
+  /**
+   * {@index ユーザー削除（論理削除）}
+   * @param id
+   * @throws SQLException
+   */
   public void delUserAndLogin(int id) throws SQLException {
     
     //ステートメントの設定
@@ -197,6 +149,12 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
     super.executeDML("updUserShousai.sql", statement);
   }
   
+  /**
+   * {@index} 社員情報の更新を実施(user/usershousaiテーブル)
+   * @param fileName 実行したいSQLファイルの名前
+   * @param updKoumoku アップデートしたい項目
+   * @throws SQLException 
+   */
   public void updUserALL(Map<String, Object> updKoumoku,int userId) throws SQLException {
     List<Object> statement1 = new ArrayList<>();
 
@@ -242,6 +200,39 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
     }
     //コミット
     super.endTransactionTrue(conn);
+  }
+  
+  public void insertMail(Map<String, Object> insKoumoku) throws SQLException {
+    List<Object> statement = new ArrayList<Object>();
+    statement.add(insKoumoku.get("id"));
+    statement.add(insKoumoku.get("mailAddress"));
+    statement.add(insKoumoku.get("timestamp"));
+    
+    String SQLPath = MASTA_MAIL + "InsMail.sql";
+    
+    super.executeDML(SQLPath, statement);
+  }
+  
+  public void updateMail(Map<String, Object> updKoumoku)throws SQLException {
+    List<Object> statement = new ArrayList<Object>();
+    statement.add(updKoumoku.get("mailAddress"));
+    statement.add(updKoumoku.get("timestamp"));
+    statement.add(updKoumoku.get("id"));
+    statement.add(updKoumoku.get("mailAddress"));
+    
+    String SQLPath = MASTA_MAIL + "updMail.sql";
+    
+    super.executeDML(SQLPath, statement);
+  }
+  
+  public void deleteMail(int id,String mailAddress) throws SQLException{
+    List<Object> statement = new ArrayList<Object>();
+    statement.add(id);
+    statement.add(mailAddress);
+    
+    String SQLPath = MASTA_MAIL + "delMail.sql";
+    
+    super.executeDML(SQLPath, statement);
   }
 
 }

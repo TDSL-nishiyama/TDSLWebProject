@@ -264,5 +264,22 @@
 		<url-pattern>/ResultKoutsuuSyuuseiAction</url-pattern>
 	</servlet-mapping>
 
-
+	<servlet>
+		<servlet-name>MailMastaAction</servlet-name>
+		<servlet-class>action.MailMastaAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MailMastaAction</servlet-name>
+		<url-pattern>/MailMastaAction</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>MailAddAction</servlet-name>
+		<servlet-class>action.MailAddAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MailAddAction</servlet-name>
+		<url-pattern>/MailAddAction</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

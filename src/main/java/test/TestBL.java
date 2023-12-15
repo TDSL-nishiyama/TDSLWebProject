@@ -30,7 +30,7 @@ public class TestBL extends DAOCommon implements DBAccess {
 
     String userSeinenngappiGetSQL = "select S.seinenngappi from usershousai as S JOIN user as U ON S.id = U.id where U.del = '';";
 
-    double userCnt = super.countSQL("test.sql", null);
+    double userCnt = super.countSQL("\\test\\test.sql", null);
 
     List<TestBean> resultDB = new ArrayList<>();
     List<String> column = new ArrayList<>();

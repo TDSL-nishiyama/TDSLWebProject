@@ -1,0 +1,1 @@
+DELETE mail where id = ? AND mailaddress = ?;

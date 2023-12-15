@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class MastaEntity implements Serializable {
 
@@ -10,7 +11,8 @@ public class MastaEntity implements Serializable {
   private String sakujo; //(1=退職)
   private String loginid;
   private String loginpassword;
-  private String sendMailAddress;
+  private String mailAddress;
+  private Timestamp timestamp;
   
   //コンストラクタ
   public MastaEntity(int userid, String username, boolean kanriFlg, String loginid,String loginpassword) {
@@ -92,11 +94,19 @@ public class MastaEntity implements Serializable {
     this.loginpassword = loginpassword;
   }
 
-  public String getSendMailAddress() {
-    return sendMailAddress;
+  public String getMailAddress() {
+    return mailAddress;
   }
 
-  public void setSendMailAddress(String sendMailAddress) {
-    this.sendMailAddress = sendMailAddress;
+  public void setMailAddress(String mailAddress) {
+    this.mailAddress = mailAddress;
+  }
+
+  public Timestamp getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(Timestamp timestamp) {
+    this.timestamp = timestamp;
   }
 }

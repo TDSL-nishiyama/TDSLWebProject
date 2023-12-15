@@ -1,0 +1,1 @@
+SELECT COUNT(id) FROM mail WHERE id = ? AND mailaddress = ?;

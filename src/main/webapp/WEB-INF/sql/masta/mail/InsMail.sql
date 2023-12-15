@@ -1,0 +1,1 @@
+INSERT INTO mail(id,mailaddress,timestamp) VALUES(?,?,?);
