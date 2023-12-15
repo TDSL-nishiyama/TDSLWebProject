@@ -2,6 +2,7 @@ package control;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -215,10 +216,10 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
   
   public void updateMail(Map<String, Object> updKoumoku)throws SQLException {
     List<Object> statement = new ArrayList<Object>();
-    statement.add(updKoumoku.get("mailAddress"));
-    statement.add(updKoumoku.get("timestamp"));
-    statement.add(updKoumoku.get("id"));
-    statement.add(updKoumoku.get("mailAddress"));
+    statement.add(updKoumoku.get("afterMailAddress"));
+    statement.add(LocalDateTime.now());
+    statement.add(updKoumoku.get("selId"));
+    statement.add(updKoumoku.get("beforeMailAddress"));
     
     String SQLPath = MASTA_MAIL + "updMail.sql";
     

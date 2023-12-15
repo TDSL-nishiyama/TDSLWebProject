@@ -20,9 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.MastaBean;
 
 /**
- * メールアドレスマスタ画面のサーブレット
+ * メールアドレス更新処理画面のサーブレット
  */
-public class MailAddAction extends HttpServlet {
+public class ResultMailUpdAction extends HttpServlet {
 
   /**
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,56 +33,44 @@ public class MailAddAction extends HttpServlet {
     CheckCommon checkCommon = new CheckCommon();
     List<MastaBean> mastaBeanList = new ArrayList<MastaBean>();
 
-    //必須チェック
-    boolean errFlg = false;
-    errFlg = mailBL.checkHissuKoumoku(request.getParameter("selId"), request.getParameter("mailAddress"));
-    //エラーフラグが立っている場合
-    if (errFlg == true) {
-      //画面の値を保持
-      saveParameter(request);
-      //メッセージを設定してメールアドレスマスタ画面に戻る
-      request.setAttribute(MSG.MSG_ATTRIBUTE, "必須項目に入力を行って下さい");
-      RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
-      dispatcher.forward(request, response);
-      return;
-    }
-
     //画面情報から値を取得
     int selId = Integer.parseInt(request.getParameter("selId"));
-    String mailAddress = request.getParameter("mailAddress");
+    String beforeMailAddress = request.getParameter("beforeMailAddress");
+    String afterMailAddress = request.getParameter("afterMailAddress");
     //画面情報の値を格納
     Map<String, Object> gamenInfo = new HashMap<>();
     gamenInfo.put("selId", selId);
-    gamenInfo.put("mailAddress", mailAddress);
+    gamenInfo.put("beforeMailAddress", beforeMailAddress);
+    gamenInfo.put("afterMailAddress", afterMailAddress);
+    gamenInfo.put("mailAddress", afterMailAddress);
 
     //ID存在チェック
     if (checkCommon.checkUserId(selId) == 0) {
       //画面の値を保持
-      saveParameter(request);
-      //メッセージを設定してメールアドレスマスタ画面に戻る
+      saveParameter(request,gamenInfo);
+      //メッセージを設定してメールアドレス更新画面に戻る
       request.setAttribute(MSG.MSG_ATTRIBUTE, "ユーザーIDが存在しません");
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
+          .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
 
     //メールアドレス多重登録チェック
-    if (mailBL.checkTajuuTouroku(selId, mailAddress)) {
+    if (mailBL.checkTajuuTouroku(selId, afterMailAddress)) {
       //画面の値を保持
-      saveParameter(request);
-      //メッセージを設定してメールアドレスマスタ画面に戻る
+      saveParameter(request,gamenInfo);
+      //メッセージを設定してメールアドレス更新画面に戻る
       request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスは既に登録済みです。IDとメールアドレスを再度確認してください");
       RequestDispatcher dispatcher = request
-          .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
+          .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
       dispatcher.forward(request, response);
       return;
     }
 
     //更新処理
     try {
-      mailBL.insertMailTBL(gamenInfo);
+      mailBL.updateMailTBL(gamenInfo);
     } catch (SQLException e) {
       //エラー画面に遷移
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR);
@@ -94,7 +82,7 @@ public class MailAddAction extends HttpServlet {
 
     //mailテーブルから値を取得
     try {
-      mastaBeanList = mailBL.getMailTBL();
+      mastaBeanList = mailBL.getMailTBL(gamenInfo);
     } catch (SQLException e) {
       //エラー画面に遷移
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR_SEL);
@@ -107,24 +95,24 @@ public class MailAddAction extends HttpServlet {
     //リクエストスコープに値を保存
     request.setAttribute(Path.MAIL_SCOPE, mastaBeanList);
     //メッセージを設定
-    request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスを追加しました");
-    //メールアドレスマスタ画面に遷移
+    request.setAttribute(MSG.MSG_ATTRIBUTE, "メールアドレスを更新しました");
+    //メールアドレス更新画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
+        .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
     dispatcher.forward(request, response);
   }
   
-  private void saveParameter(HttpServletRequest request) {
+  public void saveParameter(HttpServletRequest request,Map<String,Object> gamenInfo) {
     List<MastaBean> mastaBeanList = new ArrayList<MastaBean>();
     MailBL mailBL = new MailBL();
     try {
-      mastaBeanList = mailBL.getMailTBL();
+      mastaBeanList = mailBL.getMailTBL(gamenInfo);
     } catch (SQLException e) {
       //何もしない
     }
     request.setAttribute(Path.MAIL_SCOPE, mastaBeanList);
     request.setAttribute("selId", request.getParameter("selId"));
-    request.setAttribute("mailAddress", request.getParameter("mailAddress"));
+    request.setAttribute("afterMailAddress", request.getParameter("afterMailAddress"));
   }
 
 }

@@ -46,6 +46,7 @@ public class Const {
     public static final String KOUTSUU_SASHIMODOSHI_GAMEN = "/src/koutsuuSashimodoshi.jsp";
     public static final String KOUTSUU_SYUUSEI_GAMEN = "/src/koutsuuSyuusei.jsp";
     public static final String MASTA_MAIL_HOME_GAMEN = "/src/mail.jsp";
+    public static final String MASTA_MAIL_UPD_GAMEN = "/src/mailUpd.jsp";
     
     
     //スコープ名

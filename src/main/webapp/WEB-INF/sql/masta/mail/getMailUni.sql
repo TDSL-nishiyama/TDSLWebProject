@@ -1,0 +1,1 @@
+SELECT M.id,U.name,M.mailaddress FROM mail AS M JOIN user AS U ON M.id = U.id WHERE M.id = ? AND M.mailaddress = ?;

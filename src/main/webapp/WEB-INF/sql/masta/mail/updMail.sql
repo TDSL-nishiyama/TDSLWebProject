@@ -1,1 +1,1 @@
-UPDATE mail SET mailaddress,timestamp = ? where id = ? AND mailaddress = ?;
+UPDATE mail SET mailaddress =? ,timestamp = ? where id = ? AND mailaddress = ?;

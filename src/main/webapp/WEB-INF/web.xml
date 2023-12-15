@@ -218,8 +218,8 @@
 		<servlet-name>KoutsuuShouninAction</servlet-name>
 		<url-pattern>/KoutsuuShouninAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>ResultKoutsuuShouninAction</servlet-name>
 		<servlet-class>action.ResultKoutsuuShouninAction</servlet-class>
 	</servlet>
@@ -272,8 +272,8 @@
 		<servlet-name>MailMastaAction</servlet-name>
 		<url-pattern>/MailMastaAction</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>MailAddAction</servlet-name>
 		<servlet-class>action.MailAddAction</servlet-class>
 	</servlet>
@@ -281,5 +281,23 @@
 		<servlet-name>MailAddAction</servlet-name>
 		<url-pattern>/MailAddAction</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>MailUpdAction</servlet-name>
+		<servlet-class>action.MailUpdAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MailUpdAction</servlet-name>
+		<url-pattern>/MailUpdAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultMailUpdAction</servlet-name>
+		<servlet-class>action.ResultMailUpdAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultMailUpdAction</servlet-name>
+		<url-pattern>/ResultMailUpdAction</url-pattern>
+	</servlet-mapping>
+
 </web-app>

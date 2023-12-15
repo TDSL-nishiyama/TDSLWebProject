@@ -166,10 +166,11 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
   /**
    * {@index メールアドレスマスタの情報取得用}
    * @param fileName　実行したいSQLファイルのパス（\SQL\以下を渡す）
+   * @param statement
    * @return
    * @throws SQLException
    */
-  public List<MastaBean> getMailTBL(String fileName) throws SQLException {
+  public List<MastaBean> getMailTBL(String fileName,List<Object> statement) throws SQLException {
 
     List<MastaBean> result = new ArrayList<>();
     int id = 0;
@@ -192,6 +193,10 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
        
       //ステートメントの設定
       PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+      if(statement != null) {
+        pStmt.setObject(1,statement.get(0));
+        pStmt.setObject(2,statement.get(1));
+      }
 
       //クエリの実行
       ResultSet rs = pStmt.executeQuery();
