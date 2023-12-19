@@ -6,6 +6,7 @@ import constents.Const.Common;
 import constents.Const.ERRORMSG;
 import constents.Const.Path;
 import control.LoginBL;
+import control.common.CheckCommon;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -36,11 +37,14 @@ public class LogInAction extends HttpServlet {
     loginPassword = request.getParameter(GAMEN_LOGINPASSWORD);
 
     boolean errorFlg; // ログインIDパスワード存在チェック用 true = 存在 false = 存在しない
-
+    
+    //共通クラスのインスタンス化
     LoginBL loginBL = new LoginBL();
-
+    CheckCommon checkCommon = new CheckCommon();
+    final boolean ERROR = false;
+    
     // IDが入力されていない場合はエラー画面に遷移
-    if (loginId == null || "".equals(loginId)) {
+    if (checkCommon.checkBlankOrNULL(loginId) == ERROR) {
       //エラーメッセージを格納
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_1);
       // エラー画面に遷移
@@ -51,7 +55,7 @@ public class LogInAction extends HttpServlet {
     }
 
     // パスワードが入力されていない場合はエラー画面に遷移
-    if (loginPassword == null || "".equals(loginPassword)) {
+    if (checkCommon.checkBlankOrNULL(loginPassword) == ERROR) {
       //エラーメッセージを格納
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_2);
       // エラー画面に遷移
@@ -82,7 +86,7 @@ public class LogInAction extends HttpServlet {
     // 初回ログイン時はパスワード登録画面に遷移
     loginIdCheck = loginBL.checkLoginShokai(loginId);
 
-    if (loginId == null || loginId.equals("") || loginIdCheck[0].equals("error")) {
+    if (checkCommon.checkBlankOrNULL(loginId) == ERROR || loginIdCheck[0].equals("error")) {
       //エラーメッセージを格納
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.ERR_3);
       // エラー画面に遷移
