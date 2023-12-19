@@ -9,8 +9,10 @@ public class KoutsuuConst {
    public final static String QUERY_TYPE_1_ALL = "1"; 
    public final static String QUERY_TYPE_2_SELSTA = "2";
    public final static String QUERY_TYPE_3_JOGAI = "3";
+   public final static String QUERY_TYPE_4_SELNO = "4";
    
    public final static int NONSELID = 0;
+   public final static int NONSELNO = 0;
    public final static String NONSELSTA = null;
    
    public final static String SHINSEI = "0";
@@ -82,10 +84,9 @@ public class KoutsuuConst {
   public static final class SyuuseiG{
     public final static String GAMEN_UNINO = "selNo";
     public final static String GAMEN_USERID = "selId";
-    public final static String GAMEN_SMAIL = "sendmailaddress";
     public final static String GAMEN_RIYOUHIDUKE = "riyouhiduke";
-    public final static String GAMEN_KUKAN_S = "kukan_start";
-    public final static String GAMEN_KUKAN_E = "kukan_end";
+    public final static String GAMEN_KUKAN_S = "kukans";
+    public final static String GAMEN_KUKAN_E = "kukane";
     public final static String GAMEN_KINGAKU = "kingaku";
     public final static String GAMEN_BIKOU = "bikou";
     public final static String GAMEN_MODOSHIRIYUU = "modoshiriyuu";

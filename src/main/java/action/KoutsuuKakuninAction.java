@@ -38,7 +38,7 @@ public class KoutsuuKakuninAction extends HttpServlet {
 	  KoutsuuBL koutsuuBL = new KoutsuuBL();
     List<KoutsuuBean> koutsuuBeanList = null;
     try {
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(selId,KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(selId,KCommon.NONSELNO,KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
     } catch (SQLException e) {
       //エラー画面に遷移
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR);

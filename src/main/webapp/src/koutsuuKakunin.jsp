@@ -72,7 +72,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
         if (bean.getSeisannStatus() == "差戻中") {
         %>
         <form action="<%=request.getContextPath()%>/KoutsuuSyuuseiAction" method="post">
-          <input type="hidden" name="selId" value="<%=bean.getId()%>">
+          <input type="hidden" name="selNo" value="<%=bean.getNo()%>">
           <input type="submit" value="修正">
         </form>
         <%

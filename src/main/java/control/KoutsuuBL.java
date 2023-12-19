@@ -11,13 +11,40 @@ import java.util.Map;
 import constents.KoutsuuConst.KCommon;
 import constents.KoutsuuConst.Koutsuu;
 import constents.KoutsuuConst.KtimeStamp;
+import constents.KoutsuuConst.SyuuseiG;
 import constents.Table.User;
 import control.common.CastCommon;
 import model.KoutsuuBean;
 import model.KoutsuuEntity;
 
 public class KoutsuuBL {
-  
+
+  public Map<String, String> checkStatus(String beforeS, String AfterS) {
+    Map<String, String> result = new HashMap<String, String>();
+    result.put("errorFlg", "false");
+    result.put("errorMSG", "");
+    int intBefS = Integer.parseInt(chgStaToCode(beforeS));
+    int intAftS = Integer.parseInt(AfterS);
+
+    if (chgStaToCode(beforeS).equals(AfterS)) {
+      result.put("errorFlg", "true");
+      result.put("errorMSG", "同一ステータスへの変更はできません");
+      return result;
+    }
+    
+      if (intAftS < intBefS) {
+        result.put("errorFlg", "true");
+        StringBuilder sb = new StringBuilder();
+        sb.append("ステータス：「");
+        sb.append(beforeS);
+        sb.append("」から「");
+        sb.append(chgStatus(AfterS));
+        sb.append("」への変更はできません");
+        result.put("errorMSG", sb.toString());
+      }
+    return result;
+  }
+
   /**
    * {交通費精算要求画面で入力した画面を新規でテーブルに挿入する}
    * @param gamenInfo
@@ -61,17 +88,19 @@ public class KoutsuuBL {
   /**
    * {@index 交通費精算確認画面に表示される情報の取得を行う}
    * @param selId　対象者の社員ID（ログインしているユーザーor選択したユーザー）
+   * @param selNo　対象の申請No
    * @param selStatus 0=申請中 1=差戻中 2=承認済 3=振込済
    * @param selQuery requestされたQUERY_TYPE属性　0=where句あり（ID）　1=where句なし　2=where句あり（ステータス）
    * @return ArrayList<KotusuuBean>
    * @throws SQLException
    */
-  public List<KoutsuuBean> getKoutsuuKakunin(int selId, String selStatus, String selQuery) throws SQLException {
+  public List<KoutsuuBean> getKoutsuuKakunin(int selId, int selNo, String selStatus, String selQuery)
+      throws SQLException {
     List<KoutsuuBean> result = new ArrayList<KoutsuuBean>();
     List<KoutsuuEntity> resultDB = new ArrayList<KoutsuuEntity>();
 
     KoutsuuDAO dao = new KoutsuuDAO();
-    resultDB = dao.selectKoutsuuKakunin(selId, selStatus, selQuery);
+    resultDB = dao.selectKoutsuuKakunin(selId, selNo, selStatus, selQuery);
 
     CastCommon castCommon = new CastCommon();
 
@@ -89,7 +118,7 @@ public class KoutsuuBL {
 
     return result;
   }
-  
+
   /**
    * {@index 承認・振込に設定する際の更新処理}
    * @param selNo
@@ -111,7 +140,7 @@ public class KoutsuuBL {
     dao.updateKoutsuuAndKtimestamp(statement);
 
   }
-  
+
   /**
    * {@index 差戻ボタン押下時の更新処理}
    * @param selNo　選択したID
@@ -130,16 +159,18 @@ public class KoutsuuBL {
     KoutsuuDAO dao = new KoutsuuDAO();
     dao.updateKoutsuuSashimodoshi(statement);
   }
-  
+
   /**
    * {@index 修正ボタン押下時の更新処理}
    * @param gamenInfo　画面情報
    * @throws SQLException
    */
-  public void updKoutsuuSyuusei(Map<String,Object> gamenInfo) throws SQLException {
+  public void updKoutsuuSyuusei(Map<String, Object> gamenInfo) throws SQLException {
     Map<String, Object> statement = new HashMap<>();
     statement = gamenInfo;
-    statement.put(KtimeStamp.COL_TIMESTAMP,LocalDateTime.now());
+    statement.put(Koutsuu.COL_KUKAN_S, gamenInfo.get(SyuuseiG.GAMEN_KUKAN_S));//画面名とカラム名が違うので
+    statement.put(Koutsuu.COL_KUKAN_E, gamenInfo.get(SyuuseiG.GAMEN_KUKAN_E));//画面名とカラム名が違うので
+    statement.put(KtimeStamp.COL_TIMESTAMP, LocalDateTime.now());
 
     //更新処理
     KoutsuuDAO dao = new KoutsuuDAO();
@@ -166,6 +197,32 @@ public class KoutsuuBL {
       break;
     case KCommon.FURIKOMIZUMI:
       result = "振込済";
+      break;
+    }
+
+    return result;
+  }
+
+  /**
+   * {@index ステータスコード変換用}
+   * @param status 
+   * @return 変換結果　0←申請中 1←差戻中 2←承認済 3←振込済
+   */
+  private String chgStaToCode(String status) {
+    String result = null;
+
+    switch (status) {
+    case "申請中":
+      result = KCommon.SHINSEI;
+      break;
+    case "差戻中":
+      result = KCommon.SASHIMODOSHI;
+      break;
+    case "承認済":
+      result = KCommon.SYOUNIN;
+      break;
+    case "振込済":
+      result = KCommon.FURIKOMIZUMI;
       break;
     }
 

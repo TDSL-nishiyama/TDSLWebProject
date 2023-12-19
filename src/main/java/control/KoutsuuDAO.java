@@ -84,11 +84,12 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
   /**
    * {@ 交通費精算(確認/承認)画面を開いた際の処理（請求している/していた交通費の確認）}
    * @param selId 選択するid （全IDを表示したい場合0を指定）
+   * @param selId 選択するno （指定のない場合0を指定）
    * @param selStatus 選択するステータス（0=申請中 1=差戻中 2=承認済 3=振込済）
    * @param selQuery 選択するクエリ 0=選択したIDのみ 1=すべてのID 2=ステータスが指定のもののみ
    * @throws SQLException
    */
-  public List<KoutsuuEntity> selectKoutsuuKakunin(int selId, String selStatus, String selQuery) throws SQLException {
+  public List<KoutsuuEntity> selectKoutsuuKakunin(int selId,int selNo, String selStatus, String selQuery) throws SQLException {
     List<Object> statement = new ArrayList<Object>();
     List<KoutsuuEntity> result = new ArrayList<KoutsuuEntity>();
 
@@ -112,6 +113,10 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       sqlPath += "koutsuu\\getKoutsuuKakuninJogai.sql";
       statement.add(selStatus);
       break;
+    case KCommon.QUERY_TYPE_4_SELNO:
+      sqlPath += "koutsuu\\getKoutsuuKakuninWhereNo.sql";
+      statement.add(selNo);
+      break;  
     default:
       sqlPath += "koutsuu\\getKoutsuuKakuninAll.sql";
     }

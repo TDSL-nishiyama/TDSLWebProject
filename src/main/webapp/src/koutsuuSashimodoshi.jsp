@@ -46,7 +46,6 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
           <%=koutsuuBeanList.get(0).getNo()%>
         </td>
         <td>
-          <input type="hidden" name="selId" value="<%=koutsuuBeanList.get(0).getId()%>">
           <%=koutsuuBeanList.get(0).getUserName()%>
         </td>
         <td>
@@ -65,7 +64,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
           <input type="text" name="bikou" value="<%=koutsuuBeanList.get(0).getBikou()%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="modoshiriyuu" value="<%=koutsuuBeanList.get(0).getModoshiriyuu()%>" maxlength="1000">
+          <input type="textarea" name="modoshiriyuu" value="<%=koutsuuBeanList.get(0).getModoshiriyuu()%>" maxlength="1000">
         </td>
       </tr>
     </table>

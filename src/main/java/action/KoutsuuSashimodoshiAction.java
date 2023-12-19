@@ -30,10 +30,10 @@ public class KoutsuuSashimodoshiAction extends HttpServlet {
     KoutsuuBL koutsuuBL = new KoutsuuBL();
     List<KoutsuuBean> koutsuuBeanList = null;
     
-    int selId = Integer.parseInt(request.getParameter("selId"));
+    int selNo = Integer.parseInt(request.getParameter("selNo"));
     
     try {
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(selId,KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,selNo,KCommon.NONSELSTA,KCommon.QUERY_TYPE_4_SELNO);
     } catch (SQLException e) {
       //エラー画面に遷移
       request.setAttribute(ERRORMSG.ERRMSG_ATTRIBUTE, ERRORMSG.DBERROR);

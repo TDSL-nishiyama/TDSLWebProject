@@ -63,7 +63,7 @@ public class ResultKoutsuuSyuuseiAction extends HttpServlet {
     try {
       koutsuuBL.updKoutsuuSyuusei(gamenInfo);
       //リクエストスコープに値を格納
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(Integer.parseInt(selId),KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,Integer.parseInt(selNo),KCommon.NONSELSTA,KCommon.QUERY_TYPE_4_SELNO);
       request.setAttribute(Path.KOUTSUU_KAKUNIN_SCOPE, koutsuuBeanList);
     } catch (SQLException e) {
       //エラー画面に遷移

@@ -32,15 +32,15 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
     List<KoutsuuBean> koutsuuBeanList = null;
     
     //画面情報を取得
-    String selId = request.getParameter("selId");
     String selNo = request.getParameter("selNo");
     String modoshiriyuu =  request.getParameter("modoshiriyuu");
     
     //エラーチェックSTART
+    //差戻理由がブランクの場合、
     if(modoshiriyuu.trim().equals("")) {
       //リクエストスコープにインスタンスを保存
       try {
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(Integer.parseInt(selId),KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,Integer.parseInt(selNo),KCommon.NONSELSTA,KCommon.QUERY_TYPE_4_SELNO);
         request.setAttribute(Path.KOUTSUU_KAKUNIN_SCOPE, koutsuuBeanList);
       } catch (SQLException e) {
         //エラー画面に遷移
@@ -64,7 +64,7 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
     try {
       koutsuuBL.updKoutsuuSashimodoshi(Integer.parseInt(selNo),modoshiriyuu);
       //リクエストスコープに値を格納
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(Integer.parseInt(selId),KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,Integer.parseInt(selNo),KCommon.NONSELSTA,KCommon.QUERY_TYPE_4_SELNO);
       request.setAttribute(Path.KOUTSUU_KAKUNIN_SCOPE, koutsuuBeanList);
     } catch (SQLException e) {
       //エラー画面に遷移
@@ -77,7 +77,7 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
     
     //メッセージ格納
     request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.K_SASHIMODOSHI_2);
-    //交通費精算要求画面に遷移
+    //交通費差戻要求画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.KOUTSUU_SASHIMODOSHI_GAMEN);
     dispatcher.forward(request, response);

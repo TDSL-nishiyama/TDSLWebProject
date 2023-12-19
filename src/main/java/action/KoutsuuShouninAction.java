@@ -43,7 +43,7 @@ public class KoutsuuShouninAction extends HttpServlet {
       }
       //リクエストスコープに値を保存
       try {
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
         //テーブル検索の際のエラーの場合
       } catch (SQLException e) {
         //エラーメッセージを表示
@@ -82,21 +82,21 @@ public class KoutsuuShouninAction extends HttpServlet {
       //QUERY_TYPE属性によってDAOのパラメータを変更
       switch (queryType) {
       case KCommon.QUERY_TYPE_0_SELID:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(id, KCommon.NONSELSTA, KCommon.QUERY_TYPE_0_SELID);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(id, KCommon.NONSELNO, KCommon.NONSELSTA, KCommon.QUERY_TYPE_0_SELID);
         break;
       case KCommon.QUERY_TYPE_1_ALL:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,KCommon.NONSELNO,  KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
         break;
       case KCommon.QUERY_TYPE_2_SELSTA:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, request.getParameter("status"),
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, request.getParameter("status"),
             KCommon.QUERY_TYPE_2_SELSTA);
         break;
       case KCommon.QUERY_TYPE_3_JOGAI:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.FURIKOMIZUMI,
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.FURIKOMIZUMI,
             KCommon.QUERY_TYPE_3_JOGAI);
         break;
       default:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
       }
     } catch (SQLException e) {
       //エラーメッセージを表示

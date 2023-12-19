@@ -27,13 +27,13 @@ public class KoutsuuSyuuseiAction extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
     //画面情報を取得
-    String selId = request.getParameter(SyuuseiG.GAMEN_USERID);
+    String selNo = request.getParameter(SyuuseiG.GAMEN_UNINO);
     
     //リクエストスコープに値を格納
     KoutsuuBL koutsuuBL = new KoutsuuBL();
     List<KoutsuuBean> koutsuuBeanList = null;
     try {
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(Integer.parseInt(selId),KCommon.NONSELSTA,KCommon.QUERY_TYPE_0_SELID);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, Integer.parseInt(selNo), KCommon.NONSELSTA,KCommon.QUERY_TYPE_4_SELNO);
     } catch (NumberFormatException | SQLException e) {
       e.printStackTrace();
     }
