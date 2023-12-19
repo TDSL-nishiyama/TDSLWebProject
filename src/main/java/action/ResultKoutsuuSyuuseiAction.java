@@ -10,6 +10,7 @@ import constents.Const.ERRORMSG;
 import constents.Const.MSG;
 import constents.Const.Path;
 import constents.KoutsuuConst.KCommon;
+import constents.KoutsuuConst.SyuuseiG;
 import control.KoutsuuBL;
 import control.common.CastCommon;
 import jakarta.servlet.RequestDispatcher;
@@ -35,24 +36,25 @@ public class ResultKoutsuuSyuuseiAction extends HttpServlet {
     CastCommon castCommon = new CastCommon();
     
     //画面情報を取得
-    String selId = request.getParameter("selId");
-    String selNo = request.getParameter("selNo");
-    String riyouhiduke = request.getParameter("riyouhiduke");
-    String kukans = request.getParameter("kukans");
-    String kukane = request.getParameter("kukane");
-    String kingaku = request.getParameter("kingaku");
-    String bikou = request.getParameter("bikou");
+    String selId = request.getParameter(SyuuseiG.GAMEN_USERID);
+    String selNo = request.getParameter(SyuuseiG.GAMEN_UNINO);
+    String riyouhiduke = request.getParameter(SyuuseiG.GAMEN_RIYOUHIDUKE);
+    String kukans = request.getParameter(SyuuseiG.GAMEN_KUKAN_S);
+    String kukane = request.getParameter(SyuuseiG.GAMEN_KUKAN_E);
+    String kingaku = request.getParameter(SyuuseiG.GAMEN_KINGAKU);
+    String bikou = request.getParameter(SyuuseiG.GAMEN_BIKOU);
+    String modoshiriyuu = request.getParameter(SyuuseiG.GAMEN_MODOSHIRIYUU);
     
     //更新内容をMAPに格納
     Map<String,Object> gamenInfo = new LinkedHashMap<String,Object>();
-    gamenInfo.put("selId", Integer.parseInt(selId));
-    gamenInfo.put("selNo", Integer.parseInt(selNo));
-    gamenInfo.put("riyouhiduke", castCommon.chgStrtoLDT(riyouhiduke));
-    gamenInfo.put("kukans", kukans);
-    gamenInfo.put("kukane", kukane);
-    gamenInfo.put("kingaku", kingaku);
-    gamenInfo.put("bikou", bikou);
-    gamenInfo.put("modoshiriyuu",request.getParameter("modoshiriyuu").toString());
+    gamenInfo.put(SyuuseiG.GAMEN_USERID, Integer.parseInt(selId));
+    gamenInfo.put(SyuuseiG.GAMEN_UNINO, Integer.parseInt(selNo));
+    gamenInfo.put(SyuuseiG.GAMEN_RIYOUHIDUKE, castCommon.chgStrtoLDT(riyouhiduke));
+    gamenInfo.put(SyuuseiG.GAMEN_KUKAN_S, kukans);
+    gamenInfo.put(SyuuseiG.GAMEN_KUKAN_E, kukane);
+    gamenInfo.put(SyuuseiG.GAMEN_KINGAKU, kingaku);
+    gamenInfo.put(SyuuseiG.GAMEN_BIKOU, bikou);
+    gamenInfo.put(SyuuseiG.GAMEN_MODOSHIRIYUU,modoshiriyuu);
     
     //エラーチェックSTART
     //エラーチェックEND

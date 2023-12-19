@@ -221,7 +221,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
   }
 
   /**
-   * 
+   * {@index 差戻ボタン押下時のテーブル更新処理}
    * @param pStatement
    * @throws SQLException
    */
@@ -258,18 +258,23 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     super.endTransactionTrue(conn);
   }
   
+  /**
+   * {@index 修正ボタン押下時のテーブル更新処理}
+   * @param pStatement
+   * @throws SQLException
+   */
   public void updateKoutsuuSyuusei(Map<String, Object> pStatement) throws SQLException {
     //ステートメントの設定
     List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
     List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
     
     //set句
-    statement1.add(pStatement.get("riyouhiduke"));
-    statement1.add(pStatement.get("kukans"));
-    statement1.add(pStatement.get("kukane"));
-    statement1.add(pStatement.get("kingaku"));
-    statement1.add(pStatement.get("bikou"));
-    statement1.add(pStatement.get("modoshiriyuu"));
+    statement1.add(pStatement.get(Koutsuu.COL_RIYOUHIDUKE));
+    statement1.add(pStatement.get(Koutsuu.COL_KUKAN_S));
+    statement1.add(pStatement.get(Koutsuu.COL_KUKAN_E));
+    statement1.add(pStatement.get(Koutsuu.COL_KINGAKU));
+    statement1.add(pStatement.get(Koutsuu.COL_BIKOU));
+    statement1.add(pStatement.get(Koutsuu.COL_MODOSHIRIYUU));
     
     statement2.add(KCommon.SHINSEI);
     statement2.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));

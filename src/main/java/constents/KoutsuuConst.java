@@ -76,4 +76,18 @@ public class KoutsuuConst {
   public static final class SashimodoshiG{
     public final static String GAMEN_MODOSHIRIYUU = "modoshiriyuu";
   }
+  /**
+   * @see 交通費修正画面の項目
+   */
+  public static final class SyuuseiG{
+    public final static String GAMEN_UNINO = "selNo";
+    public final static String GAMEN_USERID = "selId";
+    public final static String GAMEN_SMAIL = "sendmailaddress";
+    public final static String GAMEN_RIYOUHIDUKE = "riyouhiduke";
+    public final static String GAMEN_KUKAN_S = "kukan_start";
+    public final static String GAMEN_KUKAN_E = "kukan_end";
+    public final static String GAMEN_KINGAKU = "kingaku";
+    public final static String GAMEN_BIKOU = "bikou";
+    public final static String GAMEN_MODOSHIRIYUU = "modoshiriyuu";
+  }
 }

@@ -27,7 +27,7 @@ public class KaritourokuAction extends HttpServlet {
     UserIchiranBL userIchiranBL = new UserIchiranBL();    
 
     //リクエストスコープにインスタンスを保存
-    List<MastaEntity> userIchiranBLlist = userIchiranBL.resultKaritourokuUserList(userIchiranBL);
+    List<MastaEntity> userIchiranBLlist = userIchiranBL.resultKaritourokuUserList();
     request.setAttribute(Path.USER_ICHIRAN_SCOPE, userIchiranBLlist);
     
     //ユーザー一覧画面に遷移

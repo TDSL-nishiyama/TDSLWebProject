@@ -2,6 +2,9 @@ package control;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import constents.Table.Login;
+import constents.Table.User;
 import control.common.DAOCommon;
 import control.common.DBAccess;
 
@@ -18,7 +21,7 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     List<Object> statement = new ArrayList<>();
     List<Object> result = new ArrayList<>();
 
-    column.add("id");
+    column.add(Login.COL_USERID);
 
     statement.add(pLoginId);
 
@@ -86,8 +89,8 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<Object>();
 
-    column.add("loginid");
-    column.add("password");
+    column.add(Login.COL_LOGINID);
+    column.add(Login.COL_LOGINPASSWORD);
 
     statement.add(pLoginId);
     statement.add(pPassword);
@@ -108,10 +111,10 @@ public class LoginDAO extends DAOCommon implements DBAccess {
     List<String> column = new ArrayList<String>();
     List<Object> statement = new ArrayList<>();
 
-    column.add("id");
-    column.add("loginid");
-    column.add("name");
-    column.add("kanriflg");
+    column.add(User.COL_USERID);
+    column.add(Login.COL_LOGINID);
+    column.add(User.COL_USERNAME);
+    column.add(User.COL_KANRIFLG);
 
     statement.add(pLoginId);
 

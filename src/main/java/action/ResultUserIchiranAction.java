@@ -23,13 +23,13 @@ public class ResultUserIchiranAction extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    
-    UserIchiranBL userIchiranBL = new UserIchiranBL();    
+
+    UserIchiranBL userIchiranBL = new UserIchiranBL();
 
     //リクエストスコープにインスタンスを保存
-    List<MastaEntity> useIchiranBLlist = userIchiranBL.resultUserListAll(userIchiranBL);
+    List<MastaEntity> useIchiranBLlist = userIchiranBL.resultUserListAll();
     request.setAttribute(Path.USER_ICHIRAN_SCOPE, useIchiranBLlist);
-    
+
     //ユーザー一覧画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.USER_ICHIRAN_GAMEN);

@@ -114,6 +114,10 @@ public class MailAddAction extends HttpServlet {
     dispatcher.forward(request, response);
   }
   
+  /**
+   * {@index エラー時の画面項目保持}
+   * @param request
+   */
   private void saveParameter(HttpServletRequest request) {
     List<MastaBean> mastaBeanList = new ArrayList<MastaBean>();
     MailBL mailBL = new MailBL();

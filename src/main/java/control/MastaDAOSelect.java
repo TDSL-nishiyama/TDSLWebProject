@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import constents.Const.Common;
+import constents.Table.Login;
+import constents.Table.Mail;
+import constents.Table.User;
 import constents.UserShousai;
 import control.common.CastCommon;
 import control.common.DAOCommon;
@@ -22,7 +25,7 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
   private String sqlPath = Common.SQL_FILE_PATH;
   
   /**
-   * {@index 多重登録チェック用}
+   * {@index mailテーブルの多重登録チェック用}
    * @param id
    * @param mailAddress
    * @return　既存のPKの組み合わせと一致する場合は1を返却、そうではない場合は0を返却
@@ -68,10 +71,10 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
 
       //結果表に格納されたレコードの内容をMastaEntityに設定
       while (rs.next()) {
-        id = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginName = rs.getString("name");
-        kanriFlg = rs.getBoolean("kanriFlg");
+        id = rs.getInt(User.COL_USERID);
+        loginId = rs.getString(Login.COL_LOGINID);
+        loginName = rs.getString(User.COL_USERNAME);
+        kanriFlg = rs.getBoolean(User.COL_KANRIFLG);
 
         MastaEntity mastaEntity = new MastaEntity(id, loginName, kanriFlg, loginId);
         returnList.add(mastaEntity);
@@ -136,10 +139,10 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
       //結果表に格納されたレコードの内容をMastaBeanに設定
       while (rs.next()) {
         //user・login
-        id = rs.getInt("id");
-        loginId = rs.getString("loginid");
-        loginName = rs.getString("name");
-        kanriFlg = rs.getBoolean("kanriFlg");
+        id = rs.getInt(User.COL_USERID);
+        loginId = rs.getString(Login.COL_LOGINID);
+        loginName = rs.getString(User.COL_USERNAME);
+        kanriFlg = rs.getBoolean(User.COL_KANRIFLG);
         //usershousai
         sei = rs.getString(UserShousai.COL_SEI);
         seiyomi = rs.getString(UserShousai.COL_SEI_YOMI);
@@ -210,9 +213,9 @@ public class MastaDAOSelect extends DAOCommon implements DBAccess {
       //結果表に格納されたレコードの内容をMastaBeanに設定
       while (rs.next()) {
         //mail
-        id = rs.getInt("id");
-        userName = rs.getString("name");
-        mailAddress = rs.getString("mailaddress");
+        id = rs.getInt(Mail.COL_USERID);
+        userName = rs.getString(User.COL_USERNAME);
+        mailAddress = rs.getString(Mail.COL_MAILADDRESS);
         MastaBean bean = new MastaBean(id, userName,mailAddress);
         result.add(bean);
       }

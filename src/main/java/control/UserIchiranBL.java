@@ -5,9 +5,14 @@ import java.util.List;
 
 import model.MastaEntity;
 
+
 public class UserIchiranBL {
-  //実行結果をサーブレットに戻す
-  public List<MastaEntity> resultUserList(UserIchiranBL userIchiranBL) {
+  
+  /**
+   * {@ユーザー一覧を取得する}
+   * @return　ユーザーの一覧（削除されたユーザーを除く）
+   */
+  public List<MastaEntity> resultUserList() {
 
     List<MastaEntity> result = new ArrayList<>();
     
@@ -18,8 +23,11 @@ public class UserIchiranBL {
     return result;
   }
   
-  //実行結果をサーブレットに戻す
-  public List<MastaEntity> resultUserListAll(UserIchiranBL userIchiranBL) {
+  /**
+   * {@ユーザー一覧を取得する}
+   * @return　ユーザーの一覧（削除されたユーザーを含む）
+   */
+  public List<MastaEntity> resultUserListAll() {
 
     List<MastaEntity> result = new ArrayList<>();
     
@@ -30,8 +38,11 @@ public class UserIchiranBL {
     return result;
   }
   
-  //実行結果をサーブレットに戻す
-  public List<MastaEntity> resultKaritourokuUserList(UserIchiranBL userIchiranBL) {
+  /**
+   * {@ユーザー一覧を取得する}
+   * @return　ユーザーの一覧（仮登録中のユーザーのみ）
+   */
+  public List<MastaEntity> resultKaritourokuUserList() {
 
     List<MastaEntity> result = new ArrayList<>();
     

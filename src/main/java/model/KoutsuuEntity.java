@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-public class KoutsuuEntity {
+public class KoutsuuEntity implements Serializable{
 
   private int no;
   private int id;

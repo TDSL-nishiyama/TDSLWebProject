@@ -139,6 +139,7 @@ public class KoutsuuBL {
   public void updKoutsuuSyuusei(Map<String,Object> gamenInfo) throws SQLException {
     Map<String, Object> statement = new HashMap<>();
     statement = gamenInfo;
+    statement.put(KtimeStamp.COL_TIMESTAMP,LocalDateTime.now());
 
     //更新処理
     KoutsuuDAO dao = new KoutsuuDAO();

@@ -203,6 +203,11 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
     super.endTransactionTrue(conn);
   }
   
+  /**
+   * {@index mailテーブルに対しメールアドレスの新規挿入を行う}
+   * @param insKoumoku
+   * @throws SQLException
+   */
   public void insertMail(Map<String, Object> insKoumoku) throws SQLException {
     List<Object> statement = new ArrayList<Object>();
     statement.add(insKoumoku.get("selId"));
@@ -214,18 +219,29 @@ public class MastaDAOInsertUpdate extends DAOCommon implements DBAccess {
     super.executeDML(SQLPath, statement);
   }
   
+  /**
+   * {@index mailテーブルに対し更新を行う}
+   * @param updKoumoku
+   * @throws SQLException
+   */
   public void updateMail(Map<String, Object> updKoumoku)throws SQLException {
     List<Object> statement = new ArrayList<Object>();
-    statement.add(updKoumoku.get("afterMailAddress"));
+    statement.add(updKoumoku.get("afterMailAddress"));//更新後のメールアドレス
     statement.add(LocalDateTime.now());
     statement.add(updKoumoku.get("selId"));
-    statement.add(updKoumoku.get("beforeMailAddress"));
+    statement.add(updKoumoku.get("beforeMailAddress"));//更新前のメールアドレス
     
     String SQLPath = MASTA_MAIL + "updMail.sql";
     
     super.executeDML(SQLPath, statement);
   }
   
+  /**
+   * {@index mailテーブルに対し指定のメールアドレスの削除を行う}
+   * @param id　削除するID
+   * @param mailAddress　削除するメールアドレス
+   * @throws SQLException
+   */
   public void deleteMail(int id,String mailAddress) throws SQLException{
     List<Object> statement = new ArrayList<Object>();
     statement.add(id);

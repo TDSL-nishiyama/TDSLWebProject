@@ -23,7 +23,7 @@ public class SyainJouhouBL {
   }
 
   /**
-   * {@index} 社員情報閲覧画面に表示する情報の結果表(一覧)を取得してSyainJouhouBeanに格納するクラス
+   * {@index} 社員情報閲覧画面に表示する情報の結果表(一覧)を取得してSyainJouhouBeanに格納する
    * @return List<SyainJouhouBean>
    */
   //実行結果をサーブレットに戻す
@@ -291,7 +291,13 @@ public class SyainJouhouBL {
     dao.updateSyainJouhou(fileName, statement);
 
   }
-
+  
+  /**
+   * {@index 名前の設定}
+   * @param sei
+   * @param mei
+   * @return　姓＋名
+   */
   private String setName(String sei, String mei) {
     String result = null;
 
@@ -303,7 +309,12 @@ public class SyainJouhouBL {
 
     return result;
   }
-
+  
+  /**
+   * {@入社年次の設定}
+   * @param nyuusyaYMD
+   * @return
+   */
   private String setNenji(Date nyuusyaYMD) {
 
     String result = null;
@@ -320,7 +331,12 @@ public class SyainJouhouBL {
 
     return result;
   }
-
+  
+  /**
+   * {@index 性別の設定}
+   * @param seibetsu
+   * @return 0→男 1→女 2およびそれ以外→その他
+   */
   private String setSeibetsu(String seibetsu) {
 
     String result = null;
@@ -340,7 +356,12 @@ public class SyainJouhouBL {
 
     return result;
   }
-
+  
+  /**
+   * {@index 年齢の設定}
+   * @param seinenngappi
+   * @return　生年月日-現在日付（年）＋才
+   */
   private String setAge(Date seinenngappi) {
 
     String result = null;
