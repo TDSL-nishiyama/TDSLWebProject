@@ -6,6 +6,7 @@ import java.util.List;
 
 import constents.Const.Path;
 import constents.KoutsuuConst.KCommon;
+import constents.KoutsuuConst.SyuuseiG;
 import control.KoutsuuBL;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -26,7 +27,7 @@ public class KoutsuuSyuuseiAction extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
     //画面情報を取得
-    String selId = request.getParameter("selId");
+    String selId = request.getParameter(SyuuseiG.GAMEN_USERID);
     
     //リクエストスコープに値を格納
     KoutsuuBL koutsuuBL = new KoutsuuBL();
