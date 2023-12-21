@@ -35,15 +35,18 @@ public class KoutsuuShouninAction extends HttpServlet {
 
     //エラーチェックSTART
     String errMSG = null;
+    String id = request.getParameter("selId");
     //ID入力チェック
-    if (request.getParameter("selId") != null && request.getParameter("selId").equals("")) {
-      errMSG = MSG.K_SHONIN_1;
-      if (checkCommon.checkUserId(Integer.parseInt(request.getParameter("selId"))) == 0) {
+    if (id != null) {
+      if (id.isBlank()) {
+        errMSG = MSG.K_SHONIN_1;
+      } else if (checkCommon.checkUserId(Integer.parseInt(id)) == 0) {
         errMSG = MSG.K_SHONIN_2;
       }
       //リクエストスコープに値を保存
       try {
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA,
+            KCommon.QUERY_TYPE_1_ALL);
         //テーブル検索の際のエラーの場合
       } catch (SQLException e) {
         //エラーメッセージを表示
@@ -65,12 +68,6 @@ public class KoutsuuShouninAction extends HttpServlet {
     }
     //エラーチェックEND
 
-    //id指定があった場合、IDを格納
-    int id = 0;
-    if (request.getParameter("selId") != null) {
-      id = Integer.parseInt(request.getParameter("selId"));
-    }
-
     //呼び出しクエリの選択
     String queryType = ""; //switchにNULL渡すとコケる
     if (request.getParameter("type") != null) {
@@ -82,13 +79,16 @@ public class KoutsuuShouninAction extends HttpServlet {
       //QUERY_TYPE属性によってDAOのパラメータを変更
       switch (queryType) {
       case KCommon.QUERY_TYPE_0_SELID:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(id, KCommon.NONSELNO, KCommon.NONSELSTA, KCommon.QUERY_TYPE_0_SELID);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(Integer.parseInt(id), KCommon.NONSELNO, KCommon.NONSELSTA,
+            KCommon.QUERY_TYPE_0_SELID);
         break;
       case KCommon.QUERY_TYPE_1_ALL:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,KCommon.NONSELNO,  KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA,
+            KCommon.QUERY_TYPE_1_ALL);
         break;
       case KCommon.QUERY_TYPE_2_SELSTA:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, request.getParameter("status"),
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO,
+            request.getParameter("status"),
             KCommon.QUERY_TYPE_2_SELSTA);
         break;
       case KCommon.QUERY_TYPE_3_JOGAI:
@@ -96,7 +96,8 @@ public class KoutsuuShouninAction extends HttpServlet {
             KCommon.QUERY_TYPE_3_JOGAI);
         break;
       default:
-        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA, KCommon.QUERY_TYPE_1_ALL);
+        koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID, KCommon.NONSELNO, KCommon.NONSELSTA,
+            KCommon.QUERY_TYPE_1_ALL);
       }
     } catch (SQLException e) {
       //エラーメッセージを表示
