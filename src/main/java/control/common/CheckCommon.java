@@ -12,7 +12,7 @@ public class CheckCommon {
   /**
    * {@index 日付整合性チェック}
    * @param pDate　String Dateとして想定された値
-   * @return
+   * @return false = エラーあり true = エラーなし
    */
   public boolean checkDate(String pDate) {
     boolean result = true;
@@ -53,7 +53,7 @@ public class CheckCommon {
   /**
    * {@index ユーザーID存在確認（del項目に値があるユーザーを含まない）}
    * @param userId
-   * @return
+   * @return 0 = 該当なし 1 < 該当あり
    */
   public int checkUserId(int userId) {
 
@@ -69,7 +69,7 @@ public class CheckCommon {
   /**
    * {@index ユーザーID存在確認（del項目に値があるユーザーを含む）}
    * @param userId
-   * @return
+   * @return 0 = 該当なし 1 < 該当あり
    */
   public int checkUserIdAll(int userId) {
 
