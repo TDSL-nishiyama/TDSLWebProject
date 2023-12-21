@@ -73,6 +73,7 @@ public class Const {
     public static final String MSG_ATTRIBUTE = "MSG";
     
     //汎用
+    public static final String SESSION_TIME_OUT = "30分以上未操作の場合、再度のログインをお願いします";
     public static final String MSG_DATE_INTEGRITY_ERR_1 = "入社日付もしくは生年月日が誤っています。日付を再度確認してください";
     public static final String MSG_DATE_INTEGRITY_ERR_2 = "１６才未満の就労は不可能です。生年月日を確認してください。";
     

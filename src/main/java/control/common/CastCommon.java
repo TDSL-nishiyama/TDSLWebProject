@@ -19,7 +19,7 @@ public class CastCommon {
   public Date chgStrToDate(String pDate) {
     Date result = null;
 
-    if (pDate == null || pDate.equals("")) {
+    if (pDate == null || pDate.isBlank()) {
       return null;
     }
 
@@ -77,7 +77,7 @@ public class CastCommon {
   public LocalDateTime chgStrtoLDT(String pStr) {
     LocalDateTime result = null;
     
-    if (pStr == null||pStr.equals("")) {
+    if (pStr == null||pStr.isBlank()) {
       return result;
     }
     

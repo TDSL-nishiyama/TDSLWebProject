@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.List"%>
+<%@ page import="constents.Const.Path"%>
+
+<%
+//リクエストスコープに保存されたユーザー情報を取得
+List<String> getList = (List<String>) request.getAttribute(Path.KOUTSUU_YOUKYU_SCOPE);
+%>
+
 <!DOCTYPE html>
 <!-- 交通費精算要求画面  -->
 <html>
@@ -37,34 +46,34 @@
       <tr>
         <td><%=loginSession.getLoginName()%></td>
         <td>
-          <input type="text" name="riyou1" maxlength="100">
+          <input type="text" name="riyou1" value="<%=getList.get(0)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kukans1" maxlength="100">
+          <input type="text" name="kukans1"value="<%=getList.get(1)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kukane1" maxlength="100">
+          <input type="text" name="kukane1"value="<%=getList.get(2)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kingaku1" maxlength="100">
+          <input type="text" name="kingaku1"value="<%=getList.get(3)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="bikou1" maxlength="100">
+          <input type="text" name="bikou1"value="<%=getList.get(4)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="riyou2" maxlength="100">
+          <input type="text" name="riyou2"value="<%=getList.get(5)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kukans2" maxlength="100">
+          <input type="text" name="kukans2"value="<%=getList.get(6)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kukane2" maxlength="100">
+          <input type="text" name="kukane2"value="<%=getList.get(7)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="kingaku2" maxlength="100">
+          <input type="text" name="kingaku2"value="<%=getList.get(8)%>" maxlength="100">
         </td>
         <td>
-          <input type="text" name="bikou2" maxlength="100">
+          <input type="text" name="bikou2"value="<%=getList.get(9)%>" maxlength="100">
         </td>
       </tr>
     </table>

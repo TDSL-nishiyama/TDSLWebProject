@@ -18,7 +18,7 @@ public class CheckCommon {
     boolean result = true;
 
     //項目が存在しない場合チェックを行わない
-    if (pDate == null || pDate.equals("")) {
+    if (pDate == null || pDate.isBlank()) {
       return result;
     }
 
@@ -43,7 +43,7 @@ public class CheckCommon {
   public boolean checkBlankOrNULL(String str) {
     boolean result = true;
 
-    if (str == null || str.trim().equals("")) {
+    if (str == null || str.trim().isBlank()) {
       result = false;
     }
 

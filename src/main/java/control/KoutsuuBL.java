@@ -14,10 +14,52 @@ import constents.KoutsuuConst.KtimeStamp;
 import constents.KoutsuuConst.SyuuseiG;
 import constents.Table.User;
 import control.common.CastCommon;
+import control.common.CheckCommon;
 import model.KoutsuuBean;
 import model.KoutsuuEntity;
 
 public class KoutsuuBL {
+  
+  /**
+   * {@index _2に項目に入力があるか確認を行う}
+   * @param gamenInfo
+   * @return true = 入力あり false = 入力なし
+   */
+  public Map<String, String> chkeck__2(Map<String,Object> gamenInfo) {
+    Map<String, String> result = new HashMap<String, String>();
+    result.put("_2Flg", "false");
+    CheckCommon CheckC = new CheckCommon();
+    
+    for(String key : gamenInfo.keySet()) {
+      if(CheckC.checkBlankOrNULL(key) == true){
+        result.put("_2Flg", "true");
+        return result;
+      }
+    }
+    
+    return result;
+  }
+  
+  /**
+   * {@index 開始区間と終了区間が同一であるか確認を行う}
+   * @param kukans
+   * @param kukane
+   * @return  true = 同一　パラメータが空白の場合、falseを返却
+   */
+  public boolean checkKukan(String kukans,String kukane) {
+    boolean result = false;
+    CheckCommon CheckC = new CheckCommon();
+    
+    if(CheckC.checkBlankOrNULL(kukans) == false || CheckC.checkBlankOrNULL(kukane) == false) {
+      return result;
+    }
+    
+    if(kukans.equals(kukane)) {
+      result = true;
+    }
+    
+    return result;
+  }
   
   /**
    * {@index ステータス状態チェック}
