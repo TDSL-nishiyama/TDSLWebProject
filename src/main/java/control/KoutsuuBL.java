@@ -18,7 +18,15 @@ import model.KoutsuuBean;
 import model.KoutsuuEntity;
 
 public class KoutsuuBL {
-
+  
+  /**
+   * {@index ステータス状態チェック}
+   * @param beforeS　変更前のステータス
+   * @param AfterS　変更後のステータス
+   * @return　key:errorFlg true→エラーあり false→エラーなし
+   * @return　key:errorMSG エラーメッセージ
+   * @see 同一ステータスへの変更は不可。現状のステータスより前の状態への変更は不可（振込済→申請中など）
+   */
   public Map<String, String> checkStatus(String beforeS, String AfterS) {
     Map<String, String> result = new HashMap<String, String>();
     result.put("errorFlg", "false");
@@ -180,7 +188,7 @@ public class KoutsuuBL {
 
   /**
    * {@index ステータスコード変換用}
-   * @param status 0→申請中 1→差戻中 2→承認済 3→振込済
+   * @param status 0,1,2,3
    * @return 変換結果　0→申請中 1→差戻中 2→承認済 3→振込済
    */
   private String chgStatus(String status) {
@@ -206,7 +214,7 @@ public class KoutsuuBL {
 
   /**
    * {@index ステータスコード変換用}
-   * @param status 
+   * @param status 申請中,差戻中,承認済,振込済
    * @return 変換結果　0←申請中 1←差戻中 2←承認済 3←振込済
    */
   private String chgStaToCode(String status) {
