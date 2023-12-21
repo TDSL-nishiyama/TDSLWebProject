@@ -64,7 +64,7 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
     try {
       koutsuuBL.updKoutsuuSashimodoshi(Integer.parseInt(selNo),modoshiriyuu);
       //リクエストスコープに値を格納
-      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,Integer.parseInt(selNo),KCommon.NONSELSTA,KCommon.QUERY_TYPE_4_SELNO);
+      koutsuuBeanList = koutsuuBL.getKoutsuuKakunin(KCommon.NONSELID,KCommon.NONSELNO,KCommon.NONSELSTA,KCommon.QUERY_TYPE_1_ALL);
       request.setAttribute(Path.KOUTSUU_KAKUNIN_SCOPE, koutsuuBeanList);
     } catch (SQLException e) {
       //エラー画面に遷移
@@ -77,9 +77,9 @@ public class ResultKoutsuuSashimodoshiAction extends HttpServlet {
     
     //メッセージ格納
     request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.K_SASHIMODOSHI_2);
-    //交通費差戻要求画面に遷移
+    //交通費確認画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.KOUTSUU_SASHIMODOSHI_GAMEN);
+        .getRequestDispatcher(Path.KOUTSUU_KAKUNIN_GAMEN);
     dispatcher.forward(request, response);
 	}
 

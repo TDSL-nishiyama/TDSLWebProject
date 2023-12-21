@@ -1,0 +1,1 @@
+UPDATE koutsuu SET modoshiriyuu=? where no = ?;

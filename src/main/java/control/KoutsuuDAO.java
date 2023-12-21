@@ -89,7 +89,8 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
    * @param selQuery 選択するクエリ 0=選択したIDのみ 1=すべてのID 2=ステータスが指定のもののみ
    * @throws SQLException
    */
-  public List<KoutsuuEntity> selectKoutsuuKakunin(int selId,int selNo, String selStatus, String selQuery) throws SQLException {
+  public List<KoutsuuEntity> selectKoutsuuKakunin(int selId, int selNo, String selStatus, String selQuery)
+      throws SQLException {
     List<Object> statement = new ArrayList<Object>();
     List<KoutsuuEntity> result = new ArrayList<KoutsuuEntity>();
 
@@ -116,7 +117,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     case KCommon.QUERY_TYPE_4_SELNO:
       sqlPath += "koutsuu\\getKoutsuuKakuninWhereNo.sql";
       statement.add(selNo);
-      break;  
+      break;
     default:
       sqlPath += "koutsuu\\getKoutsuuKakuninAll.sql";
     }
@@ -182,7 +183,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
         }
         KoutsuuEntity entity = new KoutsuuEntity(
             no, id, userName, sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, modoshiriyuu,
-            status, shinseiYMD,sashimodoshiYMD, syouninYMD);
+            status, shinseiYMD, sashimodoshiYMD, syouninYMD);
         result.add(entity);
       }
 
@@ -205,22 +206,26 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
    */
   public void updateKoutsuuAndKtimestamp(Map<String, Object> pStatement) throws SQLException {
     //ステートメントの設定
-    List<Object> statement = new ArrayList<>();//ktimestampテーブル
+    List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
+    List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
     //set句
     String status = pStatement.get(KtimeStamp.COL_STATUS).toString();
-    statement.add(status);
+    statement2.add(status);
     if (status.equals(KCommon.SYOUNIN)) {
-      statement.add(pStatement.get(KtimeStamp.COL_SYONIN));
+      statement1.add(pStatement.get(Koutsuu.COL_MODOSHIRIYUU));
+      statement2.add(pStatement.get(KtimeStamp.COL_SYONIN));
     }
-    statement.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
+    statement2.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
     //where句
-    statement.add(pStatement.get(KtimeStamp.COL_UNINO));
+    statement1.add(pStatement.get(KtimeStamp.COL_UNINO));
+    statement2.add(pStatement.get(KtimeStamp.COL_UNINO));
 
-    //ktimestampテーブルの更新
+    //テーブルの更新
     if (status.equals(KCommon.SYOUNIN)) {
-      super.executeDML("koutsuu\\updateSyoninKtimestamp.sql", statement);
+      super.executeDML("koutsuu\\updateSyoninKoutsuu.sql", statement1);
+      super.executeDML("koutsuu\\updateSyoninKtimestamp.sql", statement2);
     } else {
-      super.executeDML("koutsuu\\updateFurikomiKtimestamp.sql", statement);
+      super.executeDML("koutsuu\\updateFurikomiKtimestamp.sql", statement2);
     }
     sqlPath = Common.SQL_FILE_PATH;
   }
@@ -234,35 +239,39 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     //ステートメントの設定
     List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
     List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
-    
+
     //set句
     statement1.add(pStatement.get(Koutsuu.COL_MODOSHIRIYUU));
     statement2.add(pStatement.get(KtimeStamp.COL_STATUS));
+
     statement2.add(pStatement.get(KtimeStamp.COL_SASHIMODOSHI));
     statement2.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
     //where句
     statement1.add(pStatement.get(KtimeStamp.COL_UNINO));
+
     statement2.add(pStatement.get(KtimeStamp.COL_UNINO));
-    
+
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
     //DB接続
     Connection conn = null;
     conn = DBAccess.super.connectionDB(conn);
+
+    //テーブルの更新
     try {
       super.startTransaction(conn);
-      super.executeDMLMlt(conn,"koutsuu\\updateSashimodoshiKoutsuu.sql", statement1);
-      super.executeDMLMlt(conn,"koutsuu\\updateSashimodoshiKtimestamp.sql", statement2);
-    }catch(SQLException e) {
+      super.executeDMLMlt(conn, "koutsuu\\updateSashimodoshiKoutsuu.sql", statement1);
+      super.executeDMLMlt(conn, "koutsuu\\updateSashimodoshiKtimestamp.sql", statement2);
+    } catch (SQLException e) {
       super.endTransactionFalse(conn);
       throw e;
-    }finally{
+    } finally {
       sqlPath = Common.SQL_FILE_PATH;
     }
     super.endTransactionTrue(conn);
   }
-  
+
   /**
    * {@index 修正ボタン押下時のテーブル更新処理}
    * @param pStatement
@@ -272,7 +281,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     //ステートメントの設定
     List<Object> statement1 = new ArrayList<>();//koutsuuテーブル
     List<Object> statement2 = new ArrayList<>();//ktimestampテーブル
-    
+
     //set句
     statement1.add(pStatement.get(Koutsuu.COL_RIYOUHIDUKE));
     statement1.add(pStatement.get(Koutsuu.COL_KUKAN_S));
@@ -280,15 +289,15 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     statement1.add(pStatement.get(Koutsuu.COL_KINGAKU));
     statement1.add(pStatement.get(Koutsuu.COL_BIKOU));
     statement1.add(pStatement.get(Koutsuu.COL_MODOSHIRIYUU));
-    
+
     statement2.add(KCommon.SHINSEI);
     statement2.add(pStatement.get(KtimeStamp.COL_TIMESTAMP));
-    
+
     //where句
     statement1.add(pStatement.get("selNo"));
-    
+
     statement2.add(pStatement.get("selNo"));
-    
+
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -297,12 +306,12 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
     conn = DBAccess.super.connectionDB(conn);
     try {
       super.startTransaction(conn);
-      super.executeDMLMlt(conn,"koutsuu\\updateSyuuseiKoutsuu.sql", statement1);
-      super.executeDMLMlt(conn,"koutsuu\\updateSyuuseiKtimestamp.sql", statement2);
-    }catch(SQLException e) {
+      super.executeDMLMlt(conn, "koutsuu\\updateSyuuseiKoutsuu.sql", statement1);
+      super.executeDMLMlt(conn, "koutsuu\\updateSyuuseiKtimestamp.sql", statement2);
+    } catch (SQLException e) {
       super.endTransactionFalse(conn);
       throw e;
-    }finally{
+    } finally {
       sqlPath = Common.SQL_FILE_PATH;
     }
     super.endTransactionTrue(conn);

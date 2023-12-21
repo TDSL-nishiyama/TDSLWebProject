@@ -31,17 +31,17 @@ public class KoutsuuBL {
       result.put("errorMSG", "同一ステータスへの変更はできません");
       return result;
     }
-    
-      if (intAftS < intBefS) {
-        result.put("errorFlg", "true");
-        StringBuilder sb = new StringBuilder();
-        sb.append("ステータス：「");
-        sb.append(beforeS);
-        sb.append("」から「");
-        sb.append(chgStatus(AfterS));
-        sb.append("」への変更はできません");
-        result.put("errorMSG", sb.toString());
-      }
+
+    if (intAftS < intBefS) {
+      result.put("errorFlg", "true");
+      StringBuilder sb = new StringBuilder();
+      sb.append("ステータス：「");
+      sb.append(beforeS);
+      sb.append("」から「");
+      sb.append(chgStatus(AfterS));
+      sb.append("」への変更はできません");
+      result.put("errorMSG", sb.toString());
+    }
     return result;
   }
 
@@ -132,6 +132,7 @@ public class KoutsuuBL {
     if (selStatus.equals(KCommon.SYOUNIN)) {
       statement.put(KtimeStamp.COL_SYONIN, LocalDateTime.now());
     }
+    statement.put(Koutsuu.COL_MODOSHIRIYUU, "");
     statement.put(KtimeStamp.COL_STATUS, selStatus);
     statement.put(KtimeStamp.COL_TIMESTAMP, LocalDateTime.now());
 

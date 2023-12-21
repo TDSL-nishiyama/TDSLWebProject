@@ -69,6 +69,7 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       <th>区間終了</th>
       <th>金額</th>
       <th>備考</th>
+      <th>差戻理由</th>
       <th>操作</th>
     </tr>
     <%
@@ -101,6 +102,9 @@ List<KoutsuuBean> koutsuuBeanList = (List<KoutsuuBean>) request.getAttribute(Pat
       </td>
       <td>
         <%=bean.getBikou()%>
+      </td>
+      <td>
+        <%=bean.getModoshiriyuu()%>
       </td>
       <td>
         <form action="<%=request.getContextPath()%>/ResultKoutsuuShouninAction" method="post">

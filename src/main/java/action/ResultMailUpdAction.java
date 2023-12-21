@@ -98,10 +98,15 @@ public class ResultMailUpdAction extends HttpServlet {
     request.setAttribute(MSG.MSG_ATTRIBUTE, MSG.MASTA_MAIL_5);
     //メールアドレス更新画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.MASTA_MAIL_UPD_GAMEN);
+        .getRequestDispatcher(Path.MASTA_MAIL_HOME_GAMEN);
     dispatcher.forward(request, response);
   }
   
+  /**
+   * {@index エラーの際の画面表示項目値保持用}
+   * @param request
+   * @param gamenInfo
+   */
   private void saveParameter(HttpServletRequest request,Map<String,Object> gamenInfo) {
     List<MastaBean> mastaBeanList = new ArrayList<MastaBean>();
     MailBL mailBL = new MailBL();
