@@ -86,7 +86,7 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
    * @param selId 選択するid （全IDを表示したい場合0を指定）
    * @param selId 選択するno （指定のない場合0を指定）
    * @param selStatus 選択するステータス（0=申請中 1=差戻中 2=承認済 3=振込済）
-   * @param selQuery 選択するクエリ 0=選択したIDのみ 1=すべてのID 2=ステータスが指定のもののみ
+   * @param selQuery 選択するクエリ 0=選択したIDのみ 1=すべてのID 2=ステータスが指定のもののみ 3=特定のステータスを除外 4=選択したNOのみ
    * @throws SQLException
    */
   public List<KoutsuuEntity> selectKoutsuuKakunin(int selId, int selNo, String selStatus, String selQuery)
