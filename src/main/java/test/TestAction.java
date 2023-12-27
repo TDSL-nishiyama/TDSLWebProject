@@ -28,10 +28,7 @@ public class TestAction extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    TestBL testBL = new TestBL();
-    var result = testBL.testBLMain();
-    request.setAttribute("KOUMOKU", "平均年齢");
-    request.setAttribute("TEST", result);
+    
     RequestDispatcher dispatcher = request
         .getRequestDispatcher("/testpage.jsp");
     dispatcher.forward(request, response);

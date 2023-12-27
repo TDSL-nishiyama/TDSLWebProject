@@ -15,7 +15,7 @@ List<SyainJouhouBean> syainJouhouBeanList = (List<SyainJouhouBean>) request.getA
 <title>社員一覧</title>
 </head>
 <body>
-<%@ include file="../msg.jsp"%>
+  <%@ include file="../msg.jsp"%>
   <%
   if (kanriFlg == false) {
   %>
@@ -29,6 +29,8 @@ List<SyainJouhouBean> syainJouhouBeanList = (List<SyainJouhouBean>) request.getA
       <th>出身地</th>
       <th>住所</th>
       <th>編集</th>
+      <th>スキルシート閲覧</th>
+      <th>スキルシート編集</th>
     </tr>
     <%
     for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
@@ -74,6 +76,8 @@ List<SyainJouhouBean> syainJouhouBeanList = (List<SyainJouhouBean>) request.getA
       <th>出身地</th>
       <th>住所</th>
       <th>編集</th>
+      <th>スキルシート閲覧</th>
+      <th>スキルシート編集</th>
     </tr>
     <%
     for (SyainJouhouBean syainJouhouBean : syainJouhouBeanList) {
@@ -99,6 +103,18 @@ List<SyainJouhouBean> syainJouhouBeanList = (List<SyainJouhouBean>) request.getA
         <form action="<%=request.getContextPath()%>/SyainJouhouHensyuuAction" method="post">
           <input type="hidden" name="chgUserId" value="<%=syainJouhouBean.getId()%>">
           <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="<%=request.getContextPath()%>/SkillAction" method="post">
+          <input type="hidden" name="selId" value="<%=syainJouhouBean.getId()%>">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="<%=request.getContextPath()%>/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="<%=syainJouhouBean.getId()%>">
+          <input type="submit" value="スキルシート編集">
         </form>
       </td>
     </tr>

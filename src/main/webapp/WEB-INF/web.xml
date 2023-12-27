@@ -309,4 +309,22 @@
 		<url-pattern>/MailDelAction</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>SkillAction</servlet-name>
+		<servlet-class>action.SkillAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SkillAction</servlet-name>
+		<url-pattern>/SkillAction</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SkillHensyuuAction</servlet-name>
+		<servlet-class>action.SkillHensyuuAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SkillHensyuuAction</servlet-name>
+		<url-pattern>/SkillHensyuuAction</url-pattern>
+	</servlet-mapping>
+
 </web-app>

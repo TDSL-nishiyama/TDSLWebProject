@@ -25,6 +25,7 @@ border-collapse: collapse;
 }
 table.tableM th,
 table.tableM td {
+overflow-wrap:normal;
 white-space: nowrap;
 padding: 0;
 border: solid 1px #000;

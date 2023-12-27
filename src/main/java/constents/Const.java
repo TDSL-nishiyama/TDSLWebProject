@@ -47,6 +47,7 @@ public class Const {
     public static final String KOUTSUU_SYUUSEI_GAMEN = "/src/koutsuuSyuusei.jsp";
     public static final String MASTA_MAIL_HOME_GAMEN = "/src/mail.jsp";
     public static final String MASTA_MAIL_UPD_GAMEN = "/src/mailUpd.jsp";
+    public static final String SKILLSHEET_GAMEN = "/src/skillsheet.jsp";
     
     
     //スコープ名
@@ -65,6 +66,7 @@ public class Const {
     public static final String KOUTSUU_KAKUNIN_SCOPE = "koutsuuKakunin";
     public static final String KOUTSUU_SHOUNIN_SCOPE = "koutsuuShounin";
     public static final String MAIL_SCOPE = "mailMasta";
+    public static final String SKILL_SCOPE = "skill";
   }
 
   //正常系メッセージ関連
