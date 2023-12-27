@@ -1,42 +1,43 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public class SkillBean implements Serializable {
 
   private int userId; //ユーザーID
   private String userName;
-  private LocalDateTime nyuusyaYMD;
+  private String nyuusyaYMD;
   private String nyuusyaYMDView;
   private String sikaku1; //資格１
-  private LocalDateTime sikaku1YMD; //資格１取得日時
+  private String sikaku1YMD; //資格１取得日時
   private String sikaku2; //資格２
-  private LocalDateTime sikaku2YMD; //資格２取得日時
+  private String sikaku2YMD; //資格２取得日時
   private String sikaku3; //資格３
-  private LocalDateTime sikaku3YMD; //資格３取得日時
-  private LocalDateTime c1SYMD; //職歴１開始日時
-  private LocalDateTime c1EYMD; //職歴１終了日時
+  private String sikaku3YMD; //資格３取得日時
+  private String c1SYMD; //職歴１開始日時
+  private String c1EYMD; //職歴１終了日時
   private String c1kikanView; //職歴１従事期間
   private String carrier1; //職歴１
   private String c1pos; //職歴１担当ポジション
-  private LocalDateTime c2SYMD; //職歴２開始日時
-  private LocalDateTime c2EYMD; //職歴２終了日時
+  private String c2SYMD; //職歴２開始日時
+  private String c2EYMD; //職歴２終了日時
   private String c2kikanView; //職歴２従事期間
   private String carrier2; //職歴２
   private String c2pos; //職歴２担当ポジション
-  private LocalDateTime c3SYMD; //職歴３開始日時
-  private LocalDateTime c3EYMD; //職歴３終了日時
+  private String c3SYMD; //職歴３開始日時
+  private String c3EYMD; //職歴３終了日時
   private String c3kikanView; //職歴３従事期間
   private String carrier3; //職歴３
   private String c3pos; //職歴３担当ポジション
   
   //コンストラクター
-  public SkillBean(int userId,String userName,String nyuusyaYMDView, String sikaku1, LocalDateTime sikaku1ymd, String sikaku2, LocalDateTime sikaku2ymd,
-      String sikaku3, LocalDateTime sikaku3ymd, LocalDateTime c1symd, LocalDateTime c1eymd, String c1kikanView,
-      String carrier1, String c1pos, LocalDateTime c2symd, LocalDateTime c2eymd, String c2kikanView, String carrier2,
-      String c2pos, LocalDateTime c3symd, LocalDateTime c3eymd, String c3kikanView, String carrier3, String c3pos) {
+  public SkillBean(int userId,String userName,String nyuusyaYMDView, String sikaku1, String sikaku1ymd, String sikaku2, String sikaku2ymd,
+      String sikaku3, String sikaku3ymd, String c1symd, String c1eymd, String c1kikanView,
+      String carrier1, String c1pos, String c2symd, String c2eymd, String c2kikanView, String carrier2,
+      String c2pos, String c3symd, String c3eymd, String c3kikanView, String carrier3, String c3pos) {
     this.userId = userId;
+    this.userName = userName;
+    this.nyuusyaYMDView = nyuusyaYMDView;
     this.sikaku1 = sikaku1;
     this.sikaku1YMD = sikaku1ymd;
     this.sikaku2 = sikaku2;
@@ -73,10 +74,10 @@ public class SkillBean implements Serializable {
   public void setSikaku1(String sikaku1) {
     this.sikaku1 = sikaku1;
   }
-  public LocalDateTime getSikaku1YMD() {
+  public String getSikaku1YMD() {
     return sikaku1YMD;
   }
-  public void setSikaku1YMD(LocalDateTime sikaku1ymd) {
+  public void setSikaku1YMD(String sikaku1ymd) {
     sikaku1YMD = sikaku1ymd;
   }
   public String getSikaku2() {
@@ -85,10 +86,10 @@ public class SkillBean implements Serializable {
   public void setSikaku2(String sikaku2) {
     this.sikaku2 = sikaku2;
   }
-  public LocalDateTime getSikaku2YMD() {
+  public String getSikaku2YMD() {
     return sikaku2YMD;
   }
-  public void setSikaku2YMD(LocalDateTime sikaku2ymd) {
+  public void setSikaku2YMD(String sikaku2ymd) {
     sikaku2YMD = sikaku2ymd;
   }
   public String getSikaku3() {
@@ -97,22 +98,22 @@ public class SkillBean implements Serializable {
   public void setSikaku3(String sikaku3) {
     this.sikaku3 = sikaku3;
   }
-  public LocalDateTime getSikaku3YMD() {
+  public String getSikaku3YMD() {
     return sikaku3YMD;
   }
-  public void setSikaku3YMD(LocalDateTime sikaku3ymd) {
+  public void setSikaku3YMD(String sikaku3ymd) {
     sikaku3YMD = sikaku3ymd;
   }
-  public LocalDateTime getC1SYMD() {
+  public String getC1SYMD() {
     return c1SYMD;
   }
-  public void setC1SYMD(LocalDateTime c1symd) {
+  public void setC1SYMD(String c1symd) {
     c1SYMD = c1symd;
   }
-  public LocalDateTime getC1EYMD() {
+  public String getC1EYMD() {
     return c1EYMD;
   }
-  public void setC1EYMD(LocalDateTime c1eymd) {
+  public void setC1EYMD(String c1eymd) {
     c1EYMD = c1eymd;
   }
   public String getCarrier1() {
@@ -127,16 +128,16 @@ public class SkillBean implements Serializable {
   public void setC1pos(String c1pos) {
     this.c1pos = c1pos;
   }
-  public LocalDateTime getC2SYMD() {
+  public String getC2SYMD() {
     return c2SYMD;
   }
-  public void setC2SYMD(LocalDateTime c2symd) {
+  public void setC2SYMD(String c2symd) {
     c2SYMD = c2symd;
   }
-  public LocalDateTime getC2EYMD() {
+  public String getC2EYMD() {
     return c2EYMD;
   }
-  public void setC2EYMD(LocalDateTime c2eymd) {
+  public void setC2EYMD(String c2eymd) {
     c2EYMD = c2eymd;
   }
   public String getCarrier2() {
@@ -151,16 +152,16 @@ public class SkillBean implements Serializable {
   public void setC2pos(String c2pos) {
     this.c2pos = c2pos;
   }
-  public LocalDateTime getC3SYMD() {
+  public String getC3SYMD() {
     return c3SYMD;
   }
-  public void setC3SYMD(LocalDateTime c3symd) {
+  public void setC3SYMD(String c3symd) {
     c3SYMD = c3symd;
   }
-  public LocalDateTime getC3EYMD() {
+  public String getC3EYMD() {
     return c3EYMD;
   }
-  public void setC3EYMD(LocalDateTime c3eymd) {
+  public void setC3EYMD(String c3eymd) {
     c3EYMD = c3eymd;
   }
   public String getCarrier3() {
@@ -202,11 +203,11 @@ public class SkillBean implements Serializable {
     this.userName = userName;
   }
 
-  public LocalDateTime getNyuusyaYMD() {
+  public String getNyuusyaYMD() {
     return nyuusyaYMD;
   }
 
-  public void setNyuusyaYMD(LocalDateTime nyuusyaYMD) {
+  public void setNyuusyaYMD(String nyuusyaYMD) {
     this.nyuusyaYMD = nyuusyaYMD;
   }
 

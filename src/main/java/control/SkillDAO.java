@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,27 +39,26 @@ public class SkillDAO extends DAOCommon implements DBAccess {
 
     //格納用変数の宣言
     int userId;
-    String userName;
-    LocalDateTime nyuusyaYMD = null;
-    String sikaku1;
-    LocalDateTime sikaku1YMD = null;
-    String sikaku2;
-    LocalDateTime sikaku2YMD = null;
-    String sikaku3;
-    LocalDateTime sikaku3YMD = null;
-    LocalDateTime c1SYMD = null;
-    LocalDateTime c1EYMD = null;
-    String carrier1;
-    String c1pos;
-    LocalDateTime c2SYMD = null;
-    LocalDateTime c2EYMD = null;
-    String carrier2;
-    String c2pos;
-    LocalDateTime c3SYMD = null;
-    LocalDateTime c3EYMD = null;
-    String carrier3;
-    String c3pos;
-
+    String userName = "";
+    LocalDate nyuusyaYMD = null;
+    String sikaku1 = "";
+    LocalDate sikaku1YMD = null;
+    String sikaku2 = "";
+    LocalDate sikaku2YMD = null;
+    String sikaku3 = "";
+    LocalDate sikaku3YMD = null;
+    LocalDate c1SYMD = null;
+    LocalDate c1EYMD = null;
+    String carrier1 = "";
+    String c1pos = "";
+    LocalDate c2SYMD = null;
+    LocalDate c2EYMD = null;
+    String carrier2 = "";
+    String c2pos = "";
+    LocalDate c3SYMD = null;
+    LocalDate c3EYMD = null;
+    String carrier3 = "";
+    String c3pos = "";
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -87,7 +86,7 @@ public class SkillDAO extends DAOCommon implements DBAccess {
       ResultSet rs = pStmt.executeQuery();
 
       //格納
-      //日付項目(MySQL:DateTime)はDateからLocalDateTimeに変換して格納
+      //日付項目(MySQL:DateTime)はDateからLocalDateに変換して格納
       //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
       while (rs.next()) {
         userId = rs.getInt(Skill.COL_USERID);

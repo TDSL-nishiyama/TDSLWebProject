@@ -81,7 +81,7 @@ public class CastCommon {
       return result;
     }
     
-    result = chgDtoLD(chgStrToDate(pStr));
+    result = chgDtoLDT(chgStrToDate(pStr));
     
     return result;
   }
@@ -105,6 +105,21 @@ public class CastCommon {
   }
   
   /**
+   * {@index LocalDateをStringに変換する（yyyy-MM-dd形式）}
+   * @param ldt LocalDateTime型の値
+   * @return
+   */
+  public String chgLDtoStr(LocalDate ld) {
+    if (ld == null) {
+      return null;
+    }
+    
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    
+    return ld.format(dateTimeFormatter);
+  }
+  
+  /**
    * {@index LocalDateTimeをStringに変換する（yyyy-MM-dd形式）}
    * @param ldt LocalDateTime型の値
    * @return
@@ -125,12 +140,26 @@ public class CastCommon {
    * UnsupportedOperationExceptionが発生するためNEWして渡すこと
    * @return 
    */
-  public LocalDateTime chgDtoLD(Date d) {
+  public LocalDateTime chgDtoLDT(Date d) {
     
     LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
     LocalTime lt = LocalTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
     
     return LocalDateTime.of(ld, lt);
+    
+  }
+  
+  /**
+   * {@index DateをLocalDateに変換する}
+   * @param d DB源泉の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
+   * UnsupportedOperationExceptionが発生するためNEWして渡すこと
+   * @return 
+   */
+  public LocalDate chgDtoLD(Date d) {
+    
+    LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
+    
+    return ld;
     
   }
 
@@ -150,5 +179,13 @@ public class CastCommon {
 
     return result;
 
+  }
+  
+  public String chgKaigyouCode(String str) {
+    String result = null;
+    
+    result = str.replace("\n", "<br>");
+    
+    return result;
   }
 }

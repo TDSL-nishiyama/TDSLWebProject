@@ -160,26 +160,26 @@ public class KoutsuuDAO extends DAOCommon implements DBAccess {
       LocalDateTime sashimodoshiYMD = null;
       LocalDateTime syouninYMD = null;
 
-      //日付項目(MySQL:DateTime)はDateからLocalDateTimeに変換して格納
+      //日付項目(MySQL:DateTime)はDateからLocalDateに変換して格納
       //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
       while (rs.next()) {
         no = rs.getInt(Koutsuu.COL_UNINO);
         id = rs.getInt(Koutsuu.COL_USERID);
         userName = rs.getString(User.COL_USERNAME);
         sendMailAdress = rs.getString(Koutsuu.COL_SMAIL);
-        riyouYMD = castCommon.chgDtoLD(new Date(rs.getDate(Koutsuu.COL_RIYOUHIDUKE).getTime()));
+        riyouYMD = castCommon.chgDtoLDT(new Date(rs.getDate(Koutsuu.COL_RIYOUHIDUKE).getTime()));
         kukanStart = rs.getString(Koutsuu.COL_KUKAN_S);
         kukanEnd = rs.getString(Koutsuu.COL_KUKAN_E);
         kingaku = rs.getString(Koutsuu.COL_KINGAKU);
         bikou = rs.getString(Koutsuu.COL_BIKOU);
         modoshiriyuu = rs.getString(Koutsuu.COL_MODOSHIRIYUU);
         status = rs.getString(KtimeStamp.COL_STATUS);
-        shinseiYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()));
+        shinseiYMD = castCommon.chgDtoLDT(new Date(rs.getDate(KtimeStamp.COL_YOUKYUU).getTime()));
         if (rs.getDate(KtimeStamp.COL_SASHIMODOSHI) != null) {
-          sashimodoshiYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_SASHIMODOSHI).getTime()));
+          sashimodoshiYMD = castCommon.chgDtoLDT(new Date(rs.getDate(KtimeStamp.COL_SASHIMODOSHI).getTime()));
         }
         if (rs.getDate(KtimeStamp.COL_SYONIN) != null) {
-          syouninYMD = castCommon.chgDtoLD(new Date(rs.getDate(KtimeStamp.COL_SYONIN).getTime()));
+          syouninYMD = castCommon.chgDtoLDT(new Date(rs.getDate(KtimeStamp.COL_SYONIN).getTime()));
         }
         KoutsuuEntity entity = new KoutsuuEntity(
             no, id, userName, sendMailAdress, riyouYMD, kukanStart, kukanEnd, kingaku, bikou, modoshiriyuu,

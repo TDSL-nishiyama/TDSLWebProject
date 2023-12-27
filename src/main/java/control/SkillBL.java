@@ -1,17 +1,18 @@
 package control;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 import control.common.CalcCommon;
+import control.common.CastCommon;
 import model.SkillBean;
 import model.SkillEntity;
 
 public class SkillBL {
-  
+
   /**
    * {@index スキルシートに表示する値を取得する}
    * @param selId
@@ -22,6 +23,7 @@ public class SkillBL {
     List<SkillBean> result = new ArrayList<SkillBean>();
     String fileName = null;
     List<Object> statement = new ArrayList<>();
+    CastCommon castC = new CastCommon();
 
     fileName = "skill\\selectSkill.sql";
     statement.add(selId);
@@ -36,33 +38,34 @@ public class SkillBL {
     String c3kikanView = getKikan(resultDB.get(0).getC3SYMD(), resultDB.get(0).getC3EYMD());
 
     SkillBean bean = new SkillBean(
-        resultDB.get(0).getUserId(),resultDB.get(0).getUserName(),setNenji(resultDB.get(0).getNyuusyaYMD()),
-        resultDB.get(0).getSikaku1(), resultDB.get(0).getSikaku1YMD(),
-        resultDB.get(0).getSikaku2(), resultDB.get(0).getSikaku2YMD(),
-        resultDB.get(0).getSikaku3(), resultDB.get(0).getSikaku3YMD(),
-        resultDB.get(0).getC1SYMD(), resultDB.get(0).getC1EYMD(), c1kikanView, resultDB.get(0).getCarrier1(), resultDB.get(0).getC1pos(),
-        resultDB.get(0).getC2SYMD(), resultDB.get(0).getC2EYMD(), c2kikanView, resultDB.get(0).getCarrier2(), resultDB.get(0).getC2pos(),
-        resultDB.get(0).getC3SYMD(), resultDB.get(0).getC3EYMD(), c3kikanView, resultDB.get(0).getCarrier3(), resultDB.get(0).getC3pos()
-        );
+        resultDB.get(0).getUserId(), resultDB.get(0).getUserName(), setNenji(resultDB.get(0).getNyuusyaYMD()),
+        resultDB.get(0).getSikaku1(), castC.chgLDtoStr(resultDB.get(0).getSikaku1YMD()),
+        resultDB.get(0).getSikaku2(), castC.chgLDtoStr(resultDB.get(0).getSikaku2YMD()),
+        resultDB.get(0).getSikaku3(), castC.chgLDtoStr(resultDB.get(0).getSikaku3YMD()),
+        castC.chgLDtoStr(resultDB.get(0).getC1SYMD()), castC.chgLDtoStr(resultDB.get(0).getC1EYMD()), c1kikanView,
+        castC.chgKaigyouCode(resultDB.get(0).getCarrier1()),castC.chgKaigyouCode(resultDB.get(0).getC1pos()),
+        castC.chgLDtoStr(resultDB.get(0).getC2SYMD()), castC.chgLDtoStr(resultDB.get(0).getC2EYMD()), c2kikanView, 
+        castC.chgKaigyouCode(resultDB.get(0).getCarrier2()),castC.chgKaigyouCode(resultDB.get(0).getC2pos()),
+        castC.chgLDtoStr(resultDB.get(0).getC3SYMD()), castC.chgLDtoStr(resultDB.get(0).getC3EYMD()), c3kikanView, 
+        castC.chgKaigyouCode(resultDB.get(0).getCarrier3()),castC.chgKaigyouCode(resultDB.get(0).getC3pos()));
     result.add(bean);
 
     return result;
   }
-  
+
   /**
    * {@index 経験年数の設定}
    * @param nyuusyaYMD
    * @return
    */
-  private String setNenji(LocalDateTime nyuusyaYMD) {
-    if(nyuusyaYMD == null) {
+  private String setNenji(LocalDate nyuusyaYMD) {
+    if (nyuusyaYMD == null) {
       return "";
     }
-    
+
     String result = null;
-    Period prNyuusyaYMD = null;
     CalcCommon calc = new CalcCommon();
-    prNyuusyaYMD = calc.diffDate(nyuusyaYMD);
+    Period prNyuusyaYMD = calc.diffDate(nyuusyaYMD);
     StringBuilder nenji = new StringBuilder();
     nenji.append(prNyuusyaYMD.getYears());
     nenji.append("年");
@@ -73,20 +76,20 @@ public class SkillBL {
 
     return result;
   }
-  
+
   /**
    * {@index プロジェクト従事期間の設定}
    * @param date1 開始
    * @param date2 終了
    * @return
    */
-  private String getKikan(LocalDateTime date1, LocalDateTime date2) {
-    if(date1 == null || date2 == null) {
+  private String getKikan(LocalDate date1, LocalDate date2) {
+    if (date1 == null || date2 == null) {
       return "";
     }
 
     CalcCommon calcC = new CalcCommon();
-    Period kikan = calcC.diffDate(date2, date1);
+    Period kikan = calcC.diffDate(date1, date2);
     StringBuilder sb = new StringBuilder();
     if (kikan.getYears() != 0) {
       sb.append(kikan.getYears());

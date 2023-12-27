@@ -3,7 +3,6 @@ package control.common;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Date;
 
@@ -29,10 +28,10 @@ public class CalcCommon {
 	
 	 /**
    *{@index} 日付計算（年月日）
-   *@param LocalDateTime date 日付 
+   *@param LocalDate date 日付 
    *@return Period パラメータに設定した日付-現在日付
    **/
-  public Period diffDate(LocalDateTime date) {
+  public Period diffDate(LocalDate date) {
     Period result = null;
     LocalDate ldate = LocalDate.of(date.getYear(),date.getMonth(),date.getDayOfMonth());
     result = Period.between(ldate, LocalDate.now());
@@ -77,11 +76,11 @@ public class CalcCommon {
   
   /**
   *{@index} 日付計算（年月日）
-  *@param LocalDateTime date1 日付1
-  *@param LocalDateTime date2 日付2
+  *@param LocalDate date1 日付1
+  *@param LocalDate date2 日付2
   *@return Period pDate1-pDate2
   **/
- public Period diffDate(LocalDateTime pDate1,LocalDateTime pDate2) {
+ public Period diffDate(LocalDate pDate1,LocalDate pDate2) {
   
    Period result = null;
 
