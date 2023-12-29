@@ -20,24 +20,24 @@ import model.SkillBean;
  * Servlet implementation class SkillAction
  */
 public class SkillAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //共通クラスのインスタンス化
-	  SkillBL skillBL = new SkillBL();
-	  CheckCommon checkC = new CheckCommon();
-	  
-	  //画面情報の取得
-	  String selId = request.getParameter("selId");
-	  int id = 0;
-	  if(checkC.checkBlankOrNULL(selId) == true) {
-	    id = Integer.parseInt(selId);
-	  }
-	  
-	  //リクエストスコープにインスタンスを保存
+    SkillBL skillBL = new SkillBL();
+    CheckCommon checkC = new CheckCommon();
+
+    //画面情報の取得
+    String selId = request.getParameter("selId");
+    int id = 0;
+    if (checkC.checkBlankOrNULL(selId) == true) {
+      id = Integer.parseInt(selId);
+    }
+
+    //リクエストスコープにインスタンスを保存
     List<SkillBean> skillBLList = new ArrayList<SkillBean>();
     try {
       skillBLList = skillBL.getSkill(id);
@@ -49,12 +49,13 @@ public class SkillAction extends HttpServlet {
       dispatcher.forward(request, response);
       return;
     }
+
     request.setAttribute(Path.SKILL_SCOPE, skillBLList);
 
-    //ユーザー更新実行画面に遷移
+    //スキルシート閲覧画面に遷移
     RequestDispatcher dispatcher = request
         .getRequestDispatcher(Path.SKILLSHEET_GAMEN);
     dispatcher.forward(request, response);
-	}
+  }
 
 }

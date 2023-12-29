@@ -56,7 +56,7 @@ List<SkillBean> skillBeanList = (List<SkillBean>) request.getAttribute(Path.SKIL
       <td><%=bean.getSikaku3()%></td>
     </tr>
   </table>
-
+  
   <p>
   <table class="skillsheet">
     <tr>

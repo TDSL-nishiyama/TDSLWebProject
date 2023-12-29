@@ -154,8 +154,8 @@ CastCommon castC = new CastCommon();
       </tr>
       <tr>
         <td width="600" style="overflow: normal"><textarea name="carrier3" rows="20" cols="90"><%=bean.getCarrier3()%></textarea></td>
-        <td style="overflow: normal"><textarea name="c2pos" rows="20" cols="30" name="c3pos"><%=bean.getC3pos()%></textarea></td>
-        <td style="overflow: normal"><textarea name="c2pos" rows="20" cols="30" name="c3tech"><%=bean.getC3tech()%></textarea></td>
+        <td style="overflow: normal"><textarea name="c3pos" rows="20" cols="30" name="c3pos"><%=bean.getC3pos()%></textarea></td>
+        <td style="overflow: normal"><textarea name="c3tech" rows="20" cols="30" name="c3tech"><%=bean.getC3tech()%></textarea></td>
       </tr>
     </table>
     <%

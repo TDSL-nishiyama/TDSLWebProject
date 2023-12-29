@@ -173,6 +173,16 @@ public class SkillDAO extends DAOCommon implements DBAccess {
     return result;
   }
   
+  public List<Object> getUserInfo(int selId){
+    List<String> column = new ArrayList<String>();
+    column.add(User.COL_USERNAME);
+    column.add(UserShousai.COL_NYUUSYAYMD);
+    List<Object> statement = new ArrayList<Object>();
+    statement.add(selId);
+
+    return super.selectSQL("getUserInfo.sql", column,statement);
+  }
+  
   /**
    * {@index skillテーブルに画面入力値をInsertする}
    * @param pStatement
