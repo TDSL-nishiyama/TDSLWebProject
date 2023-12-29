@@ -128,8 +128,8 @@ CastCommon castC = new CastCommon();
       </tr>
       <tr>
         <td width="600" style="overflow: normal"><textarea name="carrier2" rows="20" cols="90"><%=castC.chgBRtag(bean.getCarrier2())%></textarea></td>
-        <td style="overflow: normal"><textarea name="c2pos" rows="20" cols="30" name="c2pos"><%=bean.getC2pos()%></textarea></td>
-        <td style="overflow: normal"><textarea name="c2tech" rows="20" cols="30" name="c2tech"><%=bean.getC2tech()%></textarea></td>
+        <td style="overflow: normal"><textarea name="c2pos" rows="20" cols="30" name="c2pos"><%=castC.chgBRtag(bean.getC2pos())%></textarea></td>
+        <td style="overflow: normal"><textarea name="c2tech" rows="20" cols="30" name="c2tech"><%=castC.chgBRtag(bean.getC2tech())%></textarea></td>
       </tr>
       <tr>
         <th style="width: 50px" rowspan="6">3</th>
@@ -153,9 +153,9 @@ CastCommon castC = new CastCommon();
         <th>使用言語等</th>
       </tr>
       <tr>
-        <td width="600" style="overflow: normal"><textarea name="carrier3" rows="20" cols="90"><%=bean.getCarrier3()%></textarea></td>
-        <td style="overflow: normal"><textarea name="c3pos" rows="20" cols="30" name="c3pos"><%=bean.getC3pos()%></textarea></td>
-        <td style="overflow: normal"><textarea name="c3tech" rows="20" cols="30" name="c3tech"><%=bean.getC3tech()%></textarea></td>
+        <td width="600" style="overflow: normal"><textarea name="carrier3" rows="20" cols="90"><%=castC.chgBRtag(bean.getCarrier3())%></textarea></td>
+        <td style="overflow: normal"><textarea name="c3pos" rows="20" cols="30" name="c3pos"><%=castC.chgBRtag(bean.getC3pos())%></textarea></td>
+        <td style="overflow: normal"><textarea name="c3tech" rows="20" cols="30" name="c3tech"><%=castC.chgBRtag(bean.getC3tech())%></textarea></td>
       </tr>
     </table>
     <%
