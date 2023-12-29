@@ -48,7 +48,7 @@ public class Const {
     public static final String MASTA_MAIL_HOME_GAMEN = "/src/mail.jsp";
     public static final String MASTA_MAIL_UPD_GAMEN = "/src/mailUpd.jsp";
     public static final String SKILLSHEET_GAMEN = "/src/skillsheet.jsp";
-    
+    public static final String SKILLSHEET_HENSYUU_GAMEN = "/src/skillsheetHensyuu.jsp";
     
     //スコープ名
     public static final String SESSION_SCOPE = "loginSession";
@@ -124,6 +124,9 @@ public class Const {
     
     //交通費修正
     public static final String K_SYUUSEI_1 = "修正処理が完了しました";
+    
+    //スキルシート編集
+    public static final String SK_HENSYU_1 = "更新が完了しました";
   }
 
   //エラー関連

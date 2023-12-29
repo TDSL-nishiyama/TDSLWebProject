@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import constents.Const.Common;
 import constents.SkillConst.Skill;
+import constents.SkillConst.SkillHensyuuG;
 import constents.Table.User;
 import constents.UserShousai;
 import control.common.CastCommon;
@@ -51,14 +54,18 @@ public class SkillDAO extends DAOCommon implements DBAccess {
     LocalDate c1EYMD = null;
     String carrier1 = "";
     String c1pos = "";
+    String c1tech = "";
     LocalDate c2SYMD = null;
     LocalDate c2EYMD = null;
     String carrier2 = "";
     String c2pos = "";
+    String c2tech = "";
     LocalDate c3SYMD = null;
     LocalDate c3EYMD = null;
     String carrier3 = "";
     String c3pos = "";
+    String c3tech = "";
+    
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -114,6 +121,7 @@ public class SkillDAO extends DAOCommon implements DBAccess {
         }
         carrier1 = rs.getString(Skill.COL_CARRIER1);
         c1pos = rs.getString(Skill.COL_CARRIER1_POS);
+        c1tech = rs.getString(Skill.COL_CARRIER1_TECH);
         if (rs.getDate(Skill.COL_CARRIER2_START) != null) {
           c2SYMD = castCommon.chgDtoLD(new Date(rs.getDate(Skill.COL_CARRIER2_START).getTime()));
         }
@@ -122,6 +130,7 @@ public class SkillDAO extends DAOCommon implements DBAccess {
         }
         carrier2 = rs.getString(Skill.COL_CARRIER2);
         c2pos = rs.getString(Skill.COL_CARRIER2_POS);
+        c2tech = rs.getString(Skill.COL_CARRIER2_TECH);
         if (rs.getDate(Skill.COL_CARRIER3_START) != null) {
           c3SYMD = castCommon.chgDtoLD(new Date(rs.getDate(Skill.COL_CARRIER3_START).getTime()));
         }
@@ -130,9 +139,10 @@ public class SkillDAO extends DAOCommon implements DBAccess {
         }
         carrier3 = rs.getString(Skill.COL_CARRIER3);
         c3pos = rs.getString(Skill.COL_CARRIER3_POS);
+        c3tech = rs.getString(Skill.COL_CARRIER3_TECH);
 
         SkillEntity entity = new SkillEntity(userId, userName,nyuusyaYMD,sikaku1, sikaku1YMD, sikaku2, sikaku2YMD, sikaku3, sikaku3YMD,
-            c1SYMD, c1EYMD, carrier1, c1pos, c2SYMD, c2EYMD, carrier2, c2pos, c3SYMD, c3EYMD, carrier3, c3pos);
+            c1SYMD, c1EYMD, carrier1, c1pos,c1tech,c2SYMD, c2EYMD, carrier2, c2pos,c2tech, c3SYMD, c3EYMD, carrier3, c3pos,c3tech);
         result.add(entity);
       }
     } catch (SQLException e) {
@@ -143,5 +153,94 @@ public class SkillDAO extends DAOCommon implements DBAccess {
       DBAccess.super.closeDB(conn);
     }
     return result;
+  }
+  
+  /**
+   * {@index skillテーブルのIDチェック用}
+   * @param selId　ユーザーID
+   * @return true = IDあり false = IDなし
+   */
+  public boolean checkIdInSkill(int selId) {
+    boolean result = false;
+    List<Object> statement = new ArrayList<Object>();
+    
+    statement.add(selId);
+    
+    if(super.countSQL("\\skill\\checkIdInSkill.sql", statement) == 1) {
+      result = true;
+    }
+    
+    return result;
+  }
+  
+  /**
+   * {@index skillテーブルに画面入力値をInsertする}
+   * @param pStatement
+   * @throws SQLException
+   */
+  public void insSkil(Map<String,Object> pStatement)throws SQLException {
+    List<Object> statement = new ArrayList<Object>();
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_USERID));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1YMD));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2YMD));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3YMD));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_START));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_END));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_POS));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_TECH));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_START));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_END));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_POS));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_TECH));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_START));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_END));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_POS));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_TECH));
+    statement.add(LocalDateTime.now());
+    
+    super.executeDML("\\skill\\insertSkill.sql", statement);
+  }
+  
+  /**
+   * {@index skillテーブルを画面入力値を元にUPDATEする}
+   * @param pStatement
+   * @throws SQLException
+   */
+  public void updSkil(Map<String,Object> pStatement)throws SQLException {
+    List<Object> statement = new ArrayList<Object>();
+    //set句
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1YMD));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2YMD));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3YMD));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_START));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_END));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_POS));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_TECH));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_START));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_END));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_POS));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER2_TECH));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_START));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_END));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_POS));
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_TECH));
+    statement.add(LocalDateTime.now());
+    
+    //where句
+    statement.add(pStatement.get(SkillHensyuuG.GAMEN_USERID));
+    
+    super.executeDML("\\skill\\updateSkill.sql", statement);
   }
 }

@@ -38,7 +38,7 @@ public class CheckCommon {
   /**
    * {@index ブランクまたはNULLチェック}
    * @param str 文字列
-   * @return true=エラーなし　false=エラーあり
+   * @return true=内容あり　false=ブランクまたはNULL
    */
   public boolean checkBlankOrNULL(String str) {
     boolean result = true;

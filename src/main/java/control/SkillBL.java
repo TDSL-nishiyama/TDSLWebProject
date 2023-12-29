@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import control.common.CalcCommon;
 import control.common.CastCommon;
@@ -37,20 +38,49 @@ public class SkillBL {
     String c2kikanView = getKikan(resultDB.get(0).getC2SYMD(), resultDB.get(0).getC2EYMD());
     String c3kikanView = getKikan(resultDB.get(0).getC3SYMD(), resultDB.get(0).getC3EYMD());
 
+    //日付項目はString型（yyyy-mm-dd形式）に変更のうえNULLの場合空白に設定
+    String sikaku1YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getSikaku1YMD()));
+    String sikaku2YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getSikaku2YMD()));
+    String sikaku3YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getSikaku3YMD()));
+    String c1sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC1SYMD()));
+    String c1eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC1EYMD()));
+    String c2sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC2SYMD()));
+    String c2eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC2EYMD()));
+    String c3sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC3SYMD()));
+    String c3eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC3EYMD()));
+    
     SkillBean bean = new SkillBean(
         resultDB.get(0).getUserId(), resultDB.get(0).getUserName(), setNenji(resultDB.get(0).getNyuusyaYMD()),
-        resultDB.get(0).getSikaku1(), castC.chgLDtoStr(resultDB.get(0).getSikaku1YMD()),
-        resultDB.get(0).getSikaku2(), castC.chgLDtoStr(resultDB.get(0).getSikaku2YMD()),
-        resultDB.get(0).getSikaku3(), castC.chgLDtoStr(resultDB.get(0).getSikaku3YMD()),
-        castC.chgLDtoStr(resultDB.get(0).getC1SYMD()), castC.chgLDtoStr(resultDB.get(0).getC1EYMD()), c1kikanView,
-        castC.chgKaigyouCode(resultDB.get(0).getCarrier1()),castC.chgKaigyouCode(resultDB.get(0).getC1pos()),
-        castC.chgLDtoStr(resultDB.get(0).getC2SYMD()), castC.chgLDtoStr(resultDB.get(0).getC2EYMD()), c2kikanView, 
-        castC.chgKaigyouCode(resultDB.get(0).getCarrier2()),castC.chgKaigyouCode(resultDB.get(0).getC2pos()),
-        castC.chgLDtoStr(resultDB.get(0).getC3SYMD()), castC.chgLDtoStr(resultDB.get(0).getC3EYMD()), c3kikanView, 
-        castC.chgKaigyouCode(resultDB.get(0).getCarrier3()),castC.chgKaigyouCode(resultDB.get(0).getC3pos()));
+        resultDB.get(0).getSikaku1(), sikaku1YMD,
+        resultDB.get(0).getSikaku2(), sikaku2YMD,
+        resultDB.get(0).getSikaku3(), sikaku3YMD,
+        c1sYMD, c1eYMD, c1kikanView,
+        castC.chgKaigyouCode(resultDB.get(0).getCarrier1()),castC.chgKaigyouCode(resultDB.get(0).getC1pos()),castC.chgKaigyouCode(resultDB.get(0).getC1tech()),
+        c2sYMD, c2eYMD, c2kikanView, 
+        castC.chgKaigyouCode(resultDB.get(0).getCarrier2()),castC.chgKaigyouCode(resultDB.get(0).getC2pos()),castC.chgKaigyouCode(resultDB.get(0).getC2tech()),
+        c3sYMD, c3eYMD, c3kikanView, 
+        castC.chgKaigyouCode(resultDB.get(0).getCarrier3()),castC.chgKaigyouCode(resultDB.get(0).getC3pos()),castC.chgKaigyouCode(resultDB.get(0).getC3tech()));
     result.add(bean);
 
     return result;
+  }
+  
+  /**
+   * {@index スキルシート更新処理}
+   * @param selId
+   * @param gamenInfo
+   * @throws SQLException
+   */
+  public void updSkill(int selId,Map<String,Object> gamenInfo)throws SQLException {
+    //共通クラスのインスタンス化
+    SkillDAO dao = new SkillDAO(); 
+    
+    //IDがある場合UPDATE、ない場合INSERT
+    if(dao.checkIdInSkill(selId) == true) {
+      dao.updSkil(gamenInfo);
+    }else {
+      dao.insSkil(gamenInfo);
+    }
   }
 
   /**

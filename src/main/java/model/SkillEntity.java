@@ -19,21 +19,24 @@ public class SkillEntity implements Serializable {
   private LocalDate c1EYMD; //職歴１終了日時
   private String carrier1; //職歴１
   private String c1pos; //職歴１担当ポジション
+  private String c1tech; //職歴１使用技術等
   private LocalDate c2SYMD; //職歴２開始日時
   private LocalDate c2EYMD; //職歴２終了日時
   private String carrier2; //職歴２
   private String c2pos; //職歴２担当ポジション
+  private String c2tech; //職歴２使用技術等
   private LocalDate c3SYMD; //職歴３開始日時
   private LocalDate c3EYMD; //職歴３終了日時
   private String carrier3; //職歴３
   private String c3pos; //職歴３担当ポジション
+  private String c3tech; //職歴３使用技術等
   private Timestamp timestamp;
-  
+
   //コンストラクター
-  public SkillEntity(int userId,String userName,LocalDate nyuusyaYMD, String skill1, LocalDate sikaku1ymd, String skill2, LocalDate sikaku2ymd,
-      String skill3, LocalDate sikaku3ymd, LocalDate c1symd, LocalDate c1eymd, String carrier1, String c1pos,
-      LocalDate c2symd, LocalDate c2eymd, String carrier2, String c2pos, LocalDate c3symd, LocalDate c3eymd,
-      String carrier3, String c3pos) {
+  public SkillEntity(int userId, String userName, LocalDate nyuusyaYMD, String skill1, LocalDate sikaku1ymd, String skill2, LocalDate sikaku2ymd,
+      String skill3, LocalDate sikaku3ymd, LocalDate c1symd, LocalDate c1eymd, String carrier1, String c1pos,String c1tech,
+      LocalDate c2symd, LocalDate c2eymd, String carrier2, String c2pos,String c2tech, LocalDate c3symd, LocalDate c3eymd,
+      String carrier3, String c3pos,String c3tech) {
     this.userId = userId;
     this.userName = userName;
     this.nyuusyaYMD = nyuusyaYMD;
@@ -47,16 +50,19 @@ public class SkillEntity implements Serializable {
     this.c1EYMD = c1eymd;
     this.carrier1 = carrier1;
     this.c1pos = c1pos;
+    this.c1tech = c1tech;
     this.c2SYMD = c2symd;
     this.c2EYMD = c2eymd;
     this.carrier2 = carrier2;
     this.c2pos = c2pos;
+    this.c2tech = c2tech;
     this.c3SYMD = c3symd;
     this.c3EYMD = c3eymd;
     this.carrier3 = carrier3;
     this.c3pos = c3pos;
+    this.c3tech = c3tech;
   }
-  
+
   //アクセサメソッド
   public int getUserId() {
     return userId;
@@ -162,6 +168,14 @@ public class SkillEntity implements Serializable {
     this.c1pos = c1pos;
   }
 
+  public String getC1tech() {
+    return c1tech;
+  }
+
+  public void setC1tech(String c1tech) {
+    this.c1tech = c1tech;
+  }
+
   public LocalDate getC2SYMD() {
     return c2SYMD;
   }
@@ -194,6 +208,14 @@ public class SkillEntity implements Serializable {
     this.c2pos = c2pos;
   }
 
+  public String getC2tech() {
+    return c2tech;
+  }
+
+  public void setC2tech(String c2tech) {
+    this.c2tech = c2tech;
+  }
+
   public LocalDate getC3SYMD() {
     return c3SYMD;
   }
@@ -224,6 +246,14 @@ public class SkillEntity implements Serializable {
 
   public void setC3pos(String c3pos) {
     this.c3pos = c3pos;
+  }
+
+  public String getC3tech() {
+    return c3tech;
+  }
+
+  public void setC3tech(String c3tech) {
+    this.c3tech = c3tech;
   }
 
   public Timestamp getTimestamp() {

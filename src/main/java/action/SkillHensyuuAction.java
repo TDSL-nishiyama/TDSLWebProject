@@ -8,7 +8,6 @@ import java.util.List;
 import constents.Const.ERRORMSG;
 import constents.Const.Path;
 import control.SkillBL;
-import control.common.CheckCommon;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -19,25 +18,21 @@ import model.SkillBean;
 /**
  * Servlet implementation class SkillAction
  */
-public class SkillAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class SkillHensyuuAction extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //共通クラスのインスタンス化
-	  SkillBL skillBL = new SkillBL();
-	  CheckCommon checkC = new CheckCommon();
-	  
-	  //画面情報の取得
-	  String selId = request.getParameter("selId");
-	  int id = 0;
-	  if(checkC.checkBlankOrNULL(selId) == true) {
-	    id = Integer.parseInt(selId);
-	  }
-	  
-	  //リクエストスコープにインスタンスを保存
+    SkillBL skillBL = new SkillBL();
+
+    //画面情報の取得
+    String selId = request.getParameter("selId");
+    int id = Integer.parseInt(selId);
+
+    //リクエストスコープにインスタンスを保存
     List<SkillBean> skillBLList = new ArrayList<SkillBean>();
     try {
       skillBLList = skillBL.getSkill(id);
@@ -53,8 +48,8 @@ public class SkillAction extends HttpServlet {
 
     //ユーザー更新実行画面に遷移
     RequestDispatcher dispatcher = request
-        .getRequestDispatcher(Path.SKILLSHEET_GAMEN);
+        .getRequestDispatcher(Path.SKILLSHEET_HENSYUU_GAMEN);
     dispatcher.forward(request, response);
-	}
+  }
 
 }

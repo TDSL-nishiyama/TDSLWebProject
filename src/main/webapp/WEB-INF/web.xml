@@ -327,4 +327,13 @@
 		<url-pattern>/SkillHensyuuAction</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ResultSkillHensyuuAction</servlet-name>
+		<servlet-class>action.ResultSkillHensyuuAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResultSkillHensyuuAction</servlet-name>
+		<url-pattern>/ResultSkillHensyuuAction</url-pattern>
+	</servlet-mapping>
+
 </web-app>

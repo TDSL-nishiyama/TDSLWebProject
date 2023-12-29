@@ -68,7 +68,7 @@ public class CastCommon {
 
     return result;
   }
-  
+
   /**
    * {@index　日付型文字列をLocalDateTimeに変換する}
    * @param pStr
@@ -76,13 +76,13 @@ public class CastCommon {
    */
   public LocalDateTime chgStrtoLDT(String pStr) {
     LocalDateTime result = null;
-    
-    if (pStr == null||pStr.isBlank()) {
+
+    if (pStr == null || pStr.isBlank()) {
       return result;
     }
-    
+
     result = chgDtoLDT(chgStrToDate(pStr));
-    
+
     return result;
   }
 
@@ -103,7 +103,7 @@ public class CastCommon {
 
     return result;
   }
-  
+
   /**
    * {@index LocalDateをStringに変換する（yyyy-MM-dd形式）}
    * @param ldt LocalDateTime型の値
@@ -113,12 +113,12 @@ public class CastCommon {
     if (ld == null) {
       return null;
     }
-    
+
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    
+
     return ld.format(dateTimeFormatter);
   }
-  
+
   /**
    * {@index LocalDateTimeをStringに変換する（yyyy-MM-dd形式）}
    * @param ldt LocalDateTime型の値
@@ -128,12 +128,12 @@ public class CastCommon {
     if (ldt == null) {
       return null;
     }
-    
+
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    
+
     return ldt.format(dateTimeFormatter);
   }
-  
+
   /**
    * {@index DateをLocalDateTimeに変換する}
    * @param d DB源泉の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
@@ -141,14 +141,14 @@ public class CastCommon {
    * @return 
    */
   public LocalDateTime chgDtoLDT(Date d) {
-    
+
     LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
     LocalTime lt = LocalTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
-    
+
     return LocalDateTime.of(ld, lt);
-    
+
   }
-  
+
   /**
    * {@index DateをLocalDateに変換する}
    * @param d DB源泉の値はDate型でキャストしないとjava.sql.toInstant()が呼ばれて
@@ -156,11 +156,11 @@ public class CastCommon {
    * @return 
    */
   public LocalDate chgDtoLD(Date d) {
-    
+
     LocalDate ld = LocalDate.ofInstant(d.toInstant(), ZoneId.systemDefault());
-    
+
     return ld;
-    
+
   }
 
   /**
@@ -178,14 +178,51 @@ public class CastCommon {
     }
 
     return result;
-
   }
   
+  /**
+   * {@index 入力値がブランクまたはNULLの場合入力値にNULLを代入して返却する}
+   * @param input
+   * @return
+   */
+  public String setNull(Object input) {
+    CheckCommon checkC = new CheckCommon();
+    String result = (String) input;
+    if(checkC.checkBlankOrNULL(result)==false) {
+      result = null;
+    }
+    return result;
+  }
+  
+  /**
+   * {@index 改行コード\nを<br>タグに変換する}
+   * @param str　変換したい文字列
+   * @return
+   */
   public String chgKaigyouCode(String str) {
     String result = null;
-    
-    result = str.replace("\n", "<br>");
-    
+    CheckCommon checkC = new CheckCommon();
+    if (checkC.checkBlankOrNULL(str) == true) {
+      result = str.replace("\n", "<br>");
+    } else {
+      result = "";
+    }
+    return result;
+  }
+  
+  /**
+   * {@index <br>タグを改行コード\nに変換する}
+   * @param str　変換したい文字列
+   * @return
+   */
+  public String chgBRtag(String str) {
+    String result = null;
+    CheckCommon checkC = new CheckCommon();
+    if (checkC.checkBlankOrNULL(str) == true) {
+      result = str.replace("<br>", "\n");
+    } else {
+      result = "";
+    }
     return result;
   }
 }

@@ -87,9 +87,9 @@ List<SkillBean> skillBeanList = (List<SkillBean>) request.getAttribute(Path.SKIL
     <tr>
       <td width="600" style="overflow: normal"><%=bean.getCarrier1()%></td>
       <td style="overflow: normal"><%=bean.getC1pos()%></td>
-      <td style="overflow: normal">言語：VB6・VB.net・VC++・C#.net・COBOL・Visual Cobol<br>DB：SQLServer・DB2</td>
+      <td style="overflow: normal"><%=bean.getC1tech()%></td>
     </tr>
-        <tr>
+    <tr>
       <th style="width: 50px" rowspan="6">2</th>
     </tr>
     <tr>
@@ -101,9 +101,9 @@ List<SkillBean> skillBeanList = (List<SkillBean>) request.getAttribute(Path.SKIL
       <th>在籍期間</th>
     </tr>
     <tr>
-      <td style="width: 200px"><%=bean.getC1SYMD()%></td>
-      <td style="width: 200px"><%=bean.getC1EYMD()%></td>
-      <td style="width: 200px"><%=bean.getC1kikanView()%></td>
+      <td style="width: 200px"><%=bean.getC2SYMD()%></td>
+      <td style="width: 200px"><%=bean.getC2EYMD()%></td>
+      <td style="width: 200px"><%=bean.getC2kikanView()%></td>
     </tr>
     <tr>
       <th>職務内容</th>
@@ -111,11 +111,11 @@ List<SkillBean> skillBeanList = (List<SkillBean>) request.getAttribute(Path.SKIL
       <th>使用言語等</th>
     </tr>
     <tr>
-      <td width="600" style="overflow: normal"><%=bean.getCarrier1()%></td>
-      <td style="overflow: normal"><%=bean.getC1pos()%></td>
-      <td style="overflow: normal">言語：VB6・VB.net・VC++・C#.net<br>DB：MySQL</td>
+      <td width="600" style="overflow: normal"><%=bean.getCarrier2()%></td>
+      <td style="overflow: normal"><%=bean.getC2pos()%></td>
+      <td style="overflow: normal"><%=bean.getC2tech()%></td>
     </tr>
-        <tr>
+    <tr>
       <th style="width: 50px" rowspan="6">3</th>
     </tr>
     <tr>
@@ -127,9 +127,9 @@ List<SkillBean> skillBeanList = (List<SkillBean>) request.getAttribute(Path.SKIL
       <th>在籍期間</th>
     </tr>
     <tr>
-      <td style="width: 200px"><%=bean.getC1SYMD()%></td>
-      <td style="width: 200px"><%=bean.getC1EYMD()%></td>
-      <td style="width: 200px"><%=bean.getC1kikanView()%></td>
+      <td style="width: 200px"><%=bean.getC3SYMD()%></td>
+      <td style="width: 200px"><%=bean.getC3EYMD()%></td>
+      <td style="width: 200px"><%=bean.getC3kikanView()%></td>
     </tr>
     <tr>
       <th>職務内容</th>
@@ -137,9 +137,9 @@ List<SkillBean> skillBeanList = (List<SkillBean>) request.getAttribute(Path.SKIL
       <th>使用言語等</th>
     </tr>
     <tr>
-      <td width="600" style="overflow: normal"><%=bean.getCarrier1()%></td>
-      <td style="overflow: normal"><%=bean.getC1pos()%></td>
-      <td style="overflow: normal">言語：VB6・VB.net・VC++・C#.net<br>DB：MySQL</td>
+      <td width="600" style="overflow: normal"><%=bean.getCarrier3()%></td>
+      <td style="overflow: normal"><%=bean.getC3pos()%></td>
+      <td style="overflow: normal"><%=bean.getC3tech()%></td>
     </tr>
   </table>
   <%
