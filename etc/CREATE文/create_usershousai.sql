@@ -10,4 +10,5 @@ CREATE TABLE usershousai
 ,seinenngappi DATE NOT NULL
 ,syusshin VARCHAR(1000) DEFAULT('')
 ,juusyo VARCHAR(1000) NOT NULL
+,timestamp TIMESTAMP
 );

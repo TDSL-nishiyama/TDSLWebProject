@@ -8,4 +8,5 @@ CREATE TABLE koutsuu
 ,kingaku VARCHAR(100) NOT NULL
 ,bikou VARCHAR(1000)
 ,modoshiriyuu VARCHAR(1000) DEFAULT('')
+,timestamp TIMESTAMP
 );

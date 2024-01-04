@@ -291,7 +291,4 @@ public class SkillBean implements Serializable {
     this.c3tech = c3tech;
   }
   
-  //アクセサメソッド
-
-   
 }
