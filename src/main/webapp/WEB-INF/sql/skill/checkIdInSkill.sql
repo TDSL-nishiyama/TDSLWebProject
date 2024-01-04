@@ -1,1 +1,1 @@
-SELECT COUNT(id) FROM skill WHERE id = ?;
+SELECT COUNT(id) FROM skill_1 WHERE id = ?;

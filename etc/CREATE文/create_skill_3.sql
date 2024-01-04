@@ -1,12 +1,6 @@
-CREATE TABLE skill_
+CREATE TABLE skill_3
 (
    id INT PRIMARY KEY,
-   sikaku1 VARCHAR (100),
-   sikaku1syutokuYMD DATE,
-   sikaku2 VARCHAR (100),
-   sikaku2syutokuYMD DATE,
-   sikaku3 VARCHAR (100),
-   sikaku3syutokuYMD DATE,
    c1kikanS DATE,
    c1kikanE DATE,
    carrier1 VARCHAR (1000),
