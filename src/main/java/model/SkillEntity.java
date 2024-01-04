@@ -62,6 +62,37 @@ public class SkillEntity implements Serializable {
     this.c3pos = c3pos;
     this.c3tech = c3tech;
   }
+  
+  //資格欄
+  public SkillEntity(String sikaku1, LocalDate sikaku1ymd, String sikaku2, LocalDate sikaku2ymd, String sikaku3, LocalDate sikaku3ymd) {
+    this.sikaku1 = sikaku1;
+    sikaku1YMD = sikaku1ymd;
+    this.sikaku2 = sikaku2;
+    sikaku2YMD = sikaku2ymd;
+    this.sikaku3 = sikaku3;
+    sikaku3YMD = sikaku3ymd;
+  }
+  
+  //職歴欄
+  public SkillEntity(LocalDate c1symd, LocalDate c1eymd, String carrier1, String c1pos, String c1tech, LocalDate c2symd, LocalDate c2eymd,
+      String carrier2, String c2pos, String c2tech, LocalDate c3symd, LocalDate c3eymd, String carrier3, String c3pos, String c3tech) {
+    super();
+    c1SYMD = c1symd;
+    c1EYMD = c1eymd;
+    this.carrier1 = carrier1;
+    this.c1pos = c1pos;
+    this.c1tech = c1tech;
+    c2SYMD = c2symd;
+    c2EYMD = c2eymd;
+    this.carrier2 = carrier2;
+    this.c2pos = c2pos;
+    this.c2tech = c2tech;
+    c3SYMD = c3symd;
+    c3EYMD = c3eymd;
+    this.carrier3 = carrier3;
+    this.c3pos = c3pos;
+    this.c3tech = c3tech;
+  }
 
   //アクセサメソッド
   public int getUserId() {

@@ -56,5 +56,37 @@ public class SkillConst {
     public final static String GAMEN_CARRIER3 = "carrier3";
     public final static String GAMEN_CARRIER3_POS = "c3pos";
     public final static String GAMEN_CARRIER3_TECH = "c3tech";
+    
+    public final static String GAMEN_CARRIER1_START_2 = "c1sYMD_2";
+    public final static String GAMEN_CARRIER1_END_2 = "c1eYMD_2";
+    public final static String GAMEN_CARRIER1_2 = "carrier1_2";
+    public final static String GAMEN_CARRIER1_POS_2 = "c1pos_2";
+    public final static String GAMEN_CARRIER1_TECH_2 = "c1tech_2";
+    public final static String GAMEN_CARRIER2_START_2 = "c2sYMD_2";
+    public final static String GAMEN_CARRIER2_END_2 = "c2eYMD_2";
+    public final static String GAMEN_CARRIER2_2 = "carrier2_2";
+    public final static String GAMEN_CARRIER2_POS_2 = "c2pos_2";
+    public final static String GAMEN_CARRIER2_TECH_2 = "c2tech_2";
+    public final static String GAMEN_CARRIER3_START_2 = "c3sYMD_2";
+    public final static String GAMEN_CARRIER3_END_2 = "c3eYMD_2";
+    public final static String GAMEN_CARRIER3_2 = "carrier3_2";
+    public final static String GAMEN_CARRIER3_POS_2 = "c3pos_2";
+    public final static String GAMEN_CARRIER3_TECH_2 = "c3tech_2";
+    
+    public final static String GAMEN_CARRIER1_START_3 = "c1sYMD_3";
+    public final static String GAMEN_CARRIER1_END_3 = "c1eYMD_3";
+    public final static String GAMEN_CARRIER1_3 = "carrier1_3";
+    public final static String GAMEN_CARRIER1_POS_3 = "c1pos_3";
+    public final static String GAMEN_CARRIER1_TECH_3 = "c1tech_3";
+    public final static String GAMEN_CARRIER2_START_3 = "c2sYMD_3";
+    public final static String GAMEN_CARRIER2_END_3 = "c2eYMD_3";
+    public final static String GAMEN_CARRIER2_3 = "carrier2_3";
+    public final static String GAMEN_CARRIER2_POS_3 = "c2pos_3";
+    public final static String GAMEN_CARRIER2_TECH_3 = "c2tech_3";
+    public final static String GAMEN_CARRIER3_START_3 = "c3sYMD_3";
+    public final static String GAMEN_CARRIER3_END_3 = "c3eYMD_3";
+    public final static String GAMEN_CARRIER3_3 = "carrier3_3";
+    public final static String GAMEN_CARRIER3_POS_3 = "c3pos_3";
+    public final static String GAMEN_CARRIER3_TECH_3 = "c3tech_3";
   }
 }

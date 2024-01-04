@@ -26,46 +26,45 @@ public class SkillDAO extends DAOCommon implements DBAccess {
   private String sqlPath = Common.SQL_FILE_PATH;
 
   /**
-   * {@index skillテーブル取得}
+   * {@index 基本情報部分に表示する情報を取得}
+   * @param selId
+   * @return
+   */
+  public List<Object> getUserInfo(int selId) {
+    List<String> column = new ArrayList<String>();
+    column.add(User.COL_USERNAME);
+    column.add(UserShousai.COL_NYUUSYAYMD);
+    List<Object> statement = new ArrayList<Object>();
+    statement.add(selId);
+
+    return super.selectSQL("getUserInfo.sql", column, statement);
+  }
+
+  /**
+   * {@index 取得資格部分に表示する情報を取得}
    * @param fileName
-   * @param statement　ない場合NULLを指定
+   * @param statement
    * @return
    * @throws SQLException
    */
-  public List<SkillEntity> selectSkill(String fileName, List<Object> statement)
+  public List<SkillEntity> selectSkillSikaku(String fileName, List<Object> statement)
       throws SQLException {
-
     List<SkillEntity> result = new ArrayList<SkillEntity>();
 
+    //SQLパスの指定
     sqlPath += fileName;
+
+    //共通クラスのインスタンス化
     CastCommon castCommon = new CastCommon();
 
-    //格納用変数の宣言
-    int userId;
-    String userName = "";
-    LocalDate nyuusyaYMD = null;
+    //格納用変数
     String sikaku1 = "";
     LocalDate sikaku1YMD = null;
     String sikaku2 = "";
     LocalDate sikaku2YMD = null;
     String sikaku3 = "";
     LocalDate sikaku3YMD = null;
-    LocalDate c1SYMD = null;
-    LocalDate c1EYMD = null;
-    String carrier1 = "";
-    String c1pos = "";
-    String c1tech = "";
-    LocalDate c2SYMD = null;
-    LocalDate c2EYMD = null;
-    String carrier2 = "";
-    String c2pos = "";
-    String c2tech = "";
-    LocalDate c3SYMD = null;
-    LocalDate c3EYMD = null;
-    String carrier3 = "";
-    String c3pos = "";
-    String c3tech = "";
-    
+
     //JDBC接続
     DBAccess.super.loadJDBCDriver();
 
@@ -96,11 +95,6 @@ public class SkillDAO extends DAOCommon implements DBAccess {
       //日付項目(MySQL:DateTime)はDateからLocalDateに変換して格納
       //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
       while (rs.next()) {
-        userId = rs.getInt(Skill.COL_USERID);
-        userName = rs.getString(User.COL_USERNAME);
-        if (rs.getDate(UserShousai.COL_NYUUSYAYMD) != null) {
-          nyuusyaYMD = castCommon.chgDtoLD(new Date(rs.getDate(UserShousai.COL_NYUUSYAYMD).getTime()));
-        }
         sikaku1 = rs.getString(Skill.COL_SIKAKU1);
         if (rs.getDate(Skill.COL_SIKAKU1YMD) != null) {
           sikaku1YMD = castCommon.chgDtoLD(new Date(rs.getDate(Skill.COL_SIKAKU1YMD).getTime()));
@@ -113,6 +107,81 @@ public class SkillDAO extends DAOCommon implements DBAccess {
         if (rs.getDate(Skill.COL_SIKAKU3YMD) != null) {
           sikaku3YMD = castCommon.chgDtoLD(new Date(rs.getDate(Skill.COL_SIKAKU3YMD).getTime()));
         }
+        SkillEntity entity = new SkillEntity(sikaku1, sikaku1YMD, sikaku2, sikaku2YMD, sikaku3, sikaku3YMD);
+        result.add(entity);
+      }
+    } catch (SQLException e) {
+      throw e;
+    } finally {
+      sqlPath = Common.SQL_FILE_PATH;
+      //DB切断
+      DBAccess.super.closeDB(conn);
+    }
+    return result;
+  }
+
+  /**
+   * {@index 職歴部分に表示する情報を取得}
+   * @param fileName
+   * @param statement　ない場合NULLを指定
+   * @return
+   * @throws SQLException
+   */
+  public List<SkillEntity> selectSkillCarrier(String fileName, List<Object> statement)
+      throws SQLException {
+
+    List<SkillEntity> result = new ArrayList<SkillEntity>();
+
+    sqlPath += fileName;
+    CastCommon castCommon = new CastCommon();
+
+    //格納用変数の宣言
+    LocalDate c1SYMD = null;
+    LocalDate c1EYMD = null;
+    String carrier1 = "";
+    String c1pos = "";
+    String c1tech = "";
+    LocalDate c2SYMD = null;
+    LocalDate c2EYMD = null;
+    String carrier2 = "";
+    String c2pos = "";
+    String c2tech = "";
+    LocalDate c3SYMD = null;
+    LocalDate c3EYMD = null;
+    String carrier3 = "";
+    String c3pos = "";
+    String c3tech = "";
+
+    //JDBC接続
+    DBAccess.super.loadJDBCDriver();
+
+    //DB接続
+    Connection conn = null;
+    conn = DBAccess.super.connectionDB(conn);
+
+    //SQL文の作成
+    String sql = null;
+    sql = makeSQL(sqlPath);
+
+    //クエリの発行・格納
+    try {
+      //発行
+      PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+      //ステートメントの設定
+      if (statement != null) {
+        int cnt = statement.size(); //ステートメントを設定する数
+        for (int i = 0; i < cnt; i++) {
+          pStmt.setObject(i + 1, statement.get(i));
+        }
+      }
+
+      //クエリの実行
+      ResultSet rs = pStmt.executeQuery();
+
+      //格納
+      //日付項目(MySQL:DateTime)はDateからLocalDateに変換して格納
+      //Date型でキャストしないとjava.sql.toInstant()が呼ばれてUnsupportedOperationExceptionが発生するため
+      while (rs.next()) {
         if (rs.getDate(Skill.COL_CARRIER1_START) != null) {
           c1SYMD = castCommon.chgDtoLD(new Date(rs.getDate(Skill.COL_CARRIER1_START).getTime()));
         }
@@ -141,9 +210,17 @@ public class SkillDAO extends DAOCommon implements DBAccess {
         c3pos = rs.getString(Skill.COL_CARRIER3_POS);
         c3tech = rs.getString(Skill.COL_CARRIER3_TECH);
 
-        SkillEntity entity = new SkillEntity(userId, userName,nyuusyaYMD,sikaku1, sikaku1YMD, sikaku2, sikaku2YMD, sikaku3, sikaku3YMD,
-            c1SYMD, c1EYMD, carrier1, c1pos,c1tech,c2SYMD, c2EYMD, carrier2, c2pos,c2tech, c3SYMD, c3EYMD, carrier3, c3pos,c3tech);
+        SkillEntity entity = new SkillEntity(c1SYMD, c1EYMD, carrier1, c1pos, c1tech, c2SYMD, c2EYMD, carrier2, c2pos, c2tech, c3SYMD, c3EYMD,
+            carrier3, c3pos, c3tech);
         result.add(entity);
+
+        c1SYMD = null;
+        c1EYMD = null;
+        c2SYMD = null;
+        c2EYMD = null;
+        c3SYMD = null;
+        c3EYMD = null;
+
       }
     } catch (SQLException e) {
       throw e;
@@ -154,49 +231,43 @@ public class SkillDAO extends DAOCommon implements DBAccess {
     }
     return result;
   }
-  
+
   /**
    * {@index skillテーブルのIDチェック用}
+   * @param fileName SQLファイル名
    * @param selId　ユーザーID
    * @return true = IDあり false = IDなし
    */
-  public boolean checkIdInSkill(int selId) {
+  public boolean checkIdInSkill(String fileName, int selId) {
     boolean result = false;
     List<Object> statement = new ArrayList<Object>();
-    
-    statement.add(selId);
-    
-    if(super.countSQL("\\skill\\checkIdInSkill.sql", statement) == 1) {
-      result = true;
-    }
-    
-    return result;
-  }
-  
-  public List<Object> getUserInfo(int selId){
-    List<String> column = new ArrayList<String>();
-    column.add(User.COL_USERNAME);
-    column.add(UserShousai.COL_NYUUSYAYMD);
-    List<Object> statement = new ArrayList<Object>();
+
     statement.add(selId);
 
-    return super.selectSQL("getUserInfo.sql", column,statement);
+    if (super.countSQL(fileName, statement) == 1) {
+      result = true;
+    }
+
+    return result;
   }
-  
+
   /**
    * {@index skillテーブルに画面入力値をInsertする}
+   * @param fileName SQLファイル名
    * @param pStatement
    * @throws SQLException
    */
-  public void insSkil(Map<String,Object> pStatement)throws SQLException {
+  public void insSkil(String fileName, Map<String, Object> pStatement) throws SQLException {
     List<Object> statement = new ArrayList<Object>();
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_USERID));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1YMD));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2YMD));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3YMD));
+    if (pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1) != null) {
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1YMD));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2YMD));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3YMD));
+    }
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_START));
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_END));
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1));
@@ -213,24 +284,27 @@ public class SkillDAO extends DAOCommon implements DBAccess {
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_POS));
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_TECH));
     statement.add(LocalDateTime.now());
-    
-    super.executeDML("\\skill\\insertSkill.sql", statement);
+
+    super.executeDML(fileName, statement);
   }
-  
+
   /**
    * {@index skillテーブルを画面入力値を元にUPDATEする}
+   * @param fileName SQLファイル名
    * @param pStatement
    * @throws SQLException
    */
-  public void updSkil(Map<String,Object> pStatement)throws SQLException {
+  public void updSkil(String fileName, Map<String, Object> pStatement) throws SQLException {
     List<Object> statement = new ArrayList<Object>();
     //set句
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1YMD));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2YMD));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3));
-    statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3YMD));
+    if (pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1) != null) {
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU1YMD));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU2YMD));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3));
+      statement.add(pStatement.get(SkillHensyuuG.GAMEN_SIKAKU3YMD));
+    }
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_START));
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1_END));
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER1));
@@ -247,10 +321,10 @@ public class SkillDAO extends DAOCommon implements DBAccess {
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_POS));
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_CARRIER3_TECH));
     statement.add(LocalDateTime.now());
-    
+
     //where句
     statement.add(pStatement.get(SkillHensyuuG.GAMEN_USERID));
-    
-    super.executeDML("\\skill\\updateSkill.sql", statement);
+
+    super.executeDML(fileName, statement);
   }
 }

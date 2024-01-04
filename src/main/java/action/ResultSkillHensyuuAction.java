@@ -37,31 +37,70 @@ public class ResultSkillHensyuuAction extends HttpServlet {
     //画面情報の取得
     String selId = request.getParameter("selId");
     int id = Integer.parseInt(selId);
-
-    Map<String, Object> gamenInfo = new HashMap<String, Object>();
+    List<Map<String, Object>> gamenInfo = new ArrayList<Map<String, Object>>();
+    Map<String, Object> gamenVal1 = new HashMap<String, Object>();
+    Map<String, Object> gamenVal2 = new HashMap<String, Object>();
+    Map<String, Object> gamenVal3 = new HashMap<String, Object>();
     //日付項目は空白の場合NULLに設定したうえで格納
-    gamenInfo.put(SkillHensyuuG.GAMEN_USERID, id);
-    gamenInfo.put(SkillHensyuuG.GAMEN_SIKAKU1YMD, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_SIKAKU1YMD)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_SIKAKU1, request.getParameter(SkillHensyuuG.GAMEN_SIKAKU1));
-    gamenInfo.put(SkillHensyuuG.GAMEN_SIKAKU2YMD, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_SIKAKU2YMD)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_SIKAKU2, request.getParameter(SkillHensyuuG.GAMEN_SIKAKU2));
-    gamenInfo.put(SkillHensyuuG.GAMEN_SIKAKU3YMD, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_SIKAKU3YMD)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_SIKAKU3, request.getParameter(SkillHensyuuG.GAMEN_SIKAKU3));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER1_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_START)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER1_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_END)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER1, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER1_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_POS));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER1_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_TECH));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER2_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_START)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER2_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_END)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER2, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER2_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_POS));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER2_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_TECH));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER3_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_START)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER3_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_END)));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER3, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER3_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_POS));
-    gamenInfo.put(SkillHensyuuG.GAMEN_CARRIER3_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_TECH));
+    gamenVal1.put(SkillHensyuuG.GAMEN_USERID, id);
+    gamenVal1.put(SkillHensyuuG.GAMEN_SIKAKU1YMD, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_SIKAKU1YMD)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_SIKAKU1, request.getParameter(SkillHensyuuG.GAMEN_SIKAKU1));
+    gamenVal1.put(SkillHensyuuG.GAMEN_SIKAKU2YMD, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_SIKAKU2YMD)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_SIKAKU2, request.getParameter(SkillHensyuuG.GAMEN_SIKAKU2));
+    gamenVal1.put(SkillHensyuuG.GAMEN_SIKAKU3YMD, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_SIKAKU3YMD)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_SIKAKU3, request.getParameter(SkillHensyuuG.GAMEN_SIKAKU3));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER1_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_START)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER1_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_END)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER1, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER1_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_POS));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER1_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_TECH));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER2_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_START)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER2_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_END)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER2, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER2_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_POS));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER2_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_TECH));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER3_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_START)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER3_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_END)));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER3, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER3_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_POS));
+    gamenVal1.put(SkillHensyuuG.GAMEN_CARRIER3_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_TECH));
+    gamenInfo.add(gamenVal1);
+    //職歴No4以降はSkill_2テーブルに登録
+    gamenVal2.put(SkillHensyuuG.GAMEN_USERID, id);
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER1_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_START_2)));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER1_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_END_2)));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER1, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER1_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_POS_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER1_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_TECH_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER2_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_START_2)));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER2_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_END_2)));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER2, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER2_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_POS_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER2_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_TECH_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER3_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_START_2)));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER3_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_END_2)));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER3, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER3_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_POS_2));
+    gamenVal2.put(SkillHensyuuG.GAMEN_CARRIER3_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_TECH_2));
+    gamenInfo.add(gamenVal2);
+    //職歴No7以降はSkill_3テーブルに登録
+    gamenVal3.put(SkillHensyuuG.GAMEN_USERID, id);
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER1_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_START_3)));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER1_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_END_3)));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER1, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER1_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_POS_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER1_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER1_TECH_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER2_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_START_3)));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER2_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_END_3)));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER2, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER2_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_POS_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER2_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER2_TECH_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER3_START, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_START_3)));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER3_END, castC.setNull(request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_END_3)));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER3, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER3_POS, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_POS_3));
+    gamenVal3.put(SkillHensyuuG.GAMEN_CARRIER3_TECH, request.getParameter(SkillHensyuuG.GAMEN_CARRIER3_TECH_3));
+    gamenInfo.add(gamenVal3);
 
     //更新処理
     try {

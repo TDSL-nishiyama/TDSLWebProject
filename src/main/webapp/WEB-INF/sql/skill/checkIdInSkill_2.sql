@@ -1,0 +1,1 @@
+SELECT COUNT(id) FROM skill_2 WHERE id = ?;

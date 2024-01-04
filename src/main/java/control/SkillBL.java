@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,58 +22,93 @@ public class SkillBL {
    */
   public List<SkillBean> getSkill(int selId) throws SQLException {
     List<SkillBean> result = new ArrayList<SkillBean>();
-    String fileName = null;
     List<Object> statement = new ArrayList<>();
     CastCommon castC = new CastCommon();
 
-    fileName = "skill\\selectSkill.sql";
+    //ステートメントの設定
     statement.add(selId);
 
     SkillDAO dao = new SkillDAO();
-    List<SkillEntity> resultDB = new ArrayList<SkillEntity>();
-    resultDB = dao.selectSkill(fileName, statement);
 
-    //レコードがある時ないときで分岐
-    if (!(resultDB.isEmpty())) {
-      //期間の設定
-      String c1kikanView = getKikan(resultDB.get(0).getC1SYMD(), resultDB.get(0).getC1EYMD());
-      String c2kikanView = getKikan(resultDB.get(0).getC2SYMD(), resultDB.get(0).getC2EYMD());
-      String c3kikanView = getKikan(resultDB.get(0).getC3SYMD(), resultDB.get(0).getC3EYMD());
+    //基本情報の取得
+    List<Object> userInfo = new ArrayList<>();
+    userInfo = dao.getUserInfo(selId);
+    String userName = userInfo.get(0).toString();
+    //年次の変換
+    String nenji = setNenji(castC.chgStrtoLD(userInfo.get(1).toString()));
 
-      //日付項目はString型（yyyy-mm-dd形式）に変更のうえNULLの場合空白に設定
-      String sikaku1YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getSikaku1YMD()));
-      String sikaku2YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getSikaku2YMD()));
-      String sikaku3YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getSikaku3YMD()));
-      String c1sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC1SYMD()));
-      String c1eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC1EYMD()));
-      String c2sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC2SYMD()));
-      String c2eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC2EYMD()));
-      String c3sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC3SYMD()));
-      String c3eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB.get(0).getC3EYMD()));
+    //資格情報の取得
+    List<SkillEntity> resultDB1 = new ArrayList<SkillEntity>();
+    String sikaku1YMD = "";
+    String sikaku1 = "";
+    String sikaku2YMD = "";
+    String sikaku2 = "";
+    String sikaku3YMD = "";
+    String sikaku3 = "";
+    resultDB1 = dao.selectSkillSikaku("skill\\selectSkill.sql", statement);
+    
+    if (!(resultDB1.isEmpty())) {     
+      sikaku1YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB1.get(0).getSikaku1YMD()));
+      sikaku1 = resultDB1.get(0).getSikaku1();
+      sikaku2YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB1.get(0).getSikaku2YMD()));
+      sikaku2 = resultDB1.get(0).getSikaku2();
+      sikaku3YMD = castC.nullToBlank(castC.chgLDtoStr(resultDB1.get(0).getSikaku3YMD()));
+      sikaku3 = resultDB1.get(0).getSikaku3();
+    }
 
-      SkillBean bean = new SkillBean(
-          resultDB.get(0).getUserId(), resultDB.get(0).getUserName(), setNenji(resultDB.get(0).getNyuusyaYMD()),
-          resultDB.get(0).getSikaku1(), sikaku1YMD,
-          resultDB.get(0).getSikaku2(), sikaku2YMD,
-          resultDB.get(0).getSikaku3(), sikaku3YMD,
-          c1sYMD, c1eYMD, c1kikanView,
-          castC.chgKaigyouCode(resultDB.get(0).getCarrier1()), castC.chgKaigyouCode(resultDB.get(0).getC1pos()),
-          castC.chgKaigyouCode(resultDB.get(0).getC1tech()),
-          c2sYMD, c2eYMD, c2kikanView,
-          castC.chgKaigyouCode(resultDB.get(0).getCarrier2()), castC.chgKaigyouCode(resultDB.get(0).getC2pos()),
-          castC.chgKaigyouCode(resultDB.get(0).getC2tech()),
-          c3sYMD, c3eYMD, c3kikanView,
-          castC.chgKaigyouCode(resultDB.get(0).getCarrier3()), castC.chgKaigyouCode(resultDB.get(0).getC3pos()),
-          castC.chgKaigyouCode(resultDB.get(0).getC3tech()));
-      result.add(bean);
+    //職歴情報の取得
+    List<SkillEntity> resultDB2 = new ArrayList<SkillEntity>();
+    statement.add(selId);//skill_2テーブル用
+    statement.add(selId);//skill_3テーブル用
+    resultDB2 = dao.selectSkillCarrier("skill\\selectSkillUnion.sql", statement);
+    
+    //職歴情報の分だけループ（1-3想定だけどテーブル増やせば増やせる）
+    for (int i = 0; i < resultDB2.size(); i++) {
+      //職歴情報のDB取得結果がある場合はそれぞれ値を設定。ない場合は基本情報・資格情報を除き空白を設定して返却
+      if (!(resultDB2.get(0).getC1SYMD() == null)) {
+        //期間の設定
+        String c1kikanView = getKikan(resultDB2.get(i).getC1SYMD(), resultDB2.get(i).getC1EYMD());
+        String c2kikanView = getKikan(resultDB2.get(i).getC2SYMD(), resultDB2.get(i).getC2EYMD());
+        String c3kikanView = getKikan(resultDB2.get(i).getC3SYMD(), resultDB2.get(i).getC3EYMD());
 
-    } else {
-      List<Object> userInfo = new ArrayList<>();
-      
-      userInfo = dao.getUserInfo(selId);
-      
-      SkillBean bean = new SkillBean(selId, (String)userInfo.get(0),castC.chgDateToStr((Date) userInfo.get(1)), "","","","","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","");
-      result.add(bean);
+        //日付項目はString型（yyyy-mm-dd形式）に変更のうえNULLの場合空白に設定
+        String c1sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB2.get(i).getC1SYMD()));
+        String c1eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB2.get(i).getC1EYMD()));
+        String c2sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB2.get(i).getC2SYMD()));
+        String c2eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB2.get(i).getC2EYMD()));
+        String c3sYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB2.get(i).getC3SYMD()));
+        String c3eYMD = castC.nullToBlank(castC.chgLDtoStr(resultDB2.get(i).getC3EYMD()));
+
+        SkillBean bean = new SkillBean(
+            selId, userName, nenji,
+            sikaku1, sikaku1YMD,
+            sikaku2, sikaku2YMD,
+            sikaku3, sikaku3YMD,
+            c1sYMD, c1eYMD, c1kikanView,
+            castC.chgKaigyouCode(resultDB2.get(i).getCarrier1()), castC.chgKaigyouCode(resultDB2.get(i).getC1pos()),
+            castC.chgKaigyouCode(resultDB2.get(i).getC1tech()),
+            c2sYMD, c2eYMD, c2kikanView,
+            castC.chgKaigyouCode(resultDB2.get(i).getCarrier2()), castC.chgKaigyouCode(resultDB2.get(i).getC2pos()),
+            castC.chgKaigyouCode(resultDB2.get(i).getC2tech()),
+            c3sYMD, c3eYMD, c3kikanView,
+            castC.chgKaigyouCode(resultDB2.get(i).getCarrier3()), castC.chgKaigyouCode(resultDB2.get(i).getC3pos()),
+            castC.chgKaigyouCode(resultDB2.get(i).getC3tech()));
+
+        result.add(bean);
+        //資格は1回しか表示させたくないので2回目以降はNULL
+        sikaku1 = null;
+        sikaku1YMD = null;
+        sikaku2 = null;
+        sikaku2YMD = null;
+        sikaku3 = null;
+        sikaku3YMD = null;
+        
+      } else {
+        SkillBean bean = new SkillBean(selId, userName, nenji, sikaku1, sikaku1YMD, sikaku2, sikaku2YMD, sikaku3,sikaku3YMD, "", "",
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        result.add(bean);
+      }
+
     }
 
     return result;
@@ -86,15 +120,31 @@ public class SkillBL {
    * @param gamenInfo
    * @throws SQLException
    */
-  public void updSkill(int selId, Map<String, Object> gamenInfo) throws SQLException {
+  public void updSkill(int selId, List<Map<String, Object>> gamenInfo) throws SQLException {
     //共通クラスのインスタンス化
     SkillDAO dao = new SkillDAO();
 
     //IDがある場合UPDATE、ない場合INSERT
-    if (dao.checkIdInSkill(selId) == true) {
-      dao.updSkil(gamenInfo);
+    if (dao.checkIdInSkill("\\skill\\checkIdInSkill_1.sql",selId) == true) {
+      dao.updSkil("\\skill\\updateSkill_1.sql",gamenInfo.get(0));
     } else {
-      dao.insSkil(gamenInfo);
+      dao.insSkil("\\skill\\insertSkill_1.sql",gamenInfo.get(0));
+    }
+    //職歴No4以降が存在する場合、UPDATE/INSERT
+    if(!(gamenInfo.get(1).isEmpty())) {
+      if (dao.checkIdInSkill("\\skill\\checkIdInSkill_2.sql",selId) == true) {
+        dao.updSkil("\\skill\\updateSkill_2.sql",gamenInfo.get(1));
+      } else {
+        dao.insSkil("\\skill\\insertSkill_2.sql",gamenInfo.get(1));
+      }
+    }
+    //職歴No7以降が存在する場合、UPDATE/INSERT
+    if(!(gamenInfo.get(1).isEmpty())) {
+      if (dao.checkIdInSkill("\\skill\\checkIdInSkill_3.sql",selId) == true) {
+        dao.updSkil("\\skill\\updateSkill_3.sql",gamenInfo.get(2));
+      } else {
+        dao.insSkil("\\skill\\insertSkill_3.sql",gamenInfo.get(2));
+      }
     }
   }
 

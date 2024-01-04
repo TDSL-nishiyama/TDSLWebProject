@@ -68,7 +68,23 @@ public class CastCommon {
 
     return result;
   }
+  /**
+   * {@index　日付型文字列をLocalDateに変換する}
+   * @param pStr
+   * @return
+   */
+  public LocalDate chgStrtoLD(String pStr) {
+    LocalDate result = null;
 
+    if (pStr == null || pStr.isBlank()) {
+      return result;
+    }
+
+    result = chgDtoLD(chgStrToDate(pStr));
+
+    return result;
+  }
+  
   /**
    * {@index　日付型文字列をLocalDateTimeに変換する}
    * @param pStr
