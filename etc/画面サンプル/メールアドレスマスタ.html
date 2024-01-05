@@ -1,0 +1,179 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!-- メールアドレス登録更新画面ホーム  -->
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>メールアドレス登録更新</title>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  <p>
+    <span class="req">※必須項目</span>
+  <form action="/TDSLWebProject/MailAddAction" method="post">
+    <p>
+      <input type="submit" value="メールアドレスの新規追加">
+    </p>
+    <span class="req">※</span>追加する社員ID:
+    <input type="text" name="selId" value="">
+    <br> <span class="req">※</span>追加するメールアドレス:
+    <input type="text" name="mailAddress" value="">
+    <br>
+  </form>
+  </p>
+
+  <p>
+    <strong>メールアドレス一覧</strong>
+  <table class="tableM">
+    <tr>
+      <th>ID</th>
+      <th>ユーザー名</th>
+      <th>メールアドレス</th>
+      <th>操作</th>
+    </tr>
+    
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        西山龍一
+      </td>
+      <td>
+        mail2
+      </td>
+      <td>
+        <form action="/TDSLWebProject/MailUpdAction" method="post">
+          <input type="hidden" name="selId" value="1">
+          <input type="hidden" name="mailAddress" value="mail2">
+          <input type="submit" value="更新">
+        </form>
+        <form action="/TDSLWebProject/MailDelAction" method="post">
+          <input type="hidden" name="selId" value="1">
+          <input type="hidden" name="mailAddress" value="mail2">
+          <input type="submit" value="削除">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        西山龍一
+      </td>
+      <td>
+        mail
+      </td>
+      <td>
+        <form action="/TDSLWebProject/MailUpdAction" method="post">
+          <input type="hidden" name="selId" value="1">
+          <input type="hidden" name="mailAddress" value="mail">
+          <input type="submit" value="更新">
+        </form>
+        <form action="/TDSLWebProject/MailDelAction" method="post">
+          <input type="hidden" name="selId" value="1">
+          <input type="hidden" name="mailAddress" value="mail">
+          <input type="submit" value="削除">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        2
+      </td>
+      <td>
+        一般次郎
+      </td>
+      <td>
+        mail1@mail.jp
+      </td>
+      <td>
+        <form action="/TDSLWebProject/MailUpdAction" method="post">
+          <input type="hidden" name="selId" value="2">
+          <input type="hidden" name="mailAddress" value="mail1@mail.jp">
+          <input type="submit" value="更新">
+        </form>
+        <form action="/TDSLWebProject/MailDelAction" method="post">
+          <input type="hidden" name="selId" value="2">
+          <input type="hidden" name="mailAddress" value="mail1@mail.jp">
+          <input type="submit" value="削除">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        3
+      </td>
+      <td>
+        管理者花子
+      </td>
+      <td>
+        mail100
+      </td>
+      <td>
+        <form action="/TDSLWebProject/MailUpdAction" method="post">
+          <input type="hidden" name="selId" value="3">
+          <input type="hidden" name="mailAddress" value="mail100">
+          <input type="submit" value="更新">
+        </form>
+        <form action="/TDSLWebProject/MailDelAction" method="post">
+          <input type="hidden" name="selId" value="3">
+          <input type="hidden" name="mailAddress" value="mail100">
+          <input type="submit" value="削除">
+        </form>
+      </td>
+    </tr>
+    
+  </table>
+  </p>
+
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<script type="text/javascript" src="./js/UserAddCheck.js" charset="UTF-8"></script>
+<title>ユーザー登録画面</title>
+</head>
+<body>
+  <form name="toUserIchiran" action="/TDSLWebProject/UserIchiranAction" method="post">
+    <p>
+      <input type="submit" name="toMasta" value="ユーザー一覧">
+    </p>
+  </form>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  <form name="userInsert" action="/TDSLWebProject/ResultUserAddAction" method="post" onsubmit="return checkUserAdd();">
+    <p>
+      <span class="req">※ 必須項目</span>
+    </p>
+    
+    <table>
+      <tr>
+        <td>
+          <span class="req">※</span>ユーザー名：
+          <input type="text" name="userName" value=>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="req">※</span>管理者権限：
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="radio" name="kanriFlg" value="true">
+          あり
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="radio" name="kanriFlg" value="false" checked>
+          なし
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td>
+          <span class="req">※</span>姓：
+        </td>
+        <td>
+          <input type="text" name="sei" value=>
+        </td>
+        <td>
+          <span class="req">※</span>名：
+        </td>
+        <td>
+          <input type="text" name="mei" value=>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="req">※</span>姓(ﾖﾐ)：
+        </td>
+        <td>
+          <input type="text" name="sei_yomi" value=>
+        </td>
+        <td>
+          <span class="req">※</span>名(ﾖﾐ)：
+        </td>
+        <td>
+          <input type="text" name="mei_yomi" value=>
+        </td>
+      </tr>
+      <tr>
+        <td>入社日付：</td>
+        <td>
+          
+          <input type="text" name="nyuusyaYMD" value=>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="req">※</span>性別：
+      </tr>
+      </td>
+      <tr>
+        <td>
+          <input type="radio" name="seibetsu" value="0">
+          男
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="radio" name="seibetsu" value="1">
+          女
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="radio" name="seibetsu" value="2">
+          その他
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="req">※</span>生年月日：
+        </td>
+        <td>
+          
+          <input type="text" name="seinenngappi" value=>
+        </td>
+      </tr>
+      <tr>
+        <td>出身地：</td>
+        <td>
+          <input type="text" name="syusshin" value=>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="req">※</span>住所：
+        </td>
+        <td>
+          <input type="text" name="juusyo" value=>
+        </td>
+      </tr>
+    </table>
+    
+    <p>
+      <input type="submit" value="ユーザー登録">
+    </p>
+    </p>
+  </form>
+
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
+
+</body>
+</html>

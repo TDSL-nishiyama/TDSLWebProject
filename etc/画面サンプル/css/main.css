@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+/* あまり興味ないので好きに作ってください */
+
+/* 必須項目 */
+.req {
+	color: red;
+	font-size: small;
+}
+
+/* 必須項目欠テキストボックス*/
+.reqTexNG {
+	background-color: bisque;
+}
+
+/* アラートメッセージ */
+.altMsg {
+	color: red;
+	font-weight: bold
+}
+
+/* テーブル*/
+table.tableM {
+	border-collapse: collapse;
+}
+
+table.tableM th,
+table.tableM td {
+	overflow-wrap: normal;
+	white-space: nowrap;
+	padding: 0;
+	border: solid 1px #000;
+}
+
+table.tableM td {
+	white-space: nowrap;
+	padding: 0;
+	border: solid 1px #000;
+}
+
+table.table-login {
+	border-collapse: collapse;
+}
+
+table.table-login th,
+table.table-login td {
+	white-space: nowrap;
+	padding: 5px;
+}
+
+table.skillsheet {
+	border-collapse: collapse;
+}
+
+table.skillsheet th {
+	white-space: normal;
+	padding: 5px;
+	border: solid 1px #000;
+	width: 300px;
+}
+
+table.skillsheet tr,
+table.skillsheet.td {
+	white-space: normal;
+	padding: 5px;
+	border: solid 1px #000;
+}

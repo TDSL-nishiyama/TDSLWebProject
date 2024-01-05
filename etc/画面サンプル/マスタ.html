@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>マスタ画面</title>
+</head>
+<body>
+  <table>
+    <th></th>
+  </table>
+  <form action="/TDSLWebProject/UserIchiranAction" method="post">
+    <p>
+      <input type="submit" value="ユーザー一覧">
+    </p>
+  </form>
+
+  <form action="/TDSLWebProject/UserAddAction" method="post">
+    <p>
+      <input type="submit" value="ユーザー登録">
+    </p>
+  </form>
+
+  <form action="/TDSLWebProject/UserUpdAction" method="post">
+    <p>
+      <input type="submit" value="ユーザー更新">
+    </p>
+  </form>
+
+  <form action="/TDSLWebProject/UserDelAction" method="post">
+    <p>
+      <input type="submit" value="ユーザー削除">
+    </p>
+  </form>
+
+  <form action="/TDSLWebProject/KaritourokuAction" method="post">
+    <p>
+      <input type="submit" value="仮登録ユーザー一覧">
+    </p>
+  </form>
+
+  <form action="/TDSLWebProject/MailMastaAction" method="post">
+    <p>
+      <input type="submit" value="メールアドレス一覧">
+    </p>
+  </form>
+
+  <a href="/TDSLWebProject/index.jsp">戻る</a>
+
+</body>
+</html>

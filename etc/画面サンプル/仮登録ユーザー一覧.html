@@ -1,0 +1,84 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>仮登録ユーザー一覧</title>
+</head>
+<body>
+  <form name="toUserIchiran" action="/TDSLWebProject/UserIchiranAction" method="post">
+    <p>
+      <input type="submit" name="toMasta" value="ユーザー一覧">
+    </p>
+  </form>
+  <!-- 11人目以降は2ページ目  -->
+  <!-- 最大表示数は100人 -->
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>ログインID</th>
+      <th>名前</th>
+      <th>管理フラグ</th>
+    </tr>
+    
+    <td>7</td>
+    <td>kari7</td>
+    <td>イチロー</td>
+    <td>
+      
+      ×
+    </td>
+    </tr>
+    
+    <td>8</td>
+    <td>kari8</td>
+    <td>若者</td>
+    <td>
+      
+      ×
+    </td>
+    </tr>
+    
+    <td>9</td>
+    <td>kari9</td>
+    <td>老人</td>
+    <td>
+      
+      ×
+    </td>
+    </tr>
+    
+  </table>
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
+</body>
+</html>

@@ -1,0 +1,250 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>ユーザー一覧</title>
+</head>
+<body>
+  <form action=/TDSLWebProject/UserAddAction method="post">
+    <p>
+      <input type="submit" value="ユーザーの追加">
+    </p>
+  </form>
+
+  <form name="toKaritouroku" action="/TDSLWebProject/KaritourokuAction" method="post">
+    <p>
+      <input type="submit" name="toKari" value="仮登録ユーザー一覧">
+    </p>
+  </form>
+  <p>
+  <table>
+    <tr>
+      <td>
+        <form name="toResultUserIchiran" action=/TDSLWebProject/ResultUserIchiranAction method="post">
+          <input type="submit" value="削除されたユーザーも含めて表示">
+        </form>
+      </td>
+      <td>
+        <form name="toUserIchiran" action="/TDSLWebProject/UserIchiranAction" method="post">
+          <input type="submit" name="toMasta" value="削除されたユーザーを含まず表示">
+        </form>
+      </td>
+    </tr>
+  </table>
+  </p>
+  <!--TODO 仕様迷い中、ページディレクションのJSPのみでの実装がしんどい  -->
+  <!-- 11人目以降は2ページ目  -->
+  <!-- 最大表示数は100人 -->
+  <table class="tableM">
+    <tr>
+      <th>ID</th>
+      <th>ログインID</th>
+      <th>名前</th>
+      <th>管理フラグ</th>
+      <th>更新</th>
+      <th>削除</th>
+    </tr>
+    
+    <td>1</td>
+    <td>nishiyama</td>
+    <td>西山龍一</td>
+    <td>
+      
+      〇
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="1">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="1">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>2</td>
+    <td>ippan</td>
+    <td>一般次郎</td>
+    <td>
+      
+      ×
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="2">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="2">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>3</td>
+    <td>kanrihanako</td>
+    <td>管理者花子</td>
+    <td>
+      
+      〇
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="3">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="3">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>4</td>
+    <td>suzuki1</td>
+    <td>鈴木一郎</td>
+    <td>
+      
+      ×
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="4">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="4">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>6</td>
+    <td>test2</td>
+    <td>テスト太郎</td>
+    <td>
+      
+      〇
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="6">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="6">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>7</td>
+    <td>kari7</td>
+    <td>イチロー</td>
+    <td>
+      
+      ×
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="7">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="7">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>8</td>
+    <td>kari8</td>
+    <td>若者</td>
+    <td>
+      
+      ×
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="8">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="8">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+    <td>9</td>
+    <td>kari9</td>
+    <td>老人</td>
+    <td>
+      
+      ×
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserUpdAction" method="post">
+        <input type="hidden" name="userIdUpd" value="9">
+        <input type="submit" value="更新">
+      </form>
+    </td>
+    <td>
+      <form action="/TDSLWebProject/ResultUserDelAction" method="post">
+        <input type="hidden" name="userIdDel" value="9">
+        <input type="submit" value="削除">
+      </form>
+    </td>
+    </tr>
+    
+  </table>
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
+</body>
+</html>

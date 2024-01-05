@@ -1,0 +1,117 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!-- 交通費差戻要求画面  -->
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>交通費精算</title>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  <form action="/TDSLWebProject/ResultKoutsuuSashimodoshiAction" method="post">
+    <span class="req">※ 必須項目</span>
+    <p>
+    <table class="tableM">
+      <tr>
+        <th>請求No</th>
+        <th>利用者</th>
+        <th>
+          <span class="req">※</span>利用日付
+        </th>
+        <th>
+          <span class="req">※</span>区間開始
+        </th>
+        <th>
+          <span class="req">※</span>区間終了
+        </th>
+        <th>
+          <span class="req">※</span>金額
+        </th>
+        <th>備考</th>
+        <th>差戻事由</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="hidden" name="selNo" value="17">
+          17
+        </td>
+        <td>
+          一般次郎
+        </td>
+        <td>
+          <input type="text" name="riyouhiduke" value="2023-12-11" maxlength="100">
+        </td>
+        <td>
+          <input type="text" name="kukans" value="東京" maxlength="100">
+        </td>
+        <td>
+          <input type="text" name="kukane" value="中野" maxlength="100">
+        </td>
+        <td>
+          <input type="text" name="kingaku" value="300" maxlength="100">
+        </td>
+        <td>
+          <input type="text" name="bikou" value="交通費１" maxlength="100">
+        </td>
+        <td>
+          <input type="textarea" name="modoshiriyuu" value="" maxlength="1000">
+        </td>
+      </tr>
+    </table>
+    </p>
+    <p>
+      <input type="submit" value="差戻">
+    </p>
+  </form>
+  <p>
+  <form action="/TDSLWebProject/KoutsuuKakuninAction" method="post">
+    <p>
+      <input type="submit" value="交通費精算確認画面に遷移">
+    </p>
+  </form>
+  </p>
+
+  <a href="/TDSLWebProject/index.jsp">トップページに戻る</a>
+</body>
+</html>

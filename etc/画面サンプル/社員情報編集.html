@@ -1,0 +1,138 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>社員一覧</title>
+</head>
+
+<body>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  
+  <form name="toSJHen-SJInfo" action="/TDSLWebProject/ResultSyainJouhouHensyuuAction" method="post">
+    <div class="req">※ 必須項目</div>
+    <p>
+    <table class="tableM">
+      <tr>
+        <th>社員ID</th>
+        <th>
+          <span class="req">※</span>姓
+        </th>
+        <th>
+          <span class="req">※</span>姓(ﾖﾐ)
+        </th>
+        <th>
+          <span class="req">※</span>名
+        </th>
+        <th>
+          <span class="req">※</span>名(ﾖﾐ)
+        </th>
+        <th>
+          <span class="req">※</span>性別
+        </th>
+        <th>
+          <span class="req">※</span>生年月日
+        </th>
+        <th>入社年月日</th>
+        <th>出身地</th>
+        <th>
+          <span class="req">※</span>住所
+        </th>
+      </tr>
+
+      
+      <tr>
+        <td>
+          <input type="hidden" name="updUserId" value=1>1</td>
+        <td>
+          <input type="text" name="sei" value=西山>
+        </td>
+        <td>
+          <input type="text" name="sei_yomi" value=ﾆｼﾔﾏ>
+        </td>
+        <td>
+          <input type="text" name="mei" value=龍一>
+        </td>
+        <td>
+          <input type="text" name="mei_yomi" value=ﾘｭｳｲﾁ>
+        </td>
+        <td>
+          
+          <input type="radio" name="seibetsu" value="0" checked>
+          男
+          <input type="radio" name="seibetsu" value="1">
+          女
+          <input type="radio" name="seibetsu" value="2">
+          その他
+          
+        </td>
+        <td>
+          
+          <input type="text" name="seinenngappi" value=1989-02-04>
+        </td>
+        
+        <td>
+          <input type="text" name="nyuusyaYMD" value=2016-12-01>
+        </td>
+        <td>
+          <input type="text" name="syusshin" value=静岡県駿東郡長泉町>
+        </td>
+        <td>
+          <input type="text" name="juusyo" value=東京都中野区中野>
+        </td>
+      </tr>
+      
+    </table>
+    </p>
+    <p>
+    <input type="submit" value="更新実行">
+    </p>
+  </form>
+  
+
+  <form name="toSJHen-SJInfo" action="/TDSLWebProject/SyainJouhouAction" method="post">
+    <input type="submit" name="toSJHen-SJInfo" value="戻る">
+  </form>
+</body>
+</html>

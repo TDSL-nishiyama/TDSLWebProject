@@ -1,0 +1,64 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>メインページ</title>
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：一般次郎</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+</head>
+<body>
+
+  <form name="toSyainJouhou" action="/TDSLWebProject/SyainJouhouAction" method="post">
+    
+    <p>
+      <input type="submit" name="syainIpppan" value="社員名簿の閲覧">
+    </p>
+    
+  </form>
+
+  <form name="toKoutsuuYoukyuu" action="/TDSLWebProject/KoutsuuYoukyuuAction" method="post">
+    <p>
+      <input type="submit" name="toMasta" value="交通費精算要求画面に遷移">
+    </p>
+  </form>
+
+  <form action="/TDSLWebProject/KoutsuuKakuninAction" method="post">
+    <p>
+      <input type="submit" value="交通費精算確認画面に遷移">
+    </p>
+  </form>
+
+  
+
+  <!-- 何かを実装するためのテスト用のページとしてご自由にご利用ください -->
+  <br><br>
+  <form name="test" action="/TDSLWebProject/TestAction" method="post">
+    <p>
+      <input type="submit" value="テスト用ページに遷移">
+    </p>
+  </form>
+
+</body>
+</html>

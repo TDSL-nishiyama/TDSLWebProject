@@ -1,0 +1,555 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>スキルシート編集</title>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  <form action="/TDSLWebProject/ResultSkillHensyuuAction" method="post">
+    <p>
+      <input type="hidden" name="selId" value=1>
+      <input type="submit" value="更新実行">
+    </p>
+    <p>
+    <table class="skillsheet">
+      <tr>
+        <th colspan="2">基本情報</th>
+      </tr>
+      <tr>
+        <th>名前</th>
+        <th>経験年数</th>
+      </tr>
+      <tr>
+        <td>西山龍一</td>
+        <td>7年1ヵ月</td>
+      </tr>
+    </table>
+
+    <p>
+    <table class="skillsheet">
+      <tr>
+        <th colspan="2">取得資格</th>
+      </tr>
+      <tr>
+        <th>取得年月日</th>
+        <th>資格名称</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" size="50" name="sikaku1YMD" value="2009-02-01">
+        </td>
+        <td>
+          <input type="text" size="100" name="sikaku1" value="普通自動車免許（AT限定）">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" size="50" name="sikaku2YMD" value="2010-04-01">
+        </td>
+        <td>
+          <input type="text" size="100" name="sikaku2" value="MicroSoftOfficeMaster　2007">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" size="50" name="sikaku3YMD" value="2017-12-03">
+        </td>
+        <td>
+          <input type="text" size="100" name="sikaku3" value="Oracle Java Silever">
+        </td>
+      </tr>
+    </table>
+
+    <p>
+    <table class="skillsheet">
+      <tr>
+        <th style="width: 50px">No</th>
+        <th colspan="10">職務経歴</th>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">1</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c1sYMD" value="2016-12-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c1eYMD" value="2017-02-28">
+        </td>
+        <td style="width: 200px">3ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier1" rows="20" cols="90">Javaの基礎～応用（Webアプリケーション作成など）についての研修</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c1pos" rows="20" cols="45">－</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c1tech" rows="20" cols="45">Java
+MySQL
+Windows</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">2</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c2sYMD" value="2017-03-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c2eYMD" value="2017-06-30">
+        </td>
+        <td style="width: 200px">4ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier2" rows="20" cols="90">概要：業務パッケージ拡張開発のテスト
+
+★勤務形態
+社内（打合せのみ客先）
+
+★詳細
+2018-03～2018-06：改修部分についてのシステムテストを実施</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c2pos" rows="20" cols="45">システムテスト実施</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c2tech" rows="20" cols="45">Java
+Excel VBA
+
+※テストのみの案件のためコーディングについては未実施。VBAでツールを作成</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">3</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c3sYMD" value="2017-07-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c3eYMD" value="2017-12-31">
+        </td>
+        <td style="width: 200px">6ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier3" rows="20" cols="90">概要：大手メガバンク、ウェブ画面拡張開発
+
+★勤務形態
+客先常駐
+
+★詳細
+2017-07～2017-09：ウェブ画面改善（MAX10人月規模）　開発メンバー
+2017-10～2017-12：ウェブ画面機能追加（MAX10人月規模）　開発メンバー</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c3pos" rows="20" cols="45">開発・単体テスト
+テスト仕様書作成
+結合テスト</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c3tech" rows="20" cols="45">言語（フロント）：JSP（Strutsベース独自フレームワーク）・JavaScript
+
+言語（サーバ）：Java（Strutsベース独自フレームワーク）
+
+DB：Oracle
+
+開発環境：Windowsシンクライアント</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">4</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c1sYMD_2" value="2018-01-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c1eYMD_2" value="2018-10-30">
+        </td>
+        <td style="width: 200px">10ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier1_2" rows="20" cols="90">概要：（株）東京ドーム（当時）の情報システム部にてシステムの導入、EUC開発を担当
+
+★勤務形態
+客先常駐
+
+★詳細
+全期間：
+・ベンダーとの調整
+・システム開発、改修に伴う要件定義ヒアリング
+・ExcelVBA、AccessVBAでのEUC開発</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c1pos_2" rows="20" cols="45">ベンダーコントロール
+要件定義
+受け入れテストの実施</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c1tech_2" rows="20" cols="45">Excel VBA
+Access　VBA
+
+DB保守・管理のため以下のデータベースを使った職務
+Oracle・SQLServer・Firebird</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">5</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c2sYMD_2" value="2018-11-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c2eYMD_2" value="2022-04-30">
+        </td>
+        <td style="width: 200px">3年6ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier2_2" rows="20" cols="90">概要：損保代理店向けシステムの開発・保守
+
+★勤務形態
+客先常駐（2020年3月以降はリモート勤務を含む）
+
+★詳細
+全期間：自動車・火災を除くシステム全般の保守リーダー
+2018/11～2019/2：企業向け賠責システム改元対応（MAX3人月規模）開発リーダー
+2019/3～2019/9：自動車系システム年次定例改修（MAX20人規模）　開発メンバー
+2019/10～2020/4：個人・企業向け賠責システム社名変更・法律改正対応・内部バージョンアップ対応
+2020/5～2020/10：自動車系システムバージョンアップ対応（MAX30人月規模）帳票機能サブリーダー
+2020/11～2021/8：火災系システムAPI作成　開発リーダー
+2020/11～2021/4：企業向け賠責システムAPI作成（MAX2人月規模）　開発リーダー
+2020/11～2021/3：新規賠責系システム作成（6画面程度・MAX3人月規模）開発リーダー
+2021/9～2022/4：火災系システム年次定例改修（MAX8人月規模） 個人向け機能サブリーダー</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c2pos_2" rows="20" cols="45">プロジェクトリーダー
+要件定義
+見積・調査
+設計
+開発・単体テスト
+テスト仕様書作成
+結合テスト
+保守業務全般</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c2tech_2" rows="20" cols="45">言語（フロント）：ASP.net・JavaScript・VBScript・JQuery
+
+言語（サーバ）：VB6・VB.net・VC++・C#.net・COBOL・VisualCOBOL
+
+DB：SQLServer2008・
+SQLServer2019(Azure)・DB2
+
+開発環境：Windows</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">6</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c3sYMD_2" value="2022-05-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c3eYMD_2" value="2022-10-30">
+        </td>
+        <td style="width: 200px">6ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier3_2" rows="20" cols="90">概要：損保系調査会社基幹システムの機能改修
+
+★勤務形態
+フルリモート勤務
+
+★詳細
+2022-05～2022/10：法律改正に伴う対応</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c3pos_2" rows="20" cols="45">見積・調査
+設計
+開発・単体テスト
+テスト仕様書作成
+結合テスト</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c3tech_2" rows="20" cols="45">言語（フロント）：ASP.net(WebForms,MVC)・JavaScript・VBScript・JQuery・AngulerJS
+
+言語（サーバ）：VB.net・C#.net
+
+DB：SQLServer2016
+
+開発環境：Windows</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">7</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c1sYMD_3" value="2022-11-01">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c1eYMD_3" value="2023-03-31">
+        </td>
+        <td style="width: 200px">5ヵ月</td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier1_3" rows="20" cols="90">概要：公共系基幹システムのバージョンアップ移行支援
+★勤務形態
+客先常駐
+
+★詳細
+2022/12～2023/3：データベース移行作業支援　開発メンバー</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c1pos_3" rows="20" cols="45">見積・調査
+設計
+開発・単体テスト</textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c1tech_3" rows="20" cols="45">言語（フロント）：JSP（独自フレームワーク）・JavaScript
+
+言語（サーバ）：Java（JavaEEベース独自フレームワーク）・ShellScript
+
+DB:Oracle 12c
+
+開発環境：Linux(redhat)</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">8</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c2sYMD_3" value="">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c2eYMD_3" value="">
+        </td>
+        <td style="width: 200px"></td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier2_3" rows="20" cols="90"></textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c2pos_3" rows="20" cols="45"></textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c2tech_3" rows="20" cols="45"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 50px" rowspan="6">9</th>
+      </tr>
+      <tr>
+        <th colspan="3" width="">勤務年月等</th>
+      </tr>
+      <tr>
+        <th>入場</th>
+        <th>退場</th>
+        <th>在籍期間</th>
+      </tr>
+      <tr>
+        <td style="width: 200px">
+          <input type="text" name="c3sYMD_3" value="">
+        </td>
+        <td style="width: 200px">
+          <input type="text" name="c3eYMD_3" value="">
+        </td>
+        <td style="width: 200px"></td>
+      </tr>
+      <tr>
+        <th>職務内容</th>
+        <th>担当職務</th>
+        <th>使用言語等</th>
+      </tr>
+      <tr>
+        <td width="600" style="overflow: normal">
+          <textarea name="carrier3_3" rows="20" cols="90"></textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c3pos_3" rows="20" cols="45"></textarea>
+        </td>
+        <td style="overflow: normal">
+          <textarea name="c3tech_3" rows="20" cols="45"></textarea>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <input type="hidden" name="selId" value=1>
+      <input type="submit" value="更新実行">
+    </p>
+  </form>
+  <p>
+  <form action="/TDSLWebProject/SkillAction" method="post">
+    <input type="hidden" name="selId" value=1>
+    <input type="submit" value="スキルシート閲覧画面に戻る">
+  </form>
+  </p>
+  <p>
+  <form action="/TDSLWebProject/SyainJouhouAction" method="post">
+    <input type="submit" value="社員情報編集画面に戻る">
+  </form>
+  </p>
+  <p>
+    <a href="/TDSLWebProject/index.jsp">トップページに戻る</a>
+  </p>
+</body>
+</html>

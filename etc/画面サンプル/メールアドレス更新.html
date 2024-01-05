@@ -1,0 +1,85 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!-- メールアドレス更新画面  -->
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>メールアドレス更新</title>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  <p>
+  <form action="/TDSLWebProject/ResultMailUpdAction" method="post">
+    <table class="tableM">
+      <tr>
+        <th>ID</th>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
+      </tr>
+      
+      <tr>
+        <td>
+          <input type="hidden" name="selId" value="1">
+          1
+        </td>
+        <td>
+          西山龍一
+        </td>
+        <td>
+          <input type="hidden" name="beforeMailAddress" value="mail2">
+          <input type="text" name="afterMailAddress" value="mail2">
+        </td>
+      </tr>
+      
+    </table>
+    </p>
+    <p>
+      <input type="submit" value="更新">
+  </form>
+  </p>
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
+</body>
+</html>

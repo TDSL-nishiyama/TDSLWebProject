@@ -1,0 +1,295 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：一般次郎</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>社員一覧</title>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  
+  <!-- 一般ユーザー -->
+  <table class="tableM">
+    <tr>
+      <th>社員ID</th>
+      <th>名前</th>
+      <th>入社年月日</th>
+      <th>年次</th>
+      <th>出身地</th>
+      <th>住所</th>
+      <th>編集</th>
+      <th>スキルシート閲覧</th>
+      <th>スキルシート編集</th>
+    </tr>
+    
+    <tr>
+      <td>1</td>
+      <td>西山龍一</td>
+      
+      <td>2016-12-01</td>
+      <td>7年1ヵ月</td>
+      <td>静岡県駿東郡長泉町</td>
+      <td>東京都中野区中野</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="1">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="1">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="1">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>2</td>
+      <td>一般太郎</td>
+      
+      <td>2000-04-01</td>
+      <td>23年9ヵ月</td>
+      <td>北海道札幌市</td>
+      <td>東京都品川区</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="2">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="2">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="2">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>3</td>
+      <td>管理者花子</td>
+      
+      <td>1998-08-01</td>
+      <td>25年5ヵ月</td>
+      <td>愛知県犬山市</td>
+      <td>千葉県浦安市</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="3">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="3">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="3">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>4</td>
+      <td>鈴木一郎</td>
+      
+      <td>2022-04-01</td>
+      <td>1年9ヵ月</td>
+      <td>愛知県名古屋市</td>
+      <td>東京都世田谷区</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="4">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="4">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="4">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>6</td>
+      <td>テスト太郎</td>
+      
+      <td>1995-04-01</td>
+      <td>28年9ヵ月</td>
+      <td>愛知県名古屋市</td>
+      <td>東京都中野区</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="6">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="6">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="6">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>7</td>
+      <td>鈴木一郎</td>
+      
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>東京都大田区</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="7">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="7">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="7">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>8</td>
+      <td>若者</td>
+      
+      <td>2023-12-07</td>
+      <td>0年0ヵ月</td>
+      <td>東京都大田区</td>
+      <td>東京都大田区</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="8">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="8">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="8">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>9</td>
+      <td>老人</td>
+      
+      <td>2023-12-07</td>
+      <td>0年0ヵ月</td>
+      <td>沖縄県那覇市</td>
+      <td>東京都文京区</td>
+      <td>
+        <form action="/TDSLWebProject/SyainJouhouHensyuuAction" method="post">
+          <input type="hidden" name="chgUserId" value="9">
+          <input type="submit" value="編集">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillAction" method="post">
+          <input type="hidden" name="selId" value="9">
+          <input type="submit" value="スキルシート閲覧">
+        </form>
+      </td>
+      <td>
+        <form action="/TDSLWebProject/SkillHensyuuAction" method="post">
+          <input type="hidden" name="selId" value="9">
+          <input type="submit" value="スキルシート編集">
+        </form>
+      </td>
+    </tr>
+    
+  </table>
+  
+  <p>
+    <a href="/TDSLWebProject/index.jsp">戻る</a>
+  </p>
+</body>
+</html>

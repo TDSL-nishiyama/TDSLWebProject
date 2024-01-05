@@ -1,0 +1,66 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+
+
+
+
+
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./css/main.css">
+<div align="right">ログインユーザー：西山龍一</div>
+<p>
+<form name="btnLogout"
+  action="/TDSLWebProject/LogOutAction" method="post">
+
+  <div align="right">
+    <input type="submit" name="logout" value="ログアウト">
+  </div>
+</form>
+</p>
+</html>
+<title>ユーザー削除画面</title>
+</head>
+<body>
+  <form name="toUserIchiran" action="/TDSLWebProject/UserIchiranAction" method="post">
+    <p>
+      <input type="submit" name="toMasta" value="ユーザー一覧">
+    </p>
+  </form>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="altMsg">
+  
+  </div>
+</body>
+</html>
+  <form name="userDelete" action="/TDSLWebProject/ResultUserDelAction" method="post">
+    削除するユーザーIDを入力してください
+    <p>
+      ユーザーID：
+      <input type="text" name="userIdDel">
+      <input type="submit" name="userDel" value="削除">
+    </p>
+    
+
+  </form>
+
+  <p>
+    <a href="/TDSLWebProject/masta.jsp">戻る</a>
+  </p>
+
+</body>
+</html>
