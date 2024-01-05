@@ -23,7 +23,7 @@ public class SyainJouhouBL {
   }
 
   /**
-   * {@index} 社員情報閲覧画面に表示する情報の結果表(一覧)を取得してSyainJouhouBeanに格納する
+   * {@index 社員情報閲覧画面に表示する情報の結果表(一覧)を取得してSyainJouhouBeanに格納する} 
    * @return List<SyainJouhouBean>
    */
   //実行結果をサーブレットに戻す
@@ -125,7 +125,7 @@ public class SyainJouhouBL {
   }
 
   /**
-   * {@index} 社員情報編集を行うユーザーの結果表（1レコード）を取得してSyainJouhouHensyuuBeanに格納する
+   * {@index 社員情報編集を行うユーザーの結果表（1レコード）を取得してSyainJouhouHensyuuBeanに格納する}
    * @param pUpdId　編集するユーザーID
    * @return
    */
@@ -236,7 +236,7 @@ public class SyainJouhouBL {
   }
 
   /**
-   * {@index} 社員情報更新を行う
+   * {@index 社員情報更新を行う}
    * @param updKoumoku　アップデートする項目
    * @param pUpdId　編集するユーザーID
    * @return
@@ -311,7 +311,7 @@ public class SyainJouhouBL {
   }
   
   /**
-   * {@入社年次の設定}
+   * {@index 入社年次の設定}
    * @param nyuusyaYMD
    * @return
    */
