@@ -112,7 +112,7 @@ public class ResultKoutsuuYoukyuuAction extends HttpServlet {
     gamenInfo.put("kingaku", kingaku2);
     gamenInfo.put("bikou", bikou2);
     //_2のいずれかの項目に入力がある場合は_2の項目に対しても必須チェック・区間チェックを行う
-    boolean _2Flg = Boolean.valueOf((koutsuuBL.chkeck__2(gamenInfo)).get("_2Flg"));
+    boolean _2Flg = Boolean.valueOf((koutsuuBL.check_2(gamenInfo)).get("_2Flg"));
     if (_2Flg == true) {
       hissuCheck = new HashMap<String, Object>();
       hissuCheck = checkC.checkHissu(gamenInfo, checkKoumoku);

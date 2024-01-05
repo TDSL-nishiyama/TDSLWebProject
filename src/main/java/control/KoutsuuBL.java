@@ -25,7 +25,7 @@ public class KoutsuuBL {
    * @param gamenInfo
    * @return true = 入力あり false = 入力なし
    */
-  public Map<String, String> chkeck__2(Map<String,Object> gamenInfo) {
+  public Map<String, String> check_2(Map<String,Object> gamenInfo) {
     Map<String, String> result = new HashMap<String, String>();
     result.put("_2Flg", "false");
     CheckCommon CheckC = new CheckCommon();
