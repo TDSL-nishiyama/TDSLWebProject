@@ -15,7 +15,7 @@ CastCommon castC = new CastCommon();
 <html>
 <head>
 <%@ include file="../header.jsp"%>
-<title>社員一覧</title>
+<title>スキルシート編集</title>
 </head>
 <body>
   <%@ include file="../msg.jsp"%>
@@ -45,7 +45,7 @@ CastCommon castC = new CastCommon();
         <th colspan="2">取得資格</th>
       </tr>
       <tr>
-        <th>取得年月</th>
+        <th>取得年月日</th>
         <th>資格名称</th>
       </tr>
       <tr>
@@ -287,13 +287,13 @@ CastCommon castC = new CastCommon();
       </tr>
       <tr>
         <td width="600" style="overflow: normal">
-          <textarea name="carrier3_2" rows="20" cols="90"><%=castC.chgBRtag(skillBeanList.get(2).getCarrier3())%></textarea>
+          <textarea name="carrier3_2" rows="20" cols="90"><%=castC.chgBRtag(skillBeanList.get(1).getCarrier3())%></textarea>
         </td>
         <td style="overflow: normal">
-          <textarea name="c3pos_2" rows="20" cols="45"><%=castC.chgBRtag(skillBeanList.get(2).getC3pos())%></textarea>
+          <textarea name="c3pos_2" rows="20" cols="45"><%=castC.chgBRtag(skillBeanList.get(1).getC3pos())%></textarea>
         </td>
         <td style="overflow: normal">
-          <textarea name="c3tech_2" rows="20" cols="45"><%=castC.chgBRtag(skillBeanList.get(2).getC3tech())%></textarea>
+          <textarea name="c3tech_2" rows="20" cols="45"><%=castC.chgBRtag(skillBeanList.get(1).getC3tech())%></textarea>
         </td>
       </tr>
       <tr>
@@ -405,6 +405,10 @@ CastCommon castC = new CastCommon();
         </td>
       </tr>
     </table>
+    <p>
+      <input type="hidden" name="selId" value=<%=skillBeanList.get(0).getUserId()%>>
+      <input type="submit" value="更新実行">
+    </p>
   </form>
   <p>
   <form action="<%=request.getContextPath()%>/SkillAction" method="post">

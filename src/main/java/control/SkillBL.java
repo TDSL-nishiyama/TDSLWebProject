@@ -190,7 +190,7 @@ public class SkillBL {
       sb.append(kikan.getYears());
       sb.append("年");
     }
-    sb.append(kikan.getMonths());
+    sb.append(kikan.getMonths() + 1);
     sb.append("ヵ月");
 
     return sb.toString();
