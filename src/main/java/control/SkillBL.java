@@ -139,7 +139,7 @@ public class SkillBL {
       }
     }
     //職歴No7以降が存在する場合、UPDATE/INSERT
-    if(!(gamenInfo.get(1).isEmpty())) {
+    if(!(gamenInfo.get(2).isEmpty())) {
       if (dao.checkIdInSkill("\\skill\\checkIdInSkill_3.sql",selId) == true) {
         dao.updSkil("\\skill\\updateSkill_3.sql",gamenInfo.get(2));
       } else {
