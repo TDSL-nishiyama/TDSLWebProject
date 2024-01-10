@@ -38,7 +38,7 @@ public class ResultKoutsuuSyuuseiAction extends HttpServlet {
     //画面情報を取得
     String selId = request.getParameter(SyuuseiG.GAMEN_USERID);
     String selNo = request.getParameter(SyuuseiG.GAMEN_UNINO);
-    String riyouhiduke = request.getParameter(SyuuseiG.GAMEN_RIYOUHIDUKE);
+    String riyouhiduke = castCommon.chgDStrToStr(request.getParameter(SyuuseiG.GAMEN_RIYOUHIDUKE));
     String kukans = request.getParameter(SyuuseiG.GAMEN_KUKAN_S);
     String kukane = request.getParameter(SyuuseiG.GAMEN_KUKAN_E);
     String kingaku = request.getParameter(SyuuseiG.GAMEN_KINGAKU);

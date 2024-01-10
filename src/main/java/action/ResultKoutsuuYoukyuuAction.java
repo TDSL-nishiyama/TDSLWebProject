@@ -46,12 +46,12 @@ public class ResultKoutsuuYoukyuuAction extends HttpServlet {
     CheckCommon checkC = new CheckCommon();
 
     //画面情報を取得
-    String riyouhiduke1 = request.getParameter(YoukyuuG.GAMEN_RIYOUHIDUKE_1);
+    String riyouhiduke1 = castC.chgDStrToStr(request.getParameter(YoukyuuG.GAMEN_RIYOUHIDUKE_1));
     String kukans1 = request.getParameter(YoukyuuG.GAMEN_KUKAN_START_1);
     String kukane1 = request.getParameter(YoukyuuG.GAMEN_KUKAN_END_1);
     String kingaku1 = request.getParameter(YoukyuuG.GAMEN_KINGAKU_1);
     String bikou1 = request.getParameter(YoukyuuG.GAMEN_BIKOU_1);
-    String riyouhiduke2 = request.getParameter(YoukyuuG.GAMEN_RIYOUHIDUKE_2);
+    String riyouhiduke2 = castC.chgDStrToStr(request.getParameter(YoukyuuG.GAMEN_RIYOUHIDUKE_2));
     String kukans2 = request.getParameter(YoukyuuG.GAMEN_KUKAN_START_2);
     String kukane2 = request.getParameter(YoukyuuG.GAMEN_KUKAN_END_2);
     String kingaku2 = request.getParameter(YoukyuuG.GAMEN_KINGAKU_2);

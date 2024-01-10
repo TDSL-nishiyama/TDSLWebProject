@@ -45,7 +45,7 @@ public class CastCommon {
       return result;
     }
 
-    final String[] formatStrings = { "yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd" };
+    final String[] formatStrings = { "yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd","yyyy-M-d","yyyy/M/d","yyyyMd"};
 
     Date date = null;
 
